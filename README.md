@@ -1,5 +1,5 @@
 noteispad
 =========
-Projeto "NOTE IS PAD".
-Start date: 11/04/2014
-Autors: Jeremy Pougnet and Stenio Elson
+Projeto "NOTE IS PAD".<br>
+Start date: 11/04/2014<br>
+Autors: Jeremy Pougnet and Stenio Elson<br>
