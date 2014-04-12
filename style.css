@@ -802,6 +802,7 @@ input[type="checkbox"] {
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	display: none;
+	z-index:99999;
 }
 .userName{
 	font-size: 36px;
