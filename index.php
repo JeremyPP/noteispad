@@ -52,6 +52,20 @@
         </script>
     </head>
         <body>
+		<div class="erro">
+			<div class="error-modal">
+				<h3>Erro Qualquer</h3>
+				<div>
+					<p>Isso é um erro qualquer. Voce pode fazer o seguinte com ele:</p>
+					<ul>
+						<li><strong>Ler:</strong> esse erro pode ser alguma coisa importante, não esqueça de ler o que esta dizendo.</li>
+						<li><strong>Olhar:</strong> um erro tambem merece algum tipo de atenção. Olhe para ele e aprecie a sua presença.</li>
+						<li><strong>Fechar:</strong> clique no botão abaixo para fechar esse erro e tentar novamente.</li>
+					</ul>
+					<button class="md-close">Me Feche!</button>
+				</div>
+			</div>
+		</div>
 			<div id="openb">Saiba mais<img src="info.png"></div>
 			<div id="over">
 				<div id="closeb"><span class="og-close"></span></div>
@@ -99,8 +113,10 @@
 				<div id="formsLog">
 					<form action="me.php" method="post">
 						<input id="emailLog" autofocus="1" type="email" name="login_email" id="login_email" placeholder="Seu email">
+						<div class="form-error" id="email-error">Email invalido ou inexistente!</div>
 						<br>
 						<input id="senhaLog" type="password" id="login_password" name="login_password" placeholder="Sua senha">
+						<div class="form-error" id="pass-error">Senha incorreta!</div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">
 							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Mantenha-me logado</label>
@@ -174,6 +190,43 @@
 				  $("#center").attr('class', 'closedSing');
 				  $("#openb").attr('class', 'closed');
 				});
+				
+				//=== Erros ===
+				$( ".erro" ).click(function() {
+				  $(".erro").css('opacity', '0');
+				  $(".erro").css('visibility', 'hidden');
+				});
+				$( "#center" ).click(function() {
+				  $("#center").css('background', '#333');
+				   $("#center").css('color', '#ccc');
+				});
+				
+				function erro01(){
+				  $(".erro").css('visibility', 'visible');
+				  $(".erro").css('opacity', '1');
+				}
+				
+				function erro02(){
+				  $("#emailLog").css('background', 'rgb(245, 212, 212)');
+				  $("#emailLog").css('border', '1px solid #e74c3c');
+				  $("#email-error").css('display', 'block');
+				}
+				function erro03(){
+				  $("#senhaLog").css('background', 'rgb(245, 212, 212)');
+				  $("#senhaLog").css('border', '1px solid #e74c3c');
+				  $("#pass-error").css('margin-top', '5px');
+				  $("#pass-error").css('display', 'block');
+				}
+				function erro04(){
+				  $("#center").css('background', '#F55B68');
+				  $('#desc').fadeOut( 100 , function(){
+					   var div = $('<div id="desc">Os caracteres: \ / : * ? " < > |, não são aceitos no Código de Acesso.</div>').hide();
+					   $(this).replaceWith(div);
+					   $('#desc').fadeIn( 500 );
+				  });
+				  $("#center").css('color', '#ffffff');
+				}
+				
 			</script>
 		<script src="scrollReveal.js"></script>
         </body>

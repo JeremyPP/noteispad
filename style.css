@@ -1190,3 +1190,96 @@ background: #0099FF;
 #picker, #slide {
     cursor: crosshair;
 }
+
+
+/*======= Erros =======*/
+.erro{
+	background: #e74c3c;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	cursor:default;
+}
+.error-modal{
+	background:#e74c3c;
+	background:recd;
+	position: fixed;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 450px;
+	height: 458px;
+	z-index: 2000;
+}
+.error-modal h3 {
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+	font-size: 2.4em;
+	font-weight: 300;
+	color: #F1D2CE;
+	font-family: 'Open Sans', sans-serif;
+}
+.error-modal > div {
+	padding: 15px 40px 30px;
+	margin: 0;
+	font-size: 1.15em;
+	font-family: 'Open Sans', sans-serif;
+	color: #F1D2CE;
+}
+.error-modal > div p {
+	margin: 0;
+	padding: 10px 0;
+}
+.error-modal > div ul {
+	margin: 0;
+	padding: 0 0 30px 20px;
+}
+.error-modal > div ul li {
+	padding: 5px 0;
+}
+.error-modal li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+	list-style-type: disc;
+}
+.error-modal strong{
+	color: #fff;
+}
+.error-modal button {
+	display: block;
+	margin: 0 auto;
+	font-size: 0.8em;
+	border: none;
+	padding: 0.6em 1.2em;
+	background: #c0392b;
+	color: #F1D2CE;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: none;
+}
+.error-modal button:hover {
+	background: #A5281B;
+}
+
+.form-error{
+	color: #e74c3c;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+	margin-top: -15px;
+	display: none;
+	font-weight: 900;
+	text-align: right;
+}
