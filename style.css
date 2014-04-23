@@ -861,7 +861,18 @@ input[type="checkbox"] {
 	font-size: 80px;
 	font-weight: 800;
 	margin-top: 30px;
-	margin-bottom: 55px;
+}
+#allNotes h3{
+	font-family: 'Open Sans', sans-serif;
+	color: #B5E1FF;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 900;
+	margin-bottom: 50px;
+}
+#allNotes span{
+	color: #FFFFFF;
+	opacity: 0.9;
 }
 #allNotes p{
 	text-align: center;
@@ -913,15 +924,16 @@ input[type="checkbox"] {
 	font-size: 22px;
 	float: left;
 	min-height: 120px;
-	-webkit-transition: background 150ms ease-in-out;
-	-moz-transition: background 150ms ease-in-out;
-	-ms-transition: background 150ms ease-in-out;
-	-o-transition: background 150ms ease-in-out;
-	transition: background 150ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
+	-moz-transition: all 300ms ease-in-out;
+	-ms-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
 }
 .allNotaContTxt:hover{
-	background: #eee;
+	background: #D2E7FD;
 	cursor: pointer;
+	color: #5C5C5C;
 }
 .allNotaIcon{
 	float: right;
