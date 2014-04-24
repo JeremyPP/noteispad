@@ -3,6 +3,7 @@ session_start(); ?>
 <html>
     <head>
         <link href="style.css" type="text/css" rel="stylesheet">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <?php
     $url=".";
     $redirecionar = false;

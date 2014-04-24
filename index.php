@@ -42,6 +42,7 @@
 		<link href="style7.css" type="text/css" rel="stylesheet">
 		<title>NOT is PAD!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script type="text/javascript">
         <?php
@@ -138,6 +139,7 @@
 			
 				<div id="logo">
 					<center><div id = "cloud"></div></center>
+					<center><div class="logo-p2"></div></center>
 					<div id="name">NOT is PAD!</div>
 				</div>
 				<div>

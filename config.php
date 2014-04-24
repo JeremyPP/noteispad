@@ -4,6 +4,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<title>NOT is PAD!</title>
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -172,8 +174,8 @@
 					<h3>Sua conta, assim que todas as suas notas serão permanentemente apagadas dos nossos servidores.</h3>
 					<h4>Deseja realmente apagar sua conta?</h4>
 					<center>
-						<div id="delC-ok">Apagar</div>
-						<div id="delC-cancel">Cancelar</div>
+						<div id="delC-ok">Sim</div>
+						<div id="delC-cancel">Não</div>
 					</center>
 				</div>
 			</div>
@@ -197,7 +199,7 @@
 				<div class="confOp-title">Opções de personalização</div>
 				<p>Cor da fonte: <b>Preto</b> <span id="colorChangeFont">MUDAR COR</span></p>
 				<p>Cor do fundo: <b>Branco</b> <span id="colorChangeBg">MUDAR COR</span></p>
-				<p>Tamanho da fonte: <b>Normal</b><span id="tamFonteB">MUDAR TAMANHO DA FONTE</span></p>
+				<p>Tamanho da fonte: <b>Normal</b><span id="tamFonteB">MUDAR TAMANHO</span></p>
 			</div>
 			
 			<script src="scrollReveal.js"></script>

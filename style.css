@@ -67,10 +67,10 @@ input:focus::-webkit-input-placeholder {
 }
 #name{
 	color: #fff;
-	font-family: sans-serif;
+	font-family: Comic Sans MS, sans-serif;
 	font-size: 33px;
 	text-align: center;
-	margin-top: 15px;
+	margin-top: -41px;
 }
 #desc{
 	font-size: 22px;
@@ -971,7 +971,7 @@ input[type="checkbox"] {
 	color: #4F779B;
 }
 .confOp{
-	width: 920px;
+	max-width: 920px;
 	margin: 0 auto;
 }
 #conf h1{
@@ -1521,4 +1521,17 @@ input[type="checkbox"] {
 	display: none;
 	font-weight: 900;
 	text-align: right;
+}
+
+
+.logo-p2{
+	background: none;
+	height: 45px;
+	width: 35px;
+	border-top-left-radius: 50%;
+	border-top-right-radius: 50%;
+	border: 11px solid #4CAED3;
+	border-bottom: none;
+	position: relative;
+	top: -80px;
 }

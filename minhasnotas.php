@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<title>NOT is PAD!</title>
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
