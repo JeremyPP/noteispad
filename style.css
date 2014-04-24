@@ -1091,6 +1091,111 @@ input[type="checkbox"] {
 	background: #fff;
 	border-radius: 4px;
 }
+#dellConta{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	width: 450px;
+	height: 400px;
+	background: #e74c3c;
+	border-radius: 4px;
+}
+#delC-ok{
+	display: inline-block;
+	background: #AC392E;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 3px;
+	color: #FFF;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 900;
+	margin-right: 30px;
+	width: 70px;
+	cursor: pointer;
+	-webkit-transition: background 150ms ease-in-out;
+	-moz-transition: background 150ms ease-in-out;
+	-ms-transition: background 150ms ease-in-out;
+	-o-transition: background 150ms ease-in-out;
+	transition: background 150ms ease-in-out;
+}
+#delC-cancel{
+	display: inline-block;
+	background: #ccc;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 3px;
+	color: #4E4747;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 900;
+	width: 70px;
+	cursor: pointer;
+	-webkit-transition: background 150ms ease-in-out;
+	-moz-transition: background 150ms ease-in-out;
+	-ms-transition: background 150ms ease-in-out;
+	-o-transition: background 150ms ease-in-out;
+	transition: background 150ms ease-in-out;
+}
+#delC-ok:hover{
+	background: #9E362C;
+}
+#delC-cancel:hover{
+	background: #E0E0E0;
+}
+.og-closeD {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 7px;
+	right: 7px;
+	cursor: pointer;
+}
+.og-closeD::before, .og-closeD::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	height: 2px;
+	background: #fff;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+.og-closeD::after {
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+#dellConta h2{
+	color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	font-size: 33px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+#dellConta h3{
+	color: #E0E0E0;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	font-size: 22px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+#dellConta h4{
+	color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	font-size: 18px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
 #novoPlano{
 	position: fixed;
 	top: 0;
@@ -1206,7 +1311,7 @@ input[type="checkbox"] {
 	cursor: pointer;
 	color: #4CAED3 !important;
 }
-#modalEmail, #modalNome, #modalSenha, #modalCorFonte, #modalCorBg, #modalTmFonte, #modalMudarPlano{
+#modalEmail, #modalNome, #modalSenha, #modalCorFonte, #modalCorBg, #modalTmFonte, #modalMudarPlano, #modaldelConta{
 	position: fixed;
 	top: 0;
 	bottom: 0;

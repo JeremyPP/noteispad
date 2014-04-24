@@ -164,6 +164,19 @@
 					</div>
 				</div>
 			</div>
+			<div id="modaldelConta" class="hidden">
+				<div id="dellConta">
+					<span class="og-closeD"></span>
+					<h2>Atenção!</h2>
+					<h3>Essa ação não podera ser cancelada.</h3>
+					<h3>Sua conta, assim que todas as suas notas serão permanentemente apagadas dos nossos servidores.</h3>
+					<h4>Deseja realmente apagar sua conta?</h4>
+					<center>
+						<div id="delC-ok">Apagar</div>
+						<div id="delC-cancel">Cancelar</div>
+					</center>
+				</div>
+			</div>
 			<a href="me.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
 			<h1 data-scrollreveal="enter top and move -200px over 1s">Configurações</h1>
 			
@@ -249,6 +262,19 @@
 				});
 				$( ".og-closeE" ).click(function() {
 				  $("#modalMudarPlano").attr('class', 'hidden');
+				  $("#openb2").css('opacity', '1');
+				});
+				
+				$( "#confDel" ).click(function() {
+				  $("#modaldelConta").attr('class', 'visible');
+				  $("#openb2").css('opacity', '0');
+				});
+				$( ".og-closeD" ).click(function() {
+				  $("#modaldelConta").attr('class', 'hidden');
+				  $("#openb2").css('opacity', '1');
+				});
+				$( "#delC-cancel" ).click(function() {
+				  $("#modaldelConta").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');
 				});
 			</script>
