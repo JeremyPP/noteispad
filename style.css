@@ -1055,7 +1055,7 @@ input[type="checkbox"] {
 	color: #fff !important;
 }
 
-#boxEmail, #boxNome{
+#boxEmail, #boxNome, #tmFonte{
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -1067,7 +1067,7 @@ input[type="checkbox"] {
 	background: #fff;
 	border-radius: 4px;
 }
-#boxCorFonte{
+#boxCorFonte, #boxCorBg{
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -1091,7 +1091,44 @@ input[type="checkbox"] {
 	background: #fff;
 	border-radius: 4px;
 }
-#modalEmail, #modalNome, #modalSenha, #modalCorFonte{
+#tmFonte{
+	font-family: 'Open Sans', sans-serif;
+	color: #1A1A1A;
+	font-weight: normal;
+}
+#tmFonte h4{
+	font-size: 18px;
+	margin-bottom: 5px;
+	margin-top: 20px;
+	text-align: center;
+}
+#tmFonte h3{
+	font-size: 22px;
+	margin-bottom: 5px;
+	color: #4CAED3;
+	text-align: center;
+}
+#tmFonte h2{
+	font-size: 28px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+#tmFonte h1{
+	font-size: 33px;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: #1A1A1A;
+	text-align: center;
+}
+#tmFonte h1:hover, #tmFonte h2:hover, #tmFonte h3:hover, #tmFonte h4:hover{
+	cursor: pointer;
+	color: #757575;
+}
+.tamSelected:hover{
+	cursor: pointer;
+	color: #4CAED3 !important;
+}
+#modalEmail, #modalNome, #modalSenha, #modalCorFonte, #modalCorBg, #modalTmFonte{
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -1188,8 +1225,11 @@ input[type="checkbox"] {
 	height: 300px;
 	margin: 22px auto;
 }
-#boxCorFonte{
+#boxCorFonte, #boxCorBg{
 	height: 415px !important;
+}
+#tmFonte{
+	height: 270px !important;
 }
 .color-selector{
 	width: 30px;

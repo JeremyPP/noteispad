@@ -80,6 +80,48 @@
 					</div>
 				</div>
 			</div>
+			<div id="modalCorBg" class="hidden">
+				<div id="boxCorBg">
+					<span class="og-closeE"></span>
+					<div class="popUpTxtConfS">Selectione a cor do fundo</div>
+					<div id="color-main">
+						<div class="color-selector" style=" background: #000; "></div>
+						<div class="color-selector" style=" background: #777; "></div>
+						<div class="color-selector" style=" background: #ccc; "></div>
+						<div class="color-selector" style=" background: #FFF; "></div>
+						<div class="color-selector" style=" background: #771696; "></div>
+						<div class="color-selector" style=" background: #A148BD; "></div>
+						<div class="color-selector" style=" background: #C371DD; "></div>
+						<div class="color-selector" style=" background: #DDA9EE; "></div>
+						<div class="color-selector" style=" background: #227492; "></div>
+						<div class="color-selector" style=" background: #48B1F7; "></div>
+						<div class="color-selector" style=" background: #8DD7FA; "></div>
+						<div class="color-selector" style=" background: #C5F1FF; "></div>
+						<div class="color-selector" style=" background: #17A82F; "></div>
+						<div class="color-selector" style=" background: #2CD347; "></div>
+						<div class="color-selector" style=" background: #63F57B; "></div>
+						<div class="color-selector" style=" background: #99F6A8; "></div>
+						<div class="color-selector" style=" background: #FF8718; "></div>
+						<div class="color-selector" style=" background: #FFAC18; "></div>
+						<div class="color-selector" style=" background: #F7D757; "></div>
+						<div class="color-selector" style=" background: #FFF46F; "></div>
+						<div class="color-selector" style=" background: #DD0F0F; "></div>
+						<div class="color-selector" style=" background: #F14B4B; "></div>
+						<div class="color-selector" style=" background: #FF9494; "></div>
+						<div class="color-selector" style=" background: #FFBBBB; "></div>
+					</div>
+				</div>
+			</div>
+			<div id="modalTmFonte" class="hidden">
+				<div id="tmFonte">
+					<span class="og-closeE"></span>
+					<div class="popUpTxtConfS">Selectione o tamanho da fonte</div>
+					<h4>Pequena</h4>
+					<h3 class="tamSelected">Normal</h3>
+					<h2>Grande</h2>
+					<h1>Gigante</h1>
+				</div>
+			</div>
 			<a href="me.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
 			<h1 data-scrollreveal="enter top and move -200px over 1s">Configurações</h1>
 			
@@ -138,6 +180,24 @@
 				});
 				$( ".og-closeE" ).click(function() {
 				  $("#modalCorFonte").attr('class', 'hidden');
+				  $("#openb2").css('opacity', '1');
+				});
+				
+				$( "#colorChangeBg" ).click(function() {
+				  $("#modalCorBg").attr('class', 'visible');
+				  $("#openb2").css('opacity', '0');
+				});
+				$( ".og-closeE" ).click(function() {
+				  $("#modalCorBg").attr('class', 'hidden');
+				  $("#openb2").css('opacity', '1');
+				});
+				
+				$( "#tamFonteB" ).click(function() {
+				  $("#modalTmFonte").attr('class', 'visible');
+				  $("#openb2").css('opacity', '0');
+				});
+				$( ".og-closeE" ).click(function() {
+				  $("#modalTmFonte").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');
 				});
 			</script>
