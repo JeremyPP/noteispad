@@ -136,9 +136,7 @@
 						   $('#id-allNota').fadeIn( 50 );
 						});
 			  }
-			);
-				
-				
+			);			
 			</script>
 			
 			<script src="scrollReveal.js"></script>

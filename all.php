@@ -25,7 +25,7 @@
                     $k=1+$i;
                     echo "<a href='notpad.php?arquivo=$k' style='text-decoration: none; color: #000; '><div class='all'>
                             <div class='allnum'>
-                                Nota $k
+                                Pagina $k
                             </div>
                             <div class='allcontent'><p>".
                                 fread(fopen("$codigo/$i.txt", "r"), 800)

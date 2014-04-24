@@ -12,10 +12,9 @@
         <body id="allNotes">
 		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
 		<h1 data-scrollreveal="enter top and move -200px over 1s">Recuperar senha</h1>
-		<p>Uma vez a sua identidade verificada, uma nova senha padrão sera enviada para o seu email. Voce poderar alterar essa senha padrão uma vez logado, indo em "Configurações".</p>
+		<p style="margin-top: 40px; max-width: 750px;">Uma vez a sua identidade verificada, uma nova senha padrão sera enviada para o seu email. Voce poderar alterar essa senha padrão uma vez logado, indo em "Configurações".</p>
 		<form id="dadosUser">
-			<input type="text" name="name" placeholder="Seu nome" class="u-dI" autofocus><br>
-			<input type="email" name="email" placeholder="Seu email" class="u-dI"><br>
+			<input type="email" name="email" placeholder="Seu email" class="u-dI" autofocus><br>
 			<input type="submit" value="Enviar" class="recupPass">
 		</form>
         <script src="scrollReveal.js"></script>
