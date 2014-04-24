@@ -1091,6 +1091,84 @@ input[type="checkbox"] {
 	background: #fff;
 	border-radius: 4px;
 }
+#novoPlano{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	width: 800px;
+	height: 460px;
+	background: #fff;
+	border-radius: 4px;
+}
+#card01m, #card02m, #card03m{
+	float: left;
+	background: #4CAED3;
+	height: 100%;
+	width: 240px;
+}
+#card01m {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+.separaM {
+	float: left;
+	width: 20px;
+	height: 100%;
+	background: #fff;
+}
+#card03m {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+.plan-titleM {
+	font-family: 'Open Sans', sans-serif;
+	padding: 20px;
+	line-height: 1;
+	font-size: 22px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: center;
+}
+.plan-priceM {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	margin: 15px auto 20px;
+	width: 90px;
+	height: 90px;
+	line-height: 90px;
+	font-size: 16px;
+	color: rgb(105, 105, 105);
+	background: #7CD0F0;
+	border-radius: 45px;
+}
+.plan-featuresM {
+	font-family: 'Open Sans', sans-serif;
+	margin-bottom: 20px;
+	line-height: 2;
+	font-size: 14px;
+	color: #F0F0F0;
+	text-align: center;
+}
+.plan-featuresM strong {
+	color: #FFF;
+}
+.mudarPlanoTitle{
+	color: #808080;
+	font-weight: 900;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.select{
+	color: #000 !important;
+	background: #fff !important;
+	cursor: default !important;
+}
 #tmFonte{
 	font-family: 'Open Sans', sans-serif;
 	color: #1A1A1A;
@@ -1128,7 +1206,7 @@ input[type="checkbox"] {
 	cursor: pointer;
 	color: #4CAED3 !important;
 }
-#modalEmail, #modalNome, #modalSenha, #modalCorFonte, #modalCorBg, #modalTmFonte{
+#modalEmail, #modalNome, #modalSenha, #modalCorFonte, #modalCorBg, #modalTmFonte, #modalMudarPlano{
 	position: fixed;
 	top: 0;
 	bottom: 0;

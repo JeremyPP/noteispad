@@ -122,6 +122,48 @@
 					<h1>Gigante</h1>
 				</div>
 			</div>
+			<div id="modalMudarPlano" class="hidden">
+				<div id="novoPlano">
+					<span class="og-closeE"></span>
+					<div class="mudarPlanoTitle">Selectione um novo plano</div>
+					<div id="priceCards">
+					
+						<div id="card01m">
+							<h2 class="plan-titleM" style=" background: #75C1DD; ">Basico</h2>
+							<div class="plan-priceM">R$2<span>/mês</span></div>
+							<ul class="plan-featuresM">
+								<li><strong>20</strong> notas por mês</li>
+								<li>Gerenciador de notas basico</li>
+								<br>
+							</ul>
+							<center><a href="#" class="plan-button">Selectionar</a></center>
+						</div>
+						<div class="separaM"></div>
+						<div id="card02m" style="opacity: .4;">
+							<h2 class="plan-titleM" style=" background: #5C99AF; ">Pro</h2>
+							<div class="plan-priceM">R$9<span>/mês</span></div>
+							<ul class="plan-featuresM">
+								<li><strong>100</strong> notas por mês</li>
+								<li>Gerenciador de notas basico</li>
+								<li>Opções de perçonalização</li>
+							</ul>
+							<center><a href="#" class="plan-button select">Plano atual</a></center>
+						</div>
+						<div class="separaM"></div>
+						<div id="card03m">
+							<h2 class="plan-titleM" style=" background: #56899C; ">Premium</h2>
+							<div class="plan-priceM">R$19<span>/mês</span></div>
+							<ul class="plan-featuresM">
+								<li><strong>500</strong> notas por mês</li>
+								<li>Gerenciador de notas avançado</li>
+								<li>Opções de perçonalização</li>
+							</ul>
+							<center><a href="#" class="plan-button">Selectionar</a></center>
+						</div>
+				
+					</div>
+				</div>
+			</div>
 			<a href="me.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
 			<h1 data-scrollreveal="enter top and move -200px over 1s">Configurações</h1>
 			
@@ -134,7 +176,7 @@
 			
 			<div id="conf-odc" class="confOp" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Opções da conta</div>
-				<p>Plano atual: <b>PRO (R$9/mês)</b><span>MUDAR DE PLANO</span></p>
+				<p>Plano atual: <b>PRO (R$9/mês)</b><span id="mudarPlanoB">MUDAR DE PLANO</span></p>
 				<p>Deletar permanentemente sua conta <span id="confDel">DELETAR</span></p>
 			</div>
 			
@@ -198,6 +240,15 @@
 				});
 				$( ".og-closeE" ).click(function() {
 				  $("#modalTmFonte").attr('class', 'hidden');
+				  $("#openb2").css('opacity', '1');
+				});
+				
+				$( "#mudarPlanoB" ).click(function() {
+				  $("#modalMudarPlano").attr('class', 'visible');
+				  $("#openb2").css('opacity', '0');
+				});
+				$( ".og-closeE" ).click(function() {
+				  $("#modalMudarPlano").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');
 				});
 			</script>
