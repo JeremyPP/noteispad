@@ -6,6 +6,12 @@ body{
 	background:#4CAED3;
 	overflow: hidden;
 }
+::selection {
+	background: #cecece; /* Safari */
+	}
+::-moz-selection {
+	background: #cecece; /* Firefox */
+}
 
 /* =======Pagina inicial======= */
 #center{
@@ -60,17 +66,17 @@ body{
    font-size: 18px;
 }
 :-ms-input-placeholder {  
-   font-size: 18px;
+   font-size: 18px !important;
 }
 input:focus::-webkit-input-placeholder {
     opacity: .6;
 }
 #name{
 	color: #fff;
-	font-family: Comic Sans MS, sans-serif;
-	font-size: 33px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 40px;
 	text-align: center;
-	margin-top: -41px;
+	margin-top: -50px;
 }
 #desc{
 	font-size: 22px;
@@ -380,7 +386,7 @@ input:focus::-webkit-input-placeholder {
 ol, ul {
 	list-style: none;
 }
-.plan-button {
+.plan-button, .plan-button2 {
 	font-family: 'Open Sans', sans-serif;
 	padding: 5px 15px;
 	line-height: 30px;
@@ -396,7 +402,7 @@ ol, ul {
 	-o-transition: all 150ms ease-in-out;
 	transition: all 150ms ease-in-out;
 }
-.plan-button:hover{
+.plan-button:hover, .plan-button2:hover{
 	color: #4CAED3;
 	background: #fff;
 	cursor: pointer;
@@ -576,7 +582,7 @@ input[type="checkbox"] {
 	text-decoration: underline;
 }
 
-#showmeOver{
+#showmeOver, #work-in-prog-overlay{
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -595,7 +601,42 @@ input[type="checkbox"] {
 	position: absolute;
 	background: #fafafa;
 }
-#closeOverPlan{
+#inprogPremium{
+	width: 700px;
+	height: 390px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	background: #fff;
+	border-radius: 3px;
+}
+#inprogPremium img{
+	width: 100px;
+	height: 100px;
+}
+#inprogPremium h2{
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	color: #A2A5A7;
+	font-weight: 900;
+	font-size: 50px;
+	margin-top: 50px;
+}
+#inprogPremium h3{
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	color: #838383;
+	font-weight: 400;
+	font-size: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#closeOverPlan, #closeOverPlan2{
 	float: right;
 	width: 50px;
 	height: 50px;
@@ -631,7 +672,7 @@ input[type="checkbox"] {
 		text-align: center;
 		font-size: 80px;
 		font-weight: 800;
-		margin-top: 30px;
+		margin-top: 50px;
 }
 #contOverPlan h2{
 		font-family: 'Open Sans', sans-serif;
@@ -1534,4 +1575,19 @@ input[type="checkbox"] {
 	border-bottom: none;
 	position: relative;
 	top: -80px;
+}
+
+/*======= Erro se o navegador for IE =======*/
+.erro-navegador{
+	width: 100%;
+	min-height: 70px;
+	background: lightskyblue;
+	display: none;
+}
+.erro-navegador div{
+	font-family: sans-serif;
+	color: #fff;
+	font-weight: 700;
+	padding: 25px;
+	text-align: center;
 }

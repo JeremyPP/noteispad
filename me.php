@@ -96,7 +96,7 @@
 				<div id="logo">
 					<center><div id = "cloud"></div></center>
 					<center><div class="logo-p2"></div></center>
-					<div id="name">NOT is PAD!</div>
+					<div id="name">not is pad!</div>
 				</div>
 				<div>
 					<form action="notpad.php" method="post">

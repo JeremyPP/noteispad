@@ -52,7 +52,25 @@
         ?>
         </script>
     </head>
-        <body>
+    <body>
+	
+		<!---Verificar navegador--->
+		<div class="erro-navegador" id="erroNav">
+			<div>
+				Este site não esta otimizado para o seu navegador. Aconselhamos instalar o Google
+				Chrome para uma melhor experiencia.
+			</div>
+		</div>
+		<script>
+		var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
+            document.getElementById('erroNav').style.display="block";
+        else
+            document.getElementById('erroNav').style.display="none";
+		</script>
+		
 		<div class="erro">
 			<div class="error-modal">
 				<h3>Erro Qualquer</h3>
@@ -140,7 +158,7 @@
 				<div id="logo">
 					<center><div id = "cloud"></div></center>
 					<center><div class="logo-p2"></div></center>
-					<div id="name">NOT is PAD!</div>
+					<div id="name">not is pad!</div>
 				</div>
 				<div>
 					<form action="notpad.php" method="post">
@@ -175,11 +193,13 @@
 				  $("#over").attr('class', 'open');
 				  $("#center").attr('class', 'open');
 				  $("#b01").attr('class', 'open');
+				  $("body").css('overflow-y', 'visible');
 				});
 				$( "#closeb" ).click(function() {
 				  $("#over").attr('class', 'closed');
 				  $("#center").attr('class', 'closed');
 				  $("#b01").attr('class', 'closed');
+				  $("body").css('overflow-y', 'hidden');
 				});
 				
 				$( "#b01" ).click(function() {

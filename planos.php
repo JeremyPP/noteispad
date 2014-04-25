@@ -34,6 +34,19 @@
 				</div>
 			</div>
 		</div>
+		<div id="work-in-prog-overlay">
+			<div id="inprogPremium">
+				<div id="closeOverPlan2">
+						<span class="og-close3"></span>
+				</div>
+				
+				<h2>Ooops!</h2>
+				<h3>Pareçe que ainda estamos trabalhando nessa parte, por favor, volte em breve. :)</h3>
+				<center>
+					<img src="Preloader_3.gif"></img>
+				</center>
+			</div>
+		</div>
 		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
 			<h1 data-scrollreveal="enter top and move -200px over 1s">Escolha o seu plano</h1>
 			<div id="priceCards">
@@ -67,7 +80,7 @@
 						<li>Gerenciador de notas avançado</li>
 						<li>Opções de perçonalização</li>
 					</ul>
-					<center><a href="#" class="plan-button">Selectionar</a></center>
+					<center><a href="#" class="plan-button2" id="wokinprog">Selectionar</a></center>
 				</div>
 				
 			</div>
@@ -76,13 +89,22 @@
 				</div>
         <script src="scrollReveal.js"></script>
 		<script>
-		$(".u-dI2").after("<div class='passwordInfo'><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div></div>");
+			$(".u-dI2").after("<div class='passwordInfo'><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div></div>");
 			$(".plan-button").click(function () {
 				$("#showmeOver").fadeIn();
 				$("#openb2").css({ opacity: 0 });
 			});
 			$("#closeOverPlan").click(function () {
 				$("#showmeOver").fadeOut();
+				$("#openb2").css({ opacity: 1 });
+			});
+			
+			$(".plan-button2").click(function () {
+				$("#work-in-prog-overlay").fadeIn();
+				$("#openb2").css({ opacity: 0 });
+			});
+			$("#closeOverPlan2").click(function () {
+				$("#work-in-prog-overlay").fadeOut();
 				$("#openb2").css({ opacity: 1 });
 			});
 		</script>
