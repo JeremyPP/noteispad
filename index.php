@@ -72,17 +72,12 @@
 		</script>
 		
 		<div class="erro">
-			<div class="error-modal">
-				<h3>Erro Qualquer</h3>
-				<div>
-					<p>Isso é um erro qualquer. Voce pode fazer o seguinte com ele:</p>
-					<ul>
-						<li><strong>Ler:</strong> esse erro pode ser alguma coisa importante, não esqueça de ler o que esta dizendo.</li>
-						<li><strong>Olhar:</strong> um erro tambem merece algum tipo de atenção. Olhe para ele e aprecie a sua presença.</li>
-						<li><strong>Fechar:</strong> clique no botão abaixo para fechar esse erro e tentar novamente.</li>
-					</ul>
-					<button class="md-close">Me Feche!</button>
-				</div>
+			<div class="recovery-center">
+				<h1>Oops! :(</h1>
+				<h2>
+					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+				</h2>
+				<div id="voltar-pass-er-b">Voltar</div>
 			</div>
 		</div>
 			<div id="openb">Saiba mais<img src="info.png"></div>

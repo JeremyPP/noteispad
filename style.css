@@ -930,17 +930,21 @@ input[type="checkbox"] {
 	background: rgb(57, 144, 173);
 	border: none;
 	padding: 10px;
-	width: 330px;
+	width: 310px;
 	color: #fff;
 	font-size: 22px;
 	border-radius: 3px;
 	cursor: pointer;
-	outline:none;
+	outline: none;
 	-webkit-transition: background 150ms ease-in-out;
 	-moz-transition: background 150ms ease-in-out;
 	-ms-transition: background 150ms ease-in-out;
 	-o-transition: background 150ms ease-in-out;
 	transition: background 150ms ease-in-out;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	height: 26px;
+	line-height: 26px;
 }
 .recupPass:hover{
 	background: rgb(50, 130, 156);
@@ -1474,19 +1478,17 @@ input[type="checkbox"] {
 
 /*======= Erros =======*/
 .erro{
-	background: #e74c3c;
-	position: fixed;
-	width: 100%;
-	height: 100%;
 	visibility: hidden;
-	top: 0;
-	left: 0;
-	z-index: 1000;
 	opacity: 0;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
 	cursor:default;
+	background: #e74c3c;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 999;
 }
 .error-modal{
 	background:#e74c3c;
@@ -1539,16 +1541,18 @@ input[type="checkbox"] {
 .error-modal button {
 	display: block;
 	margin: 0 auto;
-	font-size: 0.8em;
+	font-size: 18px;
+	font-weight: 900;
 	border: none;
 	padding: 0.6em 1.2em;
 	background: #c0392b;
-	color: #F1D2CE;
+	color: #fff;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	cursor: pointer;
 	border-radius: 2px;
 	outline: none;
+	font-family: 'Open Sans', sans-serif;
 }
 .error-modal button:hover {
 	background: #A5281B;
@@ -1575,6 +1579,73 @@ input[type="checkbox"] {
 	border-bottom: none;
 	position: relative;
 	top: -80px;
+}
+
+/*Recuperar senha (erro ou não))*/
+#recoverok{
+	background: #4CAED3;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	margin-top: -20px;
+	z-index: 999;
+	display: none;
+}
+#recoverfail{
+	background: #e74c3c;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	margin-top: -20px;
+	z-index: 999;
+	display: none;
+}
+.recovery-center{
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	position: absolute;
+	margin: auto;
+	max-width: 800px;
+	height: 400px;
+}
+.recovery-center h1{
+	font-family: 'Open Sans', sans-serif;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 80px;
+	font-weight: 800;
+	margin-top: 30px;
+}
+.recovery-center h2{
+	font-family: 'Open Sans', sans-serif;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 25px;
+	font-weight: 800;
+	margin-top: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+#voltar-pass-b, #voltar-pass-er-b{
+	background: lightblue;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 3px;
+	margin: 0 auto;
+	margin-top: 38px;
+	font-family: 'Open Sans', sans-serif;
+	color: #4CAED3;
+	font-weight: 900;
+	font-size: 18px;
+	cursor: pointer;
+}
+#voltar-pass-er-b{
+	background: #c0392b !important;
+	color: #fff !important;
 }
 
 /*======= Erro se o navegador for IE =======*/

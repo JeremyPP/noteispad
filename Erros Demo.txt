@@ -1,0 +1,64 @@
+##############################
+#                            #
+#  Teste erros Note is Pad!  #
+#            v1.0            #
+#                            #
+##############################
+
+
+Para visualizar um erro, no console chamar a função correspondente.
+
+Ex: para abrir o Erro 01: 
+inspecionar elemento > console > digite "erro01()" sem as aspas.
+
+OBS: para poder ver os erros 02 e 03, é necessario que a aba "Login" esteja visivel.
+
+
+===============================
+
+
+ERROS parte 1
+(pagina initial -> index.php):
+_______________________________
+
+
+Erro 01 - grande (pagina toda):
+
+-> função: erro01();
+uso: erro de conexão com o DB, outros erros qualquer...
+
+-------------------------------
+
+Erro 02 - login01 (email):
+
+-> função: erro02();
+uso: o email que foi informado é incorreto ou inexistente.
+
+-------------------------------
+
+Erro 03 - login02 (senha):
+
+-> função: erro03();
+uso: a senha que foi informada esta incorreta.
+
+-------------------------------
+
+Erro 04 - codigo invalido (criação de codigo para uma nova nota):
+
+-> função: erro04();
+uso: o codigo de acesso possui algum caracter não autorizado.
+
+-------------------------------
+
+
+ERROS parte 2
+(pagina recuperação de senha -> forgot.php):
+_______________________________
+
+
+Erro 05 - failure (mesmo que erro 01):
+
+-> função: errorRP();
+uso: se o ocoreu algum erro na tentativa de mandar a nova senha. EX: O email informado não esta vinculado a nenhuma conta existente.
+
+-------------------------------

@@ -41,7 +41,7 @@
 				</div>
 				
 				<h2>Ooops!</h2>
-				<h3>Pareçe que ainda estamos trabalhando nessa parte, por favor, volte em breve. :)</h3>
+				<h3>Pareçe que ainda estamos trabalhando nessa parte. Por favor, volte em breve. :)</h3>
 				<center>
 					<img src="Preloader_3.gif"></img>
 				</center>
