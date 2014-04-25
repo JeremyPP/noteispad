@@ -1648,6 +1648,128 @@ input[type="checkbox"] {
 	color: #fff !important;
 }
 
+/*======= ADMIN page =======*/
+#admin h1{
+	font-family: 'Open Sans', sans-serif;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 80px;
+	font-weight: 800;
+	margin-top: 30px;
+}
+#admin h6{
+	font-family: 'Open Sans', sans-serif;
+	color: #DDDDDD;
+	text-align: center;
+	font-size: 33px;
+	font-weight: 800;
+	margin-bottom: 20px;
+	background: rgb(70, 70, 70);
+	margin: -20px -20px 30px -20px;
+	border-radius: 10px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+#admin p{
+	font-family: 'Open Sans', sans-serif;
+	color: #EC616C;
+	text-align: center;
+	font-size: 25px;
+	font-weight: 800;
+	padding-left: 30px;
+	padding-right: 30px;
+	max-width: 1080px;
+	margin: 30px auto 50px;
+}
+#basic-info, #servidor-info, #usuarios-info, #lista-usuarios{
+	background: rgb(82, 82, 82);
+	max-width: 1080px;
+	margin: 30px auto;
+	padding: 20px;
+	border-radius: 10px;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+}
+#lista-usuarios{
+	text-align: center;
+	background: rgb(202, 202, 202);
+	font-weight: 900;
+	font-size: 20px;
+	cursor: pointer;
+	color: #696969;
+}
+#lista-usuarios:hover{
+	background: rgb(218, 218, 218);
+	color: #474747;
+}
+#basic-info div{
+	margin-bottom: 10px;
+	background: rgb(109, 109, 109);
+	padding: 5px;
+	border-radius: 3px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: rgb(192, 192, 192);
+	font-size: 20px;
+	font-weight: 900;
+}
+#basic-info span{
+	float: right;
+	color: #fafafa;
+}
+#servidor-info h3{
+	background: #2C2C2C;
+	width: 60px;
+	text-align: center;
+	border-radius: 3px;
+	color: rgb(99, 238, 133);
+	font-size: 22px;
+	font-weight: 900;
+	margin: 0 auto;
+}
+#servidor-info div{
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 900;
+}
+#servidor-info h4{
+	margin-top: 10px;
+	color: #ccc;
+	font-size: 18px;
+}
+#bginfoserver{
+	background: rgb(109, 109, 109);
+	width: 210px;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 3px;
+}
+#usuarios-info h3{
+	font-size: 22px;
+	padding-top: 5px;
+	width: 150px;
+	background: rgb(109, 109, 109);
+	text-align: center;
+	border-radius: 3px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+}
+#usuarios-info div{
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 3px;
+	color: rgb(192, 192, 192);
+	font-size: 20px;
+	font-weight: 900;
+}
+#separausersinfo{
+	border-top: 2px dashed #ccc;
+	margin-top: 10px;
+}
+
 /*======= Erro se o navegador for IE =======*/
 .erro-navegador{
 	width: 100%;
