@@ -65,6 +65,17 @@
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
         <body id="pagNot">
+		
+		<div class="erro">
+			<div class="recovery-center">
+				<h1>Oops! :(</h1>
+				<h2>
+					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+				</h2>
+				<div id="voltar-pass-er-b">Voltar</div>
+			</div>
+		</div>
+		
 			<div id="modal" class="hidden">
 				<div id="box">
 					<span class="og-close"></span>
@@ -97,6 +108,17 @@
 				$( ".og-close" ).click(function() {
 				  $("#modal").attr('class', 'hidden');
 				});
+				
+				//=== Erros ===
+				$( ".erro" ).click(function() {
+				  $(".erro").css('opacity', '0');
+				  $(".erro").css('visibility', 'hidden');
+				});
+				
+				function erroSaveN(){
+				  $(".erro").css('visibility', 'visible');
+				  $(".erro").css('opacity', '1');
+				}
 			</script>
         </body>
 </html>

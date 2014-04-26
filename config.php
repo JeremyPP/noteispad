@@ -11,13 +11,25 @@
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
         <body id="conf" style="overflow: visible;">
+		
+		<div class="erro" style="margin-top: -20px;">
+			<div class="recovery-center">
+				<h1>Oops! :(</h1>
+				<h2>
+					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+				</h2>
+				<div id="voltar-pass-er-b">Voltar</div>
+			</div>
+		</div>
+		
 			<div id="modalNome" class="hidden">
 				<div id="boxNome">
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConf">Digite um novo nome</div>
 					<center>
-                        <form action="script.php" method="post">
+                        <form action="" method="post">
                             <input id="novoEmail" placeholder="" type="text" name="codigo" value="Jérémy">
+							<div class="form-error-conf" id="name-error">Digite apenas 01 (um) nome.</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Salvar" name="salvar">
                         </form>
@@ -29,8 +41,9 @@
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConf">Digite um novo email</div>
 					<center>
-                        <form action="script.php" method="post">
-                            <input id="novoEmail" placeholder="" type="email" name="codigo" value="jeremynaka@hotmail.com">
+                        <form action="" method="post">
+                            <input id="novoEmail02" placeholder="" type="email" name="codigo" value="jeremynaka@hotmail.com">
+							<div class="form-error-conf" id="email-error">Email invalido!</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Salvar" name="salvar">
                         </form>
@@ -41,9 +54,11 @@
 				<div id="boxSenha">
 					<span class="og-closeE"></span>
 					<center>
-                        <form action="script.php" method="post" style="margin-top: 20px;">
-                            <input id="novaSenha" placeholder="Senha atual" type="password" name="codigo">
+                        <form action="" method="post" style="margin-top: 20px;">
+                            <input id="novaSenha-ant" placeholder="Senha atual" type="password" name="codigo">
+							<div class="form-error-conf" id="pass-error" style="margin-bottom: 0px;">Senha incorreta!</div>
 							<input id="novaSenha" placeholder="Nova senha" type="password" name="codigo">
+							<div class="form-error-conf" id="pass-error02">Senha invalida! Minimo de 6 caracteres.</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Salvar" name="salvar">
                         </form>
@@ -279,6 +294,38 @@
 				  $("#modaldelConta").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');
 				});
+				
+				//=== Erros ===
+				function erro07(){
+				  $("#novoEmail").css('background', 'rgb(245, 212, 212)');
+				  $("#novoEmail").css('border', '1px solid #e74c3c');
+				  $("#name-error").css('display', 'block');
+				}
+				function erro08(){
+				  $("#novoEmail02").css('background', 'rgb(245, 212, 212)');
+				  $("#novoEmail02").css('border', '1px solid #e74c3c');
+				  $("#email-error").css('display', 'block');
+				}
+				function erro09(){
+				  $("#novaSenha-ant").css('background', 'rgb(245, 212, 212)');
+				  $("#novaSenha-ant").css('border', '1px solid #e74c3c');
+				  $("#pass-error").css('display', 'block');
+				  $("#boxSenha").css('height', '280px');
+				}
+				function erro10(){
+				  $("#novaSenha").css('background', 'rgb(245, 212, 212)');
+				  $("#novaSenha").css('border', '1px solid #e74c3c');
+				  $("#pass-error02").css('display', 'block');
+				  $("#boxSenha").css('height', '280px');
+				}
+				$( ".erro" ).click(function() {
+				  $(".erro").css('opacity', '0');
+				  $(".erro").css('visibility', 'hidden');
+				});
+				function erro11(){
+				  $(".erro").css('visibility', 'visible');
+				  $(".erro").css('opacity', '1');
+				}
 			</script>
 		</body>
 </html>

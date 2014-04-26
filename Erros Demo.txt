@@ -16,10 +16,11 @@ OBS: para poder ver os erros 02 e 03, é necessario que a aba "Login" esteja visi
 
 ===============================
 
-
-ERROS parte 1
-(pagina initial -> index.php):
-_______________________________
+ ________________________________
+|                                |
+|         ERROS parte 1          |
+| (pagina initial -> index.php)  |
+|________________________________|
 
 
 Erro 01 - grande (pagina toda):
@@ -51,14 +52,74 @@ uso: o codigo de acesso possui algum caracter não autorizado.
 -------------------------------
 
 
-ERROS parte 2
-(pagina recuperação de senha -> forgot.php):
-_______________________________
+ ______________________________________________
+|                                              |
+|                 ERROS parte 2                |
+| (pagina recuperação de senha -> forgot.php)  |
+|______________________________________________|
 
 
 Erro 05 - failure (mesmo que erro 01):
 
 -> função: errorRP();
 uso: se o ocoreu algum erro na tentativa de mandar a nova senha. EX: O email informado não esta vinculado a nenhuma conta existente.
+
+-------------------------------
+
+
+ _______________________________
+|                               |
+|        ERROS parte 3          |
+| (pagina notas -> notpad.php)  |
+|_______________________________|
+
+
+Erro 06 - failure (mesmo que erro 01 & 05):
+
+-> função: erroSaveN();
+uso: se o ocoreu algum erro na hora de salvar a nota.
+
+-------------------------------
+
+
+ _______________________________________
+|                                       |
+|             ERROS parte 4             |
+| (pagina Configurações -> config.php)  |
+|_______________________________________|
+
+
+Erro 07 - modificar info (nome):
+
+-> função: erro07();
+uso: se o usuario digitar mais de uma palavra como nome.
+
+-------------------------------
+
+Erro 08 - modificar info (email):
+
+-> função: erro08();
+uso: se o email que foi informado for invalido.
+
+-------------------------------
+
+Erro 09 - modificar info (senha atual):
+
+-> função: erro09();
+uso: se a senha do usuario estiver incorreta.
+
+-------------------------------
+
+Erro 10 - modificar info (nova senha):
+
+-> função: erro10();
+uso: se a nova senha for invalida. EX: tiver menos que 6 caracteres.
+
+-------------------------------
+
+Erro 11 - failure (erro salvar):
+
+-> função: erro11();
+uso: se ocorrer algum erro na hora de salvar alguma modificação.
 
 -------------------------------

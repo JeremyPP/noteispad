@@ -80,6 +80,7 @@
 				<div id="voltar-pass-er-b">Voltar</div>
 			</div>
 		</div>
+		
 			<div id="openb">Saiba mais<img src="info.png"></div>
 			<div id="over">
 				<div id="closeb"><span class="og-close"></span></div>
@@ -147,9 +148,7 @@
 				</div>
 			</div>
            
-
 		   <div id="center" data-scrollreveal="enter bottom and move 200px over 1.3s">
-			
 				<div id="logo">
 					<center><div id = "cloud"></div></center>
 					<center><div class="logo-p2"></div></center>
@@ -164,6 +163,7 @@
 				"Aproveite o melhor da núvem, faça suas anotações e use onde quiser."
 				</div>
 			</div>
+			
 			<script>
 				var $div = $("#senha");
 				//var $text = $("#desc");
