@@ -11,6 +11,17 @@
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
         <body id="pagePrice">
+		
+		<div class="erro" style="margin-top: -20px;">
+			<div class="recovery-center">
+				<h1>Oops! :(</h1>
+				<h2>
+					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+				</h2>
+				<div id="voltar-pass-er-b">Voltar</div>
+			</div>
+		</div>
+		
 		<div id="showmeOver">
 			<div id="showme">
 				<div id="closeOverPlan">
@@ -20,9 +31,13 @@
 					<h1>Complete as informações abaixo</h1>
 					<h2>Voce escolheu o plano PRO de R$9/mês.</h2>
 					<form id="dadosUser" action="me.php">
-						<input type="text" name="name" placeholder="Seu nome" class="u-dI" autofocus><br>
-						<input type="email" name="email" placeholder="Seu email" class="u-dI"><br>
-						<input type="password" name="password" placeholder="Uma senha" class="u-dI u-dI2">
+						<input type="text" name="name" id="name-cc" placeholder="Seu nome" class="u-dI" autofocus>
+						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Digite apenas 01 (um) nome.</div><br>
+						<input type="email" name="email" id="email-cc" placeholder="Seu email" class="u-dI">
+						<div class="form-error-conf" id="email-error" style="margin-top:-10px;margin-bottom:0px;">Já existe uma conta associada a esse email!</div>
+						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Email invalido!</div><br>
+						<input type="password" name="password" id="pass-cc" placeholder="Uma senha" class="u-dI u-dI2">
+						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Senha invalida! Minimo de 6 caracteres.</div>
 						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -115px;margin-left: 345px;">
 						  <div class="db-arrow-border"></div>
 						  <div class="db-arrow"></div>
@@ -108,6 +123,37 @@
 				$("#work-in-prog-overlay").fadeOut();
 				$("#openb2").css({ opacity: 1 });
 			});
+			
+			//=== Erros ===
+				$( ".erro" ).click(function() {
+				  $(".erro").css('opacity', '0');
+				  $(".erro").css('visibility', 'hidden');
+				});
+				
+				function erro12(){
+				  $(".erro").css('visibility', 'visible');
+				  $(".erro").css('opacity', '1');
+				}
+				function erro13(){
+				  $("#name-cc").css('background', 'rgb(245, 212, 212)');
+				  $("#name-cc").css('border', '1px solid #e74c3c');
+				  $("#name-error").css('display', 'block');
+				}
+				function erro14(){
+				  $("#email-cc").css('background', 'rgb(245, 212, 212)');
+				  $("#email-cc").css('border', '1px solid #e74c3c');
+				  $("#email-error").css('display', 'block');
+				}
+				function erro15(){
+				  $("#email-cc").css('background', 'rgb(245, 212, 212)');
+				  $("#email-cc").css('border', '1px solid #e74c3c');
+				  $("#email-error2").css('display', 'block');
+				}
+				function erro16(){
+				  $("#pass-cc").css('background', 'rgb(245, 212, 212)');
+				  $("#pass-cc").css('border', '1px solid #e74c3c');
+				  $("#pass-error").css('display', 'block');
+				}
 		</script>
 		</body>
 </html>

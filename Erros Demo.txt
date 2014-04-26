@@ -123,3 +123,46 @@ Erro 11 - failure (erro salvar):
 uso: se ocorrer algum erro na hora de salvar alguma modificação.
 
 -------------------------------
+
+
+ _______________________________________
+|                                       |
+|             ERROS parte 5             |
+| (pagina Criar Conta -> planos.php)  |
+|_______________________________________|
+
+
+Erro 12 - failure (erro salvar):
+
+-> função: erro12();
+uso: se ocorrer algum erro inesperado na hora de criar a conta do usuario.
+
+-------------------------------
+
+Erro 13 - dados conta (nome):
+
+-> função: erro13();
+uso: se o usuario digitar mais de uma palavra como nome.
+
+-------------------------------
+
+Erro 14 - dados conta (email existente):
+
+-> função: erro14();
+uso: se o email que foi informado ja existir no DB.
+
+-------------------------------
+
+Erro 15 - dados conta (email invalido):
+
+-> função: erro15();
+uso: se o email que foi informado for invalido.
+
+-------------------------------
+
+Erro 16 - dados conta (senha):
+
+-> função: erro15();
+uso: se a nova senha for invalida. EX: tiver menos que 6 caracteres.
+
+-------------------------------

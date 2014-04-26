@@ -1488,7 +1488,7 @@ input[type="checkbox"] {
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	z-index: 999;
+	z-index: 999999;
 }
 .error-modal{
 	background:#e74c3c;
