@@ -4,6 +4,7 @@ session_start(); ?>
     <head>
         <link href="style.css" type="text/css" rel="stylesheet">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <?php
     $url=".";
     $redirecionar = false;

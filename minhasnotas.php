@@ -7,6 +7,7 @@
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<title>NOT is PAD!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
         <body id="allNotes">
