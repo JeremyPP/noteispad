@@ -1831,6 +1831,25 @@ input[type="checkbox"] {
 		margin-top: -30px;
 		margin-bottom: 30px;
 	}
+	#novoPlano{
+		overflow: scroll;
+		width: auto;
+		height: auto;
+	}
+	#priceCards{
+		width: 100%;
+	}
+	#card01m, #card02m, #card03m{
+		height: 335px;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	.separaM{
+		display: none;
+	}
+	#conf h1{
+		font-size: 50px;
+	}
 }
 @media only screen and (max-width: 500px) {
 	#center{
@@ -1857,6 +1876,29 @@ input[type="checkbox"] {
 	}
 	.passwordInfo{
 		display: none;
+	}
+	#conf h1{
+		font-size: 35px;
+	}
+	#boxEmail, #boxNome, #tmFonte{
+		width: auto;
+	}
+	#boxSenha{
+		width: auto;
+	}
+	#conf-mip, #conf-odc, #conf-odp{
+		border-radius: 0;
+		padding-bottom: 50px;
+	}
+	#dellConta{
+		width: auto;
+		height: 100%;
+	}
+	#boxCorFonte, #boxCorBg{
+		width: auto;
+	}
+	#tmFonte {
+		height: 300px !important;
 	}
 }
 @media only screen and (max-width: 360px) {
