@@ -1799,9 +1799,37 @@ input[type="checkbox"] {
 }
 
 /*======= Media querys =======*/
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 603px) {
 	#contentOver h1{
 		font-size: 60px !important;
+	}
+	#pagePrice h1{
+		margin-bottom: 50px;
+		font-size: 50px;
+	}
+	#priceCards{
+		height: 100%;
+		width: 100%;
+		margin: 0;
+	}
+	#card01, #card02, #card03{
+		height: 340px;
+		width: 100%;
+		margin-bottom: 20px;
+		float: none;
+	}
+	#duvidaPrice{
+		margin-bottom: 22px;
+		margin-top: 0;
+	}
+	#inprogPremium{
+		width: auto;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	#contOverPlan h2{
+		margin-top: -30px;
+		margin-bottom: 30px;
 	}
 }
 @media only screen and (max-width: 500px) {
@@ -1812,6 +1840,23 @@ input[type="checkbox"] {
 @media only screen and (max-width: 450px) {
 	#center{
 		width: 400px;
+	}
+	#inprogPremium h2{
+		font-size: 33px;
+	}
+	#inprogPremium h3{
+		font-size: 20px;
+	}
+	#pagePrice h1{
+		margin-bottom: 45px;
+		font-size: 33px;
+	}
+	#dadosUser {
+		width: auto;
+		margin: 6px;
+	}
+	.passwordInfo{
+		display: none;
 	}
 }
 @media only screen and (max-width: 360px) {
