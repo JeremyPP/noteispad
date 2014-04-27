@@ -924,6 +924,8 @@ input[type="checkbox"] {
 	font-size: 22px;
 	margin-top: -20px;
 	margin-bottom: 70px;
+	padding-left: 15px;
+	padding-right: 15px;
 
 }
 .recupPass{
@@ -945,6 +947,7 @@ input[type="checkbox"] {
 	font-family: 'Open Sans', sans-serif;
 	height: 26px;
 	line-height: 26px;
+	margin-bottom: 30px;
 }
 .recupPass:hover{
 	background: rgb(50, 130, 156);
@@ -1836,6 +1839,15 @@ input[type="checkbox"] {
 	}
 	#loginclose{
 		left: 310px !important;
+	}
+	#allNotes h1{
+		font-size: 45px;
+		margin-top: 15px;
+		margin-bottom: -20px;
+	}
+	#allNotes p{
+		font-size: 18px;
+		margin-bottom: 30px;
 	}
 }
 @media only screen and (max-width: 320px) {
