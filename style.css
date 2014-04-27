@@ -1794,3 +1794,81 @@ input[type="checkbox"] {
 	padding: 25px;
 	text-align: center;
 }
+
+/*======= Media querys =======*/
+@media only screen and (max-width: 600px) {
+	#contentOver h1{
+		font-size: 60px !important;
+	}
+}
+@media only screen and (max-width: 500px) {
+	#center{
+		width: 450px;
+	}
+}
+@media only screen and (max-width: 450px) {
+	#center{
+		width: 400px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	#center{
+		width: 350px;
+		height: 370px;
+		margin-bottom: 30px;
+	}
+	#logo{
+		height: 170px !important;
+	}
+	#contentOver h1{
+		font-size: 40px !important;
+	}
+	#contentOver{
+		width: 90% !important;
+	}
+	#loginOver{
+		width: 350px !important;
+	}
+	#topLog{
+		padding-left: 85px !important;
+		padding-top: 20px !important;
+		margin-bottom: -20px;
+	}
+	#loginclose{
+		left: 310px !important;
+	}
+}
+@media only screen and (max-width: 320px) {
+	#center{
+		width: 320px;
+		height: 345px;
+		margin-bottom: 30px;
+	}
+	#logo{
+		height: 150px !important;
+	}
+	#loginOver{
+		width: 320px !important;
+	}
+	#topLog {
+		padding-left: 70px !important;
+	}
+	#emailLog, #senhaLog{
+		width: 270px !important;
+		margin-left: 15px;
+	}
+	#loginSubmit{
+		width: 85% !important;
+		margin-left: 15px;
+	}
+	#remember-me{
+		margin-left: 15px;
+	}
+	#createSubmit{
+		width: 85% !important;
+		margin-left: 15px;
+	}
+	#loginclose {
+		left: 280px !important;
+	}
+}

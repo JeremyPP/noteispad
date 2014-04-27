@@ -122,7 +122,7 @@
 				<div id="topLog">
 					Log in
 					<div id="clos02">
-					<span class="og-close" style="top: 10px; left: 410px;"></span>
+					<span class="og-close" id="loginclose" style="top: 10px; left: 410px;"></span>
 					</div>
 				</div>
 				<div id="formsLog">
