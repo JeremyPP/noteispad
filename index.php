@@ -1,4 +1,7 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -87,11 +90,12 @@
 					</div>
 				</div>
 				<div id="formsLog">
-					<form action="me.php" method="post">
-						<input id="emailLog" autofocus="1" type="email" name="login_email" id="login_email" placeholder="Seu email">
+                    <?php if (isset($_SESSION['email'])) { echo $_SESSION['email'];} ?>
+					<form action="command.php" method="post">
+						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Seu email">
 						<div class="form-error" id="email-error">Email invalido ou inexistente!</div>
 						<br>
-						<input id="senhaLog" type="password" id="login_password" name="login_password" placeholder="Sua senha">
+						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Sua senha">
 						<div class="form-error" id="pass-error">Senha incorreta!</div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">

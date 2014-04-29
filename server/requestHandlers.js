@@ -98,10 +98,14 @@ function getInfo(response, query) {
 * @param query O query da requisição
 */
 function login(response, query) {
+    console.log(query);
     if (query['method'] == "POST") {
         switch (query['function']) {
             case 'login':
                 logar(response, query);
+                break;
+            case 'verifyTolken':
+                verifyTolken(response, query);
                 break;
             case 'setTolken':
                 setTolken(response, query);
@@ -136,6 +140,43 @@ function logar(response, query) {
         error(response, CONSTANTES.SUCESS.FALSO);
     }
 }
+
+/**
+* Verifica se o tolken pertence ao usuário.
+*/
+function verifyTolken(response, query) {
+    if (query['email'] && query['tolken']) {
+        db.getTolkens(query['email'], function(tolkens) {
+            if (tolkens) {
+                contains(query['tolken'], tolkens, function(contain) {
+                    var json = '{"sucess": "'+contain+'"}';
+                    write(response, json);
+                });
+            } else { 
+                error(response, CONSTANTES.SUCESS.FALSO);
+            }
+        });
+    } else {
+        error(response, CONSTANTES.SUCESS.FALSO);
+    }
+}
+
+function contains(element, array, callback) {
+    var length = array.length;
+    function loop(){
+        if (length) {
+            if (element == array[--length]) {
+                callback(true);
+            } else {
+                setTimeout(loop, 10);
+            }
+        } else {
+            callback(false);
+        }
+    }
+    loop();
+}
+
 
 function setTolken(response, query) {
     if (query['email'] && query['tolken']) {

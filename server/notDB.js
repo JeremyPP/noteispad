@@ -207,6 +207,28 @@ function setTolkenUsuario(email, tolken, callback) {
 }
 
 /**
+* Retorna os tolkens do usuario
+*
+* @param email O email do usuario
+* @param callback callback(tolkens) A array de tolkens do usuario. OU null se nao existir usuario.
+*/
+function getTolkens(email, callback) {
+    usuarios.findOne({email: email})
+    .done(function(usuario){
+            if (usuario) {
+                callback(usuario['tolkens']);
+            } else {
+                callback(null);
+            }
+        })
+	.fail(function(err){
+			console.log("erro no getTolkens - documento notDB.js\n"+err);
+            callback(null);
+		});
+    
+}
+
+/**
 * Retorna o número de páginas do documento
 *
 * @param code O código do documento.
@@ -236,3 +258,4 @@ exports.criaDocumento = criaDocumento;
 exports.getUsuario = getUsuario;
 exports.setTolkenUsuario = setTolkenUsuario;
 exports.getPaginas = getPaginas;
+exports.getTolkens = getTolkens;

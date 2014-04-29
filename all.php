@@ -1,6 +1,6 @@
 ﻿<?php 
-    require_once("../notispad/init.php");
-    require_once("../notispad/functions.php");
+    require_once("init.php");
+    require_once("functions.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
