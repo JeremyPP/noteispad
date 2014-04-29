@@ -1,6 +1,6 @@
 ﻿<?php 
-    require_once("../notispad/init.php");
-    require_once("../notispad/functions.php");
+    require_once("init.php");
+    require_once("functions.php");
     $SERVER = "http://localhost:8888";
     
     if (isset($_POST['todas'])) {

@@ -1,6 +1,6 @@
 ﻿<?php
-    require_once("../notispad/init.php");
-    require_once("../notispad/functions.php");
+    require_once("init.php");
+    require_once("functions.php");
     
     if (isset($_GET['code'])) {
         $query = sendGet("http://localhost:8888?".$_SERVER['QUERY_STRING']);
