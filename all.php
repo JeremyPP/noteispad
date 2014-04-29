@@ -1,15 +1,9 @@
-﻿<?php session_start(); ?>
+﻿<?php 
+    require_once("../notispad/init.php");
+    require_once("../notispad/functions.php");
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
-        
-<?php
-    if(!$_SESSION['codtempacess']){
-        echo '<meta http-equiv="refresh" content="0 url=.">';
-            echo '<script type="text/javascript">
-                    location.href = ".";
-                  </script>';}
-    else{
-?>
 <html lang="pt-br">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -22,19 +16,24 @@
     <body>
         <?php
                 $codigo=$_SESSION['codtempacess'];
-                $s=fread(fopen("$codigo/.1.txt", "r"), filesize("$codigo/.1.txt"));
-                for ($i=$s; $i>=0; $i--){
-                    $k=1+$i;
-                    echo "<a href='notpad.php?arquivo=$k' style='text-decoration: none; color: #000; '><div class='all'>
+                $server = "http://localhost:8888";
+                $pages = json_decode(sendGet($server."?function=getInfo&code=".$codigo), true)['pages'];
+                if ($pages == 0) {
+                    $pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
+                }
+                
+                for ($i=$pages - 1; $i>=0; $i--){
+                    echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
                             <div class='allnum'>
-                                Pagina $k
+                                Pagina $i
                             </div>
                             <div class='allcontent'><p>".
-                                fread(fopen("$codigo/$i.txt", "r"), 800)
+                                json_decode(sendGet($server."?code=$codigo&page=$i"), true)['content']
                                 ."
                             </p></div>
                             <br>
-                          </div></a>";}}
+                          </div></a>";
+                }
         ?>
     </body>
 </html>
