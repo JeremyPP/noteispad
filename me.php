@@ -1,36 +1,16 @@
-﻿<?php session_start();
-    $url='notpad.php';
-    (isset($_SESSION['codigo'])&&$_SESSION['codigo']!='')?$_SESSION['codtempacess']=$_SESSION['codigo']:'';
-    isset($_GET['logout'])?$_SESSION['codtempacess']='':'';
-    if(isset($_SESSION['codtempacess']) && $_SESSION['codtempacess']!=''/*&& !isset($_POST['codigo'])*/){
-        $_SESSION['codigo']='';
-        echo '<meta http-equiv="refresh" content="0 url='.$url.'">';
-        echo '<script type="text/javascript">
-                location.href = "'.$url.'";
-            </script>';}
-    else{
-        if(isset($_POST['codigo'])){
-            $_SESSION['codtempacess'] = $_POST['codigo'];}
-        isset($_SESSION['codigo'])?$_POST['codigo']=$_SESSION['codigo']:'';
-        $_SESSION['newcd']=false;
-        $newcd =& $_SESSION['newcd'];
-        $del =0;
-        /* Criando Pasta (codigo) para salvar os arquivos */
-            !isset($_POST['codigo'])?$_POST['codigo']='':'';
-            if($_POST['codigo']!='' && $_POST['codigo']!=$_SESSION['codtempacess']){#Verifica se o novo código é igual ao anterior, se não for, criar pasta e arquivos.
-                $codigo=$_POST['codigo'];
-                /* Verificar caracteres especiais */
-                    
-                /*FIM*/
-                if($del!=1){
-                    $_SESSION['codtempacess']=$_POST['codigo'];
-                    $codigo=$_SESSION['codtempacess'];
-                    $newcd=true;}
-                if(!is_dir($codigo) && $del!=1){
-                    mkdir("$codigo", 0777);
-                    fwrite(fopen("$codigo/.1.txt", "w+"), "0");
-                    fwrite(fopen("$codigo/0.txt", "w+"), "Bem vindo!\n\nGuarde bem o código, pois é com ele que você terá acesso aos arquivos.Lembre-se, se você tinha gerado outro código, os arquivos ainda estão nele, não se preocupe.\n\nNot is Pad, is a NOTePAD.\nStênio Elson");}}
-        /*FIM */
+﻿<?php
+    require_once('init.php');
+    require_once('functions.php');
+    
+    if (!logado()) {
+        redirect(".");
+    }
+    
+    //$userInfo = getUserInfo($_SESSION['email'], $_SESSION['tolken']);
+    
+    $email = $_SESSION['email'];
+    $notas = array("atual" => 15, "total" =>100);
+    
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -45,22 +25,17 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script type="text/javascript">
-        <?php
-            if(isset($_SESSION['del']) && $_SESSION['del']==1){
-                echo 'alert('."'".'Os caracteres: \ / : * ? " < > |, não são aceitos no Código de Acesso.'."'".')';
-                $_SESSION['del']='';}}
-        ?>
         </script>
     </head>
         <body>			
-			<div id="b01p"><img src="user.png">Jérémy</div>
+			<div id="b01p"><img src="user.png"><?php echo explode("@", $email)[0]; ?></div>
 			
 			<div id="dropDownProf">
-				<div class="userName">Jérémy</div>
-				<div class="userEmail">jimypougnet@gmail.com</div>
-				<div class="userDataLeft">27 de 100 notas criadas</div>
+				<div class="userName"><?php echo explode("@", $email)[0]; ?></div>
+				<div class="userEmail"><?php echo $email; ?></div>
+				<div class="userDataLeft"><?php echo $notas['atual']." de ".$notas['total']." notas criadas"; ?></div>
 				<div class="quotaContainer">
-					<div style="width: 27%;" class="quotaBar"></div>
+					<div style="width: <?php echo $notas['atual']; ?>%;" class="quotaBar"></div>
 				</div>
 				<a href="minhasnotas.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">
@@ -99,8 +74,8 @@
 					<div id="name">not is pad!</div>
 				</div>
 				<div>
-					<form action="notpad.php" method="post">
-						<input id="senha" placeholder="Digite seu Código" type="password" name="codigo">
+					<form action="notpad.php" method="get">
+						<input id="senha" placeholder="Digite seu Código" type="password" name="code">
 					</form>
 				</div>
 				<div id="desc">

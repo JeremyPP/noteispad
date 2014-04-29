@@ -126,9 +126,7 @@
     *
     * @param $email Email do usuário
     * @param $tolken O tolken a ser verificado
-    * @return Uma string json 
-    *         {"sucess" : "true"/"false"}
-    *          true se o tolken pertencer ao usuário, false caso contrário.
+    * @return true se o tolken pertencer ao usuário, false caso contrário.
     */
     function verifyTolken($email, $tolken) {
         global $EMAIL;
@@ -138,7 +136,19 @@
         $query = array("function" => "verifyTolken", $EMAIL => $email, $TOLKEN => $tolken);
         $response = json_decode(sendPost($SERVER.'/login', $query), true);
         
-        return $response;
+        return $response['sucess'] == 'true';
+    }
+    
+    /**
+    * Verifica se um usuário esta logado
+    * 
+    * @return True se o usuário estiver logado
+    */
+    function logado() {
+        if (isset($_SESSION['tolken']) and isset($_SESSION['email'])){
+            return true;
+        }
+        return false;
     }
     
     /**

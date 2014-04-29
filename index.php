@@ -1,5 +1,11 @@
 ﻿<?php
 require_once("init.php");
+require_once("functions.php");
+
+if (logado()){
+    redirect("me.php");
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -90,7 +96,6 @@ require_once("init.php");
 					</div>
 				</div>
 				<div id="formsLog">
-                    <?php if (isset($_SESSION['email'])) { echo $_SESSION['email'];} ?>
 					<form action="command.php" method="post">
 						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Seu email">
 						<div class="form-error" id="email-error">Email invalido ou inexistente!</div>

@@ -5,7 +5,7 @@
     
     if (!isset($_POST['email']) and isset($_SESSION['email']) and isset($_SESSION['tolken'])) {
         $verify = verifyTolken($_SESSION['email'], $_SESSION['tolken']);
-        if(isset($verify['sucess']) and $verify['sucess'] == 'false'){
+        if(!$verify){
             unset ($_SESSION['email']);
             unset ($_SESSION['tolken']);
         }

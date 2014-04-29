@@ -13,6 +13,6 @@
     
     if (ep($EMAIL) and ep($SENHA)) {
         logar(p($EMAIL), p($SENHA));
-        redirect(".");
+        redirect("me.php");
     }
 ?>
