@@ -36,7 +36,11 @@ function getConteudoDe(code, page, callback) {
 	getDocumento(code, function(documento){
 		if (documento) {
 			getUltimaVersaoDe(documento, page, function(versao) {
-				callback(versao['content']);
+				if (versao) {
+                    callback(versao['content']);
+                } else {
+                    getConteudoDe(CONSTANTES.PADRAO.DOCUMENTO._id, CONSTANTES.PADRAO.PAGINA.page, callback);
+                }
 			});
 		} else {
 			getConteudoDe(CONSTANTES.PADRAO.DOCUMENTO._id, CONSTANTES.PADRAO.PAGINA.page, callback);
@@ -68,11 +72,15 @@ function getDocumento(code, callback) {
 function getUltimaVersaoDe(documento, page, callback) {
 	paginas.findOne({document: documento["_id"], page: parseInt(page)})
 	.done(function(pagina){
-			versoes.findOne({document: pagina['document'], page: parseInt(page), version: pagina['versions'] - 1})
-			.done(callback)
-			.fail(function(err){
-					console.log("erro no getUltimaVersaoDe - documento notDB.js\n"+err);
-				});
+            if (pagina) {
+                versoes.findOne({document: pagina['document'], page: parseInt(page), version: pagina['versions'] - 1})
+                .done(callback)
+                .fail(function(err){
+                        console.log("erro no getUltimaVersaoDe - documento notDB.js\n"+err);
+                    });
+            } else {
+                callback(null);
+            }
 		})
 	.fail(function(err){
 			console.log("erro no getDocumento - documento notDB.js\n"+err);
@@ -164,9 +172,67 @@ function criaDocumento(code, callback){
 		});
 }
 
+/**
+* Retorna o usuario com o email especificado.
+*
+* @param email O email do usuário
+* @param callback; callback(usuario). Retorna o usuario, caso exista, null caso contrário
+*/
+function getUsuario(email, callback) {
+    usuarios.findOne({email: email})
+    .done(callback)
+	.fail(function(err){
+			console.log("erro no getUsuario - documento notDB.js\n"+err);
+            callback(null);
+		});
+}
+
+/**
+* Adiciona um tolken ao usuário.
+*
+* @param email O email do usuário
+* @param tolken O tolken a ser adicionado
+* @param callback; callback(usuario). Retorna true se adicionou false caso contrário.
+*/
+function setTolkenUsuario(email, tolken, callback) {
+    console.log(tolken);
+    usuarios.update({"email": email}, {$push: {"tolkens": tolken}}, {upsert: false})
+    .done(function(usuario) {
+            callback(true);
+        })
+	.fail(function(err){
+			console.log("erro no setTolken - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
+/**
+* Retorna o número de páginas do documento
+*
+* @param code O código do documento.
+* @param callback; callback(paginas) Número de páginas
+*/
+function getPaginas(code, callback) {
+    documentos.findOne({_id: code})
+    .done(function(documento) {
+        if (documento) {
+            callback(documento['pages']);
+        } else {
+            callback(0);
+        }
+    })
+	.fail(function(err){
+			console.log("erro no getPaginas - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
 exports.getDocumento = getDocumento;
 exports.getUltimaPaginaDe = getUltimaPaginaDe;
 exports.getConteudoDe = getConteudoDe;
 exports.inserePaginaNoDocumento = inserePaginaNoDocumento;
 exports.alterarDocumento = alterarDocumento;
 exports.criaDocumento = criaDocumento;
+exports.getUsuario = getUsuario;
+exports.setTolkenUsuario = setTolkenUsuario;
+exports.getPaginas = getPaginas;

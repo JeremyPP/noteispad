@@ -3,6 +3,17 @@
 */
 constantes = 
 	{
+        FIELD:
+            {
+                USUARIO:
+                    {
+                        TOLKENS: "tolkens"
+                    }
+            },
+        SUCESS:
+            {
+                FALSO: '{"sucess": "false"}'
+            },
 		PADRAO:
 			{
 				DOCUMENTO:
