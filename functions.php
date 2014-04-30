@@ -12,6 +12,7 @@
     $SENHA = "password";
     $TOLKEN = "tolken";
     $SERVER = "http://localhost:8888";
+    $PLANOS = ['basico', 'pro', 'premium'];
     
     function redirect($url) {
         header("Location: ".$url);
@@ -65,6 +66,37 @@
     }
     
     /**
+    * Um atalho para $_GET['query']
+    *
+    * @param $query valor a ser recuperado.
+    * @return Se existe: $_GET['query'], caso contrário: null
+    */
+    function g($query) {
+        try {
+            return $_GET[$query];
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    
+    /**
+    * Verifica se um determinado valor existe na variavel $_GET do php
+    *
+    * @param $query valor a ser verificado
+    * @return Se existe o valor.
+    */
+    function eg($query) {
+        try {
+            if (isset($_GET) and isset($_GET[$query])) {
+                return true;
+            }
+        } catch (Exception $e) {
+        }
+        
+        return false;
+    }
+    
+    /**
     * Um atalho para $_POST['query']
     *
     * @param $query valor a ser recuperado.
@@ -87,6 +119,37 @@
     function ep($query) {
         try {
             if (isset($_POST) and isset($_POST[$query])) {
+                return true;
+            }
+        } catch (Exception $e) {
+        }
+        
+        return false;
+    }
+    
+    /**
+    * Um atalho para $_SESSION['query']
+    *
+    * @param $query valor a ser recuperado.
+    * @return Se existe: $_SESSION['query'], caso contrário: null
+    */
+    function s($query) {
+        try {
+            return $_SESSION[$query];
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    
+    /**
+    * Verifica se um determinado valor existe na variavel $_SESSION do php
+    *
+    * @param $query valor a ser verificado
+    * @return Se existe o valor.
+    */
+    function es($query) {
+        try {
+            if (isset($_SESSION) and isset($_SESSION[$query])) {
                 return true;
             }
         } catch (Exception $e) {
@@ -146,7 +209,7 @@
     */
     function logado() {
         if (isset($_SESSION['tolken']) and isset($_SESSION['email'])){
-            return true;
+            return verifyTolken(s('email'), s('tolken'));
         }
         return false;
     }
@@ -172,5 +235,139 @@
         } else {
             return null;
         }
+    }
+    
+    function existeUsuairo($email) {
+        global $SERVER;
+        
+        $query = array('function' => 'exist', 'email' => $email);
+        $response = json_decode(sendPost($SERVER, $query), true);
+        
+        return $response['sucess'] == 'true';
+    }
+    
+    function validePlano($plano) {
+        global $PLANOS;
+    
+        return in_array(strtolower($plano), $PLANOS);
+    }
+    
+    /**
+    * Criar Usuario
+    * 
+    * @return true se ok, ou uma string com o erro.
+    */
+    function criarUsuario($nome, $email, $senha, $plano) {
+        global $SERVER;
+    
+        if (!validePlano($plano)) { return "Este não é um de nossos planos."; }
+        if (existeUsuairo($email)) { return "Usuário existente"; }
+        
+        $created = time();
+        $jsonDecoded = array(
+            '_id' => $email,
+            "plan" => array("type" => $plano, "begin" => $created),
+            "notes" => 0,
+            "codes" => [],
+            "created" => $created,
+            "name" => array("first" => explode(" ", $nome." ")[0], "complete" => $nome),
+            "password" => $senha,
+            "tolkens" => []
+        );
+        $jsonEncoded = json_encode($jsonDecoded);
+        
+        $query = array('function' => "insereUsuario", "json" => $jsonEncoded);
+        $response = json_decode(sendPost($SERVER.'/login', $query), true);
+        
+        return $response['sucess'] == 'true';
+    }
+    
+    function getUserInfo($email, $tolken) {
+        try {
+            if (verifyTolken($email, $tolken)) {
+                global $SERVER;
+                
+                $query = array('function' => 'getInfo', 'email' => $email);
+                $response = json_decode(sendPost($SERVER, $query), true);
+                
+                if ($response['sucess'] == 'true') {
+                    return $response;
+                }
+            }
+        } catch (Exception $e) {
+        }
+        return false;
+    }
+    
+    function getPlanInfo($plano) {
+        try{
+            global $SERVER;
+            
+            $query = array('function' => 'getInfo', 'plan' => $plano);
+            $response = json_decode(sendPost($SERVER, $query), true);
+            
+            if ($response['sucess'] = 'true') {
+                return $response;
+            }
+        } catch(Eception $e) {
+        }
+        return false;
+    }
+    
+    function existeDocumento($code) {
+        global $SERVER;
+        
+        $query = array("function" => "getInfo", "code" => $code);
+        $pages = json_decode(sendPost($SERVER, $query), true)['pages'];
+        
+        return $pages > 0;
+    }
+    
+    function criarDocumento($code, $content) {
+        global $SERVER;
+        
+        if (!existeDocumento($code)) {
+            $query['function'] = 'save';
+            $query['code'] = $code;
+            $query['content'] = $content;
+            
+            $json = json_decode(sendPost($SERVER, $query),true);
+            
+            return $json['sucess'] == 'true';
+        }
+        
+        return false;
+    }
+    
+    function atribuirPosse($code, $email) {
+        try{
+            global $SERVER;
+            
+            if(!existeDocumento($code)) { return false; }
+            
+            $query = array('function' => 'atribuirPosse', 'code' => $code, 'email' => $email);
+            $response = json_decode(sendPost($SERVER, $query), true);
+                
+            if ($response['sucess'] = 'true') {
+                return $response;
+            }
+        } catch(Eception $e) {
+        }
+        return false;
+    }
+    
+    function getContent($code = "default", $page = -1, $version = -1) {
+        global $SERVER;
+        
+        $query = array("code" => $code, "page" => $page, "version" => $version);
+        $response = json_decode(sendPost($SERVER, $query), true);
+        
+        
+        return $response['content'];
+    }
+    
+    function deslogar() {
+        if(es('email')) { unset($_SESSION['email']);}
+        if(es('tolken')) { unset($_SESSION['tolken']);}
     }
 ?>

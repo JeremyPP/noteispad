@@ -1,6 +1,7 @@
 var CONSTANTES = require("./constantes.js").CONSTANTES;
 var mongoq = require("mongoq");
 var db = mongoq("mongodb://127.0.0.1:27017/notispad", {safe:false});
+var planos     = db.collection("planos");
 var documentos = db.collection("documentos");
 var paginas    = db.collection("paginas");
 var usuarios   = db.collection("usuarios");
@@ -179,7 +180,7 @@ function criaDocumento(code, callback){
 * @param callback; callback(usuario). Retorna o usuario, caso exista, null caso contrário
 */
 function getUsuario(email, callback) {
-    usuarios.findOne({email: email})
+    usuarios.findOne({_id: email})
     .done(callback)
 	.fail(function(err){
 			console.log("erro no getUsuario - documento notDB.js\n"+err);
@@ -196,7 +197,7 @@ function getUsuario(email, callback) {
 */
 function setTolkenUsuario(email, tolken, callback) {
     console.log(tolken);
-    usuarios.update({"email": email}, {$push: {"tolkens": tolken}}, {upsert: false})
+    usuarios.update({_id: email}, {$push: {"tolkens": tolken}}, {upsert: false})
     .done(function(usuario) {
             callback(true);
         })
@@ -213,7 +214,7 @@ function setTolkenUsuario(email, tolken, callback) {
 * @param callback callback(tolkens) A array de tolkens do usuario. OU null se nao existir usuario.
 */
 function getTolkens(email, callback) {
-    usuarios.findOne({email: email})
+    usuarios.findOne({_id: email})
     .done(function(usuario){
             if (usuario) {
                 callback(usuario['tolkens']);
@@ -249,6 +250,67 @@ function getPaginas(code, callback) {
 		});
 }
 
+/**
+* @param json Um string json com os dados a serem inseridos na coleção usuários.
+*/
+function insereUsuario(json, callback) {
+    usuarios.insert(json)
+    .done(function(usuario){
+        callback(usuario?true:false);
+    })
+	.fail(function(err){
+			console.log("erro no insereUsuario - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
+function getPlano(plano, callback) {
+    planos.findOne({_id: plano})
+    .done(callback)
+	.fail(function(err){
+			console.log("erro no getPlano - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
+function trocaUsuarioNota(code, email, callback) {
+    documentos.update({_id: code}, {$set:{user: email}})
+    .done(function(documento){
+        callback(documento?true:false);
+        })
+	.fail(function(err){
+			console.log("erro no trocaUsuarioNota - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
+function appendNotaUsuario(email, code, callback) {
+    usuarios.update({_id: email}, {$push:{codes:code}})
+    .done(function(usuario){
+        callback(usuario?true:false);
+        })
+	.fail(function(err){
+			console.log("erro no appendNotaUsuario - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
+/**
+* Retorna nova quantidade
+*/
+function incrementaNotasUsuario(email, qnt, callback) {
+    usuarios.update({_id:email}, {$inc:{notes:qnt}})
+    .done(function(usuario){
+        callback(usuario?usuario[0]['notes']:false);
+        })
+	.fail(function(err){
+			console.log("erro no incrementaNotasUsuario - documento notDB.js\n"+err);
+            callback(false);
+		});
+}
+
+exports.incrementaNotasUsuario = incrementaNotasUsuario;
+exports.appendNotaUsuario = appendNotaUsuario;
 exports.getDocumento = getDocumento;
 exports.getUltimaPaginaDe = getUltimaPaginaDe;
 exports.getConteudoDe = getConteudoDe;
@@ -259,3 +321,6 @@ exports.getUsuario = getUsuario;
 exports.setTolkenUsuario = setTolkenUsuario;
 exports.getPaginas = getPaginas;
 exports.getTolkens = getTolkens;
+exports.insereUsuario = insereUsuario;
+exports.getPlano = getPlano;
+exports.trocaUsuarioNota = trocaUsuarioNota;

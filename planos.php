@@ -30,7 +30,8 @@
 				<div id="contOverPlan">
 					<h1>Complete as informações abaixo</h1>
 					<h2>Voce escolheu o plano PRO de R$9/mês.</h2>
-					<form id="dadosUser" action="me.php">
+					<form id="dadosUser" action="command.php" method='post'>
+                        <input type='hidden' name='plan' value='pro'>
 						<input type="text" name="name" id="name-cc" placeholder="Seu nome" class="u-dI" autofocus>
 						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Digite apenas 01 (um) nome.</div><br>
 						<input type="email" name="email" id="email-cc" placeholder="Seu email" class="u-dI">
@@ -45,7 +46,7 @@
 						  <div class="password-bubble-desc">Boas senhas são difíceis de adivinhar. Use palavras incomuns, com maiúsculas escritas aleatoriamente, erros de ortografia criativos e com números e símbolos.</div>
 						</div>
 						<br>
-						<input type="submit" value="Prosseguir com o pagamento" class="u-dS">
+						<input type="submit" name='cadastrar' value="Prosseguir com o pagamento" class="u-dS">
 					</form>
 				</div>
 			</div>

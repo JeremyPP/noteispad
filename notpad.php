@@ -3,7 +3,7 @@
     require_once("functions.php");
     
     if (isset($_GET['code'])) {
-        $query = sendGet("http://localhost:8888?".$_SERVER['QUERY_STRING']);
+        $query = sendPost("http://localhost:8888?", queryToArray($_SERVER['QUERY_STRING']));
     } else {
         $query = sendPost("http://localhost:8888", $_POST);
     }
@@ -12,6 +12,12 @@
     
     if (!$info or (isset($info['sucess']) and $info['sucess'] == 'false')) {
         redirect(".");
+    }
+    
+    if (logado()) {
+        if (criarDocumento(g('code'), $info['content'])){
+            atribuirPosse(g('code'), s('email'));
+        }
     }
     
     $document = $info['document'];

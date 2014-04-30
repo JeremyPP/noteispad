@@ -17,9 +17,12 @@
         <?php
                 $codigo=$_SESSION['codtempacess'];
                 $server = "http://localhost:8888";
-                $pages = json_decode(sendGet($server."?function=getInfo&code=".$codigo), true)['pages'];
+                
+                $query = array("function" => "getInfo", "code" => $codigo);
+                $pages = json_decode(sendPost($server, $query), true)['pages'];
                 if ($pages == 0) {
-                    $pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
+                    $query['code'] = "default";
+                    $pages = json_decode(sendPost($server, $query), true)['pages'];
                 }
                 
                 for ($i=$pages - 1; $i>=0; $i--){
@@ -28,7 +31,7 @@
                                 Pagina $i
                             </div>
                             <div class='allcontent'><p>".
-                                json_decode(sendGet($server."?code=$codigo&page=$i"), true)['content']
+                                json_decode(sendPost($server, array("code" => $codigo, "page" => $i)), true)['content']
                                 ."
                             </p></div>
                             <br>

@@ -6,10 +6,22 @@
         redirect(".");
     }
     
-    //$userInfo = getUserInfo($_SESSION['email'], $_SESSION['tolken']);
+    $userInfo = getUserInfo($_SESSION['email'], $_SESSION['tolken']);
     
-    $email = $_SESSION['email'];
-    $notas = array("atual" => 15, "total" =>100);
+    if (!$userInfo) {
+        redirect(".");    
+    }
+    
+    $name = $userInfo['name']['first'];
+    $email = s('email');
+    
+    $planInfo = getPlanInfo($userInfo['plan']['type']);
+    
+    if (!$planInfo) {
+        redirect(".");    
+    }
+    
+    $notas = array("atual" => $userInfo['notes'], "total" => $planInfo['notes']);
     
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -28,14 +40,14 @@
         </script>
     </head>
         <body>			
-			<div id="b01p"><img src="user.png"><?php echo explode("@", $email)[0]; ?></div>
+			<div id="b01p"><img src="user.png"><?php echo $name; ?></div>
 			
 			<div id="dropDownProf">
-				<div class="userName"><?php echo explode("@", $email)[0]; ?></div>
+				<div class="userName"><?php echo $name; ?></div>
 				<div class="userEmail"><?php echo $email; ?></div>
 				<div class="userDataLeft"><?php echo $notas['atual']." de ".$notas['total']." notas criadas"; ?></div>
 				<div class="quotaContainer">
-					<div style="width: <?php echo $notas['atual']; ?>%;" class="quotaBar"></div>
+					<div style="width: <?php echo $notas['atual']*100/$notas['total']; ?>%;" class="quotaBar"></div>
 				</div>
 				<a href="minhasnotas.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">
@@ -47,7 +59,7 @@
 						Configurações
 					</div>
 				</a>
-				<a href="../notepad" class="nemuListProfLink">
+				<a href="command.php?sair=true" class="nemuListProfLink">
 					<div id="logoffMenu" class="nemuListProf" style="margin-bottom: 17px;">
 						Deslogar-se
 					</div>

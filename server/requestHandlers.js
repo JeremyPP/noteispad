@@ -19,8 +19,44 @@ function start(response, query) {
         case 'getInfo':
             getInfo(response, query);
             break;
+        case 'exist':
+            exist(response, query);
+            break;
+        case 'atribuirPosse':
+            atribuirPosse(response, query);
+            break;
         default:
             get(response, query);
+    }
+}
+
+function atribuirPosse(response, query){
+    if (query['code'] && query['email']) {
+        db.trocaUsuarioNota(query['code'], query['email'], function(sucess){
+            db.appendNotaUsuario(query['email'], query['code'], function(sucess){
+                db.incrementaNotasUsuario(query['email'], 1, function(qnt) {
+                    writeSucess(response, qnt?true:false);
+                });
+            });
+        });
+    } else {
+        error(response, CONSTANTES.SUCESS.FALSO);
+    }
+}
+
+function exist(response, query) {
+    if (query['email']) {
+        db.getUsuario(query['email'], function(usuario){
+            var json = '';
+            if (usuario) {
+                json = '{"sucess": "true"}';
+            } else {
+                json = CONSTANTES.SUCESS.FALSO;
+            }
+            write(response, json);
+        });
+    } else {
+        db.getDocumento
     }
 }
 
@@ -86,6 +122,31 @@ function getInfo(response, query) {
             var json = '{"sucess": "true", "pages": '+pages+'}';
             write(response, json);
         });
+    } else if(query['email']){
+        db.getUsuario(query['email'], function(usuario) {
+            if (usuario) {
+                delete usuario['tolkens'];
+                delete usuario['password'];
+                
+                usuario['sucess'] = 'true';
+                var json = JSON.stringify(usuario);
+                
+                write(response, json);
+            } else {
+                error(response, CONSTANTES.SUCESS.FALSO);
+            }
+        });
+    } else if (query['plan']){
+        db.getPlano(query['plan'], function(plano) {
+            if(plano){
+                plano['sucess'] = 'true';
+                var json = JSON.stringify(plano);
+                
+                write(response, json);
+            } else {
+                error(response, CONSTANTES.SUCESS.FALSO);
+            }
+        });
     } else {
         error(response, CONSTANTES.SUCESS.FALSO);
     }
@@ -98,7 +159,6 @@ function getInfo(response, query) {
 * @param query O query da requisição
 */
 function login(response, query) {
-    console.log(query);
     if (query['method'] == "POST") {
         switch (query['function']) {
             case 'login':
@@ -110,11 +170,24 @@ function login(response, query) {
             case 'setTolken':
                 setTolken(response, query);
                 break;
+            case 'insereUsuario':
+                insereUsuario(response, query);
+                break;
             default:
                 error(response, CONSTANTES.SUCESS.FALSO);
         }        
     }else {
         error(response, CONSTANTES.SUCESS.FALSO);
+    }
+}
+
+function insereUsuario(response, query) {
+    if (query['json']) {
+        db.insereUsuario(JSON.parse(query['json']), function(sucess) {
+            writeSucess(response, sucess);
+        });
+    } else {
+        error(response, CONSTANTES,SUCESS,FALSO);
     }
 }
 
@@ -192,6 +265,10 @@ function setTolken(response, query) {
 function favicon(response, query) {
 	// melhor colocar logo um favicon na pasta, pra não dar treta.
     response.end();
+}
+
+function writeSucess(response, sucess) {
+    write(response, '{"sucess": "'+sucess+'"}');
 }
 
 function write(response, msg) {
