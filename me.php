@@ -1,18 +1,4 @@
-﻿<?php
-    require_once('init.php');
-    require_once('functions.php');
-    
-    if (!logado()) {
-        redirect(".");
-    }
-    
-    //$userInfo = getUserInfo($_SESSION['email'], $_SESSION['tolken']);
-    
-    $email = $_SESSION['email'];
-    $notas = array("atual" => 15, "total" =>100);
-    
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -28,14 +14,14 @@
         </script>
     </head>
         <body>			
-			<div id="b01p"><img src="user.png"><?php echo explode("@", $email)[0]; ?></div>
+			<div id="b01p"><img src="user.png">Jeremy</div>
 			
 			<div id="dropDownProf">
-				<div class="userName"><?php echo explode("@", $email)[0]; ?></div>
-				<div class="userEmail"><?php echo $email; ?></div>
-				<div class="userDataLeft"><?php echo $notas['atual']." de ".$notas['total']." notas criadas"; ?></div>
+				<div class="userName">Jeremy</div>
+				<div class="userEmail">jimypougnet@gmail.com</div>
+				<div class="userDataLeft">15 de 100 notas criadas</div>
 				<div class="quotaContainer">
-					<div style="width: <?php echo $notas['atual']; ?>%;" class="quotaBar"></div>
+					<div style="width: 20%;" class="quotaBar"></div>
 				</div>
 				<a href="minhasnotas.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">

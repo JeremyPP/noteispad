@@ -1,33 +1,11 @@
-﻿<?php
-    require_once("init.php");
-    require_once("functions.php");
-    
-    if (isset($_GET['code'])) {
-        $query = sendGet("http://localhost:8888?".$_SERVER['QUERY_STRING']);
-    } else {
-        $query = sendPost("http://localhost:8888", $_POST);
-    }
-    $info = json_decode($query, true);
-    
-    
-    if (!$info or (isset($info['sucess']) and $info['sucess'] == 'false')) {
-        redirect(".");
-    }
-    
-    $document = $info['document'];
-    $_SESSION['codtempacess'] = $document;
-    $page = $info['page'];
-    $content = htmlspecialchars($info['content']);
-    
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
-		<title><?php echo "Página $page"; ?> - NOT is PAD!</title>
+		<title>NOT is PAD!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -57,7 +35,7 @@
 			</div>
 			<form action="script.php" method="post">
 				<div id="top">
-                        <input type="hidden" name="code" value="<?php echo $document?>">
+                        <input type="hidden" name="code" value="">
 						<input id="botao0" type="submit" onclick="script.php" value="Salvar" name="salvar">
 						<!--<input id="botao1" type="submit" onclick="script.php" value="Adicionar" name="nova">-->
 						<div id="botao2">Nova Nota</div>
@@ -65,7 +43,7 @@
 						<input id="botao4" type="submit" onclick="script.php" value="Sair" name="sair">
 						<!---->
 				</div>
-				<textarea id="textNote" name="content" spellcheck=false><?php echo $content; ?></textarea>
+				<textarea id="textNote" name="content" spellcheck=false>Some content...</textarea>
 				<div id="bottom"></div>
 			</form>
 			<div id="bottomBar"></div>
