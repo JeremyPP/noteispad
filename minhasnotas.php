@@ -1,16 +1,4 @@
-﻿<?php
-    require_once("init.php");
-    require_once("functions.php");
-    
-    if (!logado()) {
-        redirect(".");
-    }
-    
-    $userInfo =  getUserInfo($_SESSION['email'], $_SESSION['tolken']);
-   
-    $notes = $userInfo['codes'];
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -30,15 +18,19 @@
 				Minhas notas
 			</h1>
 			<h3 data-scrollreveal="enter top and move -200px over 1s">
-				<?php //<span>2</span> notas de <span>20</span> criadas esse mes. ?><span><?php echo $userInfo['notes']; ?></span> notas no total
+				<span>2</span> notas de <span>20</span> criadas esse mes. <span>6</span> notas no total
 			</h3>
 			
 			<div id="contAllNotas" data-scrollreveal="enter bottom and move 100px over 1s">
 			
-                <?php for ($i = $userInfo['notes'] - 1; $i >= 0; $i --) { $code = $notes[$i]; ?>
 				<div class="notaAllNota">
-					<a href="notpad.php?code=<?php echo urlencode($code); ?>">
-						<div class="allNotaContTxt" id="id-allNota"><?php echo "Código: ".$code."<br>".getContent($code); ?></div>
+					<a href="#">
+						<div class="allNotaContTxt" id="id-allNota">
+							Alios autem dicere aiunt multo etiam inhumanius (quem locum breviter paulo ante 
+							perstrinxi) praesidii adiumentique causa, non benevolentiae neque caritatis, 
+							amicitias esse expetendas; itaque, ut quisque minimum firmitatis haberet minimumque 
+							virium, ita amicitias appetere maxime; ex eo fieri ut mulie...
+						</div>
 					</a>
 					<div class="allNotaIcon" id="but-id">
 						<center>
@@ -47,7 +39,86 @@
 						<div class="anI-txt">Ver codigo</div>
 					</div>
 				</div>
-				<?php } ?>
+				
+				<div class="notaAllNota">
+					<a href="#">
+						<div class="allNotaContTxt">
+							Sed quid est quod in hac causa maxime homines admirentur et reprehendant meum 
+							consilium, cum ego idem antea multa decreverim, que magis ad hominis dignitatem 
+							quam ad rei publicae necessitatem pertinerent?
+						</div>
+					</a>
+					<div class="allNotaIcon">
+						<center>
+							<img src="eye.png">
+						</center>
+						<div class="anI-txt">Ver codigo</div>
+					</div>
+				</div>
+				
+				<div class="notaAllNota">
+					<a href="#">
+						<div class="allNotaContTxt">
+							Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas 
+							sit ingeni, neque haec dicendi ratio aut disciplina, ne nos quidem huic uni studio 
+							penitus umquam dediti fuimus. Etenim omnes artes, quae ad humanitatem pertinent, 
+							habent quoddam commune vinculum, et quasi cognatione qu...
+						</div>
+					</a>
+					<div class="allNotaIcon">
+						<center>
+							<img src="eye.png">
+						</center>
+						<div class="anI-txt">Ver codigo</div>
+					</div>
+				</div>
+				
+				<div class="notaAllNota">
+					<a href="#">
+						<div class="allNotaContTxt">
+							Quam ob rem cave Catoni anteponas ne istum quidem ipsum, quem Apollo, ut ais, 
+							sapientissimum iudicavit; huius enim facta, illius dicta laudantur. De me autem, ut
+							iam cum utroque vestrum loquar, sic habetote.
+						</div>
+					</a>
+					<div class="allNotaIcon">
+						<center>
+							<img src="eye.png">
+						</center>
+						<div class="anI-txt">Ver codigo</div>
+					</div>
+				</div>
+				
+				<div class="notaAllNota">
+					<a href="#">
+						<div class="allNotaContTxt">
+							Illud autem non dubitatur quod cum esset aliquando virtutum omnium domicilium Roma.
+						</div>
+					</a>
+					<div class="allNotaIcon">
+						<center>
+							<img src="eye.png">
+						</center>
+						<div class="anI-txt">Ver codigo</div>
+					</div>
+				</div>
+				
+				<div class="notaAllNota">
+					<a href="#">
+						<div class="allNotaContTxt">
+							Sed ut tum ad senem senex de senectute, sic hoc libro ad amicum amicissimus scripsi 
+							de amicitia. Tum est Cato locutus, quo erat nemo fere senior temporibus illis, nemo 
+							prudentior; nunc Laelius et sapiens (sic enim est habitus) et amicitiae gloria 
+							excellens de amicitia loquetur.
+						</div>
+					</a>
+					<div class="allNotaIcon">
+						<center>
+							<img src="eye.png">
+						</center>
+						<div class="anI-txt">Ver codigo</div>
+					</div>
+				</div>
 				
 			</div>
 			

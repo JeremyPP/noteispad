@@ -1,36 +1,4 @@
-<<<<<<< HEAD
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-=======
-﻿<?php
-    require_once("init.php");
-    require_once("functions.php");
-    
-    if (isset($_GET['code'])) {
-        $query = sendPost("http://localhost:8888?", queryToArray($_SERVER['QUERY_STRING']));
-    } else {
-        $query = sendPost("http://localhost:8888", $_POST);
-    }
-    $info = json_decode($query, true);
-    
-    
-    if (!$info or (isset($info['sucess']) and $info['sucess'] == 'false')) {
-        redirect(".");
-    }
-    
-    if (logado()) {
-        if (criarDocumento(g('code'), $info['content'])){
-            atribuirPosse(g('code'), s('email'));
-        }
-    }
-    
-    $document = $info['document'];
-    $_SESSION['codtempacess'] = $document;
-    $page = $info['page'];
-    $content = htmlspecialchars($info['content']);
-    
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
->>>>>>> 9953c711791c1e840f84d5ea26a04e09f6a2d211
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>

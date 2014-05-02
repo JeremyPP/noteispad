@@ -1,34 +1,4 @@
-<<<<<<< HEAD
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-=======
-﻿<?php
-    require_once('init.php');
-    require_once('functions.php');
-    
-    if (!logado()) {
-        redirect(".");
-    }
-    
-    $userInfo = getUserInfo($_SESSION['email'], $_SESSION['tolken']);
-    
-    if (!$userInfo) {
-        redirect(".");    
-    }
-    
-    $name = $userInfo['name']['first'];
-    $email = s('email');
-    
-    $planInfo = getPlanInfo($userInfo['plan']['type']);
-    
-    if (!$planInfo) {
-        redirect(".");    
-    }
-    
-    $notas = array("atual" => $userInfo['notes'], "total" => $planInfo['notes']);
-    
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
->>>>>>> 9953c711791c1e840f84d5ea26a04e09f6a2d211
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -44,7 +14,6 @@
         </script>
     </head>
         <body>			
-<<<<<<< HEAD
 			<div id="b01p"><img src="user.png">Jeremy</div>
 			
 			<div id="dropDownProf">
@@ -53,16 +22,6 @@
 				<div class="userDataLeft">15 de 100 notas criadas</div>
 				<div class="quotaContainer">
 					<div style="width: 20%;" class="quotaBar"></div>
-=======
-			<div id="b01p"><img src="user.png"><?php echo $name; ?></div>
-			
-			<div id="dropDownProf">
-				<div class="userName"><?php echo $name; ?></div>
-				<div class="userEmail"><?php echo $email; ?></div>
-				<div class="userDataLeft"><?php echo $notas['atual']." de ".$notas['total']." notas criadas"; ?></div>
-				<div class="quotaContainer">
-					<div style="width: <?php echo $notas['atual']*100/$notas['total']; ?>%;" class="quotaBar"></div>
->>>>>>> 9953c711791c1e840f84d5ea26a04e09f6a2d211
 				</div>
 				<a href="minhasnotas.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">
@@ -74,7 +33,7 @@
 						Configurações
 					</div>
 				</a>
-				<a href="command.php?sair=true" class="nemuListProfLink">
+				<a href="../notepad" class="nemuListProfLink">
 					<div id="logoffMenu" class="nemuListProf" style="margin-bottom: 17px;">
 						Deslogar-se
 					</div>
