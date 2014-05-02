@@ -1,50 +1,50 @@
-##############################
-#                            #
-#  Teste erros Note is Pad!  #
-#            v1.0            #
-#                            #
-##############################
+#########################
+#                       #
+#  Errors Note is Pad!  #
+#         v1.2          #
+#                       #
+#########################
 
 
-Para visualizar um erro, no console chamar a função correspondente.
+To see an error, on the console, call the corresponding function..
 
-Ex: para abrir o Erro 01: 
-inspecionar elemento > console > digite "erro01()" sem as aspas.
+Ex: To open Error 01: 
+inspect element > console > type "erro01()" without the quotes.
 
-OBS: para poder ver os erros 02 e 03, é necessario que a aba "Login" esteja visivel.
+OBS: to see errors 01 and 02, the login "menu" needs to be open.
 
 
 ===============================
 
  ________________________________
 |                                |
-|         ERROS parte 1          |
+|         ERRORS part 1          |
 | (pagina initial -> index.php)  |
 |________________________________|
 
 
-Erro 01 - grande (pagina toda):
+Error 01 - grande (pagina toda):
 
 -> função: erro01();
 uso: erro de conexão com o DB, outros erros qualquer...
 
 -------------------------------
 
-Erro 02 - login01 (email):
+Error 02 - login01 (email):
 
 -> função: erro02();
 uso: o email que foi informado é incorreto ou inexistente.
 
 -------------------------------
 
-Erro 03 - login02 (senha):
+Error 03 - login02 (senha):
 
 -> função: erro03();
 uso: a senha que foi informada esta incorreta.
 
 -------------------------------
 
-Erro 04 - codigo invalido (criação de codigo para uma nova nota):
+Error 04 - codigo invalido (criação de codigo para uma nova nota):
 
 -> função: erro04();
 uso: o codigo de acesso possui algum caracter não autorizado.
@@ -54,12 +54,12 @@ uso: o codigo de acesso possui algum caracter não autorizado.
 
  ______________________________________________
 |                                              |
-|                 ERROS parte 2                |
+|                 ERRORS part 2                |
 | (pagina recuperação de senha -> forgot.php)  |
 |______________________________________________|
 
 
-Erro 05 - failure (mesmo que erro 01):
+Error 05 - failure (mesmo que erro 01):
 
 -> função: errorRP();
 uso: se o ocoreu algum erro na tentativa de mandar a nova senha. EX: O email informado não esta vinculado a nenhuma conta existente.
@@ -69,12 +69,12 @@ uso: se o ocoreu algum erro na tentativa de mandar a nova senha. EX: O email inf
 
  _______________________________
 |                               |
-|        ERROS parte 3          |
+|        ERRORS part 3          |
 | (pagina notas -> notpad.php)  |
 |_______________________________|
 
 
-Erro 06 - failure (mesmo que erro 01 & 05):
+Error 06 - failure (mesmo que erro 01 & 05):
 
 -> função: erroSaveN();
 uso: se o ocoreu algum erro na hora de salvar a nota.
@@ -84,40 +84,40 @@ uso: se o ocoreu algum erro na hora de salvar a nota.
 
  _______________________________________
 |                                       |
-|             ERROS parte 4             |
+|             ERRORS part 4             |
 | (pagina Configurações -> config.php)  |
 |_______________________________________|
 
 
-Erro 07 - modificar info (nome):
+Error 07 - modificar info (nome):
 
 -> função: erro07();
 uso: se o usuario digitar mais de uma palavra como nome.
 
 -------------------------------
 
-Erro 08 - modificar info (email):
+Error 08 - modificar info (email):
 
 -> função: erro08();
 uso: se o email que foi informado for invalido.
 
 -------------------------------
 
-Erro 09 - modificar info (senha atual):
+Error 09 - modificar info (senha atual):
 
 -> função: erro09();
 uso: se a senha do usuario estiver incorreta.
 
 -------------------------------
 
-Erro 10 - modificar info (nova senha):
+Error 10 - modificar info (nova senha):
 
 -> função: erro10();
 uso: se a nova senha for invalida. EX: tiver menos que 6 caracteres.
 
 -------------------------------
 
-Erro 11 - failure (erro salvar):
+Error 11 - failure (erro salvar):
 
 -> função: erro11();
 uso: se ocorrer algum erro na hora de salvar alguma modificação.
@@ -127,40 +127,40 @@ uso: se ocorrer algum erro na hora de salvar alguma modificação.
 
  _______________________________________
 |                                       |
-|             ERROS parte 5             |
+|             ERRORS part 5             |
 | (pagina Criar Conta -> planos.php)  |
 |_______________________________________|
 
 
-Erro 12 - failure (erro salvar):
+Error 12 - failure (erro salvar):
 
 -> função: erro12();
 uso: se ocorrer algum erro inesperado na hora de criar a conta do usuario.
 
 -------------------------------
 
-Erro 13 - dados conta (nome):
+Error 13 - dados conta (nome):
 
 -> função: erro13();
 uso: se o usuario digitar mais de uma palavra como nome.
 
 -------------------------------
 
-Erro 14 - dados conta (email existente):
+Error 14 - dados conta (email existente):
 
 -> função: erro14();
 uso: se o email que foi informado ja existir no DB.
 
 -------------------------------
 
-Erro 15 - dados conta (email invalido):
+Error 15 - dados conta (email invalido):
 
 -> função: erro15();
 uso: se o email que foi informado for invalido.
 
 -------------------------------
 
-Erro 16 - dados conta (senha):
+Error 16 - dados conta (senha):
 
 -> função: erro15();
 uso: se a nova senha for invalida. EX: tiver menos que 6 caracteres.
