@@ -11,8 +11,21 @@
     require_once("init.php");
     require_once("functions.php");
     
+    if (eg("sair")) {
+        deslogar();
+        redirect('.');
+    }
+    
+    if (ep("cadastrar") and ep("plan") and ep("name") and ep("email") and ep("password")) {
+        if (criarUsuario(p("name"), p("email"), p("password"), p("plan")) == true) {
+            logar(p("email"), p("password"));
+            redirect("me.php");
+        }
+    }
+    
     if (ep($EMAIL) and ep($SENHA)) {
         logar(p($EMAIL), p($SENHA));
         redirect("me.php");
     }
+    
 ?>
