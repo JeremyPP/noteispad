@@ -69,7 +69,7 @@
 					services. Besides having access to an exclusive area on our servers to store
 					all your notes, you will have access to the Note Manager. This last allows you
 					to organize and manage all your notes in addition to ensure you access to
-					advanced options. If you are interested, click here and check out the best plan
+					advanced options. If you are interested, click <a href="planos.php">here</a> and check out the best plan
 					for you!</p>
 					<p>We hope to see you soon!</p>
 					<p>Best,</p>
@@ -97,7 +97,7 @@
 						<div class="form-error" id="pass-error">Incorrect password!</div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">
-							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Keep me loged</label>
+							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Keep me logged in</label>
 						</div>
 						<input name="login_submit" value="Log in" type="submit" id="loginSubmit">
 						<div id="forgotPassword">
