@@ -35,12 +35,14 @@
 			</div>
 			<form action="script.php" method="post">
 				<div id="top">
-                        <input type="hidden" name="code" value="">
-						<input id="botao0" type="submit" onclick="script.php" value="Salvar" name="salvar">
+<?php
+                        echo "<input type='hidden' name='code' value='$_POST[code]'>";
+?>
+						<input id="botao0" type="submit" onclick="script.php" value="Salvar/Save" name="salvar">
 						<!--<input id="botao1" type="submit" onclick="script.php" value="Adicionar" name="nova">-->
 						<div id="botao2">Nova Nota</div>
-						<input id="botao3" type="submit" onclick="script.php" value="Ver todas" name="todas">
-						<input id="botao4" type="submit" onclick="script.php" value="Sair" name="sair">
+						<input id="botao3" type="submit" onclick="script.php" value="Ver todas/View all" name="todas">
+						<input id="botao4" type="submit" onclick="script.php" value="Sair/Exit" name="sair">
 						<!---->
 				</div>
 				<textarea id="textNote" name="content" spellcheck=false>Some content...</textarea>

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+session_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -11,25 +15,29 @@
     </head>
     <body>
         <?php
-                $codigo=$_SESSION['codtempacess'];
+                //$codigo=$_SESSION['codtempacess'];
                 $server = "http://localhost:8888";
-                $pages = json_decode(sendGet($server."?function=getInfo&code=".$codigo), true)['pages'];
-                if ($pages == 0) {
-                    $pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
-                }
+                //$pages = json_decode(sendGet($server."?function=getInfo&code=".$codigo), true)['pages'];
+                //if ($pages == 0) {
+                    //$pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
+                //}
                 
-                for ($i=$pages - 1; $i>=0; $i--){
-                    echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
-                            <div class='allnum'>
-                                Pagina $i
-                            </div>
-                            <div class='allcontent'><p>".
-                                json_decode(sendGet($server."?code=$codigo&page=$i"), true)['content']
-                                ."
-                            </p></div>
-                            <br>
-                          </div></a>";
-                }
+		$result = mysql_query("select FL.fnote_text from fastnote F, fastnote_lines FL where F.fnote_name = '$_SESSION[code]' and FL.fnote_id = F.fnote_id");
+		$num_rows = mysql_num_rows($result);
+		for ($i=0, $p=1; $i < $num_rows; ++$i, ++$p)
+		{
+			$row = mysql_fetch_row($result);
+			echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
+			<div class='allnum'>
+				Pagina $p
+			</div>
+			<div class='allcontent'><p>".
+			$row[0]
+			."
+			</p></div>
+			<br>
+			</div></a>";
+		}
         ?>
     </body>
 </html>
