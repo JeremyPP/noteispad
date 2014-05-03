@@ -16,19 +16,19 @@
 			<div class="recovery-center">
 				<h1>Oops! :(</h1>
 				<h2>
-					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+					Sorry, it seems that an unexpected error has occurred. Please, try again.
 				</h2>
-				<div id="voltar-pass-er-b">Voltar</div>
+				<div id="voltar-pass-er-b">Back</div>
 			</div>
 		</div>
 		
 			<div id="modal" class="hidden">
 				<div id="box">
 					<span class="og-close"></span>
-					<p>Crie um código para fazer uma nova nota ou accesse uma que ja foi criada.</p>
+					<p>Create your Access Code for a new note, or go to one that already exist.</p>
 					<center>
                         <form action="notpad.php" method="get">
-                            <input id="senhaNota" placeholder="Digite seu Código" type="password" name="code">
+                            <input id="senhaNota" placeholder="Type your Access Code" type="password" name="code">
                         </form>
                     </center>
 				</div>
@@ -38,14 +38,28 @@
 <?php
                         echo "<input type='hidden' name='code' value='$_POST[code]'>";
 ?>
-						<input id="botao0" type="submit" onclick="script.php" value="Salvar/Save" name="salvar">
-						<!--<input id="botao1" type="submit" onclick="script.php" value="Adicionar" name="nova">-->
-						<div id="botao2">Nova Nota</div>
-						<input id="botao3" type="submit" onclick="script.php" value="Ver todas/View all" name="todas">
-						<input id="botao4" type="submit" onclick="script.php" value="Sair/Exit" name="sair">
+						<input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar">
+						<div id="botao2">New Note</div>
+						<input id="botao3" type="submit" onclick="script.php" value="View all" name="todas">
+						<input id="botao4" type="submit" onclick="script.php" value="Exit" name="sair">
 						<!---->
 				</div>
-				<textarea id="textNote" name="content" spellcheck=false>Some content...</textarea>
+				<textarea id="textNote" name="content" spellcheck=false>
+Welcome!
+
+You have just created a nonexistent code, so a new note has been created.
+Once saved, this note will be associated to this code.
+Save this code to access your notes again, or to share it with others people.
+If you share the code, don't worry, the original content of your note will cannot be changed.
+Once the note saved, any changes made will be saved to another 'page'.
+You can access all existing pages by clicking on 'View all'.
+Also, you can create a new note with a brand new code or access another existing note by clicking on 'New Note' in the upper right corner.
+We hope you enjoy our services.
+We are here if you have any question.
+Regards,
+
+The NOT is PAD! team.
+				</textarea>
 				<div id="bottom"></div>
 			</form>
 			<div id="bottomBar"></div>
