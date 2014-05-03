@@ -16,9 +16,9 @@
 			<div class="recovery-center">
 				<h1>Oops! :(</h1>
 				<h2>
-					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+					Sorry, it seems that an unexpected error has occurred. Please, try again.
 				</h2>
-				<div id="voltar-pass-er-b">Voltar</div>
+				<div id="voltar-pass-er-b">Back</div>
 			</div>
 		</div>
 		
@@ -28,24 +28,27 @@
 					<span class="og-close3"></span>
 				</div>
 				<div id="contOverPlan">
-					<h1>Complete as informações abaixo</h1>
-					<h2>Voce escolheu o plano PRO de R$9/mês.</h2>
+					<h1>Complete the information below</h1>
+					<h2>You chose the PRO plan for $4.90 per month</h2>
 					<form id="dadosUser" action="me.php">
-						<input type="text" name="name" id="name-cc" placeholder="Seu nome" class="u-dI" autofocus>
-						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Digite apenas 01 (um) nome.</div><br>
-						<input type="email" name="email" id="email-cc" placeholder="Seu email" class="u-dI">
-						<div class="form-error-conf" id="email-error" style="margin-top:-10px;margin-bottom:0px;">Já existe uma conta associada a esse email!</div>
+						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" autofocus>
+						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Type only one name.</div><br>
+						<input type="email" name="email" id="email-cc" placeholder="Your email" class="u-dI">
+						<div class="form-error-conf" id="email-error" style="margin-top:-10px;margin-bottom:0px;">This email already exist!</div>
 						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Email invalido!</div><br>
-						<input type="password" name="password" id="pass-cc" placeholder="Uma senha" class="u-dI u-dI2">
-						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Senha invalida! Minimo de 6 caracteres.</div>
+						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2">
+						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Invalid password. Minimum of 6 characters.</div>
 						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -115px;margin-left: 345px;">
-						  <div class="db-arrow-border"></div>
-						  <div class="db-arrow"></div>
-						  <div class="password-bubble-title"></div>
-						  <div class="password-bubble-desc">Boas senhas são difíceis de adivinhar. Use palavras incomuns, com maiúsculas escritas aleatoriamente, erros de ortografia criativos e com números e símbolos.</div>
+						<div class="db-arrow-border"></div>
+						<div class="db-arrow"></div>
+						<div class="password-bubble-title"></div>
+						<div class="password-bubble-desc">Good passwords are hard to guess. Use
+							uncommon words or inside jokes, non-standard uPPercasing, creative
+							spelllling, and non-obvious numbers and symbols.
+						</div>
 						</div>
 						<br>
-						<input type="submit" value="Prosseguir com o pagamento" class="u-dS">
+						<input type="submit" value="Proceed with billing" class="u-dS">
 					</form>
 				</div>
 			</div>
@@ -57,51 +60,51 @@
 				</div>
 				
 				<h2>Ooops!</h2>
-				<h3>Pareçe que ainda estamos trabalhando nessa parte. Por favor, volte em breve. :)</h3>
+				<h3>It seems that we are still working on that. Please come back soon. :)</h3>
 				<center>
 					<img src="Preloader_3.gif"></img>
 				</center>
 			</div>
 		</div>
-		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
-			<h1 data-scrollreveal="enter top and move -200px over 1s">Escolha o seu plano</h1>
+		<a href="../noteispad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
+			<h1 data-scrollreveal="enter top and move -200px over 1s">Choose your plan</h1>
 			<div id="priceCards">
 				<div id="card01" data-scrollreveal="enter bottom and move 200px over 1s">
-					<h2 class="plan-title" style=" background: #F8F8F8; ">Basico</h2>
-					<p class="plan-price">R$2<span>/mês</span></p>
+					<h2 class="plan-title" style=" background: #F8F8F8; ">Basic</h2>
+					<p class="plan-price">$2<span>/mo</span></p>
 					<ul class="plan-features">
-						<li><strong>20</strong> notas por mês</li>
-						<li>Gerenciador de notas basico</li>
+						<li><strong>20</strong> notes per month</li>
+						<li>Basic note manager</li>
 						<br>
 					</ul>
-					<center><a href="#" class="plan-button">Selectionar</a></center>
+					<center><a href="#" class="plan-button">Choose</a></center>
 				</div>
 				<div class="separa"></div>
 				<div id="card02" data-scrollreveal="after .4s enter bottom and move 200px over 1s">
 					<h2 class="plan-title" style=" background: #eee; ">Pro</h2>
-					<p class="plan-price">R$9<span>/mês</span></p>
+					<p class="plan-price">$5<span>/mo</span></p>
 					<ul class="plan-features">
-						<li><strong>100</strong> notas por mês</li>
-						<li>Gerenciador de notas basico</li>
-						<li>Opções de perçonalização</li>
+						<li><strong>100</strong> notes per month</li>
+						<li>Basic note manager</li>
+						<li>Personalisation options</li>
 					</ul>
-					<center><a href="#" class="plan-button">Selectionar</a></center>
+					<center><a href="#" class="plan-button">Choose</a></center>
 				</div>
 				<div class="separa"></div>
 				<div id="card03" data-scrollreveal="after .8s enter bottom and move 200px over 1s">
 					<h2 class="plan-title" style=" background: #E0E0E0; ">Premium</h2>
-					<p class="plan-price">R$19<span>/mês</span></p>
+					<p class="plan-price">$10<span>/mo</span></p>
 					<ul class="plan-features">
-						<li><strong>500</strong> notas por mês</li>
-						<li>Gerenciador de notas avançado</li>
-						<li>Opções de perçonalização</li>
+						<li><strong>500</strong> notes per month</li>
+						<li>Advanced note manager</li>
+						<li>Personalisation options</li>
 					</ul>
-					<center><a href="#" class="plan-button2" id="wokinprog">Selectionar</a></center>
+					<center><a href="#" class="plan-button2" id="wokinprog">Choose</a></center>
 				</div>
 				
 			</div>
 				<div id="duvidaPrice" data-scrollreveal="after 1.2s, ease-in 32px and reset over .66s">
-					<p>Alguma duvida sobre qual plano escolher? <span>Fale com a gente</span>!</p>
+					<p>Any doubt about which plan to choose? <span>Talk to us</span>!</p>
 				</div>
         <script src="scrollReveal.js"></script>
 		<script>
