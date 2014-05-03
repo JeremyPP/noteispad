@@ -36,43 +36,45 @@
 			<div class="recovery-center">
 				<h1>Oops! :(</h1>
 				<h2>
-					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+					Sorry, it seems that an unexpected error has occurred. Please, try again.
 				</h2>
-				<div id="voltar-pass-er-b">Voltar</div>
+				<div id="voltar-pass-er-b">Back</div>
 			</div>
 		</div>
 		
-			<div id="openb">Saiba mais<img src="info.png"></div>
+			<div id="openb">Learn more<img src="info.png"></div>
 			<div id="over">
 				<div id="closeb"><span class="og-close"></span></div>
 				<div id="contentOver">
-					<h1>Bem vindo ao NOT is PAD!</h1>
-					<h2>Nosso objectivo</h2>
-					<p>A idea por traz do NOT is PAD! é de proporcionar uma maneira rapida e facil 
-					de compartilhar comteudo nas nuvens com outras pessoas. Com o NOT is PAD!, voce
-					cria um codigo para a sua nota e compartilha esse codigo com o seus amigo e/ou cologas.
-					Mais não se preocupe, a sua nota original não pode ser alterada, se uma pessoa fizer modificaçoes
-					no conteudo da nota, outra "pagina" sera criada e o conteudo inicial não sera alterado.</p>
-					<h2>Criar uma Nota Rapida</h2>
-					<p>Existe duas maneiras de utilizar o NOT is PAD!, a primeira delas é para criar
-					"Notas Rapidas". As Notas Rapidas sao uma exelente solução para compartilhar ou
-					registrar rapidamente uma ideia. Para criar uma nova Nota Rapida, basta escolher um
-					codigo de acesso e pronto, sua nota é automaticamente criada, basta começar a escrever.
-					As Notas Rapidas podem ser acessadas por qualquer um que possua o codigo relacionado a esta
-					nota. Por isso se voce não deseja compartilhar o conteudo da nota, quarde o codigo
-					em segurança. E tambem importante saber que as Notas Rapidas ficam acessiveis nos
-					nossos servidores somente por 7 (sete) dias.</p>
-					<h2>Criar uma conta no NOT is PAD!</h2>
-					<p>Criando uma conta no NOT is PAD! e escolhendo um dos nosso planos, voce
-					beneficia de varias vantagens que permitem utilizar plemamente nossos serviços.
-					Alem de ter acesso a um espaço esclusivo nos nossos servidores para poder armazenar suas notas,
-					voçe tera acesso ao nosso gerenciador de notas. Esse ultimo permite organizar todas suas 
-					notas alem de lhe garantir accesso a opçoes avançadas. Se estiver interesado, clique <a href="planos.php">aqui</a> e confira o melhor plano para voce!</p>
-					<p>Esperamos lhe ver em breve no NOT is PAD!</p>
-					<p>Qualquer duvida, entre em contato com a gente.</p>
-					<p>Atenciosamente,</p>
+					<h1>Welcome to NOT is PAD!</h1>
+					<h2>Our goal</h2>
+					<p>The idea behind NOT is PAD! is to provide a quick and easy way to share
+					content on the clouds with others people. With the NOT is PAD!, you create a
+					code for your note and share this code with your friend and/or colleagues.
+					But do not worry, your original note can not be changed. If someone changes the
+					content of the note, another "page" will be created and the initial content
+					will be unchanged.</p>
+					<h2>Fast Notes</h2>
+					<p>There are two ways to use the NOT is PAD!. The first one is to create "Fast
+					Notes". Fast Notes are an very good way to quickly share or registering an
+					idea, a thought, or anything else. To create a new Fast Note, just choose a new
+					access code and voila, your note is created automatically, just start writing.
+					But keep in mind that Fast Notes can be accessed by anyone with the access code
+					associated to this note. For this reason, if you don't want to share its
+					content, keep the access code safe. It's also important to know that Fast Notes
+					are availible on our servers for only seven (7) days.</p>
+					<h2>Create an account</h2>
+					<p>Creating an account and choosing between one of our subscription plans, you
+					will benefit from several advantages that will allow you to fully use our
+					services. Besides having access to an exclusive area on our servers to store
+					all your notes, you will have access to the Note Manager. This last allows you
+					to organize and manage all your notes in addition to ensure you access to
+					advanced options. If you are interested, click here and check out the best plan
+					for you!</p>
+					<p>We hope to see you soon!</p>
+					<p>Best,</p>
 					<br>
-					<p>A equipe NOT is PAD!</p>
+					<p>The NOT is PAD! team.</p>
 					<br>
 					<br>
 				</div>
@@ -88,23 +90,23 @@
 				</div>
 				<div id="formsLog">
 					<form action="me.php" method="post">
-						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Seu email">
-						<div class="form-error" id="email-error">Email invalido ou inexistente!</div>
+						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Your email">
+						<div class="form-error" id="email-error">Email invalid or nonexistent!</div>
 						<br>
-						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Sua senha">
-						<div class="form-error" id="pass-error">Senha incorreta!</div>
+						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Your password">
+						<div class="form-error" id="pass-error">Incorrect password!</div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">
-							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Mantenha-me logado</label>
+							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Keep me loged</label>
 						</div>
 						<input name="login_submit" value="Log in" type="submit" id="loginSubmit">
 						<div id="forgotPassword">
 							<center style=" margin-top: 10px; ">
-								<a href="forgot.php">Esqueceu sua senha?</a>
+								<a href="forgot.php">Forgot password?</a>
 							</center>
 						</div>
-						<center id="separaLogin">ou</center>
-						<center id="createSubmit"><a href="planos.php" style="padding: 15px;color: #fafafa; text-decoration: none;text-transform: uppercase;font-weight: 700;">Crie uma conta</a></center>
+						<center id="separaLogin">or</center>
+						<center id="createSubmit"><a href="planos.php" style="padding: 15px;color: #fafafa; text-decoration: none;text-transform: uppercase;font-weight: 700;">Create an account</a></center>
 					</form>
 				</div>
 			</div>
@@ -117,11 +119,11 @@
 				</div>
 				<div>
 					<form action="notpad.php" method="get">
-						<input id="senha" placeholder="Digite seu Código" type="password" name="code">
+						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
 					</form>
 				</div>
 				<div id="desc">
-				"Aproveite o melhor da núvem, faça suas anotações e use onde quiser."
+				"Enjoy the best of the cloud, make your notes anywhere at anytime."
 				</div>
 			</div>
 			
@@ -131,7 +133,7 @@
 				
 				$($div).focus(function() {
 					$('#desc').fadeOut( 100 , function(){
-					   var div = $("<div id='desc'>Crie um código para fazer uma nova nota ou accesse uma que ja foi criada.</div>").hide();
+					   var div = $("<div id='desc'>Type a new access code or open a note that already exists.</div>").hide();
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 					});
@@ -139,7 +141,7 @@
 				
 				$($div).focusout(function(){
 					$('#desc').fadeOut( 100 , function(){
-					   var div = $("<div id='desc'>&quot;Aproveite o melhor da núvem, faça suas anotações e use onde quiser.&quot;</div>").hide();
+					   var div = $("<div id='desc'>&quot;Enjoy the best of the cloud, make your notes anywhere at anytime.&quot;</div>").hide();
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 					});
@@ -198,7 +200,7 @@
 				function erro04(){
 				  $("#center").css('background', '#F55B68');
 				  $('#desc').fadeOut( 100 , function(){
-					   var div = $('<div id="desc">Os caracteres: \ / : * ? " < > |, não são aceitos no Código de Acesso.</div>').hide();
+					   var div = $('<div id="desc">The characters: \ / : * ? " < > |, cannot be used on the access code.</div>').hide();
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 				  });
