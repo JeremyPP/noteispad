@@ -29,7 +29,7 @@ session_start();
 			$row = mysql_fetch_row($result);
 			echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
 			<div class='allnum'>
-				Pagina $p
+				Page $p
 			</div>
 			<div class='allcontent'><p>".
 			$row[0]
