@@ -118,7 +118,7 @@
 					<div id="name">not is pad!</div>
 				</div>
 				<div>
-					<form action="notpad.php" method="get">
+					<form action="notpad.php" method="post">
 						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
 					</form>
 				</div>
