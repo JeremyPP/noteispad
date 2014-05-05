@@ -1,4 +1,8 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+session_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -45,6 +49,16 @@
 						<!---->
 				</div>
 				<textarea id="textNote" name="content" spellcheck=false>
+<?php
+	// Is this a new note or an existing one?
+	if($result = $mysql->query("select FL.fnote_text as fntext from fastnote_lines FL, fastnote F where F.fnote_name = '$_POST[code]' and FL.fnote_id = F.fnote_id and FL.fnote_seq = (select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)"))
+	{
+		$obj = $result->fetch_object();
+		echo $obj->fntext;
+	}
+	else
+	{
+		echo <<<'EOR'
 Welcome!
 
 You have just created a nonexistent code, so a new note has been created.
@@ -59,6 +73,9 @@ We are here if you have any question.
 Regards,
 
 The NOT is PAD! team.
+EOR;
+	}
+?>
 				</textarea>
 				<div id="bottom"></div>
 			</form>
