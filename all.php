@@ -27,13 +27,13 @@ session_start();
 			for ($i=0, $p=1; $i < $result->num_rows; ++$i, ++$p)
 			{
 				$result->data_seek($i);
-				$row = $result->fetch_assoc();
-				echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
+				$row = $result->fetch_row();
+				echo "<a href='notpad.php?page=$p' style='text-decoration: none; color: #000; '><div class='all'>
 				<div class='allnum'>
 					Page $p
 				</div>
 				<div class='allcontent'><p>".
-				$row[fntext]
+				$row[0]
 				."
 				</p></div>
 				<br>

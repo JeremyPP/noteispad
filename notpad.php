@@ -50,8 +50,19 @@ session_start();
 				</div>
 				<textarea id="textNote" name="content" spellcheck=false>
 <?php
+	if(isset($_GET[page]))
+	{
+		$seq_sql = $_GET[page];
+		$code = $_SESSION[code];
+	}
+	else
+	{
+		$seq_sql = "(select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)";
+		$code = $_POST[code];
+	}
+
 	// Is this a new note or an existing one?
-	if($result = $mysql->query("select FL.fnote_text as fntext from fastnote_lines FL, fastnote F where F.fnote_name = '$_POST[code]' and FL.fnote_id = F.fnote_id and FL.fnote_seq = (select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)"))
+	if($result = $mysql->query("select FL.fnote_text as fntext from fastnote_lines FL, fastnote F where F.fnote_name = '$code' and FL.fnote_id = F.fnote_id and FL.fnote_seq = " . $seq_sql))
 	{
 		if($result->num_rows)
 		{
