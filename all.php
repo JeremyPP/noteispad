@@ -22,22 +22,29 @@ session_start();
                     //$pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
                 //}
                 
-		$result = mysql_query("select FL.fnote_text from fastnote F, fastnote_lines FL where F.fnote_name = '$_SESSION[code]' and FL.fnote_id = F.fnote_id");
-		$num_rows = mysql_num_rows($result);
-		for ($i=0, $p=1; $i < $num_rows; ++$i, ++$p)
+		if($result = $mysql->query("select FL.fnote_text as fntext from fastnote F, fastnote_lines FL where F.fnote_name = '$_SESSION[code]' and FL.fnote_id = F.fnote_id"))
 		{
-			$row = mysql_fetch_row($result);
-			echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
-			<div class='allnum'>
-				Page $p
-			</div>
-			<div class='allcontent'><p>".
-			$row[0]
-			."
-			</p></div>
-			<br>
-			</div></a>";
+			for ($i=0, $p=1; $i < $result->num_rows; ++$i, ++$p)
+			{
+				$result->data_seek($i);
+				$row = $result->fetch_assoc();
+				echo "<a href='notpad.php?code=$codigo&page=$i' style='text-decoration: none; color: #000; '><div class='all'>
+				<div class='allnum'>
+					Page $p
+				</div>
+				<div class='allcontent'><p>".
+				$row[fntext]
+				."
+				</p></div>
+				<br>
+				</div></a>";
+			}
 		}
+		else
+		{
+			echo "<div class='allcontent'><p>No Pages</p></div>";
+		}
+
         ?>
     </body>
 </html>

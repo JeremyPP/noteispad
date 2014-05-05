@@ -12,32 +12,40 @@
         if (isset($_POST['code']) and strlen($_POST['code'])>0) {
             $_POST['function'] = 'save';
             $json = json_decode(sendPost($SERVER, $_POST),true);
-	// Not sure why 'salvar' and 'sair' both save if there's anything entered but I'll stick to your logic - KJ
 
 	// See if there's already a fast note with this name
-	$result = mysql_query("select fnote_id from fastnote where fnote_name = '$_POST[code]'");
-	$fnote_id = mysql_result($result,0);
-	if(!$fnote_id)
+	if(!$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$_POST[code]'"))
 	{
 		// There is not so create a new fastnote
-		$result = mysql_query("insert into fastnote(fnote_name) values('$_POST[code]')");
+		$result = $mysql->query("insert into fastnote(fnote_name) values('$_POST[code]')");
 		if(!$result)
 		{
 			die("Insert failed: " . mysql_error());
 		}
 
-		$fnote_id = mysql_insert_id();
+		$fnote_id = $mysql->insert_id();
+	}
+	else
+	{
+		$obj = $result->fetch_object();
+		$fnote_id = $obj->fnote_id;
 	}
 
+
 	// Now insert the line
-	$result = mysql_query("select max(fnote_seq) from fastnote_lines where fnote_id = $fnote_id");
-	$fnote_seq = mysql_result($result,0);
-	++$fnote_seq;
-	$result = mysql_query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$_POST[content]')");
-	if(!$result)
+	if($result = $mysql->query("select max(fnote_seq) as fnseq from fastnote_lines where fnote_id = $fnote_id"))
 	{
-		die("Insert into fastnote_lines failed:" . mysql_error());
+		$obj = $result->fetch_object();
+		$fnote_seq = $obj->fnseq;
 	}
+	else
+	{
+		$fnote_seq = 0;
+	}
+
+	++$fnote_seq;
+	
+	$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$_POST[content]')");
 		
             if (isset($_POST['sair'])) {
                 header("Location: .");
