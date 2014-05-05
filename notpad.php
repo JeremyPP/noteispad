@@ -53,12 +53,14 @@ session_start();
 	// Is this a new note or an existing one?
 	if($result = $mysql->query("select FL.fnote_text as fntext from fastnote_lines FL, fastnote F where F.fnote_name = '$_POST[code]' and FL.fnote_id = F.fnote_id and FL.fnote_seq = (select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)"))
 	{
-		$obj = $result->fetch_object();
-		echo $obj->fntext;
-	}
-	else
-	{
-		echo <<<'EOR'
+		if($result->num_rows)
+		{
+			$obj = $result->fetch_object();
+			echo $obj->fntext;
+		}
+		else
+		{
+			echo <<<'EOR'
 Welcome!
 
 You have just created a nonexistent code, so a new note has been created.
@@ -74,6 +76,7 @@ Regards,
 
 The NOT is PAD! team.
 EOR;
+		}
 	}
 ?>
 				</textarea>
