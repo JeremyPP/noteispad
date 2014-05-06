@@ -26,6 +26,15 @@ session_start();
 			</div>
 		</div>
 		
+		<div class="popup-modal">
+			<div class="popup">
+				<span id="close-popup-ex" class="og-close"></span>
+				<h5>The changes you've made will not be saved!</h5>
+				<div id="pu-snex-b">Save and exit</div>
+				<div id="pu-ex-b">Exit</div>
+			</div>
+		</div>
+		
 			<div id="modal" class="hidden">
 				<div id="box">
 					<span class="og-close"></span>
@@ -129,6 +138,14 @@ EOR;
 				  $(".erro").css('visibility', 'visible');
 				  $(".erro").css('opacity', '1');
 				}
+				
+				//=== Confirm exit
+				function confEx(){
+				  $(".popup-modal").css('display', 'block');
+				}
+				$( "#close-popup-ex" ).click(function() {
+				  $(".popup-modal").css('display', 'none');
+				});
 			</script>
         </body>
 </html>
