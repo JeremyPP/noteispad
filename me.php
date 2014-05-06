@@ -19,23 +19,23 @@
 			<div id="dropDownProf">
 				<div class="userName">Jeremy</div>
 				<div class="userEmail">jimypougnet@gmail.com</div>
-				<div class="userDataLeft">15 de 100 notas criadas</div>
+				<div class="userDataLeft">15 of 100 notes created</div>
 				<div class="quotaContainer">
 					<div style="width: 20%;" class="quotaBar"></div>
 				</div>
 				<a href="minhasnotas.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">
-						Ver minhas notas
+						All my notes
 					</div>
 				</a>
 				<a href="config.php" class="nemuListProfLink">
 					<div id="confMmenu" class="nemuListProf">
-						Configurações
+						Settings
 					</div>
 				</a>
 				<a href="../notepad" class="nemuListProfLink">
 					<div id="logoffMenu" class="nemuListProf" style="margin-bottom: 17px;">
-						Deslogar-se
+						Log out
 					</div>
 				</a>
 				<div class="arrow-border"></div>
@@ -61,11 +61,11 @@
 				</div>
 				<div>
 					<form action="notpad.php" method="get">
-						<input id="senha" placeholder="Digite seu Código" type="password" name="code">
+						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
 					</form>
 				</div>
 				<div id="desc">
-				"Aproveite o melhor da núvem, faça suas anotações e use onde quiser."
+				"Enjoy the best of the cloud, make your notes anywhere at anytime."
 				</div>
 			</div>
 			<script>
@@ -74,7 +74,7 @@
 				
 				$($div).focus(function() {
 					$('#desc').fadeOut( 100 , function(){
-					   var div = $("<div id='desc'>Crie um código para fazer uma nova nota ou accesse uma que ja foi criada.</div>").hide();
+					   var div = $("<div id='desc'>Type a new access code or open a note that already exists.</div>").hide();
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 					});
@@ -82,7 +82,7 @@
 				
 				$($div).focusout(function(){
 					$('#desc').fadeOut( 100 , function(){
-					   var div = $("<div id='desc'>&quot;Aproveite o melhor da núvem, faça suas anotações e use onde quiser.&quot;</div>").hide();
+					   var div = $("<div id='desc'>&quot;Enjoy the best of the cloud, make your notes anywhere at anytime.&quot;</div>").hide();
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 					});
