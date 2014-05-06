@@ -12,13 +12,13 @@
     </head>
         <body id="allNotes">
 			<a href="me.php" style="text-decoration: none;">
-				<div id="openb2"><img src="back.png">Voltar</div>
+				<div id="openb2"><img src="back.png">Back</div>
 			</a>
 			<h1 data-scrollreveal="enter top and move -200px over 1s">
-				Minhas notas
+				My notes
 			</h1>
 			<h3 data-scrollreveal="enter top and move -200px over 1s">
-				<span>2</span> notas de <span>20</span> criadas esse mes. <span>6</span> notas no total
+				<span>2</span> notes of <span>20</span> created this month. <span>6</span> notes in total
 			</h3>
 			
 			<div id="contAllNotas" data-scrollreveal="enter bottom and move 100px over 1s">
@@ -36,7 +36,7 @@
 						<center>
 							<img src="eye.png">
 						</center>
-						<div class="anI-txt">Ver codigo</div>
+						<div class="anI-txt">View code</div>
 					</div>
 				</div>
 				
@@ -52,7 +52,7 @@
 						<center>
 							<img src="eye.png">
 						</center>
-						<div class="anI-txt">Ver codigo</div>
+						<div class="anI-txt">View code</div>
 					</div>
 				</div>
 				
@@ -69,7 +69,7 @@
 						<center>
 							<img src="eye.png">
 						</center>
-						<div class="anI-txt">Ver codigo</div>
+						<div class="anI-txt">View code</div>
 					</div>
 				</div>
 				
@@ -85,7 +85,7 @@
 						<center>
 							<img src="eye.png">
 						</center>
-						<div class="anI-txt">Ver codigo</div>
+						<div class="anI-txt">View code</div>
 					</div>
 				</div>
 				
@@ -99,7 +99,7 @@
 						<center>
 							<img src="eye.png">
 						</center>
-						<div class="anI-txt">Ver codigo</div>
+						<div class="anI-txt">View code</div>
 					</div>
 				</div>
 				
@@ -116,7 +116,7 @@
 						<center>
 							<img src="eye.png">
 						</center>
-						<div class="anI-txt">Ver codigo</div>
+						<div class="anI-txt">View code</div>
 					</div>
 				</div>
 				
