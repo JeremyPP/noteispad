@@ -40,13 +40,13 @@ session_start();
 			<form action="script.php" method="post">
 				<div id="top">
 <?php
-			if(isset($_SESSION['code']))
+			if(isset($_POST['code']))
 			{
-				$code = $_SESSION['code'];
+				$code = $_POST['code'];
 			}
 			else
 			{
-				$code = $_POST['code'];
+				$code = $_SESSION['code'];
 			}
 
                         echo "<input type='hidden' name='code' value='$code'>";
