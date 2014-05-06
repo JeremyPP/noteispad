@@ -13,29 +13,29 @@
         <body id="allNotes">
 		<div id="recoverok">
 			<div class="recovery-center">
-				<h1>Obrigado! :)</h1>
+				<h1>Thank you! :)</h1>
 				<h2>
-					Uma nova senha padrão foi enviada para o seu email.<br>
-					Não se esqueça de mudar ela uma vez logado indo em Configurações > Mudar Senha.
+					A new default password has been sent to your email. <br>
+					Don't forget to change it once logged by going to Settings > Change Password.
 				</h2>
-				<a href="/notepad" style="text-decoration: none;"><div id="voltar-pass-b">Voltar</div></a>
+				<a href="/notepad" style="text-decoration: none;"><div id="voltar-pass-b">Ok</div></a>
 			</div>
 		</div>
 		<div id="recoverfail">
 			<div class="recovery-center">
 				<h1>Oops! :(</h1>
 				<h2>
-					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+					Sorry, it seems that an unexpected error has occurred. Please, try again.
 				</h2>
 				<a href="" style="text-decoration: none;"><div id="voltar-pass-er-b">Voltar</div></a>
 			</div>
 		</div>
-		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
-		<h1 data-scrollreveal="enter top and move -200px over 1s">Recuperar senha</h1>
-		<p style="margin-top: 40px; max-width: 750px;">Uma vez a sua identidade verificada, uma nova senha padrão sera enviada para o seu email. Voce poderar alterar essa senha padrão uma vez logado, indo em "Configurações".</p>
+		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
+		<h1 data-scrollreveal="enter top and move -200px over 1s">Recover password</h1>
+		<p style="margin-top: 40px; max-width: 750px;">Once your identity verified, a new default password will be sent to your email. You will be able to change it once logged by going to "Settings".</p>
 		<form id="dadosUser">
-			<input type="email" name="email" placeholder="Seu email" class="u-dI" autofocus><br>
-			<div class="recupPass" onClick="ok()">Enviar</div>
+			<input type="email" name="email" placeholder="Your email" class="u-dI" autofocus><br>
+			<div class="recupPass" onClick="ok()">Send</div>
 		</form>
         <script src="scrollReveal.js"></script>
 		<script>
