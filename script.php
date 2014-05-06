@@ -2,10 +2,14 @@
     require_once("init.php");
     require_once("functions.php");
     $SERVER = "http://localhost:8888";
+
+	if(isset($_POST['code']))
+	{
+		session_start();
+		$_SESSION['code'] = $_POST['code'];
+	}
     
     if (isset($_POST['todas'])) {
-	session_start();
-	$_SESSION['code'] = $_POST['code'];
         header("Location: all.php");
     }
     if (isset($_POST['salvar']) || isset($_POST['sair'])) {
@@ -14,7 +18,8 @@
             $json = json_decode(sendPost($SERVER, $_POST),true);
 
 	// See if there's already a fast note with this name
-	if(!$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$_POST[code]'"))
+	$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$_POST[code]'");
+	if(!$result->num_rows)
 	{
 		// There is not so create a new fastnote
 		$result = $mysql->query("insert into fastnote(fnote_name) values('$_POST[code]')");
@@ -23,7 +28,7 @@
 			die("Insert failed: " . mysql_error());
 		}
 
-		$fnote_id = $mysql->insert_id();
+		$fnote_id = $mysql->insert_id;
 	}
 	else
 	{
@@ -48,10 +53,11 @@
 	$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$_POST[content]')");
 		
             if (isset($_POST['sair'])) {
+		session_destroy();
                 header("Location: .");
             } else {
                 $_SESSION['salvo'] = 1;
-                header("Location: notpad.php?code=".$json['document']);
+                header("Location: notpad.php");
             }
         }
     }

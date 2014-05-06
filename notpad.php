@@ -40,7 +40,16 @@ session_start();
 			<form action="script.php" method="post">
 				<div id="top">
 <?php
-                        echo "<input type='hidden' name='code' value='$_POST[code]'>";
+			if(isset($_SESSION['code']))
+			{
+				$code = $_SESSION['code'];
+			}
+			else
+			{
+				$code = $_POST['code'];
+			}
+
+                        echo "<input type='hidden' name='code' value='$code'>";
 ?>
 						<input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar">
 						<div id="botao2">New Note</div>
@@ -50,7 +59,7 @@ session_start();
 				</div>
 				<textarea id="textNote" name="content" spellcheck=false>
 <?php
-	if(isset($_GET[page]))
+	if(isset($_GET['page']))
 	{
 		$seq_sql = $_GET[page];
 		$code = $_SESSION[code];
@@ -58,7 +67,14 @@ session_start();
 	else
 	{
 		$seq_sql = "(select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)";
-		$code = $_POST[code];
+		if(isset($_POST['code']))
+		{
+			$code = $_POST['code'];
+		}
+		else
+		{
+			$code = $_SESSION['code'];
+		}
 	}
 
 	// Is this a new note or an existing one?
