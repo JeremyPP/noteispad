@@ -287,6 +287,22 @@ input:focus::-webkit-input-placeholder {
 	right: 0;
 	margin: auto;
 }
+#salvoTextCenter{
+	background: #4CAED3;
+	color: #fff;
+	font-family: sans-serif;
+	font-size: 44px;
+	text-align: center;
+	text-decoration: none;
+	position: absolute;
+	width: 260px;
+	height: 50px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
 
 /* =======Todas as Notas======= */
 .all{

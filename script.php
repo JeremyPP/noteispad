@@ -57,11 +57,12 @@ elseif(isset($_POST['salvar']))
 		echo '<html>
 		    <head>
 			<link href="style.css" type="text/css" rel="stylesheet">
-				<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-				<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+			<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+			<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+			<meta http-equiv="refresh" content="2;url=notpad.php">
 		   </head>
 		   <body>
-			    <a id="salvo" href="notpad.php"><div id="textCenter">SAVED</div></a>
+			    <div id="salvoTextCenter">SAVED</div></a>
 		   </body>
 		</html>';
 	}
