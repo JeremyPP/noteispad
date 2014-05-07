@@ -59,7 +59,7 @@ elseif(isset($_POST['salvar']))
 			<link href="style.css" type="text/css" rel="stylesheet">
 			<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 			<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-			<meta http-equiv="refresh" content="2;url=notpad.php">
+			<meta http-equiv="refresh" content="1;url=notpad.php">
 		   </head>
 		   <body>
 			    <div id="salvoTextCenter">SAVED</div></a>
