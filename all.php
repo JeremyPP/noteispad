@@ -27,7 +27,9 @@ session_start();
                     //$pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
                 //}
                 
-		if($result = $mysql->query("select FL.fnote_text as fntext from fastnote F, fastnote_lines FL where F.fnote_name = '$_SESSION[code]' and FL.fnote_id = F.fnote_id"))
+		$result = $mysql->query("select FL.fnote_text as fntext from fastnote F, fastnote_lines FL where F.fnote_name = '$_SESSION[code]' and FL.fnote_id = F.fnote_id");
+
+		if($result->num_rows)
 		{
 			for ($i=0, $p=1; $i < $result->num_rows; ++$i, ++$p)
 			{
