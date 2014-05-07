@@ -14,6 +14,11 @@ session_start();
 
     </head>
     <body>
+	
+	
+	<!--If there is no pages, this "back button" appears.-->
+	<!--<a href="notpad.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>-->
+	
         <?php
                 //$codigo=$_SESSION['codtempacess'];
                 $server = "http://localhost:8888";
