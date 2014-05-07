@@ -16,8 +16,6 @@ session_start();
     <body>
 	
 	
-	<!--If there is no pages, this "back button" appears.-->
-	<!--<a href="notpad.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>-->
 	
         <?php
                 //$codigo=$_SESSION['codtempacess'];
@@ -49,7 +47,8 @@ session_start();
 		}
 		else
 		{
-			echo "<div class='allcontent'><p>No Pages</p></div>";
+			echo "<a href='notpad.php' style='text-decoration: none;'><div id='openb2'><img src='back.png'>Back</div></a>";
+			echo "<div class='all'><div class='allcontent'><p>No Pages</p></div></div>";
 		}
 
         ?>
