@@ -40,7 +40,7 @@ session_start();
 					<span class="og-close"></span>
 					<p>Create your Access Code for a new note, or go to one that already exist.</p>
 					<center>
-                        <form action="notpad.php" method="get">
+                        <form action="notpad.php" method="post">
                             <input id="senhaNota" placeholder="Type your Access Code" type="password" name="code">
                         </form>
                     </center>
@@ -63,10 +63,10 @@ session_start();
 						<input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar">
 						<div id="botao2">New Note</div>
 						<input id="botao3" type="submit" onclick="script.php" value="View all" name="todas">
-						<input id="botao4" type="submit" onclick="script.php" value="Exit" name="sair">
+						<input id="botao4" type="submit" onclick="if(checkExit()){ script.php; }" value="Exit" name="sair">
 						<!---->
 				</div>
-				<textarea id="textNote" name="content" spellcheck=false>
+				<textarea id="textNote" name="content" spellcheck=false onchange="changed=true;"">
 <?php
 	if(isset($_GET['page']))
 	{
@@ -121,6 +121,8 @@ EOR;
 			<div id="bottomBar"></div>
 			
 			<script>
+				var changed=false;
+
 				$( "#botao2" ).click(function() {
 				  $("#modal").attr('class', 'visible');
 				});
@@ -139,6 +141,16 @@ EOR;
 				  $(".erro").css('opacity', '1');
 				}
 				
+				//=== Check that we should exit
+				function checkExit()
+				{
+					//var txt = $.trim($('#textNote').val());
+					//if(!txt || changed)
+					if(changed)
+					{
+						confEx();
+					}
+				}
 				//=== Confirm exit
 				function confEx(){
 				  $(".popup-modal").css('display', 'block');
