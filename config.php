@@ -16,22 +16,22 @@
 			<div class="recovery-center">
 				<h1>Oops! :(</h1>
 				<h2>
-					Desculpe. Aparentenente algum erro inesperado ocoreu, por favor tente novamente.
+					Sorry, it seems that an unexpected error has occurred. Please, try again.
 				</h2>
-				<div id="voltar-pass-er-b">Voltar</div>
+				<div id="voltar-pass-er-b">Back</div>
 			</div>
 		</div>
 		
 			<div id="modalNome" class="hidden">
 				<div id="boxNome">
 					<span class="og-closeE"></span>
-					<div class="popUpTxtConf">Digite um novo nome</div>
+					<div class="popUpTxtConf">Type a new name</div>
 					<center>
                         <form action="" method="post">
                             <input id="novoEmail" placeholder="" type="text" name="codigo" value="Jérémy">
-							<div class="form-error-conf" id="name-error">Digite apenas 01 (um) nome.</div>
+							<div class="form-error-conf" id="name-error">Enter only one (01) name.</div>
 							<br>
-							<input id="valid" type="submit" onclick="" value="Salvar" name="salvar">
+							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
                         </form>
                     </center>
 				</div>
@@ -39,13 +39,13 @@
 			<div id="modalEmail" class="hidden">
 				<div id="boxEmail">
 					<span class="og-closeE"></span>
-					<div class="popUpTxtConf">Digite um novo email</div>
+					<div class="popUpTxtConf">Type a new email</div>
 					<center>
                         <form action="" method="post">
                             <input id="novoEmail02" placeholder="" type="email" name="codigo" value="jeremynaka@hotmail.com">
-							<div class="form-error-conf" id="email-error">Email invalido!</div>
+							<div class="form-error-conf" id="email-error">Invalid email!</div>
 							<br>
-							<input id="valid" type="submit" onclick="" value="Salvar" name="salvar">
+							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
                         </form>
                     </center>
 				</div>
@@ -55,12 +55,12 @@
 					<span class="og-closeE"></span>
 					<center>
                         <form action="" method="post" style="margin-top: 20px;">
-                            <input id="novaSenha-ant" placeholder="Senha atual" type="password" name="codigo">
-							<div class="form-error-conf" id="pass-error" style="margin-bottom: 0px;">Senha incorreta!</div>
-							<input id="novaSenha" placeholder="Nova senha" type="password" name="codigo">
-							<div class="form-error-conf" id="pass-error02">Senha invalida! Minimo de 6 caracteres.</div>
+                            <input id="novaSenha-ant" placeholder="Current password" type="password" name="codigo">
+							<div class="form-error-conf" id="pass-error" style="margin-bottom: 0px;">Incorrect password!</div>
+							<input id="novaSenha" placeholder="New password" type="password" name="codigo">
+							<div class="form-error-conf" id="pass-error02">Invalid password! Need to be at least 6 characters.</div>
 							<br>
-							<input id="valid" type="submit" onclick="" value="Salvar" name="salvar">
+							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
                         </form>
                     </center>
 				</div>
@@ -68,7 +68,7 @@
 			<div id="modalCorFonte" class="hidden">
 				<div id="boxCorFonte">
 					<span class="og-closeE"></span>
-					<div class="popUpTxtConfS">Selectione a cor da fonte</div>
+					<div class="popUpTxtConfS">Select the font color</div>
 					<div id="color-main">
 						<div class="color-selector" style=" background: #000; "></div>
 						<div class="color-selector" style=" background: #777; "></div>
@@ -100,7 +100,7 @@
 			<div id="modalCorBg" class="hidden">
 				<div id="boxCorBg">
 					<span class="og-closeE"></span>
-					<div class="popUpTxtConfS">Selectione a cor do fundo</div>
+					<div class="popUpTxtConfS">Select the background color</div>
 					<div id="color-main">
 						<div class="color-selector" style=" background: #000; "></div>
 						<div class="color-selector" style=" background: #777; "></div>
@@ -132,50 +132,50 @@
 			<div id="modalTmFonte" class="hidden">
 				<div id="tmFonte">
 					<span class="og-closeE"></span>
-					<div class="popUpTxtConfS">Selectione o tamanho da fonte</div>
-					<h4>Pequena</h4>
+					<div class="popUpTxtConfS">Select the font size</div>
+					<h4>Small</h4>
 					<h3 class="tamSelected">Normal</h3>
-					<h2>Grande</h2>
-					<h1>Gigante</h1>
+					<h2>Large</h2>
+					<h1>Huge</h1>
 				</div>
 			</div>
 			<div id="modalMudarPlano" class="hidden">
 				<div id="novoPlano">
 					<span class="og-closeE"></span>
-					<div class="mudarPlanoTitle">Selectione um novo plano</div>
+					<div class="mudarPlanoTitle">Select a new plan</div>
 					<div id="priceCards">
 					
 						<div id="card01m">
-							<h2 class="plan-titleM" style=" background: #75C1DD; ">Basico</h2>
-							<div class="plan-priceM">R$2<span>/mês</span></div>
+							<h2 class="plan-titleM" style=" background: #75C1DD; ">Basic</h2>
+							<div class="plan-priceM">$2<span>/mo</span></div>
 							<ul class="plan-featuresM">
-								<li><strong>20</strong> notas por mês</li>
-								<li>Gerenciador de notas basico</li>
+								<li><strong>20</strong> notes per month</li>
+								<li>Basic note manager</li>
 								<br>
 							</ul>
-							<center><a href="#" class="plan-button">Selectionar</a></center>
+							<center><a href="#" class="plan-button">Choose</a></center>
 						</div>
 						<div class="separaM"></div>
 						<div id="card02m" style="opacity: .4;">
 							<h2 class="plan-titleM" style=" background: #5C99AF; ">Pro</h2>
-							<div class="plan-priceM">R$9<span>/mês</span></div>
+							<div class="plan-priceM">$5<span>/mo</span></div>
 							<ul class="plan-featuresM">
-								<li><strong>100</strong> notas por mês</li>
-								<li>Gerenciador de notas basico</li>
-								<li>Opções de perçonalização</li>
+								<li><strong>100</strong> notes per month</li>
+								<li>Basic note manager</li>
+								<li>Personalisation options</li>
 							</ul>
-							<center><a href="#" class="plan-button select">Plano atual</a></center>
+							<center><a href="#" class="plan-button select">Current plan</a></center>
 						</div>
 						<div class="separaM"></div>
 						<div id="card03m">
 							<h2 class="plan-titleM" style=" background: #56899C; ">Premium</h2>
-							<div class="plan-priceM">R$19<span>/mês</span></div>
+							<div class="plan-priceM">$10<span>/mo</span></div>
 							<ul class="plan-featuresM">
-								<li><strong>500</strong> notas por mês</li>
-								<li>Gerenciador de notas avançado</li>
-								<li>Opções de perçonalização</li>
+								<li><strong>500</strong> notes per month</li>
+								<li>Advanced note manager</li>
+								<li>Personalisation options</li>
 							</ul>
-							<center><a href="#" class="plan-button">Selectionar</a></center>
+							<center><a href="#" class="plan-button">Choose</a></center>
 						</div>
 				
 					</div>
@@ -184,37 +184,37 @@
 			<div id="modaldelConta" class="hidden">
 				<div id="dellConta">
 					<span class="og-closeD"></span>
-					<h2>Atenção!</h2>
-					<h3>Essa ação não podera ser cancelada.</h3>
-					<h3>Sua conta, assim que todas as suas notas serão permanentemente apagadas dos nossos servidores.</h3>
-					<h4>Deseja realmente apagar sua conta?</h4>
+					<h2>Attention!</h2>
+					<h3>This action cannot be undone.</h3>
+					<h3>Your account, with all your notes will be permanently deleted from our servers.</h3>
+					<h4>Do you really want to delete your account?</h4>
 					<center>
-						<div id="delC-ok">Sim</div>
-						<div id="delC-cancel">Não</div>
+						<div id="delC-ok">Yes</div>
+						<div id="delC-cancel">No</div>
 					</center>
 				</div>
 			</div>
-			<a href="me.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
-			<h1 data-scrollreveal="enter top and move -200px over 1s">Configurações</h1>
+			<a href="me.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
+			<h1 data-scrollreveal="enter top and move -200px over 1s">Settings</h1>
 			
 			<div id="conf-mip" class="confOp" data-scrollreveal="enter bottom and move 100px over 1s">
-				<div class="confOp-title">Modificar informações pessoais</div>
-				<p>Jérémy <span id="openNomePopup">EDITAR NOME</span></p>
-				<p>jeremynaka@hotmail.com <span id="openEmailPopup">EDITAR EMAIL</span></p>
-				<p>••••••••••••••••<span id="openSenhaPopup">MUDAR SENHA</span></p>
+				<div class="confOp-title">Change Personal Informations</div>
+				<p>Jérémy <span id="openNomePopup">EDIT NAME</span></p>
+				<p>jeremynaka@hotmail.com <span id="openEmailPopup">EDIT EMAIL</span></p>
+				<p>••••••••••••••••<span id="openSenhaPopup">CHANGE PASSWORD</span></p>
 			</div>
 			
 			<div id="conf-odc" class="confOp" data-scrollreveal="enter bottom and move 100px over 1s">
-				<div class="confOp-title">Opções da conta</div>
-				<p>Plano atual: <b>PRO (R$9/mês)</b><span id="mudarPlanoB">MUDAR DE PLANO</span></p>
-				<p>Deletar permanentemente sua conta <span id="confDel">DELETAR</span></p>
+				<div class="confOp-title">Account options</div>
+				<p>Current plan: <b>PRO ($5/mo)</b><span id="mudarPlanoB">CHANGE PLAN</span></p>
+				<p>Delete your account <span id="confDel">DELETE</span></p>
 			</div>
 			
 			<div id="conf-odp" class="confOp" style="margin-bottom: 55px;" data-scrollreveal="enter bottom and move 100px over 1s">
-				<div class="confOp-title">Opções de personalização</div>
-				<p>Cor da fonte: <b>Preto</b> <span id="colorChangeFont">MUDAR COR</span></p>
-				<p>Cor do fundo: <b>Branco</b> <span id="colorChangeBg">MUDAR COR</span></p>
-				<p>Tamanho da fonte: <b>Normal</b><span id="tamFonteB">MUDAR TAMANHO</span></p>
+				<div class="confOp-title">Personalization options</div>
+				<p>Font color: <b>Black</b> <span id="colorChangeFont">CHANGE COLOR</span></p>
+				<p>Background color: <b>White</b> <span id="colorChangeBg">CHANGE COLOR</span></p>
+				<p>Font Size: <b>Normal</b><span id="tamFonteB">CHANGE SIZE</span></p>
 			</div>
 			
 			<script src="scrollReveal.js"></script>
