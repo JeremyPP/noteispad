@@ -63,8 +63,8 @@ session_start();
 						<input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar">
 						<div id="botao2">New Note</div>
 						<input id="botao3" type="submit" onclick="script.php" value="View all" name="todas">
-						<input id="botao4" type="submit" onclick="if(checkExit()){ script.php; }" value="Exit" name="sair">
-						<!---->
+						<div id="botao4" class="ex-b-v2" onclick="confEx();">Exit</div>
+						<!-- Replace onClick #botao4 -->
 				</div>
 				<textarea id="textNote" name="content" spellcheck=false onchange="changed=true;"">
 <?php

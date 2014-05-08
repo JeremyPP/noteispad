@@ -156,6 +156,12 @@ input:focus::-webkit-input-placeholder {
 #botao1:hover, #botao3:hover, #botao4:hover, #botao0:hover{
 	opacity: .9;
 }
+.ex-b-v2{
+	height: 30px !important;
+	line-height: 32px;
+	font-family: sans-serif;
+	width: 80px !important;
+}
 #senhaNota{
 	height: 50px;
 	border: none;
