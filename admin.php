@@ -11,45 +11,46 @@
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
         <body id="admin" style="background: #333;">
-			<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Voltar</div></a>
+			<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
 			<h1>ADMIN.</h1>
 			<p>
-				Essa é uma area restrita resevada para os administradores. Se voce não sabe como
-				chegou aqui, ou simplesmente não é um administrador, por favor, ignore o conteudo abaixo e feche esta pagina. 
+				This is a restricted area reserved for administrators. If you don't know how you
+				got here, or you are not an administrator, please ignore the content below and
+				close this page. 
 			</p>
 			<div id="basic-info">
-				<h6>Informações gerais</h6>
-				<div>Total de notas criadas por usuarios: <span>1542</span></div>
-				<div>Total de notas rapidas criadas: <span>2541</span></div>
-				<div>Total de notas rapidas disponiveis: <span>334</span></div>
+				<h6>General informations</h6>
+				<div>Total of notes created by users: <span>1542</span></div>
+				<div>Total of Fast Notes created ever: <span>2541</span></div>
+				<div>Total of Fast Notes available: <span>334</span></div>
 				<br>
-				<div>Renda atual usuarios por mes: <span>2907</span></div>
-				<div>Renda total usuarios: <span>7844</span></div>
+				<div>Users income per month: <span>2907</span></div>
+				<div>Total users income: <span>7844</span></div>
 			</div>
 			<div id="servidor-info">
-				<h6>Servidor</h6>
+				<h6>Server</h6>
 				<div id="bginfoserver">
-					<div>Memoria utilizada:</div>
+					<div>Memory:</div>
 					<h3>17%</h3>
-					<h4>5.1GB de 30GB</h4>
+					<h4>5.1GB of 30GB</h4>
 				</div>
 			</div>
 			<div id="usuarios-info">
-				<h6>Usuarios</h6>
-				<div>Qtd. usuarios Plano Basico:</div>
+				<h6>Users</h6>
+				<div>Number of users Basic plan:</div>
 				<h3>152</h3>
 				<br>
-				<div>Qtd. usuarios Plano Pro:</div>
+				<div>Number of users Pro plan:</div>
 				<h3>247</h3>
 				<br>
-				<div>Qtd. usuarios Plano Premium:</div>
+				<div>Number of users Premium plan:</div>
 				<h3>20</h3>
 				<br>
 				<div id="separausersinfo"></div>
-				<div>Total de usuarios:</div>
+				<div>Total users:</div>
 				<h3 style="color: #4CAED3;background: #fff;">419</h3>
 				<br>
 			</div>
-			<div id="lista-usuarios">Baixar lista de todos os usuarios</div>
+			<div id="lista-usuarios">Download list of all users</div>
 		</body>
 </html>
