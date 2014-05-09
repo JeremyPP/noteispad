@@ -46,7 +46,7 @@ session_start();
                     </center>
 				</div>
 			</div>
-			<form action="script.php" method="post">
+			<form id="noteform" action="script.php" method="post">
 				<div id="top">
 <?php
 			if(isset($_POST['code']))
@@ -63,7 +63,7 @@ session_start();
 						<input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar">
 						<div id="botao2">New Note</div>
 						<input id="botao3" type="submit" onclick="script.php" value="View all" name="todas">
-						<div id="botao4" class="ex-b-v2" onclick="confEx();">Exit</div>
+						<div id="botao4" class="ex-b-v2" onclick="checkExit();">Exit</div>
 						<!-- Replace onClick #botao4 -->
 				</div>
 				<textarea id="textNote" name="content" spellcheck=false onchange="changed=true;"">
@@ -122,6 +122,7 @@ EOR;
 			
 			<script>
 				var changed=false;
+				var exitVal = false;
 
 				$( "#botao2" ).click(function() {
 				  $("#modal").attr('class', 'visible');
@@ -150,6 +151,11 @@ EOR;
 					{
 						confEx();
 					}
+					else
+					{
+						  window.location.href = "index.php";
+					}
+
 				}
 				//=== Confirm exit
 				function confEx(){
@@ -157,6 +163,15 @@ EOR;
 				}
 				$( "#close-popup-ex" ).click(function() {
 				  $(".popup-modal").css('display', 'none');
+				});
+				$( "#pu-snex-b" ).click(function() {
+				  $(".popup-modal").css('display', 'none');
+				  $("#noteform").append("<input type='hidden' name='sair' value='1'>"); 
+				  $("#noteform").submit();
+				});
+				$( "#pu-ex-b" ).click(function() {
+				  $(".popup-modal").css('display', 'none');
+				  window.location.href = "index.php";
 				});
 			</script>
         </body>

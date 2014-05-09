@@ -173,4 +173,57 @@
             return null;
         }
     }
+
+    /**
+    * Save fastnote - creates a new one if needed, otherwise just create a new version
+    * @param $array Post array
+    * @return Nothing at the moment - will add error checking at a later date
+    */
+    function saveFastnote($postarray)
+    {
+$dbhost = '127.0.0.1';
+$dbname = 'noteispad';
+$dbuser = 'noteispad';
+$dbpass = 'h0undd0g';
+
+$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+if($mysql->connect_errno)
+{
+	return 0;
+}
+	// Is there an existing fastnote with this name?
+	$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$postarray[code]'");
+	if(!$result->num_rows)
+	{
+		// There is not so create a new fastnote
+		$result = $mysql->query("insert into fastnote(fnote_name) values('$postarray[code]')");
+		if(!$result)
+		{
+			die("Insert failed: " . mysql_error());
+		}
+
+		$fnote_id = $mysql->insert_id;
+	}
+	else
+	{
+		$obj = $result->fetch_object();
+		$fnote_id = $obj->fnote_id;
+	}
+
+	// Now insert the line
+	$result = $mysql->query("select max(fnote_seq) as fnseq from fastnote_lines where fnote_id = $fnote_id");
+	if($result->num_rows)
+	{
+		$obj = $result->fetch_object();
+		$fnote_seq = $obj->fnseq;
+	}
+	else
+	{
+		$fnote_seq = 0;
+	}
+
+	++$fnote_seq;
+
+	$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$postarray[content]')");
+    }
 ?>
