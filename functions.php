@@ -181,16 +181,18 @@
     */
     function saveFastnote($postarray)
     {
-$dbhost = '127.0.0.1';
-$dbname = 'noteispad';
-$dbuser = 'noteispad';
-$dbpass = 'h0undd0g';
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
 
-$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-if($mysql->connect_errno)
-{
-	return 0;
-}
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in saveFastnote" . $mysqli->connect_error;
+		return 0;
+	}
+
 	// Is there an existing fastnote with this name?
 	$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$postarray[code]'");
 	if(!$result->num_rows)
@@ -199,10 +201,18 @@ if($mysql->connect_errno)
 		$result = $mysql->query("insert into fastnote(fnote_name) values('$postarray[code]')");
 		if(!$result)
 		{
-			die("Insert failed: " . mysql_error());
+			error_log("Insert failed: " . $mysql->error);
 		}
 
 		$fnote_id = $mysql->insert_id;
+
+		// Also create the event to call the sp for deletion after 7 days
+		$result = $mysql->query("create event $postarray[code]_delete on schedule at now() + interval 7 day do call delete_fastnote_sp('$postarray[code]');");
+		if(!$result)
+		{
+			error_log("Create event failed: " . $mysql->error);
+		}
+
 	}
 	else
 	{
