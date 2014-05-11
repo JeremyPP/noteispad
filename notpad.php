@@ -60,7 +60,8 @@ session_start();
 
                         echo "<input type='hidden' name='code' value='$code'>";
 ?>
-						<input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar">
+						<!-- <input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar"> -->
+						<input id="botao0" type="submit" value="Save" name="salvar">
 						<div id="botao2">New Note</div>
 						<input id="botao3" type="submit" onclick="script.php" value="View all" name="todas">
 						<div id="botao4" class="ex-b-v2" onclick="checkExit();">Exit</div>
@@ -142,12 +143,16 @@ EOR;
 				  $(".erro").css('opacity', '1');
 				}
 				
+				//=== Does the textarea have any text?
+				function hasData()
+				{
+					return $('#textNote').val().match(/\S/);
+				}
+
 				//=== Check that we should exit
 				function checkExit()
 				{
-					//var txt = $.trim($('#textNote').val());
-					//if(!txt || changed)
-					if(changed)
+					if(changed && hasData())
 					{
 						confEx();
 					}
@@ -172,6 +177,13 @@ EOR;
 				$( "#pu-ex-b" ).click(function() {
 				  $(".popup-modal").css('display', 'none');
 				  window.location.href = "index.php";
+				});
+				$("#botao0").click(function(event) 
+				{
+					if(!hasData())
+					{
+						event.preventDefault();
+					}
 				});
 			</script>
         </body>

@@ -189,7 +189,7 @@
 	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 	if($mysql->connect_errno)
 	{
-		error_log("Connection error in saveFastnote" . $mysqli->connect_error;
+		error_log("Connection error in saveFastnote" . $mysqli->connect_error);
 		return 0;
 	}
 
