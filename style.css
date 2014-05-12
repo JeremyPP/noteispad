@@ -130,7 +130,7 @@ input:focus::-webkit-input-placeholder {
 	font-size: 18px;
 	color: #FFF;
 	cursor: pointer;
-	height: 70px;
+	height: 30px !important;
 	line-height: 30px;
 	font-family: sans-serif;
 }
@@ -188,6 +188,7 @@ input:focus::-webkit-input-placeholder {
 	/*border-bottom: 3px solid #eee;*/
 	height: calc(100% - 140px);
 	position: absolute;
+	resize: none;
 }
 #bottomBar{
 	position: fixed;
