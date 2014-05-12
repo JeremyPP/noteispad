@@ -3,25 +3,39 @@
 // Setup the databse - complete the details below. Please note that this script
 // expects the user and database to already exist.
 // dbuser should have all Data and Structure grants but not Admin
-$dbhost = 'localhost';
+$dbhost = '127.0.0.1';
 $dbname = 'noteispad';
 $dbuser = 'noteispad';
 $dbpass = 'h0undd0g';
 
-mysql_connect($dbhost, $dbuser, $dbpass) or die(mysql_error());
-mysql_select_db($dbname) or die(mysql_error());
+$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-$result = mysql_query("CREATE TABLE IF NOT EXISTS fastnote(fnote_id INT(11) NOT NULL AUTO_INCREMENT, fnote_name VARCHAR(1024), fnote_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(fnote_id))") or die(mysql_error());
+if($mysql->connect_errno)
+{
+	die("Failed to connect to db: " . $mysql->connect_error);
+}
 
-$result = mysql_query("CREATE TABLE IF NOT EXISTS fastnote_lines(fnote_id INT(11) NOT NULL, fnote_seq INT NOT NULL, fnote_text VARCHAR(3072), INDEX fnote_id_idx (fnote_id), FOREIGN KEY (fnote_id) REFERENCES fastnote(fnote_id) ON DELETE CASCADE)") or die(mysql_error());
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote(fnote_id INT(11) NOT NULL AUTO_INCREMENT, fnote_name VARCHAR(1024), fnote_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(fnote_id))"))
+{
+	die("Failed to create fastnote: " .  $mysql->error);
+}
 
-$result = mysql_query("CREATE TABLE IF NOT EXISTS fastnote_archive(fnote_name VARCHAR(1024), fnote_text VARCHAR(3072))") or die(mysql_error());
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_lines(fnote_id INT(11) NOT NULL, fnote_seq INT NOT NULL, fnote_text VARCHAR(3072), INDEX fnote_id_idx (fnote_id), FOREIGN KEY (fnote_id) REFERENCES fastnote(fnote_id) ON DELETE CASCADE)"))
+{
+	die("Failed to create fastnote_lines: " . $mysql->error);
+}
 
-$result = mysql_query("drop procedure if exists noteispad.delete_fastnote_sp");
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_archive(fnote_name VARCHAR(1024), fnote_text VARCHAR(3072))"))
+{
+	die("Failed to create fastnote_archive: " . $mysql->error);
+}
 
-$result = mysql_query("delimiter $$
+if(!$mysql->query("drop procedure if exists noteispad.delete_fastnote_sp"))
+{
+	die("Failed to drop procedure: " . $mysql->error);
+}
 
-CREATE PROCEDURE noteispad.delete_fastnote_sp (fncode varchar(1024)) 
+if(!$mysql->query(" CREATE PROCEDURE noteispad.delete_fastnote_sp (fncode varchar(1024)) 
 begin
 
 declare exit handler for sqlexception
@@ -47,7 +61,19 @@ delete from fastnote where fnote_name = fncode;
 
 commit;
 
-end
-$$
-");
+end"))
+{
+	die("Failed to create procedure: " . $mysql->error);
+}
+
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS plans(plan_id INT not null auto_increment, name VARCHAR(256) not null, cost decimal(5,2) not null, notes_per_month smallint not null, primary key(plan_id))"))
+{
+	die("Failed to create plans: " . $mysql->error);
+}
+
+if(!$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Basic', 2, 20)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Pro', 5, 100)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Premium', 10, 500)"))
+{
+	die("Failed to populate plans: " . $mysql->error);
+}
+
 ?>

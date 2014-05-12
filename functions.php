@@ -236,4 +236,42 @@
 
 	$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$postarray[content]')");
     }
+
+    /**
+    * Get plan details
+    * @param $plan the plan number (from the plan_no column in the db)
+    * @return plan name, plan price and number of notes per month
+    */
+    function getPlan($plan)
+    {
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
+
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in saveFastnote" . $mysqli->connect_error);
+		return 0;
+	}
+	
+	$res = $mysql->query("select name, cost, notes_per_month from plans where plan_id = $plan");
+	if(!$res->num_rows)
+	{
+		error_log("Unknown plan requested: " . $plan);
+		$name = "Unknown";
+		$price = "Unknown";
+		$notes = "Unknown";
+	}
+	else
+	{
+		$obj = $res->fetch_object();
+		$name = $obj->name;
+		$price = $obj->cost;
+		$notes = $obj->notes_per_month;
+	}
+
+	return array ($name, $price, $notes);
+    }
 ?>
