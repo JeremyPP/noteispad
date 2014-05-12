@@ -43,7 +43,7 @@
 		</div>
 		
 			<div id="openb">Learn more<img src="info.png"></div>
-			<div id="over">
+			<div id="over" class="closed">
 				<div id="closeb"><span class="og-close"></span></div>
 				<div id="contentOver">
 					<h1>Welcome to NOT is PAD!</h1>
