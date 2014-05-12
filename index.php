@@ -6,7 +6,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link href="style7.css" type="text/css" rel="stylesheet">
-		<title>NOT is PAD!</title>
+		<title>not is pad!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -18,8 +18,8 @@
 		<!---Verificar navegador--->
 		<div class="erro-navegador" id="erroNav">
 			<div>
-				Este site não esta otimizado para o seu navegador. Aconselhamos instalar o Google
-				Chrome para uma melhor experiencia.
+				This site is not optimized for your current browser. We recommend to use Google 
+				Chrome for a better experience.
 			</div>
 		</div>
 		<script>
@@ -46,35 +46,35 @@
 			<div id="over" class="closed">
 				<div id="closeb"><span class="og-close"></span></div>
 				<div id="contentOver">
-					<h1>Welcome to NOT is PAD!</h1>
+					<h1>Welcome to not is pad!</h1>
 					<h2>Our goal</h2>
-					<p>The idea behind NOT is PAD! is to provide a quick and easy way to share
-					content on the clouds with others people. With the NOT is PAD!, you create a
-					code for your note and share this code with your friend and/or colleagues.
-					But do not worry, your original note can not be changed. If someone changes the
+					<p>The idea behind not is pad! is to provide a quick and easy way to share
+					content on the clouds with other people. With the not is pad!, you create a
+					code for your note and share this code with your friends and colleagues. But
+					don't worry, your original note can not be changed. If someone changes the
 					content of the note, another "page" will be created and the initial content
-					will be unchanged.</p>
+					will remain unchanged.</p>
 					<h2>Fast Notes</h2>
-					<p>There are two ways to use the NOT is PAD!. The first one is to create "Fast
-					Notes". Fast Notes are an very good way to quickly share or registering an
-					idea, a thought, or anything else. To create a new Fast Note, just choose a new
-					access code and voila, your note is created automatically, just start writing.
-					But keep in mind that Fast Notes can be accessed by anyone with the access code
-					associated to this note. For this reason, if you don't want to share its
-					content, keep the access code safe. It's also important to know that Fast Notes
-					are availible on our servers for only seven (7) days.</p>
+					<p>There are two ways to use the not is pad!. The first one is to create
+					"Fast Notes". Fast Notes are a very good way to quickly share or registering
+					an idea, a thought, or anything else. To create a new Fast Note, just choose
+					a new access code and voila, your note is created automatically, just start
+					writing. But keep in mind that Fast Notes can be accessed by anyone with the
+					access code associated to this note. For this reason, if you don't want to
+					share its content, keep the access code safe. It's also important to know
+					that Fast Notes are available on our servers for only 7 (seven) days.</p>
 					<h2>Create an account</h2>
-					<p>Creating an account and choosing between one of our subscription plans, you
-					will benefit from several advantages that will allow you to fully use our
+					<p>Creating an account and choosing between one of our subscription plans,
+					you will benefit from several advantages that will allow you to fully use our
 					services. Besides having access to an exclusive area on our servers to store
-					all your notes, you will have access to the Note Manager. This last allows you
-					to organize and manage all your notes in addition to ensure you access to
-					advanced options. If you are interested, click <a href="planos.php">here</a> and check out the best plan
+					all your notes, you will have access to the Note Manager. This last allows
+					you to organize and manage all your notes in addition to ensure you access
+					to advanced options. If you are interested, click <a href="planos.php">here</a> and check out the best plan
 					for you!</p>
 					<p>We hope to see you soon!</p>
 					<p>Best,</p>
 					<br>
-					<p>The NOT is PAD! team.</p>
+					<p>The not is pad! team.</p>
 					<br>
 					<br>
 				</div>
