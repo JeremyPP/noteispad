@@ -90,10 +90,10 @@
 				</div>
 				<div id="formsLog">
 					<form action="me.php" method="post">
-						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Your email">
+						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Your email" required>
 						<div class="form-error" id="email-error">Email invalid or nonexistent!</div>
 						<br>
-						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Your password">
+						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Your password" required>
 						<div class="form-error" id="pass-error">Incorrect password!</div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">
