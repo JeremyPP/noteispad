@@ -10,6 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script src="erro.js"></script>
         <script type="text/javascript">
         </script>
     </head>
@@ -170,42 +171,6 @@
 				  $("#center").attr('class', 'closedSing');
 				  $("#openb").attr('class', 'closed');
 				});
-				
-				//=== Erros ===
-				$( ".erro" ).click(function() {
-				  $(".erro").css('opacity', '0');
-				  $(".erro").css('visibility', 'hidden');
-				});
-				$( "#center" ).click(function() {
-				  $("#center").css('background', '#333');
-				   $("#center").css('color', '#ccc');
-				});
-				
-				function erro01(){
-				  $(".erro").css('visibility', 'visible');
-				  $(".erro").css('opacity', '1');
-				}
-				
-				function erro02(){
-				  $("#emailLog").css('background', 'rgb(245, 212, 212)');
-				  $("#emailLog").css('border', '1px solid #e74c3c');
-				  $("#email-error").css('display', 'block');
-				}
-				function erro03(){
-				  $("#senhaLog").css('background', 'rgb(245, 212, 212)');
-				  $("#senhaLog").css('border', '1px solid #e74c3c');
-				  $("#pass-error").css('margin-top', '5px');
-				  $("#pass-error").css('display', 'block');
-				}
-				function erro04(){
-				  $("#center").css('background', '#F55B68');
-				  $('#desc').fadeOut( 100 , function(){
-					   var div = $('<div id="desc">The characters: \ / : * ? " < > |, cannot be used on the access code.</div>').hide();
-					   $(this).replaceWith(div);
-					   $('#desc').fadeIn( 500 );
-				  });
-				  $("#center").css('color', '#ffffff');
-				}
 				
 			</script>
 		<script src="scrollReveal.js"></script>
