@@ -14,6 +14,7 @@ session_start();
 		<title>NOT is PAD!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script src="erro.js"></script>
     </head>
         <body id="pagePrice">
 		
@@ -46,7 +47,8 @@ session_start();
 				<div id="contOverPlan">
 					<h1>Complete the information below</h1>
 					<h2>You chose the <span id="pname">PRO</span> plan for $<span id="pprice">0</span> per month</h2>
-					<form id="dadosUser" action="me.php">
+					<form id="dadosUser" action="me.php" method="post">
+						<input type="hidden" id="planno" name="planno" value="">
 						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" autofocus>
 						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Type only one name.</div><br>
 						<input type="email" name="email" id="email-cc" placeholder="Your email" class="u-dI">
@@ -154,6 +156,7 @@ session_start();
 			{
 				$("#pname").text(planName[ind]);
 				$("#pprice").text(planPrice[ind]);
+				$("#planno").val(ind);
 			}
 
 			$(".u-dI2").after("<div class='passwordInfo'><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div></div>");
@@ -175,36 +178,6 @@ session_start();
 				$("#openb2").css({ opacity: 1 });
 			});
 			
-			//=== Erros ===
-				$( ".erro" ).click(function() {
-				  $(".erro").css('opacity', '0');
-				  $(".erro").css('visibility', 'hidden');
-				});
-				
-				function erro12(){
-				  $(".erro").css('visibility', 'visible');
-				  $(".erro").css('opacity', '1');
-				}
-				function erro13(){
-				  $("#name-cc").css('background', 'rgb(245, 212, 212)');
-				  $("#name-cc").css('border', '1px solid #e74c3c');
-				  $("#name-error").css('display', 'block');
-				}
-				function erro14(){
-				  $("#email-cc").css('background', 'rgb(245, 212, 212)');
-				  $("#email-cc").css('border', '1px solid #e74c3c');
-				  $("#email-error").css('display', 'block');
-				}
-				function erro15(){
-				  $("#email-cc").css('background', 'rgb(245, 212, 212)');
-				  $("#email-cc").css('border', '1px solid #e74c3c');
-				  $("#email-error2").css('display', 'block');
-				}
-				function erro16(){
-				  $("#pass-cc").css('background', 'rgb(245, 212, 212)');
-				  $("#pass-cc").css('border', '1px solid #e74c3c');
-				  $("#pass-error").css('display', 'block');
-				}
 		</script>
 		</body>
 </html>

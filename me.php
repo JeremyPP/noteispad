@@ -1,4 +1,9 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+require_once("functions.php");
+session_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -10,15 +15,49 @@
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script src="erro.js"></script>
         <script type="text/javascript">
         </script>
     </head>
         <body>			
-			<div id="b01p"><img src="user.png">Jeremy</div>
-			
-			<div id="dropDownProf">
-				<div class="userName">Jeremy</div>
-				<div class="userEmail">jimypougnet@gmail.com</div>
+<?php
+if(isset($_POST['planno']))
+{
+	// We're adding a new user
+	if(checkUser($_POST['email']))
+	{
+		echo "<script>erro14();</script>";
+	}
+	else
+	{
+		$id = addUser($_POST['name'], $_POST['password'], $_POST['email'], $_POST['planno']);
+		$_SESSION['user_id'] = $id;
+	}
+}
+elseif(isset($_POST['email']))
+{
+	// Existing user logging in
+	$uid = checkUser($_POST['email']);
+	if(!$uid || !validPassword($uid, $_POST['password']))
+	{
+		echo "<script>erro02();</script>";
+	}
+	else
+	{
+		$_SESSION['user_id'] = $uid;
+	}
+}
+
+if(isset($_SESSION['user_id']))
+{
+	$fname = getFirstName($_SESSION['user_id']);
+	$email = getEmail($_SESSION['user_id']);
+	echo "<div id='b01p'><img src='user.png'>$fname</div>";
+	echo "<div id='dropDownProf'>";
+	echo "<div class='userName'>$fname</div>";
+	echo "<div class='userEmail'>$email</div>";
+}
+?>
 				<div class="userDataLeft">15 of 100 notes created</div>
 				<div class="quotaContainer">
 					<div style="width: 20%;" class="quotaBar"></div>

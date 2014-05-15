@@ -71,9 +71,18 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS plans(plan_id INT not null auto_in
 	die("Failed to create plans: " . $mysql->error);
 }
 
-if(!$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Basic', 2, 20)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Pro', 5, 100)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Premium', 10, 500)"))
+$mysql->query("select * from plans");
+
+if(!$mysql->num_rows)
 {
-	die("Failed to populate plans: " . $mysql->error);
+	if(!$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Basic', 2, 20)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Pro', 5, 100)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Premium', 10, 500)"))
+	{
+		die("Failed to populate plans: " . $mysql->error);
+	}
 }
 
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, primary key(user_id))"))
+{
+	die("Failed to create users: " . $mysql->error);
+}
 ?>

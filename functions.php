@@ -3,6 +3,7 @@
     * Central de funções do NOTisPAD
     */
     require_once("init.php");
+    require_once("password.php");
     
     
     /**
@@ -252,7 +253,7 @@
 	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 	if($mysql->connect_errno)
 	{
-		error_log("Connection error in saveFastnote" . $mysqli->connect_error);
+		error_log("Connection error in getPlan" . $mysqli->connect_error);
 		return 0;
 	}
 	
@@ -273,5 +274,142 @@
 	}
 
 	return array ($name, $price, $notes);
+    }
+
+    /**
+    * Check to see if a user already exists
+    * @param $email email address
+    * @return 0 if invalid user, user_id otherwise
+    */
+    function checkUser($email)
+    {
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
+
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in addUser" . $mysqli->connect_error);
+		return 0;
+	}
+
+	$res = $mysql->query("select user_id from users where email = '$email'");
+	if($res->num_rows)
+	{
+		$obj = $res->fetch_object();
+		$uid = $obj->user_id;
+	}
+	else
+	{
+		$uid = 0;
+	}
+
+	return $uid;
+    }
+	
+    /**
+    * Add new user
+    * @param $name first name
+    * @param $password password (stored encrypted
+    * @param $email email address
+    * @return new user_id 
+    */
+    function addUser($name, $password, $email, $plan)
+    {
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
+
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in addUser" . $mysqli->connect_error);
+		return 0;
+	}
+
+	$encpw = password_hash($password, PASSWORD_BCRYPT);
+
+	$res = $mysql->query("insert into users(user_name, email, password, plan_id) values('$_POST[name]', '$_POST[email]', '$encpw', $plan)");
+
+	return $mysql->insert_id;
+    }
+	
+    /**
+    * Return firstname for user
+    * @param $id user id
+    * @return Users first name
+    */
+    function getFirstName($id)
+    {
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
+
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in addUser" . $mysqli->connect_error);
+		return 0;
+	}
+
+	$res = $mysql->query("select user_name from users where user_id = $id");
+	$obj = $res->fetch_object();
+
+	return $obj->user_name;
+    }
+
+    /**
+    * Check that the supplied password agrees with what's in the table
+    * @param $uid user_id
+    * @param $password the supplied password
+    * @return true if the password agrees with what's held in the database
+    */
+    function validPassword($id, $pass)
+    {
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
+
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in addUser" . $mysqli->connect_error);
+		return 0;
+	}
+
+	$res = $mysql->query("select password from users where user_id = $id");
+	$obj = $res->fetch_object();
+
+	return password_verify($pass, $obj->password);
+    }
+
+    /**
+    * Return email for user
+    * @param $id user id
+    * @return Users email address
+    */
+    function getEmail($id)
+    {
+	$dbhost = '127.0.0.1';
+	$dbname = 'noteispad';
+	$dbuser = 'noteispad';
+	$dbpass = 'h0undd0g';
+
+	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	if($mysql->connect_errno)
+	{
+		error_log("Connection error in addUser" . $mysqli->connect_error);
+		return 0;
+	}
+
+	$res = $mysql->query("select email from users where user_id = $id");
+	$obj = $res->fetch_object();
+
+	return $obj->email;
     }
 ?>

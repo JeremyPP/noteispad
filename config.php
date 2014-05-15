@@ -9,6 +9,7 @@
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<title>NOT is PAD!</title>
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script src="erro.js"></script>
     </head>
         <body id="conf" style="overflow: visible;">
 		
@@ -43,7 +44,7 @@
 					<center>
                         <form action="" method="post">
                             <input id="novoEmail02" placeholder="" type="email" name="codigo" value="jeremynaka@hotmail.com">
-							<div class="form-error-conf" id="email-error">Invalid email!</div>
+							<div class="form-error-conf" id="email-error">Invalid email or incorrect password!</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
                         </form>
@@ -294,38 +295,6 @@
 				  $("#modaldelConta").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');
 				});
-				
-				//=== Erros ===
-				function erro07(){
-				  $("#novoEmail").css('background', 'rgb(245, 212, 212)');
-				  $("#novoEmail").css('border', '1px solid #e74c3c');
-				  $("#name-error").css('display', 'block');
-				}
-				function erro08(){
-				  $("#novoEmail02").css('background', 'rgb(245, 212, 212)');
-				  $("#novoEmail02").css('border', '1px solid #e74c3c');
-				  $("#email-error").css('display', 'block');
-				}
-				function erro09(){
-				  $("#novaSenha-ant").css('background', 'rgb(245, 212, 212)');
-				  $("#novaSenha-ant").css('border', '1px solid #e74c3c');
-				  $("#pass-error").css('display', 'block');
-				  $("#boxSenha").css('height', '280px');
-				}
-				function erro10(){
-				  $("#novaSenha").css('background', 'rgb(245, 212, 212)');
-				  $("#novaSenha").css('border', '1px solid #e74c3c');
-				  $("#pass-error02").css('display', 'block');
-				  $("#boxSenha").css('height', '280px');
-				}
-				$( ".erro" ).click(function() {
-				  $(".erro").css('opacity', '0');
-				  $(".erro").css('visibility', 'hidden');
-				});
-				function erro11(){
-				  $(".erro").css('visibility', 'visible');
-				  $(".erro").css('opacity', '1');
-				}
 			</script>
 		</body>
 </html>
