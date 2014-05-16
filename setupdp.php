@@ -70,12 +70,12 @@ if(!$res->num_rows)
 	}
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, paid_until timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, paid_date timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
 {
 	die("Failed to create users: " . $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote(usernote_id INT(11) NOT NULL AUTO_INCREMENT, usernote_name VARCHAR(1024), usernote_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, treat_as_fastnote boolean default false, PRIMARY KEY(usernote_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote(usernote_id INT(11) NOT NULL AUTO_INCREMENT, user_id int not null, usernote_name VARCHAR(1024), usernote_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, treat_as_fastnote boolean default false, PRIMARY KEY(usernote_id), INDEX user_id_idx (user_id), FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE)"))
 {
 	die("Failed to create usernote: " .  $mysql->error);
 }

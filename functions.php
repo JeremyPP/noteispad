@@ -176,12 +176,13 @@
     }
 
     /**
-    * Save fastnote - creates a new one if needed, otherwise just create a new version
-    * @param $array Post array
-    * @return Nothing at the moment - will add error checking at a later date
+    * dbConnect - connect to the database
+    * @param string to include in error output
+    * @return db handle for opened db or -1 if error
     */
-    function saveFastnote($postarray)
+    function dbConnect($err_str)
     {
+        // Change these
 	$dbhost = '127.0.0.1';
 	$dbname = 'noteispad';
 	$dbuser = 'noteispad';
@@ -190,9 +191,23 @@
 	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 	if($mysql->connect_errno)
 	{
-		error_log("Connection error in saveFastnote" . $mysqli->connect_error);
+		error_log("Connection error in $err_str" . $mysqli->connect_error);
 		return 0;
 	}
+	else
+	{
+		return $mysql;
+	}
+    }
+
+    /**
+    * Save fastnote - creates a new one if needed, otherwise just create a new version
+    * @param $array Post array
+    * @return Nothing at the moment - will add error checking at a later date
+    */
+    function saveFastnote($postarray)
+    {
+	$mysql = dbConnect('saveFastNote');
 
 	// Is there an existing fastnote with this name?
 	$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$postarray[code]'");
@@ -245,17 +260,7 @@
     */
     function getPlan($plan)
     {
-	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	if($mysql->connect_errno)
-	{
-		error_log("Connection error in getPlan" . $mysqli->connect_error);
-		return 0;
-	}
+	$mysql = dbConnect('getPlan');
 	
 	$res = $mysql->query("select name, cost, notes_per_month from plans where plan_id = $plan");
 	if(!$res->num_rows)
@@ -283,17 +288,7 @@
     */
     function checkUser($email)
     {
-	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	if($mysql->connect_errno)
-	{
-		error_log("Connection error in addUser" . $mysqli->connect_error);
-		return 0;
-	}
+	$mysql = dbConnect('checkUser');
 
 	$res = $mysql->query("select user_id from users where email = '$email'");
 	if($res->num_rows)
@@ -318,17 +313,7 @@
     */
     function addUser($name, $password, $email, $plan)
     {
-	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	if($mysql->connect_errno)
-	{
-		error_log("Connection error in addUser" . $mysqli->connect_error);
-		return 0;
-	}
+	$mysql = dbConnect('addUser');
 
 	$encpw = password_hash($password, PASSWORD_BCRYPT);
 
@@ -344,17 +329,7 @@
     */
     function getFirstName($id)
     {
-	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	if($mysql->connect_errno)
-	{
-		error_log("Connection error in addUser" . $mysqli->connect_error);
-		return 0;
-	}
+	$mysql = dbConnect('getFirstName');
 
 	$res = $mysql->query("select user_name from users where user_id = $id");
 	$obj = $res->fetch_object();
@@ -370,17 +345,7 @@
     */
     function validPassword($id, $pass)
     {
-	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	if($mysql->connect_errno)
-	{
-		error_log("Connection error in addUser" . $mysqli->connect_error);
-		return 0;
-	}
+	$mysql = dbConnect('validPassword');
 
 	$res = $mysql->query("select password from users where user_id = $id");
 	$obj = $res->fetch_object();
@@ -395,21 +360,56 @@
     */
     function getEmail($id)
     {
-	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	if($mysql->connect_errno)
-	{
-		error_log("Connection error in addUser" . $mysqli->connect_error);
-		return 0;
-	}
+	$mysql = dbConnect('getEmail');
 
 	$res = $mysql->query("select email from users where user_id = $id");
 	$obj = $res->fetch_object();
 
 	return $obj->email;
+    }
+
+    /**
+    * Return total count of notes used by this user
+    * @param $id user id
+    * @return total Count of notes used
+    */
+    function getTotalNotes($id)
+    {
+	$mysql = dbConnect('getTotalNotes');
+
+	$res = $mysql->query("select count(usernote_id) as ncount from usernote where user_id = $id");
+	$obj = $res->fetch_object();
+
+	return $obj->ncount;
+    }
+
+    /**
+    * Return count of notes used in payment period
+    * @param $id user id
+    * @return Count of notes used
+    */
+    function getNotesUsed($id)
+    {
+	$mysql = dbConnect('getNotesUsed');
+
+	$res = $mysql->query("select count(UN.usernote_id) as ncount from usernote UN, users U where UN.user_id = $id and U.user_id = UN.user_id and usernote_time between U.paid_date and date_sub(date_add(U.paid_date, interval 1 month), interval 1 day)");
+	$obj = $res->fetch_object();
+
+	return $obj->ncount;
+    }
+
+    /**
+    * Return plan max notes for user
+    * @param $id user id
+    * @return Max notes for plan for user
+    */
+    function getMaxNotes($id)
+    {
+	$mysql = dbConnect('getMaxNotes');
+
+	$res = $mysql->query("select P.notes_per_month as pcount from plans P, users U where U.user_id = $id and P.plan_id = U.plan_id");
+	$obj = $res->fetch_object();
+
+	return $obj->pcount;
     }
 ?>

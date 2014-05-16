@@ -1,4 +1,9 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+require_once("functions.php");
+session_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -18,7 +23,12 @@
 				My notes
 			</h1>
 			<h3 data-scrollreveal="enter top and move -200px over 1s">
-				<span>2</span> notes of <span>20</span> created this month. <span>6</span> notes in total
+<?php
+        $notes_used = getNotesUsed($_SESSION['user_id']);
+        $note_max = getMaxNotes($_SESSION['user_id']);
+	$total_notes = getTotalNotes($_SESSION['user_id']);
+	echo "<span>$notes_used</span> notes of <span>$note_max</span> created this month. <span>$total_notes</span> notes in total";
+?>
 			</h3>
 			
 			<div id="contAllNotas" data-scrollreveal="enter bottom and move 100px over 1s">

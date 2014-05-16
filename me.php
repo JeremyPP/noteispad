@@ -56,12 +56,17 @@ if(isset($_SESSION['user_id']))
 	echo "<div id='dropDownProf'>";
 	echo "<div class='userName'>$fname</div>";
 	echo "<div class='userEmail'>$email</div>";
+	$notes_used = getNotesUsed($_SESSION['user_id']);
+	$note_max = getMaxNotes($_SESSION['user_id']);
+	echo "<div class='userDataLeft'>$notes_used of $note_max notes created</div>";
+
+	$pcnt_used = $notes_used / $note_max * 100;
+	echo "<div class='quotaContainer'>";
+	$pcnt_used = intval($pcnt_used);
+	echo "<div style='width: $pcnt_used%;' class='quotaBar'></div>";
+	echo "</div>";
 }
 ?>
-				<div class="userDataLeft">15 of 100 notes created</div>
-				<div class="quotaContainer">
-					<div style="width: 20%;" class="quotaBar"></div>
-				</div>
 				<a href="minhasnotas.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">
 						All my notes
@@ -99,7 +104,7 @@ if(isset($_SESSION['user_id']))
 					<div id="name">not is pad!</div>
 				</div>
 				<div>
-					<form action="notpad.php" method="get">
+					<form action="notpad.php" method="post">
 						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
 					</form>
 				</div>
