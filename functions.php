@@ -201,59 +201,6 @@
     }
 
     /**
-    * Save fastnote - creates a new one if needed, otherwise just create a new version
-    * @param $array Post array
-    * @return Nothing at the moment - will add error checking at a later date
-    */
-    function saveFastnote($postarray)
-    {
-	$mysql = dbConnect('saveFastNote');
-
-	// Is there an existing fastnote with this name?
-	$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$postarray[code]'");
-	if(!$result->num_rows)
-	{
-		// There is not so create a new fastnote
-		$result = $mysql->query("insert into fastnote(fnote_name) values('$postarray[code]')");
-		if(!$result)
-		{
-			error_log("Insert failed: " . $mysql->error);
-		}
-
-		$fnote_id = $mysql->insert_id;
-
-		// Also create the event to call the sp for deletion after 7 days
-		$result = $mysql->query("create event $postarray[code]_delete on schedule at now() + interval 7 day do call delete_fastnote_sp('$postarray[code]');");
-		if(!$result)
-		{
-			error_log("Create event failed: " . $mysql->error);
-		}
-
-	}
-	else
-	{
-		$obj = $result->fetch_object();
-		$fnote_id = $obj->fnote_id;
-	}
-
-	// Now insert the line
-	$result = $mysql->query("select max(fnote_seq) as fnseq from fastnote_lines where fnote_id = $fnote_id");
-	if($result->num_rows)
-	{
-		$obj = $result->fetch_object();
-		$fnote_seq = $obj->fnseq;
-	}
-	else
-	{
-		$fnote_seq = 0;
-	}
-
-	++$fnote_seq;
-
-	$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$postarray[content]')");
-    }
-
-    /**
     * Get plan details
     * @param $plan the plan number (from the plan_no column in the db)
     * @return plan name, plan price and number of notes per month
@@ -411,5 +358,177 @@
 	$obj = $res->fetch_object();
 
 	return $obj->pcount;
+    }
+
+    /**
+    * Return note type
+    * @param note code
+    * @return 'F'astnote, 'U'sernote or 'X' if note doesn't exist
+    */
+    function getNoteType($code)
+    {
+	$mysql = dbConnect('getNoteType');
+	
+	$res = $mysql->query("select count(*) as rcount, 'F' as rtype from fastnote where fnote_name = '$code' union select count(*) as rcount, 'U' as rtype from usernote where usernote_name = '$code'");
+
+	while($obj = $res->fetch_object())
+	{
+		if($obj->rcount)
+		{
+			return $obj->rtype;
+		}
+	}
+
+	return 'X';
+    }
+
+    /**
+    * Return note text
+    * @param note code, sequence sql (either a value or a sub-select)
+    * @return text of note
+    */
+    function getNoteText($code, $seq_sql)
+    {
+	$ret_text = "Welcome!
+
+You have just created a nonexistent code, so a new note has been created.
+Once saved, this note will be associated to this code.
+Save this code to access your notes again, or to share it with others people.
+If you share the code, don't worry, the original content of your note will cannot be changed.
+Once the note saved, any changes made will be saved to another 'page'.
+You can access all existing pages by clicking on 'View all'.
+Also, you can create a new note with a brand new code or access another existing note by clicking on 'New Note' in the upper right corner.
+We hope you enjoy our services.
+We are here if you have any question.
+Regards,
+
+The NOT is PAD! team.";
+
+	$mysql = dbConnect('getNoteText');
+
+	// First of all, is this a fastnote or a usernote?
+	$res = getNoteType($code);
+
+	if($res == "F")
+	{
+		$result = $mysql->query("select FL.fnote_text as fntext from fastnote_lines FL, fastnote F where F.fnote_name = '$code' and FL.fnote_id = F.fnote_id and FL.fnote_seq = " . $seq_sql);
+
+		if($result->num_rows)
+		{
+			$obj = $result->fetch_object();
+			$ret_text = $obj->fntext;
+		}
+	}
+	elseif($res == "U")
+	{
+		$res = $mysql->query("select treat_as_fastnote from usernote where usernote_name = '$code'");
+		$obj = $res->fetch_object();
+		$base_sql = "select UL.usernote_text as untext from usernote_lines UL, usernote U where U.usernote_name = '$code' and UL.usernote_id = U.usernote_id";
+		if($obj->treat_as_fastnote)
+		{
+			$base_sql .= " and UL.usernote_seq = (select max(UL.usernote_seq) from usernote_lines UL where UL.usernote_id = U.usernote_id)";
+		}
+
+		$res = $mysql->query($base_sql);
+		$obj = $res->fetch_object();
+		$ret_text = $obj->untext;
+	}
+
+	return $ret_text;
+    }
+
+    /**
+    * Save note - creates a new one if needed, otherwise just create a new version unless it's a usernote
+    * in which case it all depeneds on who's editing the note:
+    * if it's the owner then add a new note or update an existing one (unless it's already marked as being treated
+    * as a fastnote.
+    * @param $array Post array
+    * @return Nothing at the moment - will add error checking at a later date
+    */
+    function saveNote($postarray)
+    {
+	$mysql = dbConnect('saveNote');
+
+	$type = getNoteType($postarray['code']);
+	if($type == "F")
+	{
+		$result = $mysql->query("select fnote_id from fastnote where fnote_name = '$postarray[code]'");
+		$obj = $result->fetch_object();
+		$fnote_id = $obj->fnote_id;
+
+		// Now insert the line
+		$result = $mysql->query("select max(fnote_seq) as fnseq from fastnote_lines where fnote_id = $fnote_id");
+		if($result->num_rows)
+		{
+			$obj = $result->fetch_object();
+			$fnote_seq = $obj->fnseq;
+		}
+		else
+		{
+			$fnote_seq = 0;
+		}
+
+		++$fnote_seq;
+
+		$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fnote_id, $fnote_seq, '$postarray[content]')");
+	}
+	elseif($type == "U")
+	{
+		// It's a usernote. If we're the owner and it's never been edited by anyone else then update the existing one.
+		$un = $mysql->query("select usernote_id, user_id, treat_as_fastnote from usernote where usernote_name = '$postarray[code]'");
+		$un_obj = $un->fetch_object();
+
+		if($un_obj->treat_as_fastnote)
+		{
+			$res = $mysql->query("select max(usernote_seq) as seq_no from usernote_lines where usernote_id = $un_obj->usernote_id");
+			$obj = $res->fetch_object();
+			$seq_no = $obj->seq_no;
+			++$seq_no;
+			$mysql->query("insert into usernote_lines(usernote_id,usernote_seq,usernote_text) values($un_obj->usernote_id, $seq_no, '$postarray[content]')");
+		}
+		else
+		{
+			// Not a fastnote but if we're not the owner then it becomes like one
+			if(!isset($_SESSION['user_id']) || ($_SESSION['user_id'] != $un_obj->user_id))
+			{
+				$mysql->query("update usernote set treat_as_fastnote=true where usernote_id = $un_obj->usernote_id");
+				$mysql->query("insert into usernote_lines(usernote_id,usernote_seq,usernote_text) values($un_obj->usernote_id, 2, '$postarray[content]')");
+			}
+			else
+			{
+				// If we're here then it should be a usernote updated by the owner
+				$mysql->query("update usernote_lines set usernote_text = '$postarray[content]' where usernote_id = $un_obj->usernote_id");
+			}
+		}
+	}
+	elseif($type == "X")
+	{
+		// If user_id is set then it's a usernote otherwise it's a fastnote
+		if(!isset($_SESSION['user_id']))
+		{
+			$result = $mysql->query("insert into fastnote(fnote_name) values('$postarray[code]')");
+			if(!$result)
+			{
+				error_log("Insert failed: " . $mysql->error);
+			}
+
+			$fnote_id = $mysql->insert_id;
+
+			$mysql->query("insert into fastnote_lines(fnote_id, fnote_text) values($fnote_id, '$postarray[content]')");
+
+			// Also create the event to call the sp for deletion after 7 days
+			$result = $mysql->query("create event $postarray[code]_delete on schedule at now() + interval 7 day do call delete_fastnote_sp('$postarray[code]');");
+			if(!$result)
+			{
+				error_log("Create event failed: " . $mysql->error);
+			}
+		}
+		else
+		{
+			$mysql->query("insert into usernote(user_id,usernote_name) values($_SESSION[user_id], '$postarray[code]')");
+			$un_no = $mysql->insert_id;
+			$mysql->query("insert into usernote_lines(usernote_id, usernote_text) values($un_no, '$postarray[content]')");
+		}
+	}
     }
 ?>

@@ -77,7 +77,7 @@ if(isset($_SESSION['user_id']))
 						Settings
 					</div>
 				</a>
-				<a href="../notepad" class="nemuListProfLink">
+				<a href="../logoff.php" class="nemuListProfLink">
 					<div id="logoffMenu" class="nemuListProf" style="margin-bottom: 17px;">
 						Log out
 					</div>

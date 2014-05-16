@@ -25,7 +25,7 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote(fnote_id INT(11) NOT NULL
 	die("Failed to create fastnote: " .  $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_lines(fnote_id INT(11) NOT NULL, fnote_seq INT NOT NULL, fnote_text VARCHAR(3072), INDEX fnote_id_idx (fnote_id), FOREIGN KEY (fnote_id) REFERENCES fastnote(fnote_id) ON DELETE CASCADE)"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_lines(fnote_id INT(11) NOT NULL, fnote_seq INT NOT NULL default 1, fnote_text VARCHAR(3072), INDEX fnote_id_idx (fnote_id), FOREIGN KEY (fnote_id) REFERENCES fastnote(fnote_id) ON DELETE CASCADE)"))
 {
 	die("Failed to create fastnote_lines: " . $mysql->error);
 }
@@ -80,7 +80,7 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote(usernote_id INT(11) NOT N
 	die("Failed to create usernote: " .  $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote_lines(usernote_id INT(11) NOT NULL, usernote_seq INT NOT NULL, usernote_text VARCHAR(3072), INDEX usernote_id_idx (usernote_id), FOREIGN KEY (usernote_id) REFERENCES usernote(usernote_id) ON DELETE CASCADE)"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote_lines(usernote_id INT(11) NOT NULL, usernote_seq INT NOT NULL default 1, usernote_text VARCHAR(3072), INDEX usernote_id_idx (usernote_id), FOREIGN KEY (usernote_id) REFERENCES usernote(usernote_id) ON DELETE CASCADE)"))
 {
 	die("Failed to create usernote_lines: " . $mysql->error);
 }

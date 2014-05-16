@@ -20,7 +20,7 @@ elseif(isset($_POST['salvar']))
 		// $_POST['function'] = 'save';
 		//$json = json_decode(sendPost($SERVER, $_POST),true);
 
-		saveFastnote($_POST);
+		saveNote($_POST);
 		echo '<html>
 		    <head>
 			<link href="style.css" type="text/css" rel="stylesheet">
@@ -36,7 +36,10 @@ elseif(isset($_POST['salvar']))
 }
 elseif(isset($_POST['sair']))
 {
-	saveFastnote($_POST);
+	saveNote($_POST);
+
+	session_start();
+	unset($_SESSION['user_id']);
 
 	session_destroy();
 	header("Location: .");

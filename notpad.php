@@ -1,5 +1,6 @@
 ﻿<?php
 require_once("init.php");
+require_once("functions.php");
 session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -87,34 +88,7 @@ session_start();
 		}
 	}
 
-	// Is this a new note or an existing one?
-	if($result = $mysql->query("select FL.fnote_text as fntext from fastnote_lines FL, fastnote F where F.fnote_name = '$code' and FL.fnote_id = F.fnote_id and FL.fnote_seq = " . $seq_sql))
-	{
-		if($result->num_rows)
-		{
-			$obj = $result->fetch_object();
-			echo $obj->fntext;
-		}
-		else
-		{
-			echo <<<'EOR'
-Welcome!
-
-You have just created a nonexistent code, so a new note has been created.
-Once saved, this note will be associated to this code.
-Save this code to access your notes again, or to share it with others people.
-If you share the code, don't worry, the original content of your note will cannot be changed.
-Once the note saved, any changes made will be saved to another 'page'.
-You can access all existing pages by clicking on 'View all'.
-Also, you can create a new note with a brand new code or access another existing note by clicking on 'New Note' in the upper right corner.
-We hope you enjoy our services.
-We are here if you have any question.
-Regards,
-
-The NOT is PAD! team.
-EOR;
-		}
-	}
+	echo getNoteText($code, $seq_sql);
 ?>
 				</textarea>
 				<div id="bottom"></div>
