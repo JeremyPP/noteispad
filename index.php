@@ -43,7 +43,12 @@
 			</div>
 		</div>
 		
-			<div id="openb">Learn more<img src="info.png"></div>
+			<div id="openb">Learn more
+				<div class="info-img-code">
+					<div class="iic-p1"></div>
+					<div class="iic-p2"></div>
+				</div>
+			</div>
 			<div id="over" class="closed">
 				<div id="closeb"><span class="og-close"></span></div>
 				<div id="contentOver">
@@ -80,7 +85,13 @@
 					<br>
 				</div>
 			</div>
-			<div id="b01"><img src="user.png">Log in</div>
+			<div id="b01">
+				<div class="user-img-code">
+					<div class="uic-p1"></div>
+					<div class="uic-p2"></div>
+				</div>
+				Log in
+			</div>
 			
 			<div id="loginOver">
 				<div id="topLog">

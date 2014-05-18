@@ -52,7 +52,7 @@ if(isset($_SESSION['user_id']))
 {
 	$fname = getFirstName($_SESSION['user_id']);
 	$email = getEmail($_SESSION['user_id']);
-	echo "<div id='b01p'><img src='user.png'>$fname</div>";
+	echo "<div id='b01p'><div class='user-img-code'><div class='uic-p1'></div><div class='uic-p2'></div></div>$fname</div>";
 	echo "<div id='dropDownProf'>";
 	echo "<div class='userName'>$fname</div>";
 	echo "<div class='userEmail'>$email</div>";

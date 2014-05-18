@@ -461,11 +461,11 @@ ol, ul {
 	float: left;
 	margin-right: 10px;
 }
-#b01 img{
+/*#b01 img{
 	height: 25px;
 	float: left;
 	margin-right: 10px;
-}
+}*/
 #b01 {
 	top: 0;
 	float: left;
@@ -1882,6 +1882,55 @@ input[type="checkbox"] {
 	font-weight: 700;
 	padding: 25px;
 	text-align: center;
+}
+
+/*======= img user & info =======*/
+/*user*/
+.user-img-code{
+	width: 25px;
+    height: 25px;
+    float: left;
+	margin-right: 10px;
+}
+.user-img-code .uic-p1{
+	background: #fff;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #4CAED3;
+    margin: -2px auto;
+    z-index: 11;
+    position: relative;
+}
+.user-img-code .uic-p2{
+	width: 25px;
+    height: 12px;
+    background: #FFFFFF;
+    z-index: 1;
+    margin-top: -3px;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+}
+/*info*/
+.info-img-code{
+	width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    float: right;
+}
+.info-img-code .iic-p1{
+	background: white;
+    width: 3.5px;
+    height: 3.5px;
+    border-radius: 50%;
+    margin: 3px auto;
+}
+.info-img-code .iic-p2{
+	background: white;  
+    width: 3.5px;  
+    height: 9.5px;    
+    margin: -1px auto;
 }
 
 /*======= Media querys =======*/
