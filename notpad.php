@@ -60,6 +60,17 @@ session_start();
 			}
 
                         echo "<input type='hidden' name='code' value='$code'>";
+
+                        echo "<input type='hidden' name='loggedin' id='loggedin' value='";
+			if(isset($_SESSION['user_id']))
+			{
+				echo "1";
+			}
+			else
+			{
+				echo "0";
+			}
+			echo "'>";
 ?>
 						<!-- <input id="botao0" type="submit" onclick="script.php" value="Save" name="salvar"> -->
 						<input id="botao0" type="submit" value="Save" name="salvar">
@@ -132,7 +143,14 @@ session_start();
 					}
 					else
 					{
-						  window.location.href = "index.php";
+						if($('#loggedin').val() == "1")
+						{
+							window.location.href = "me.php";
+						}
+						else
+						{
+							window.location.href = "index.php";
+						}
 					}
 
 				}

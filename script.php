@@ -38,10 +38,17 @@ elseif(isset($_POST['sair']))
 {
 	saveNote($_POST);
 
-	session_start();
-	unset($_SESSION['user_id']);
+	//session_start();
+	//unset($_SESSION['user_id']);
 
-	session_destroy();
-	header("Location: .");
+	//session_destroy();
+	if(isset($_SESSION['user_id']))
+	{
+		header("Location: me.php");
+	}
+	else
+	{
+		header("Location: .");
+	}
 }
 ?>
