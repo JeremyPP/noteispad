@@ -264,7 +264,8 @@
 
 	$encpw = password_hash($password, PASSWORD_BCRYPT);
 
-	$res = $mysql->query("insert into users(user_name, email, password, plan_id) values('$_POST[name]', '$_POST[email]', '$encpw', $plan)");
+// FOR NOW WE SET THE PAID DATE TO NOW
+	$res = $mysql->query("insert into users(user_name, email, password, plan_id, paid_date) values('$_POST[name]', '$_POST[email]', '$encpw', $plan, now())");
 
 	return $mysql->insert_id;
     }
@@ -579,5 +580,27 @@ The NOT is PAD! team.";
 	$mysql = dbConnect('updatePassword');
 	$encpw = password_hash($password, PASSWORD_BCRYPT);
 	$mysql->query("update users set passsword = '$encpw' where user_id = $id");
+    }
+
+    /**
+    * Change plan for logged in user
+    * @params $id user id, $newplan new plan
+    * @return nothing
+    */
+    function updatePlan($id, $plan)
+    {
+	$mysql = dbConnect('updatePlan');
+	$mysql->query("update users set plan_id = $plan where user_id = $id");
+    }
+
+    /**
+    * Delete a user
+    * @params $id user id
+    * @return nothing
+    */
+    function deleteUser($id)
+    {
+	$mysql = dbConnect('deleteUser');
+	$mysql->query("delete from users where user_id = $id");
     }
 ?>

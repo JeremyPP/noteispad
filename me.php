@@ -58,6 +58,7 @@ if(isset($_SESSION['user_id']))
 	echo "<div class='userEmail'>$email</div>";
 	$notes_used = getNotesUsed($_SESSION['user_id']);
 	$note_max = getMaxNotes($_SESSION['user_id']);
+
 	echo "<div class='userDataLeft'>$notes_used of $note_max notes created</div>";
 
 	$pcnt_used = $notes_used / $note_max * 100;

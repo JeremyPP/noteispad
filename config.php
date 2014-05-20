@@ -7,6 +7,18 @@ if(!isset($_SESSION['user_id']))
 {
 	header("Location: .");
 }
+elseif(isset($_GET['opt']) && $_GET['opt'])
+{
+	if($_GET['opt'] == 'd')
+	{
+		deleteUser($_SESSION['user_id']);
+		header("Location: index.php");
+	}
+	else
+	{
+		updatePlan($_SESSION['user_id'], $_GET['opt']);
+	}
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -230,11 +242,11 @@ if(!isset($_SESSION['user_id']))
 
 		if($pnum == $i)
 		{
-			echo "<center><a href='#' class='plan-button select'>Current plan</a></center>\n";
+			echo "<center><a href='config.php?opt=0' class='plan-button select'>Current plan</a></center>\n";
 		}
 		else
 		{
-			echo "<center><a href='#' onClick='setVal($i)' class='plan-button'>Choose</a></center>\n";
+			echo "<center><a href='config.php?opt=$i' onClick='setVal($i)' class='plan-button'>Choose</a></center>\n";
 		}
 
 		echo "</div>\n";
@@ -259,8 +271,8 @@ if(!isset($_SESSION['user_id']))
 					<h3>Your account, with all your notes will be permanently deleted from our servers.</h3>
 					<h4>Do you really want to delete your account?</h4>
 					<center>
-						<div id="delC-ok">Yes</div>
-						<div id="delC-cancel">No</div>
+						<a href='config.php?opt=d'><div id="delC-ok">Yes</div></a>
+						<a href='config.php'><div id="delC-cancel">No</div></a>
 					</center>
 				</div>
 			</div>
@@ -301,6 +313,10 @@ EOT;
 			
 			<script src="scrollReveal.js"></script>
 			<script>
+				function setVal(ind)
+				{
+					$('#planno').val(ind);
+				}
 				$( "#openNomePopup" ).click(function() {
 				  $("#modalNome").attr('class', 'visible');
 				  $("#openb2").css('opacity', '0');

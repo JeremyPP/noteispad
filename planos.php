@@ -84,7 +84,7 @@ session_start();
 				</center>
 			</div>
 		</div>
-		<a href="../noteispad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
+		<a href="../index.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
 			<h1 data-scrollreveal="enter top and move -200px over 1s">Choose your plan</h1>
 			<div id="priceCards">
 <?php
