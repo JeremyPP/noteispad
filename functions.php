@@ -268,7 +268,22 @@
 
 	return $mysql->insert_id;
     }
-	
+
+    /**
+    * Return userplan name and price as array
+    * @param $id user id
+    * @return plan number, plan name and price for user
+    */
+    function getUserPlan($id)
+    {
+	$mysql = dbConnect('getUserPlan');
+	$res = $mysql->query("select plan_id from users where user_id = $id");
+	$obj = $res->fetch_object();
+	list ($plan, $price, $max) = getPlan($obj->plan_id);
+
+	return array ($obj->plan_id, $plan, $price);
+    }
+
     /**
     * Return firstname for user
     * @param $id user id
@@ -279,9 +294,9 @@
 	$mysql = dbConnect('getFirstName');
 
 	$res = $mysql->query("select user_name from users where user_id = $id");
-	$obj = $res->fetch_object();
+	$obj = $res->fetch_assoc();
 
-	return $obj->user_name;
+	return $obj['user_name'];
     }
 
     /**
@@ -530,5 +545,39 @@ The NOT is PAD! team.";
 			$mysql->query("insert into usernote_lines(usernote_id, usernote_text) values($un_no, '$postarray[content]')");
 		}
 	}
+    }
+
+    /**
+    * update logged in users first name
+    * @params $id user id, $newval new name
+    * @return nothing
+    */
+    function updateFirstName($id, $newval)
+    {
+	$mysql = dbConnect('updateFirstName');
+	$mysql->query("update users set user_name = '$newval' where user_id = $id");
+    }
+
+    /**
+    * update logged in users email
+    * @params $id user id, $newval new email
+    * @return nothing
+    */
+    function updateEmail($id, $newval)
+    {
+	$mysql = dbConnect('updateEmail');
+	$mysql->query("update users set email = '$newval' where user_id = $id");
+    }
+
+    /**
+    * update logged in users password
+    * @params $id user id, $newval new password
+    * @return nothing
+    */
+    function updatePassword($id, $password)
+    {
+	$mysql = dbConnect('updatePassword');
+	$encpw = password_hash($password, PASSWORD_BCRYPT);
+	$mysql->query("update users set passsword = '$encpw' where user_id = $id");
     }
 ?>

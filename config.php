@@ -1,4 +1,14 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+require_once("functions.php");
+session_start();
+
+if(!isset($_SESSION['user_id']))
+{
+	header("Location: .");
+}
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -29,7 +39,15 @@
 					<div class="popUpTxtConf">Type a new name</div>
 					<center>
                         <form action="" method="post">
-                            <input id="novoEmail" placeholder="" type="text" name="codigo" value="Jérémy">
+<?php
+	if(isset($_POST['codigo01']))
+	{
+		updateFirstName($_SESSION['user_id'], $_POST['codigo01']);
+	}
+
+	$firstname = getFirstName($_SESSION['user_id']);
+                            echo "<input id='novoEmail' placeholder='' type='text' name='codigo01' value='$firstname'>";
+?>
 							<div class="form-error-conf" id="name-error">Enter only one (01) name.</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
@@ -43,7 +61,15 @@
 					<div class="popUpTxtConf">Type a new email</div>
 					<center>
                         <form action="" method="post">
-                            <input id="novoEmail02" placeholder="" type="email" name="codigo" value="jeremynaka@hotmail.com">
+<?php
+	if(isset($_POST['codigo02']))
+	{
+		updateEmail($_SESSION['user_id'], $_POST['codigo02']);
+	}
+
+	$email = getEmail($_SESSION['user_id']);
+                            echo "<input id='novoEmail02' placeholder='' type='email' name='codigo02' value='$email'>";
+?>
 							<div class="form-error-conf" id="email-error">Invalid email or incorrect password!</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
@@ -56,10 +82,30 @@
 					<span class="og-closeE"></span>
 					<center>
                         <form action="" method="post" style="margin-top: 20px;">
-                            <input id="novaSenha-ant" placeholder="Current password" type="password" name="codigo">
-							<div class="form-error-conf" id="pass-error" style="margin-bottom: 0px;">Incorrect password!</div>
-							<input id="novaSenha" placeholder="New password" type="password" name="codigo">
-							<div class="form-error-conf" id="pass-error02">Invalid password! Need to be at least 6 characters.</div>
+                            <input id="novaSenha-ant" placeholder="Current password" type="password" name="codigo03">
+<?php
+	if(isset($_POST['codigo03']))
+	{
+		if(!validPassword($_SESSION['user_id'], $_POST['codigo03']))	
+		{
+			echo "<div class='form-error-conf' id='pass-error' style='margin-bottom: 0px;'>Incorrect password!</div>";
+			echo "<script>alert('Invalid password');</script>";
+		}
+	}
+?>
+							<input id="novaSenha" placeholder="New password" type="password" name="codigo04">
+<?php
+	if((isset($_POST['codigo03']) && !isset($_POST['codigo04'])) || (isset($_POST['codigo04']) && strlen($_POST['codigo04']) < 6))
+	{
+			echo "<div class='form-error-conf' id='pass-error02'>Invalid password! Need to be at least 6 characters.</div>";
+			//echo "<script>alert('Invalid password! Need to be at least 6 characters.');</script>";
+	}
+	elseif((isset($_POST['codigo03']) && validPassword($_SESSION['user_id'], $_POST['codigo03']))  && isset($_POST['codigo04']))
+	{
+		updatePassword($_SESSION['user_id'], $_POST['codigo04']);
+	}
+?>
+			
 							<br>
 							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
                         </form>
@@ -145,42 +191,65 @@
 					<span class="og-closeE"></span>
 					<div class="mudarPlanoTitle">Select a new plan</div>
 					<div id="priceCards">
-					
-						<div id="card01m">
-							<h2 class="plan-titleM" style=" background: #75C1DD; ">Basic</h2>
-							<div class="plan-priceM">$2<span>/mo</span></div>
-							<ul class="plan-featuresM">
-								<li><strong>20</strong> notes per month</li>
-								<li>Basic note manager</li>
-								<br>
-							</ul>
-							<center><a href="#" class="plan-button">Choose</a></center>
-						</div>
-						<div class="separaM"></div>
-						<div id="card02m" style="opacity: .4;">
-							<h2 class="plan-titleM" style=" background: #5C99AF; ">Pro</h2>
-							<div class="plan-priceM">$5<span>/mo</span></div>
-							<ul class="plan-featuresM">
-								<li><strong>100</strong> notes per month</li>
-								<li>Basic note manager</li>
-								<li>Personalisation options</li>
-							</ul>
-							<center><a href="#" class="plan-button select">Current plan</a></center>
-						</div>
-						<div class="separaM"></div>
-						<div id="card03m">
-							<h2 class="plan-titleM" style=" background: #56899C; ">Premium</h2>
-							<div class="plan-priceM">$10<span>/mo</span></div>
-							<ul class="plan-featuresM">
-								<li><strong>500</strong> notes per month</li>
-								<li>Advanced note manager</li>
-								<li>Personalisation options</li>
-							</ul>
-							<center><a href="#" class="plan-button">Choose</a></center>
-						</div>
-				
-					</div>
-				</div>
+<?php
+	list ($pnum, $pn, $pp) = getUserPlan($_SESSION['user_id']);	
+	$r = 117;
+	$g = 193;
+	$b = 221;
+        for($i=1; $i!=4; $i++)
+        {
+                list ($title, $price, $notes) = getPlan($i);
+		echo "<div id='card0" . $i . "m'";
+
+		if($pnum == $i)
+		{
+			echo " style='opacity: .4;'";
+		}
+		echo ">\n";
+		echo "<h2 class='plan-titleM' style=' background: rgb($r,$g,$b); '>$title</h2>\n";
+		echo "<div class='plan-priceM'>\$$price<span>/mo</span></div>\n";
+		echo "<ul class='plan-featuresM'>\n";
+		echo "<li><strong>$notes</strong> notes per month</li>\n";
+		if($i == 1)
+		{
+			echo "<li>Basic note manager</li>\n";
+			echo "<br>\n";
+		}
+		elseif($i == 2)
+		{
+			echo "<li>Basic note manager</li>\n";
+			echo "<li>Personalisation options</li>\n";
+		}
+		elseif($i == 3)
+		{
+			echo "<li>Advanced note manager</li>\n";
+			echo "<li>Personalisation options</li>\n";
+		}
+
+		echo "</ul>\n";
+
+		if($pnum == $i)
+		{
+			echo "<center><a href='#' class='plan-button select'>Current plan</a></center>\n";
+		}
+		else
+		{
+			echo "<center><a href='#' onClick='setVal($i)' class='plan-button'>Choose</a></center>\n";
+		}
+
+		echo "</div>\n";
+		if($i < 3)
+		{
+			echo "<div class='separaM'></div>\n";
+		}
+
+		$r -= 12;
+		$g -= 20;
+		$b -= 23;
+	}
+?>
+			</div>
+			</div>
 			</div>
 			<div id="modaldelConta" class="hidden">
 				<div id="dellConta">
@@ -200,23 +269,35 @@
 			
 			<div id="conf-mip" class="confOp" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Change Personal Informations</div>
-				<p>Jérémy <span id="openNomePopup">EDIT NAME</span></p>
-				<p>jeremynaka@hotmail.com <span id="openEmailPopup">EDIT EMAIL</span></p>
+<?php
+				echo "<p>$firstname <span id='openNomePopup'>EDIT NAME</span></p>";
+				echo "<p>$email <span id='openEmailPopup'>EDIT EMAIL</span></p>";
+?>
 				<p>••••••••••••••••<span id="openSenhaPopup">CHANGE PASSWORD</span></p>
 			</div>
 			
 			<div id="conf-odc" class="confOp" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Account options</div>
-				<p>Current plan: <b>PRO ($5/mo)</b><span id="mudarPlanoB">CHANGE PLAN</span></p>
+<?php
+	list ($pnum, $pn, $pp) = getUserPlan($_SESSION['user_id']);	
+				echo "<p>Current plan: <b>$pn (\$$pp/mo)</b><span id='mudarPlanoB'>CHANGE PLAN</span></p>";
+?>
 				<p>Delete your account <span id="confDel">DELETE</span></p>
 			</div>
 			
+<?php
+	if($pnum > 1)
+	{
+		echo <<<EOT
 			<div id="conf-odp" class="confOp" style="margin-bottom: 55px;" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Personalization options</div>
 				<p>Font color: <b>Black</b> <span id="colorChangeFont">CHANGE COLOR</span></p>
 				<p>Background color: <b>White</b> <span id="colorChangeBg">CHANGE COLOR</span></p>
 				<p>Font Size: <b>Normal</b><span id="tamFonteB">CHANGE SIZE</span></p>
 			</div>
+EOT;
+	}
+?>
 			
 			<script src="scrollReveal.js"></script>
 			<script>
