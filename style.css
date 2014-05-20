@@ -1684,6 +1684,76 @@ input[type="checkbox"] {
 	color: #fff !important;
 }
 
+/*======= Error more note (new plan) =======*/
+.confMoreN{
+	background: rgb(57, 144, 173);
+	border: none;
+	padding: 10px;
+	width: 350px;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 3px;
+	cursor: pointer;
+	outline: none;
+	-webkit-transition: background 150ms ease-in-out;
+	-moz-transition: background 150ms ease-in-out;
+	-ms-transition: background 150ms ease-in-out;
+	-o-transition: background 150ms ease-in-out;
+	transition: background 150ms ease-in-out;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	height: 26px;
+	line-height: 26px;
+	margin-bottom: 20px;
+	font-weight: 700;
+}
+.confMoreN:hover {
+	background: rgb(50, 130, 156);
+}
+#fastNConf{
+	background: #D5D5D5;
+	color: #333;
+}
+#fastNConf:hover{
+	background: #E7E7E7;
+}
+.moreNeP a{
+	text-decoration: none;
+}
+.moreNeP h1{
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	text-align: center;
+	font-size: 100px;
+	font-weight: 800;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+.moreNeP p{
+	padding-top: 10px;
+	font-size: 18px;
+	color: #fff;
+	line-height: 1.7em;
+	font-weight: 500;
+	font-family: 'Open Sans', sans-serif;
+	padding-bottom: 5px;
+	text-align: center;
+}
+#morenoteText02{
+	font-size: 22px;
+	margin-bottom: 20px;
+	margin-top: 30px;
+}
+#morenoteText01{
+	max-width: 730px;
+	margin: 0 auto;
+}
+#morenoteText0{
+	font-size: 28px;
+	font-weight: 900;
+	color: #A5D4FF;
+}
+
 /*======= ADMIN page =======*/
 #admin h1{
 	font-family: 'Open Sans', sans-serif;
