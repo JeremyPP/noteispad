@@ -2,6 +2,11 @@
 require_once("init.php");
 require_once("functions.php");
 session_start();
+
+if(!isset($_SESSION['user_id']))
+{
+	header("Location: index.php");
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -45,6 +50,12 @@ elseif(isset($_POST['email']))
 	else
 	{
 		$_SESSION['user_id'] = $uid;
+
+		if(isset($_POST['remember_me']))
+		{
+			session_set_cookie_params(60*60*24*365);
+			session_regenerate_id(true);
+		}
 	}
 }
 

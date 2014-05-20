@@ -7,9 +7,7 @@ saveNote($_POST);
 
 session_start();
 
-error_log(">>>Before: " . $_SESSION['user_id']);
 unset($_SESSION['user_id']);
-error_log("<<<After: " . $_SESSION['user_id']);
 
 session_destroy();
 header("Location: .");
