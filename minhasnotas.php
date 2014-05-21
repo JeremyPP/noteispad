@@ -32,123 +32,56 @@ session_start();
 			</h3>
 			
 			<div id="contAllNotas" data-scrollreveal="enter bottom and move 100px over 1s">
-			
-				<div class="notaAllNota">
-					<a href="#">
-						<div class="allNotaContTxt" id="id-allNota">
-							Alios autem dicere aiunt multo etiam inhumanius (quem locum breviter paulo ante 
-							perstrinxi) praesidii adiumentique causa, non benevolentiae neque caritatis, 
-							amicitias esse expetendas; itaque, ut quisque minimum firmitatis haberet minimumque 
-							virium, ita amicitias appetere maxime; ex eo fieri ut mulie...
-						</div>
-					</a>
-					<div class="allNotaIcon" id="but-id">
-						<center>
-							<img src="eye.png">
-						</center>
-						<div class="anI-txt">View code</div>
-					</div>
-				</div>
-				
-				<div class="notaAllNota">
-					<a href="#">
-						<div class="allNotaContTxt">
-							Sed quid est quod in hac causa maxime homines admirentur et reprehendant meum 
-							consilium, cum ego idem antea multa decreverim, que magis ad hominis dignitatem 
-							quam ad rei publicae necessitatem pertinerent?
-						</div>
-					</a>
-					<div class="allNotaIcon">
-						<center>
-							<img src="eye.png">
-						</center>
-						<div class="anI-txt">View code</div>
-					</div>
-				</div>
-				
-				<div class="notaAllNota">
-					<a href="#">
-						<div class="allNotaContTxt">
-							Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas 
-							sit ingeni, neque haec dicendi ratio aut disciplina, ne nos quidem huic uni studio 
-							penitus umquam dediti fuimus. Etenim omnes artes, quae ad humanitatem pertinent, 
-							habent quoddam commune vinculum, et quasi cognatione qu...
-						</div>
-					</a>
-					<div class="allNotaIcon">
-						<center>
-							<img src="eye.png">
-						</center>
-						<div class="anI-txt">View code</div>
-					</div>
-				</div>
-				
-				<div class="notaAllNota">
-					<a href="#">
-						<div class="allNotaContTxt">
-							Quam ob rem cave Catoni anteponas ne istum quidem ipsum, quem Apollo, ut ais, 
-							sapientissimum iudicavit; huius enim facta, illius dicta laudantur. De me autem, ut
-							iam cum utroque vestrum loquar, sic habetote.
-						</div>
-					</a>
-					<div class="allNotaIcon">
-						<center>
-							<img src="eye.png">
-						</center>
-						<div class="anI-txt">View code</div>
-					</div>
-				</div>
-				
-				<div class="notaAllNota">
-					<a href="#">
-						<div class="allNotaContTxt">
-							Illud autem non dubitatur quod cum esset aliquando virtutum omnium domicilium Roma.
-						</div>
-					</a>
-					<div class="allNotaIcon">
-						<center>
-							<img src="eye.png">
-						</center>
-						<div class="anI-txt">View code</div>
-					</div>
-				</div>
-				
-				<div class="notaAllNota">
-					<a href="#">
-						<div class="allNotaContTxt">
-							Sed ut tum ad senem senex de senectute, sic hoc libro ad amicum amicissimus scripsi 
-							de amicitia. Tum est Cato locutus, quo erat nemo fere senior temporibus illis, nemo 
-							prudentior; nunc Laelius et sapiens (sic enim est habitus) et amicitiae gloria 
-							excellens de amicitia loquetur.
-						</div>
-					</a>
-					<div class="allNotaIcon">
-						<center>
-							<img src="eye.png">
-						</center>
-						<div class="anI-txt">View code</div>
-					</div>
-				</div>
-				
+<?php
+	$res = $mysql->query("select U.usernote_name, UL.usernote_text from usernote U, usernote_lines UL where U.user_id = $_SESSION[user_id] and UL.usernote_id = U.usernote_id and UL.usernote_seq = (select max(usernote_seq) from usernote_lines where usernote_id = U.usernote_id)");
+	if($res->num_rows)
+	{
+
+		$script = '';
+
+		for($i=0; $i < $res->num_rows; ++$i)
+		{
+			$res->data_seek($i);
+			$row = $res->fetch_object();				
+			echo '<div class="notaAllNota">';
+			echo '<a href="#">';
+			echo "<div class='allNotaContTxt' id='id-allNota$i'>";
+			echo $row->usernote_text;
+			echo '</div>';
+			echo '</a>';
+			echo "<div class='allNotaIcon' id='but-id$i'>";
+			echo '<center>';
+			echo '<img src="eye.png">';
+			echo '</center>';
+			echo '<div class="anI-txt">View code</div>';
+			echo '</div>';
+			echo '</div>';
+
+			$script .= '$( "#but-id' . $i . '").hover(' . "\n";
+			$script .= 'function() {' . "\n";
+			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxt replacedNote\' id=\'id-allNota' . $i . '\'>' . $row->usernote_name . '</div>").hide();' . "\n";
+			$script .= '$(this).replaceWith(div);' . "\n";
+			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
+			$script .= '});' . "\n";
+			$script .= '}, function() {' . "\n";
+			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
+			$eol = array("\r\n", "\n", "\r", "\r\l");
+			$script .= 'var div = $("<div class=\'allNotaContTxt\' id=\'id-allNota' . $i . '\'>' . str_replace($eol, "\\n", $row->usernote_text) . '</div>").hide();' . "\n";
+			$script .= '$(this).replaceWith(div);' . "\n";
+			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
+			$script .= '});' . "\n";
+			$script .= '}' . "\n";
+			$script .= ');' . "\n";
+		}
+	}	
+?>
 			</div>
 			
 			<script>
-			
-			$( "#but-id" ).hover(
-			  function() {
-				$('#id-allNota').fadeOut( 50 , function(){
-						   var div = $("<div class='allNotaContTxt replacedNote' id='id-allNota'>azerty789456</div>").hide();
-						   $(this).replaceWith(div);
-						   $('#id-allNota').fadeIn( 50 );
-						});
-			  }, function() {
-				 $('#id-allNota').fadeOut( 50 , function(){
-						   var div = $("<div class='allNotaContTxt' id='id-allNota'>Alios autem dicere aiunt multo etiam inhumanius (quem locum breviter paulo ante perstrinxi) praesidii adiumentique causa, non benevolentiae neque caritatis, amicitias esse expetendas; itaque, ut quisque minimum firmitatis haberet minimumque virium, ita amicitias appetere maxime; ex eo fieri ut mulie...</div>").hide();
-						   $(this).replaceWith(div);
-						   $('#id-allNota').fadeIn( 50 );
-						});
-			  }
-			);			
+<?php
+	echo $script;
+?>
 			</script>
 			
 			<script src="scrollReveal.js"></script>

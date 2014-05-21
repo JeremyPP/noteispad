@@ -54,8 +54,13 @@ elseif(isset($_POST['email']))
 		if(isset($_POST['remember_me']))
 		{
 			session_set_cookie_params(60*60*24*365);
-			session_regenerate_id(true);
 		}
+		else
+		{
+			session_set_cookie_params(0);
+		}
+		
+		session_regenerate_id(true);
 	}
 }
 
