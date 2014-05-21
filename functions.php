@@ -603,4 +603,34 @@ The NOT is PAD! team.";
 	$mysql = dbConnect('deleteUser');
 	$mysql->query("delete from users where user_id = $id");
     }
+
+    /**
+    * Return days, hours and minutes until current plan ends
+    * @param $id user id
+    * @return Days, hours, minutes
+    */
+    function getTimeLeft($id)
+    {
+	$mysql = dbConnect('getTimeLeft');
+	$res = $mysql->query("select timediff(date_sub(date_add(paid_date, interval 1 month), interval 1 day), now()) as delta from users where user_id = $id");
+	$obj = $res->fetch_object();
+
+	$date_parts = explode(':', $obj->delta);
+
+	$days = 0;
+	$hours = $date_parts[0];
+	while($hours > 0)
+	{
+		++$days;
+		$hours -= 24;
+	}
+
+	if($hours)
+	{
+		--$days;
+		$hours += 24;
+	}
+
+	return array ($days, $hours, $date_parts[1]);
+    }
 ?>

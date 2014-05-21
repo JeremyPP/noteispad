@@ -121,7 +121,21 @@ if(isset($_SESSION['user_id']))
 					<div id="name">not is pad!</div>
 				</div>
 				<div>
-					<form action="notpad.php" method="post">
+<?php
+	$max_notes = getMaxNotes($_SESSION['user_id']);
+	$used_notes = getNotesUsed($_SESSION['user_id']);
+
+	if($used_notes == $max_notes)
+	{
+		$dest = 'more.php';
+	}
+	else
+	{
+		$dest = 'notpad.php';
+	}
+		
+	echo "<form action='$dest' method='post'>";
+?>
 						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
 					</form>
 				</div>

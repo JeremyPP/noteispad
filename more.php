@@ -1,4 +1,9 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+require_once("functions.php");
+session_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br">
 	<head>
@@ -13,7 +18,11 @@
 	<body class="moreNeP">
 		<h1>Ooops! ;)</h1>
 		<p id="morenoteText0">It seems that you have already used all your notes this month.</p>
-		<p>You will get 20 new ones in <b>14</b> days <b>5</b> hours and <b>37</b> minutes...</p>
+<?php
+	list ($d, $h, $m) = getTimeLeft($_SESSION['user_id']);
+	$mn = getMaxNotes($_SESSION['user_id']);
+	echo "<p>You will get $mn new ones in <b>$d</b> days <b>$h</b> hours and <b>$m</b> minutes...</p>";
+?>
 		<p id="morenoteText01">Until then, all the notes you create will be treated like Fast Notes, and will only
 			remain on our servers for 7 days. Also, you won't be able to see them in your note manager.</p>
 		<p id="morenoteText02"><b>Do you like to upgrade your plan to get more notes?</b></p>

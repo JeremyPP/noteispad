@@ -41,7 +41,23 @@ session_start();
 					<span class="og-close"></span>
 					<p>Create your Access Code for a new note, or go to one that already exist.</p>
 					<center>
-                        <form action="notpad.php" method="post">
+<?php
+
+	$dest = 'notpad.php';
+
+	if(isset($_SESSION['user_id']))
+	{
+		$max_notes = getMaxNotes($_SESSION['user_id']);
+		$used_notes = getNotesUsed($_SESSION['user_id']);
+
+		if($used_notes == $max_notes)
+		{
+			$dest = 'more.php';
+		}
+	}
+
+        echo "<form action='$dest' method='post'>";
+?>
                             <input id="senhaNota" placeholder="Type your Access Code" type="password" name="code">
                         </form>
                     </center>
