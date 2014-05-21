@@ -520,7 +520,15 @@ The NOT is PAD! team.";
 	elseif($type == "X")
 	{
 		// If user_id is set then it's a usernote otherwise it's a fastnote
-		if(!isset($_SESSION['user_id']))
+		// Or, if the user is at their max number of notes then it's a fastnote
+		if(isset($_SESSION['user_id']))
+		{
+			$max_notes = getMaxNotes($_SESSION['user_id']);
+			$used_notes = getNotesUsed($_SESSION['user_id']);
+			$notes_left = $max_notes - $used_notes;
+		}
+
+		if(!isset($_SESSION['user_id']) || (isset($_SESSION['user_id']) && !$notes_left))
 		{
 			$result = $mysql->query("insert into fastnote(fnote_name) values('$postarray[code]')");
 			if(!$result)

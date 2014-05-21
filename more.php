@@ -22,13 +22,14 @@ session_start();
 	list ($d, $h, $m) = getTimeLeft($_SESSION['user_id']);
 	$mn = getMaxNotes($_SESSION['user_id']);
 	echo "<p>You will get $mn new ones in <b>$d</b> days <b>$h</b> hours and <b>$m</b> minutes...</p>";
+	$_SESSION['code'] = $_POST['code'];
 ?>
 		<p id="morenoteText01">Until then, all the notes you create will be treated like Fast Notes, and will only
 			remain on our servers for 7 days. Also, you won't be able to see them in your note manager.</p>
 		<p id="morenoteText02"><b>Do you like to upgrade your plan to get more notes?</b></p>
 		<center>
 			<a href="config.php"><div class="confMoreN">Yes, take me to my settings page</div></a>
-			<a href="#"><div class="confMoreN" id="fastNConf">No, continue using Fast Notes</div></a>
+			<a href="notpad.php"><div class="confMoreN" id="fastNConf">No, continue using Fast Notes</div></a>
 		</center>
 	</body>
 </html>
