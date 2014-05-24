@@ -120,6 +120,17 @@ session_start();
 				</textarea>
 				<div id="bottom"></div>
 			</form>
+			
+			<div id="dn-swit-n" onclick="night()">
+			<div id="daynightswi1"></div>
+			<div id="daynightswi2"></div>
+			</div>
+			
+			<div id="dn-swit-d" onclick="day()">
+			<div id="daynightswi1-d"></div>
+			<div id="daynightswi2-d"></div>
+			</div>
+			
 			<div id="bottomBar"></div>
 			
 			<script>
@@ -193,6 +204,44 @@ session_start();
 						event.preventDefault();
 					}
 				});
+				
+				//=== night/Day switch ===//
+				function night() {
+					$("#top").css('background', '#53717C');
+					$("#pagNot").css('background', '#2f3030');
+					$("#textNote").css('background', '#2f3030');
+					$("#textNote").css('color', '#eee');
+					$("#botao2").css('background', 'rgb(129, 146, 151)');
+					$("#botao1").css('color', '#53717C');
+					$("#botao3").css('color', '#53717C');
+					$("#botao4").css('color', '#53717C');
+					$("#botao0").css('color', '#53717C');
+					$("#botao1").css('background', '#C7C7C7');
+					$("#botao3").css('background', '#C7C7C7');
+					$("#botao4").css('background', '#C7C7C7');
+					$("#botao0").css('background', '#C7C7C7');
+					$("#bottomBar").css('background', '#53717C');
+					$("#dn-swit-n").hide();
+					$("#dn-swit-d").show();
+				};
+				function day() {
+					$("#top").css('background', '#4CAED3');
+					$("#pagNot").css('background', '#fff');
+					$("#textNote").css('background', '#fff');
+					$("#textNote").css('color', '#000');
+					$("#botao2").css('background', 'lightblue');
+					$("#botao1").css('color', '#4CAED3');
+					$("#botao3").css('color', '#4CAED3');
+					$("#botao4").css('color', '#4CAED3');
+					$("#botao0").css('color', '#4CAED3');
+					$("#botao1").css('background', '#F1F1F1');
+					$("#botao3").css('background', '#F1F1F1');
+					$("#botao4").css('background', '#F1F1F1');
+					$("#botao0").css('background', '#F1F1F1');
+					$("#bottomBar").css('background', '#4CAED3');
+					$("#dn-swit-n").hide();
+					$("#dn-swit-d").show();
+				};
 			</script>
         </body>
 </html>

@@ -135,7 +135,7 @@ input:focus::-webkit-input-placeholder {
 	font-family: sans-serif;
 }
 #botao2:hover{
-	background: #4CAED3;
+	background: transparent !important;
 }
 #botao0, #botao1, #botao2, #botao3, #botao4{
 	height: 100%;
@@ -828,6 +828,64 @@ input[type="checkbox"] {
 	color: #fafafa;
 	opacity: .7;
 	cursor: pointer;
+}
+
+/*======= Night mode swith on note =======*/
+#dn-swit-n, #dn-swit-d{
+	cursor: pointer;
+}
+#dn-swit-d{
+	display:none;
+}
+#daynightswi1{
+	background: #ccc;
+	height: 18px;
+	width: 9px;
+	z-index: 99999;
+	position: absolute;
+	bottom: 22px;
+	right: 22px;
+	border: 6px solid #ccc;
+	border-left: none;
+	border-bottom-right-radius: 15px;
+	border-top-right-radius: 15px;
+}
+#daynightswi2{
+	height: 18px;
+	width: 9px;
+	z-index: 99999;
+	position: absolute;
+	bottom: 22px;
+	right: 37px;
+	border: 6px solid #ccc;
+	border-right: none;
+	border-bottom-left-radius: 15px;
+	border-top-left-radius: 15px;
+}
+#daynightswi1-d{
+	height: 18px;
+	width: 9px;
+	z-index: 99999;
+	position: absolute;
+	bottom: 22px;
+	right: 22px;
+	border: 6px solid #555;
+	border-left: none;
+	border-bottom-right-radius: 15px;
+	border-top-right-radius: 15px;
+	}
+#daynightswi2-d{
+	height: 18px;
+	background: #555;
+	width: 9px;
+	z-index: 99999;
+	position: absolute;
+	bottom: 22px;
+	right: 37px;
+	border: 6px solid #555;
+	border-right: none;
+	border-bottom-left-radius: 15px;
+	border-top-left-radius: 15px;
 }
 
 /*======= teste drop menu profile =======*/
