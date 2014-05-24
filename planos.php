@@ -56,13 +56,13 @@ session_start();
 						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Email invalido!</div><br>
 						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2">
 						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Invalid password. Minimum of 6 characters.</div>
-						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -115px;margin-left: 345px;">
+						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -107px;margin-left: 345px;">
 						<div class="db-arrow-border"></div>
 						<div class="db-arrow"></div>
 						<div class="password-bubble-title"></div>
-						<div class="password-bubble-desc">Good passwords are hard to guess. Use
-							uncommon words or inside jokes, non-standard uPPercasing, creative
-							spelllling, and non-obvious numbers and symbols.
+						<div class="password-bubble-desc">GGood passwords are hard to guess. Use
+							uncommon words, with lower and uppercase characters, and non-obvious
+							numbers and symbols.
 						</div>
 						</div>
 						<br>
