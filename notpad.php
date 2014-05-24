@@ -239,8 +239,8 @@ session_start();
 					$("#botao4").css('background', '#F1F1F1');
 					$("#botao0").css('background', '#F1F1F1');
 					$("#bottomBar").css('background', '#4CAED3');
-					$("#dn-swit-n").hide();
-					$("#dn-swit-d").show();
+					$("#dn-swit-d").hide();
+					$("#dn-swit-n").show();
 				};
 			</script>
         </body>
