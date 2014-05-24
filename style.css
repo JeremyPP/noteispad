@@ -2062,6 +2062,39 @@ input[type="checkbox"] {
 		width: 450px;
 	}
 }
+@media only screen and (max-width: 480px) {
+	#top {
+		height: 55px;
+	}	
+	#botao1, #botao3, #botao4, #botao0 {
+		width: 80px;
+		font-size: 12px;
+		font-weight: 900;
+	}
+	#botao0, #botao1, #botao2, #botao3, #botao4 {
+		padding: 0px;
+	}
+	#botao2 {
+		font-size: 12px;
+		height: 55px !important;
+		line-height: 55px;
+		width: 80px;
+		text-transform: uppercase;
+		text-align: center;
+		font-weight: 900;
+	}
+	.ex-b-v2 {
+		height: 55px !important;
+		line-height: 55px;
+		width: 80px !important;
+	}
+}
+@media only screen and (max-width: 455px) {
+	#box{
+		width: auto;
+		max-width: 450px;
+	}
+}
 @media only screen and (max-width: 450px) {
 	#center{
 		width: 400px;
@@ -2105,6 +2138,15 @@ input[type="checkbox"] {
 	}
 	#tmFonte {
 		height: 300px !important;
+	}
+}
+@media only screen and (max-width: 395px) {
+	#box{
+		height: 230px;
+	}
+	#senhaNota {
+		max-width: calc(90% - 15px);
+		width: auto;
 	}
 }
 @media only screen and (max-width: 360px) {
