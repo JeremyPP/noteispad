@@ -2,6 +2,12 @@
 require_once("init.php");
 require_once("functions.php");
 session_start();
+
+if(!isset($_SESSION['user_id']))
+{
+        header("Location: index.php");
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -46,7 +52,7 @@ session_start();
 			echo "<form method='post' action='notpad.php'>";
 			echo "<input type='hidden' name='code' value='$row->usernote_name'>";
 			echo '<div class="notaAllNota">';
-			echo "<div class='allNotaContTxtBtn' id='id-allNota$i'>";
+			echo "<div id='id-allNota$i'>";
 			$display_text = substr(trim($row->usernote_text), 0, 300);
 			$display_text .= '....';
 			echo "<input class='allNotaContTxtBtn' type='submit' value='$display_text'>";
@@ -70,7 +76,7 @@ session_start();
 			$script .= '}, function() {' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
 			$eol = array("\r\n", "\n", "\r", "\r\l");
-			$script .= 'var div = $("<div class=\'allNotaContTxtBtn\' id=\'id-allNota' . $i . '\'>' . str_replace($eol, "\\n", $display_text) . '</div>").hide();' . "\n";
+			$script .= 'var div = $("<div id=\'id-allNota' . $i . '\'><input class=\'allNotaContTxtBtn\' value=\''  . str_replace($eol, "\\n", $display_text) . '\' type=\'submit\'></div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";
