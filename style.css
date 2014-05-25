@@ -2177,3 +2177,24 @@ input[type="checkbox"] {
 		left: 280px !important;
 	}
 }
+.allNotaContTxtBtn{
+	border: 0 none;
+	background: #fff;
+	width: 850px;
+	padding: 15px;
+	color: #333;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 22px;
+	float: left;
+	min-height: 120px;
+	-webkit-transition: all 300ms ease-in-out;
+	-moz-transition: all 300ms ease-in-out;
+	-ms-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+}
+.allNotaContTxtBtn:hover{
+	background: #D2E7FD;
+	cursor: pointer;
+	color: #5C5C5C;
+}

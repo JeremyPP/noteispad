@@ -70,6 +70,10 @@ session_start();
 			{
 				$code = $_POST['code'];
 			}
+			elseif(isset($_GET['ucode']))
+			{
+				$code = $_GET['ucode'];
+			}
 			else
 			{
 				$code = $_SESSION['code'];
