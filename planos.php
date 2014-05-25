@@ -5,13 +5,13 @@ session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
-<html lang="pt-br">
+<html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<title>NOT is PAD!</title>
+		<title>Plans - not is pad!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 		<script src="erro.js"></script>
@@ -56,13 +56,13 @@ session_start();
 						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Email invalido!</div><br>
 						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2">
 						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Invalid password. Minimum of 6 characters.</div>
-						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -115px;margin-left: 345px;">
+						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -107px;margin-left: 345px;">
 						<div class="db-arrow-border"></div>
 						<div class="db-arrow"></div>
 						<div class="password-bubble-title"></div>
-						<div class="password-bubble-desc">Good passwords are hard to guess. Use
-							uncommon words or inside jokes, non-standard uPPercasing, creative
-							spelllling, and non-obvious numbers and symbols.
+						<div class="password-bubble-desc">GGood passwords are hard to guess. Use
+							uncommon words, with lower and uppercase characters, and non-obvious
+							numbers and symbols.
 						</div>
 						</div>
 						<br>

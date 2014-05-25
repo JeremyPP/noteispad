@@ -5,12 +5,12 @@ session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
-<html lang="pt-br">
+<html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
-		<title>NOT is PAD!</title>
+		<title>Note - not is pad!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -124,6 +124,17 @@ session_start();
 				</textarea>
 				<div id="bottom"></div>
 			</form>
+			
+			<div id="dn-swit-n" onclick="night()">
+			<div id="daynightswi1"></div>
+			<div id="daynightswi2"></div>
+			</div>
+			
+			<div id="dn-swit-d" onclick="day()">
+			<div id="daynightswi1-d"></div>
+			<div id="daynightswi2-d"></div>
+			</div>
+			
 			<div id="bottomBar"></div>
 			
 			<script>
@@ -197,6 +208,44 @@ session_start();
 						event.preventDefault();
 					}
 				});
+				
+				//=== night/Day switch ===//
+				function night() {
+					$("#top").css('background', '#53717C');
+					$("#pagNot").css('background', '#2f3030');
+					$("#textNote").css('background', '#2f3030');
+					$("#textNote").css('color', '#eee');
+					$("#botao2").css('background', 'rgb(129, 146, 151)');
+					$("#botao1").css('color', '#53717C');
+					$("#botao3").css('color', '#53717C');
+					$("#botao4").css('color', '#53717C');
+					$("#botao0").css('color', '#53717C');
+					$("#botao1").css('background', '#C7C7C7');
+					$("#botao3").css('background', '#C7C7C7');
+					$("#botao4").css('background', '#C7C7C7');
+					$("#botao0").css('background', '#C7C7C7');
+					$("#bottomBar").css('background', '#53717C');
+					$("#dn-swit-n").hide();
+					$("#dn-swit-d").show();
+				};
+				function day() {
+					$("#top").css('background', '#4CAED3');
+					$("#pagNot").css('background', '#fff');
+					$("#textNote").css('background', '#fff');
+					$("#textNote").css('color', '#000');
+					$("#botao2").css('background', 'lightblue');
+					$("#botao1").css('color', '#4CAED3');
+					$("#botao3").css('color', '#4CAED3');
+					$("#botao4").css('color', '#4CAED3');
+					$("#botao0").css('color', '#4CAED3');
+					$("#botao1").css('background', '#F1F1F1');
+					$("#botao3").css('background', '#F1F1F1');
+					$("#botao4").css('background', '#F1F1F1');
+					$("#botao0").css('background', '#F1F1F1');
+					$("#bottomBar").css('background', '#4CAED3');
+					$("#dn-swit-d").hide();
+					$("#dn-swit-n").show();
+				};
 			</script>
         </body>
 </html>
