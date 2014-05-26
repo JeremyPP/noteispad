@@ -2286,6 +2286,7 @@ input[type="checkbox"] {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 22px;
 	float: left;
+	text-align: left;
 	min-height: 120px;
 	-webkit-transition: all 300ms ease-in-out;
 	-moz-transition: all 300ms ease-in-out;
