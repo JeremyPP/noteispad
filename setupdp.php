@@ -70,7 +70,7 @@ if(!$res->num_rows)
 	}
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, paid_date timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, paid_date timestamp not null default '0000-00-00 00:00:00', auth_key varchar(255) default null, primary key(user_id))"))
 {
 	die("Failed to create users: " . $mysql->error);
 }

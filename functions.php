@@ -463,6 +463,11 @@ The NOT is PAD! team.";
     */
     function saveNote($postarray)
     {
+	if(!isset($postarray['code']))
+	{
+		return;
+	}
+
 	$mysql = dbConnect('saveNote');
 
 	$type = getNoteType($postarray['code']);
@@ -640,5 +645,54 @@ The NOT is PAD! team.";
 	}
 
 	return array ($days, $hours, $date_parts[1]);
+    }
+
+    /**
+    * Add the cookie and update the user table when a user chooses "Keep me logged in"
+    * @params $id user id
+    * @return nothing
+    */
+    function addAuthId($id)
+    {
+	$mysql = dbConnect('addAuthId');
+
+	$key = bin2hex(mcrypt_create_iv(100,MCRYPT_DEV_URANDOM));
+	$mysql->query("update users set auth_key='$key' where user_id = $id");
+	setcookie("authid", $key, time()+3600*24*30);
+    }
+
+    /**
+    * Clear the cookie and update the user table when a user chooses to logout
+    * @params $id user id
+    * @return nothing
+    */
+    function clearAuthId($id)
+    {
+	$mysql = dbConnect('clearAuthId');
+
+	$mysql->query("update users set auth_key = null  where user_id = $id");
+	setcookie("authid", '', time()-3600);
+    }
+
+    /**
+    * Check that the authid cookie is valid
+    * @params authid
+    * @return true if valid
+    */
+    function validAuthId($auth)
+    {
+	$mysql = dbConnect('validAuthId');
+	$res = $mysql->query("select user_id from users where auth_key = '$auth'");
+	if($res->num_rows)
+	{
+		$obj = $res->fetch_object();
+		$uid = $obj->user_id;
+	}
+	else
+	{
+		$uid = 0;
+	}
+
+	return $uid;
     }
 ?>

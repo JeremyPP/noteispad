@@ -2,11 +2,6 @@
 require_once("init.php");
 require_once("functions.php");
 session_start();
-
-if(!isset($_SESSION['user_id']))
-{
-	header("Location: index.php");
-}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -37,6 +32,10 @@ if(isset($_POST['planno']))
 	{
 		$id = addUser($_POST['name'], $_POST['password'], $_POST['email'], $_POST['planno']);
 		$_SESSION['user_id'] = $id;
+		if(isset($_POST['remember_me']))
+		{
+			addAuthId($id);
+		}
 	}
 }
 elseif(isset($_POST['email']))
@@ -49,18 +48,26 @@ elseif(isset($_POST['email']))
 	}
 	else
 	{
+		session_regenerate_id(true);
 		$_SESSION['user_id'] = $uid;
 
 		if(isset($_POST['remember_me']))
 		{
-			session_set_cookie_params(60*60*24*365);
+			addAuthId($uid);
 		}
-		else
+	}
+}
+else
+{
+	// Check for authid cookie
+	if(isset($_COOKIE['authid']))
+	{
+		$uid = validAuthId($_COOKIE['authid']);
+		if($uid)
 		{
-			session_set_cookie_params(0);
+			session_regenerate_id(true);
+			$_SESSION['user_id'] = $uid;
 		}
-		
-		session_regenerate_id(true);
 	}
 }
 
@@ -82,6 +89,10 @@ if(isset($_SESSION['user_id']))
 	$pcnt_used = intval($pcnt_used);
 	echo "<div style='width: $pcnt_used%;' class='quotaBar'></div>";
 	echo "</div>";
+}
+else
+{
+	header("Location: index.php");
 }
 ?>
 				<a href="minhasnotas.php" class="nemuListProfLink">

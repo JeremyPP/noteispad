@@ -3,6 +3,16 @@ require_once("init.php");
 require_once("functions.php");
 session_start();
 
+if(isset($_COOKIE['authid']))
+{
+	$uid = validAuthId($_COOKIE['authid']);
+	if($uid)
+	{
+		session_regenerate_id(true);
+		$_SESSION['user_id'] = $uid;
+	}
+}
+
 if(isset($_SESSION['user_id']))
 {
 	header("Location: me.php");
