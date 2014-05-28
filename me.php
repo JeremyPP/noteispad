@@ -26,7 +26,7 @@ if(isset($_POST['planno']))
 	// We're adding a new user
 	if(checkUser($_POST['email']))
 	{
-		echo "<script>erro14();</script>";
+		$_SESSION['error'] = "erro14();";
 	}
 	else
 	{
@@ -44,7 +44,7 @@ elseif(isset($_POST['email']))
 	$uid = checkUser($_POST['email']);
 	if(!$uid || !validPassword($uid, $_POST['password']))
 	{
-		echo "<script>erro02();</script>";
+		$_SESSION['error'] =  "erro02();";
 	}
 	else
 	{

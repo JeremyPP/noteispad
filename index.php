@@ -35,7 +35,6 @@ if(isset($_SESSION['user_id']))
         </script>
     </head>
     <body>
-	
 		<!---Verificar navegador--->
 		<div class="erro-navegador" id="erroNav">
 			<div>
@@ -123,10 +122,10 @@ if(isset($_SESSION['user_id']))
 				<div id="formsLog">
 					<form action="me.php" method="post">
 						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Your email" required>
-						<div class="form-error" id="email-error">Email invalid or nonexistent!</div>
+						<div class="form-error" id="email-error">Invalid email or wrong password!</div>
 						<br>
 						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Your password" required>
-						<div class="form-error" id="pass-error">Incorrect password!</div>
+						<div class="form-error" id="email-error"></div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">
 							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Keep me logged in</label>
@@ -204,6 +203,15 @@ if(isset($_SESSION['user_id']))
 				});
 				
 			</script>
+<?php
+	if(isset($_SESSION['error']))
+	{
+		echo '<script>$("#loginOver").attr("class", "open");$("#center").attr("class", "openSing");$("#openb").attr("class", "open");';
+		echo $_SESSION['error'];
+		unset($_SESSION['error']);
+		echo "</script>";
+	}
+?>	
 		<script src="scrollReveal.js"></script>
         </body>
 </html>
