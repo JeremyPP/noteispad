@@ -85,4 +85,8 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote_lines(usernote_id INT(11)
 	die("Failed to create usernote_lines: " . $mysql->error);
 }
 
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS password_dictionary(word_id INT(11) NOT NULL AUTO_INCREMENT, word varchar(7) not null, PRIMARY KEY(word_id))"))
+{
+	die("Failed to create password_dictionary: " . $mysql->error);
+}
 ?>
