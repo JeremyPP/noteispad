@@ -122,10 +122,10 @@ if(isset($_SESSION['user_id']))
 				<div id="formsLog">
 					<form action="me.php" method="post">
 						<input id="emailLog" autofocus="1" type="email" name="email" id="login_email" placeholder="Your email" required>
-						<div class="form-error" id="email-error">Invalid email or wrong password!</div>
+						<div class="form-error" id="email-error1">Invalid email or wrong password!</div>
 						<br>
 						<input id="senhaLog" type="password" id="login_password" name="password" placeholder="Your password" required>
-						<div class="form-error" id="email-error"></div>
+						<div class="form-error" id="email-error2"></div>
 						<div id="remember-me">
 							<input type="checkbox" checked="True" id="remember_me" name="remember_me" tabindex="3">
 							<label style="font-size: 15px; color: #8D9BA0; font-weight: 900;" for="remember_me">Keep me logged in</label>
