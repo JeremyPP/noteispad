@@ -23,9 +23,9 @@
 			}
 			#pass{
 				position: absolute;
-				background: #eee;
-				width: 400px;
-				height: 200px;
+				background: #fafafa;
+				width: 450px;
+				height: 320px;
 				padding: 30px;
 				top: 0;
 				bottom: 0;
@@ -38,13 +38,14 @@
 				font-family: 'Open Sans', sans-serif;
 				font-weight: 900;
 				font-size: 22px;
-				border-top: 5px solid rgb(85, 117, 160);
+				border-top: 5px solid #A2D0E2;
 				border-top-left-radius: 0;
 				border-top-right-radius: 0;
 			}
 			#pass p {
 				max-width: 340px;
 				margin: 0 auto;
+				color: #8D9BA0;
 			}
 			#recoverfail, #recoverok {
 				background: #e74c3c;
@@ -105,7 +106,7 @@
 				width: 350px;
 				height: 50px;
 				border: none;
-				background: #f9f9f9;
+				background: rgb(230, 230, 230);
 				padding-left: 10px;
 				color: #3d464d;
 				border-radius: 3px;
@@ -114,11 +115,11 @@
 				margin-top: 25px;
 			}
 			#respass:focus{
-				background: #fff;
+				background: rgb(230, 230, 230);
 			}
 			#submitpass{
-				width: 140px;
-				height: 40px;
+				width: 360px;
+				height: 50px;
 				background: #75B0C7;
 				color: #FFFFFF;
 				border-radius: 3px;
@@ -136,11 +137,22 @@
 				background: #5D93A8;
 				cursor: pointer;
 			}
+			
+			#pass h1{
+				line-height: 60px;
+				font-family: 'Open Sans', sans-serif;
+				font-size: 55px;
+				color: #4CAED3;
+				font-weight: 900;
+				padding-bottom: 30px;
+				padding-top: 0px;
+			}
 		</style>
     </head>
         <body>
 		<div id="pass_bg">
 			<div id="pass">
+				<h1>Reset password</h1>
 				<p>Please, type your new password below:</p>
 				<input id="respass" autofocus="1" type="password" name="pass" placeholder="Your new password" required="">
 				<input id="submitpass" type="submit" value="Reset" onclick="pass()"></input>
@@ -159,7 +171,7 @@
 			<div class="recovery-center">
 				<h1>Thank you! :)</h1>
 				<h2>
-					Your password have been successfully reset, from now on you can log in to your account with your new password.
+					Your password have been successfully reset. From now on you can log in to your account with your new password.
 				</h2>
 			</div>
 		</div>
