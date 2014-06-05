@@ -1,4 +1,21 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+require_once("functions.php");
+
+if(isset($_POST['email']))
+{
+	$uid = checkUser($_POST['email']);
+	if($uid)
+	{
+		$key = generateKey();
+		$subject = "Password reset";
+		$text = "Hello from notispad\r\nA request has been made to reset your password\r\nIf you did not make this request then please ignore this email, otherwise go to this url and reset your password:\r\nhttp://pbembid.com:8888/reset.php?$key\r\nPlease note that this url is only valid for 24 hours and if you have any questions about this email then please contact us at info@notispad.com\r\n";
+		mail($_POST['email'], $subject, $text, null, '-fdo-not-reply@notispad.com');
+		updateReset($uid, $key);
+	}
+}
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 	<head>
@@ -15,10 +32,10 @@
 			<div class="recovery-center">
 				<h1>Thank you! :)</h1>
 				<h2>
-					A new default password has been sent to your email. <br>
+					A new password has been sent to your email. <br>
 					Don't forget to change it once logged by going to Settings > Change Password.
 				</h2>
-				<a href="/notepad" style="text-decoration: none;"><div id="voltar-pass-b">Ok</div></a>
+				<a href="/index.php" style="text-decoration: none;"><div id="voltar-pass-b">Ok</div></a>
 			</div>
 		</div>
 		<div id="recoverfail">
@@ -32,19 +49,26 @@
 		</div>
 		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
 		<h1 data-scrollreveal="enter top and move -200px over 1s">Recover password</h1>
-		<p style="margin-top: 40px; max-width: 750px;">Once your identity verified, a new default password will be sent to your email. You will be able to change it once logged by going to "Settings".</p>
-		<form id="dadosUser">
+		<p style="margin-top: 40px; max-width: 750px;">If you are a registered user then new password will be sent to your email address. It is highly recommended that you change it once logged by going to "Settings".</p>
+		<form id="dadosUser" method="POST">
 			<input type="email" name="email" placeholder="Your email" class="u-dI" autofocus><br>
-			<div class="recupPass" onClick="ok()">Send</div>
+			<input type="submit" value="Send" class="recupPass">
 		</form>
         <script src="scrollReveal.js"></script>
 		<script>
 			function ok(){
 				$("#recoverok").show();
+				return true;
 			}
 			function errorRP(){
 				$("#recoverfail").show();
 			}
 		</script>
+<?php
+	if(isset($_POST['email']))
+	{
+		echo "<script>ok();</script>";
+	}
+?>
 		</body>
 </html>
