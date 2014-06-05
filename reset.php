@@ -1,7 +1,26 @@
 ﻿<?php
 require_once("init.php");
 require_once("functions.php");
-error_log(">>>$_SERVER[QUERY_STRING]");
+
+if(isset($_POST['pass']))
+{
+	updatePassword($_POST['id'], $_POST['pass']);
+	$_SESSION['msg'] = "pass();";
+}
+elseif(isset($_SERVER['QUERY_STRING']))
+{
+	$id = resetExpired($_SERVER['QUERY_STRING']);
+	if(!$id)
+	{
+		$_SESSION['msg'] = "expir();";
+	}
+}
+else
+{
+	header("Location: index.php");
+}
+
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -159,8 +178,16 @@ error_log(">>>$_SERVER[QUERY_STRING]");
 			<div id="pass">
 				<h1>Reset password</h1>
 				<p>Please, type your new password below:</p>
+				<form method="POST">
 				<input id="respass" autofocus="1" type="password" name="pass" placeholder="Your new password" required="">
-				<input id="submitpass" type="submit" value="Reset" onclick="pass()"></input>
+				<input id="submitpass" type="submit" value="Reset">
+<?php
+	if(isset($_SERVER['QUERY_STRING']))
+	{
+				echo "<input type='hidden' name='id' value='$id'>";
+	}
+?>
+				</form>
 			</div>
 		</div>
 		<div id="recoverfail">
@@ -188,5 +215,12 @@ error_log(">>>$_SERVER[QUERY_STRING]");
 			$("#recoverfail").show();
 		}
 		</script>
+<?php
+	if(isset($_SESSION['msg']))
+	{
+		echo "<script>$_SESSION[msg]</script>";
+		unset($_SESSION['msg']);
+	}
+?>
 		</body>
 </html>

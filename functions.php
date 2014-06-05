@@ -593,7 +593,7 @@ The NOT is PAD! team.";
 	$mysql = dbConnect('updatePassword');
 	$encpw = password_hash($password, PASSWORD_BCRYPT);
 
-	$mysql->query("update users set password = '$encpw' where user_id = $id");
+	$mysql->query("update users set password = '$encpw', reset_id = null, reset_sent = null where user_id = $id");
     }
 
     /**
@@ -697,7 +697,7 @@ The NOT is PAD! team.";
 	$uid = 0;
 	$mysql = dbConnect('validAuthId');
 
-	$res = $mysql->query("select user_id, auth_key from users where auth_key not null");
+	$res = $mysql->query("select user_id, auth_key from users where auth_key is not null");
 	if($res->num_rows)
 	{
 		while($obj = $res->fetch_object())
@@ -725,5 +725,32 @@ The NOT is PAD! team.";
 	$enckey = password_hash($key, PASSWORD_BCRYPT);
 
 	$res = $mysql->query("update users set reset_id = '$enckey', reset_sent = now() where user_id = $uid");
+    }
+
+    /**
+    * Check that the password reset request hasn't expired and is valid
+    * @params request_id
+    * @return user id is valid, 0 otherwise
+    */
+    function resetExpired($req_id)
+    {
+	$uid = 0;
+	$mysql = dbConnect('resetExpired');
+
+	$res = $mysql->query("select user_id, reset_id, timestampdiff(MINUTE, reset_sent, now()) as reset_diff from users where reset_id is not null");
+	if($res->num_rows)
+	{
+		while($obj = $res->fetch_object())
+		{
+error_log(">>>$obj->user_id, $obj->reset_diff");
+			if(password_verify($req_id, $obj->reset_id) && ($obj->reset_diff < 1440))
+			{
+				$uid = $obj->user_id;
+				break;
+			}
+		}
+	}
+
+	return $uid;
     }
 ?>
