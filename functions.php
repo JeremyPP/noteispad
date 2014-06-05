@@ -592,7 +592,8 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('updatePassword');
 	$encpw = password_hash($password, PASSWORD_BCRYPT);
-	$mysql->query("update users set passsword = '$encpw' where user_id = $id");
+
+	$mysql->query("update users set password = '$encpw' where user_id = $id");
     }
 
     /**
@@ -656,9 +657,21 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('addAuthId');
 
-	$key = bin2hex(mcrypt_create_iv(100,MCRYPT_DEV_URANDOM));
-	$mysql->query("update users set auth_key='$key' where user_id = $id");
+	$key = generateKey();
+	// Store an encrypted copy of the key
+	$enckey = password_hash($key, PASSWORD_BCRYPT);
+	$mysql->query("update users set auth_key='$enckey' where user_id = $id");
 	setcookie("authid", $key, time()+3600*24*30);
+    }
+
+    /**
+    * Generate a 100 byte random key
+    * @params none
+    * @return key
+    */
+    function generateKey()
+    {
+	return bin2hex(mcrypt_create_iv(100,MCRYPT_DEV_URANDOM));
     }
 
     /**
@@ -681,18 +694,36 @@ The NOT is PAD! team.";
     */
     function validAuthId($auth)
     {
+	$uid = 0;
 	$mysql = dbConnect('validAuthId');
-	$res = $mysql->query("select user_id from users where auth_key = '$auth'");
+
+	$res = $mysql->query("select user_id, auth_key from users where auth_key not null");
 	if($res->num_rows)
 	{
-		$obj = $res->fetch_object();
-		$uid = $obj->user_id;
-	}
-	else
-	{
-		$uid = 0;
+		while($obj = $res->fetch_object())
+		{
+			if(password_verify($auth, $obj->auth_key))
+			{
+				$uid = $obj->user_id;
+				break;
+			}
+		}
 	}
 
 	return $uid;
+    }
+
+    /**
+    * Update reset password fields
+    * @params user id, key
+    * @return nothing
+    */
+    function updateReset($uid, $key)
+    {
+	$mysql = dbConnect('updateReset');
+	// Don't store the id itself - bad security practice
+	$enckey = password_hash($key, PASSWORD_BCRYPT);
+
+	$res = $mysql->query("update users set reset_id = '$enckey', reset_sent = now() where user_id = $uid");
     }
 ?>
