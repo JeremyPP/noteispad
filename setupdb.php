@@ -70,7 +70,7 @@ if(!$res->num_rows)
 	}
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, paid_date timestamp not null default '0000-00-00 00:00:00', auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp default null, primary key(user_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '#000', background_colour char(7) not null default '#fff', paid_date timestamp not null default '0000-00-00 00:00:00', auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
 {
 	die("Failed to create users: " . $mysql->error);
 }
@@ -84,4 +84,44 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS usernote_lines(usernote_id INT(11)
 {
 	die("Failed to create usernote_lines: " . $mysql->error);
 }
+
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS colours(hashvalue char(6) NOT NULL, name VARCHAR(255))"))
+{
+	die("Failed to create colours: " . $mysql->error);
+}
+
+$mysql->query("delete from colours");
+
+$colour = [
+                        "000" => "Black",
+                        "777" => "Dark gray",
+                        "ccc" => "Light gray",
+                        "fff" => "White",
+                        "771696" => "Dark magenta",
+                        "A148BD" => "Moderate magenta",
+                        "C371DD" => "Soft magenta",
+                        "DDA9EE" => "Very soft magenta",
+                        "227492" => "Dark blue",
+                        "48B1F7" => "Bright blue",
+                        "8DD7FA" => "Very soft blue",
+                        "C5F1FF" => "Very pale cyan",
+                        "17A82F" => "Dark lime green",
+                        "2CD347" => "Strong lime green",
+                        "63F57B" => "Soft lime green",
+                        "99F6A8" => "Very soft lime green",
+                        "FF8718" => "Vivid orange",
+                        "FFAC18" => "Vivid orange",
+                        "F7D757" => "Soft yellow",
+                        "FFF46F" => "Very soft yellow",
+                        "DD0F0F" => "Vivid red",
+                        "F14B4B" => "Soft red",
+                        "FF9494" => "Very light red",
+                        "FFBBBB" => "Pale red"
+                ];
+
+foreach($colour as $k => $v)
+{
+	$mysql->query("insert into colours value('$k', '$v')");
+}
+	
 ?>

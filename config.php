@@ -19,6 +19,13 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 		updatePlan($_SESSION['user_id'], $_GET['opt']);
 	}
 }
+elseif(isset($_GET['fc']) && $_GET['fc'])
+{
+	updateFontColour($_SESSION['user_id'], $_GET['fc']);
+	echo "ok";
+	exit;
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -129,30 +136,16 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConfS">Select the font color</div>
 					<div id="color-main">
-						<div class="color-selector" style=" background: #000; "></div>
-						<div class="color-selector" style=" background: #777; "></div>
-						<div class="color-selector" style=" background: #ccc; "></div>
-						<div class="color-selector" style=" background: #FFF; "></div>
-						<div class="color-selector" style=" background: #771696; "></div>
-						<div class="color-selector" style=" background: #A148BD; "></div>
-						<div class="color-selector" style=" background: #C371DD; "></div>
-						<div class="color-selector" style=" background: #DDA9EE; "></div>
-						<div class="color-selector" style=" background: #227492; "></div>
-						<div class="color-selector" style=" background: #48B1F7; "></div>
-						<div class="color-selector" style=" background: #8DD7FA; "></div>
-						<div class="color-selector" style=" background: #C5F1FF; "></div>
-						<div class="color-selector" style=" background: #17A82F; "></div>
-						<div class="color-selector" style=" background: #2CD347; "></div>
-						<div class="color-selector" style=" background: #63F57B; "></div>
-						<div class="color-selector" style=" background: #99F6A8; "></div>
-						<div class="color-selector" style=" background: #FF8718; "></div>
-						<div class="color-selector" style=" background: #FFAC18; "></div>
-						<div class="color-selector" style=" background: #F7D757; "></div>
-						<div class="color-selector" style=" background: #FFF46F; "></div>
-						<div class="color-selector" style=" background: #DD0F0F; "></div>
-						<div class="color-selector" style=" background: #F14B4B; "></div>
-						<div class="color-selector" style=" background: #FF9494; "></div>
-						<div class="color-selector" style=" background: #FFBBBB; "></div>
+<?php
+	$fcscript = "";
+	$colours = getColours();
+
+	foreach($colours as &$k)
+	{
+		echo "<div id='fc$k' class='color-selector' style=' background: #$k'></div>";
+		$fcscript .= "$('#fc$k').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { fc: '#$k' } }); $('#modalCorFonte').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
+	}
+?>
 					</div>
 				</div>
 			</div>
@@ -309,6 +302,8 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 			</div>
 EOT;
 	}
+
+	echo "<script>$fcscript</script>\n";
 ?>
 			
 			<script src="scrollReveal.js"></script>
@@ -348,6 +343,18 @@ EOT;
 				  $("#modalCorFonte").attr('class', 'visible');
 				  $("#openb2").css('opacity', '0');
 				});
+				function closeFC(fc)
+				{
+				  $.ajax({
+					type: "get",
+					dataType: "json",
+					url: "config.php",
+					data: { fc: fc }
+					});
+					
+				  $("#modalCorFonte").attr('class', 'hidden');
+				  $("#openb2").css('opacity', '1');
+				}
 				$( ".og-closeE" ).click(function() {
 				  $("#modalCorFonte").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');

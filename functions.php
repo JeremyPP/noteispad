@@ -742,7 +742,6 @@ The NOT is PAD! team.";
 	{
 		while($obj = $res->fetch_object())
 		{
-error_log(">>>$obj->user_id, $obj->reset_diff");
 			if(password_verify($req_id, $obj->reset_id) && ($obj->reset_diff < 1440))
 			{
 				$uid = $obj->user_id;
@@ -752,5 +751,36 @@ error_log(">>>$obj->user_id, $obj->reset_diff");
 	}
 
 	return $uid;
+    }
+
+    /**
+    * Update font colour
+    * @params user id, font colour
+    * @return nothing
+    */
+    function updateFontColour($uid, $fc)
+    {
+	$mysql = dbConnect('updateFontColour');
+
+	$res = $mysql->query("update users set font_colour = '$fc' where user_id = $uid");
+    }
+
+    /**
+    * Get list of colour hash values
+    * @params none
+    * @return array of hash values
+    */
+    function getColours()
+    {
+	$ret_arr = array();
+	$mysql = dbConnect('getColours');
+
+	$res = $mysql->query("select hashvalue from colours");
+	while($obj = $res->fetch_object())
+	{
+		$ret_arr[] = $obj->hashvalue;
+	}	
+
+	return $ret_arr;
     }
 ?>
