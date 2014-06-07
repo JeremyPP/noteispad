@@ -2,6 +2,16 @@
 require_once("init.php");
 require_once("functions.php");
 session_start();
+
+
+if(isset($_GET['email']))
+{
+	// ajax call
+	$return['emailInUse'] = checkUser($_GET['email']);
+	echo json_encode($return);
+	exit;
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -47,22 +57,22 @@ session_start();
 				<div id="contOverPlan">
 					<h1>Complete the information below</h1>
 					<h2>You chose the <span id="pname">PRO</span> plan for $<span id="pprice">0</span> per month</h2>
-					<form id="dadosUser" action="me.php" method="post">
+					<form name="dadosUser" id="dadosUser" action="me.php" method="post">
 						<input type="hidden" id="planno" name="planno" value="">
-						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" autofocus>
-						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Type only one name.</div><br>
-						<input type="email" name="email" id="email-cc" placeholder="Your email" class="u-dI">
-						<div class="form-error-conf" id="email-error" style="margin-top:-10px;margin-bottom:0px;">This email already exist!</div>
-						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Email invalido!</div><br>
-						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2">
+						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" onChange="nameChanged = 1;" autofocus>
+						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Please supply one name</div><br>
+						<input type="text" name="email" id="email-cc" placeholder="Your email" class="u-dI" onChange="emailChanged=1;">
+						<div class="form-error-conf" id="email-error" style="margin-top:-10px;margin-bottom:0px;">This email address is already registered!</div>
+						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Invalid email!</div><br>
+						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2" onChange="passChanged=1;">
 						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Invalid password. Minimum of 6 characters.</div>
 						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -107px;margin-left: 345px;">
 						<div class="db-arrow-border"></div>
 						<div class="db-arrow"></div>
 						<div class="password-bubble-title"></div>
-						<div class="password-bubble-desc">GGood passwords are hard to guess. Use
+						<div class="password-bubble-desc">Good passwords are hard to guess. Use
 							uncommon words, with lower and uppercase characters, and non-obvious
-							numbers and symbols.
+							numbers and symbols. The minimum password length is six characters
 						</div>
 						</div>
 						<br>
@@ -152,6 +162,10 @@ session_start();
 				</div>
         <script src="scrollReveal.js"></script>
 		<script>
+			var nameChanged = 0;
+			var emailChanged = 0;
+			var passChanged = 0;
+
 			function setVal(ind)
 			{
 				$("#pname").text(planName[ind]);
@@ -177,6 +191,83 @@ session_start();
 				$("#work-in-prog-overlay").fadeOut();
 				$("#openb2").css({ opacity: 1 });
 			});
+
+			$(document).ready(function()
+			{
+				$('#dadosUser').submit(function(event)
+				{
+					var retval = true;
+
+					$("#name-error").fadeOut();
+					$("#name-error").css({opacity: 1});
+
+					if(!nameChanged || /\s/.test($("#name-cc").val()) || ($("#name-cc").val() === ""))
+					{
+						$("#name-error").fadeIn();
+						$("#name-error").css({opacity: 0});
+						retval = false;
+					}
+
+					$("#email-error").fadeOut();
+					$("#email-error").css({opacity: 1});
+
+					$("#email-error2").fadeOut();
+					$("#email-error2").css({opacity: 1});
+
+					if(!emailChanged || !validateEmail($("#email-cc").val()))
+					{
+						$("#email-error2").fadeIn();
+						$("#email-error2").css({opacity: 0});
+						retval = false;
+					}
+					else
+					{
+						$.ajax({ type: "get", 
+							url: "planos.php", 
+							dataType: "json", 
+							data: {email: $("#email-cc").val() }, 
+							async: false,
+							success: function(data)
+								{
+									if(data.emailInUse)
+									{
+										$("#email-error").fadeIn();
+										$("#email-error").css({opacity: 0});
+										retval = false;
+									}
+								}
+							});
+					}
+
+					$("#pass-error").fadeOut();
+					$("#pass-error").css({opacity: 1});
+
+					if(!passChanged || ($("#pass-cc").val().length < 5))
+					{
+						$("#pass-error").fadeIn();
+						$("#pass-error").css({opacity: 0});
+						retval = false;
+					}
+
+					return retval;
+				});
+			});
+
+			function validateEmail(email_addr)
+			{
+				var retval;
+				var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+				if(filter.test(email_addr))
+				{
+					retval = true;
+				}
+				else
+				{
+					retval = false;
+				}
+
+				return retval;
+			}
 			
 		</script>
 		</body>
