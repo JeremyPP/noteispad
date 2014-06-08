@@ -95,7 +95,20 @@ session_start();
 						<div id="botao4" class="ex-b-v2" onclick="checkExit();">Exit</div>
 						<!-- Replace onClick #botao4 -->
 				</div>
-				<textarea id="textNote" name="content" spellcheck=false onchange="changed=true;"">
+<?php
+	echo "<textarea id='textNote' name='content' spellcheck=false onchange='changed=true;'";
+	$style = "";
+	if(isset($_SESSION['user_id']))
+	{
+		$fc = getCurrentFontColour($_SESSION['user_id']);
+		$bg = getCurrentBackgroundColour($_SESSION['user_id']);
+		$fs = getCurrentFontSize($_SESSION['user_id']);
+		$style .= " style='color:#$fc;background-color:#$bg;font-size:${fs}px'";
+	}
+
+	echo "$style>";
+?>
+
 <?php
 	if(isset($_GET['page']))
 	{
@@ -227,8 +240,16 @@ session_start();
 				function day() {
 					$("#top").css('background', '#4CAED3');
 					$("#pagNot").css('background', '#fff');
-					$("#textNote").css('background', '#fff');
-					$("#textNote").css('color', '#000');
+<?php
+	if(!isset($_SESSION['user_id']))
+	{
+		$fc = '000';
+		$bg = 'fff';
+	}
+
+	echo "$('#textNote').css('background', '#$bg');\n";
+	echo "$('#textNote').css('color', '#$fc');\n";
+?>
 					$("#botao2").css('background', 'lightblue');
 					$("#botao1").css('color', '#4CAED3');
 					$("#botao3").css('color', '#4CAED3');

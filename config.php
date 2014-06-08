@@ -33,6 +33,13 @@ elseif(isset($_GET['bg']) && $_GET['bg'])
 	echo json_encode($return);
 	exit;
 }
+elseif(isset($_GET['fs']) && $_GET['fs'])
+{
+	updateFontSize($_SESSION['user_id'], $_GET['fs']);
+	$return['font_size'] = getCurrentFontSizeName($_SESSION['user_id']);
+	echo json_encode($return);
+	exit;
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -163,8 +170,6 @@ elseif(isset($_GET['bg']) && $_GET['bg'])
 					<div class="popUpTxtConfS">Select the background color</div>
 					<div id="color-main">
 <?php
-	$bcscript = "";
-
 	foreach($colours as &$k)
 	{
 		echo "<div id='bg$k' class='color-selector' style=' background: #$k'></div>";
@@ -179,10 +184,20 @@ elseif(isset($_GET['bg']) && $_GET['bg'])
 				<div id="tmFonte">
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConfS">Select the font size</div>
-					<h4>Small</h4>
-					<h3 class="tamSelected">Normal</h3>
-					<h2>Large</h2>
-					<h1>Huge</h1>
+<?php
+	$font_sizes = getFontSizes();
+	$my_font_size = getCurrentFontSize($_SESSION['user_id']);
+	foreach($font_sizes as $k => $v)
+	{
+		echo "<div id='fs$v' ";
+		//if($v == $my_font_size)
+		//{
+			//echo " class='tamSelected' ";
+		//}
+		echo "style='font-size:" . $v . "px'>$k</div>";
+		$fcscript .= "$('#fs$v').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { fs: '$v' }, dataType: 'json', success: function(data) { $('#fontSize').html(data.font_size) } }); $('#modalTmFonte').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
+	}
+?>
 				</div>
 			</div>
 			<div id="modalMudarPlano" class="hidden">
@@ -289,12 +304,13 @@ elseif(isset($_GET['bg']) && $_GET['bg'])
 	{
 		$fc = getCurrentFontColourName($_SESSION['user_id']);
 		$bg = getCurrentBackgroundColourName($_SESSION['user_id']);
+		$fs = getCurrentFontSizeName($_SESSION['user_id']);
 		echo <<<EOT
 			<div id="conf-odp" class="confOp" style="margin-bottom: 55px;" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Personalization options</div>
 				<p>Font color: <b id="fontColour">$fc</b> <span id="colorChangeFont">CHANGE COLOR</span></p>
 				<p>Background color: <b id="backgroundColour">$bg</b> <span id="colorChangeBg">CHANGE COLOR</span></p>
-				<p>Font Size: <b>Normal</b><span id="tamFonteB">CHANGE SIZE</span></p>
+				<p>Font Size: <b id="fontSize">$fs</b><span id="tamFonteB">CHANGE SIZE</span></p>
 			</div>
 EOT;
 	}

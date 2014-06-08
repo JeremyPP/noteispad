@@ -1406,31 +1406,31 @@ input[type="checkbox"] {
 	color: #1A1A1A;
 	font-weight: normal;
 }
-#tmFonte h4{
+#fs18, #tmFonte h4{
 	font-size: 18px;
 	margin-bottom: 5px;
 	margin-top: 20px;
 	text-align: center;
 }
-#tmFonte h3{
+#fs22, #tmFonte h3{
 	font-size: 22px;
 	margin-bottom: 5px;
 	color: #4CAED3;
 	text-align: center;
 }
-#tmFonte h2{
+#fs28, #tmFonte h2{
 	font-size: 28px;
 	margin-bottom: 5px;
 	text-align: center;
 }
-#tmFonte h1{
+#fs33, #tmFonte h1{
 	font-size: 33px;
 	margin-top: 0;
 	margin-bottom: 0;
 	color: #1A1A1A;
 	text-align: center;
 }
-#tmFonte h1:hover, #tmFonte h2:hover, #tmFonte h3:hover, #tmFonte h4:hover{
+#tmFonte h1:hover, #tmFonte h2:hover, #tmFonte h3:hover, #tmFonte h4:hover, #fs18:hover, #fs22:hover, #fs28:hover, #fs33:hover{
 	cursor: pointer;
 	color: #757575;
 }

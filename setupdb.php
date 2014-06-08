@@ -70,7 +70,7 @@ if(!$res->num_rows)
 	}
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '000', background_colour char(7) not null default 'fff', font_size smallint not null default 3, paid_date timestamp not null default '0000-00-00 00:00:00', auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '000', background_colour char(7) not null default 'fff', font_size smallint not null default 22, paid_date timestamp not null default '0000-00-00 00:00:00', auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
 {
 	die("Failed to create users: " . $mysql->error);
 }
@@ -123,5 +123,23 @@ foreach($colour as $k => $v)
 {
 	$mysql->query("insert into colours value('$k', '$v')");
 }
-	
+
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS font_size(size_name char(6) NOT NULL, size_px smallint not null)"))
+{
+	die("Failed to create font_size: " . $mysql->error);
+}
+
+$mysql->query("delete from font_size");
+
+$font_sizes = [
+                        "Small" => 18,
+                        "Normal" => 22,
+                        "Large" => 28,
+                        "Huge" => 33
+                ];
+
+foreach($font_sizes as $k => $v)
+{
+	$mysql->query("insert into font_size value('$k', $v)");
+}
 ?>

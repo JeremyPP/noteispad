@@ -766,6 +766,18 @@ The NOT is PAD! team.";
     }
 
     /**
+    * Update font size
+    * @params user id, font size
+    * @return nothing
+    */
+    function updateFontSize($uid, $fs)
+    {
+	$mysql = dbConnect('updateFontSize');
+
+	$res = $mysql->query("update users set font_size = $fs where user_id = $uid");
+    }
+
+    /**
     * Update background colour
     * @params user id, background colour
     * @return nothing
@@ -812,6 +824,21 @@ The NOT is PAD! team.";
     }
 
     /**
+    * Get the users current font size name
+    * @params user id
+    * @return font size name
+    */
+    function getCurrentFontSizeName($uid)
+    {
+	$mysql = dbConnect('getCurrentFontSizeName');
+
+	$res = $mysql->query("select FS.size_name from font_size FS, users U where U.user_id = $uid and FS.size_px = U.font_size");
+	$obj = $res->fetch_object();
+
+	return $obj->size_name;
+    }
+
+    /**
     * Get the users current background colour name
     * @params user id
     * @return background colour name
@@ -824,5 +851,69 @@ The NOT is PAD! team.";
 	$obj = $res->fetch_object();
 
 	return $obj->name;
+    }
+
+    /**
+    * Get the users current font colour
+    * @params user id
+    * @return font colour
+    */
+    function getCurrentFontColour($uid)
+    {
+	$mysql = dbConnect('getCurrentFontColour');
+
+	$res = $mysql->query("select font_colour from users where user_id = $uid");
+	$obj = $res->fetch_object();
+
+	return $obj->font_colour;
+    }
+
+    /**
+    * Get the users current background colour
+    * @params user id
+    * @return background colour
+    */
+    function getCurrentBackgroundColour($uid)
+    {
+	$mysql = dbConnect('getCurrentBackgroundColour');
+
+	$res = $mysql->query("select background_colour from users where user_id = $uid");
+	$obj = $res->fetch_object();
+
+	return $obj->background_colour;
+    }
+
+    /**
+    * Get the users current font size
+    * @params user id
+    * @return font size
+    */
+    function getCurrentFontSize($uid)
+    {
+	$mysql = dbConnect('getCurrentFontSize');
+
+	$res = $mysql->query("select font_size from users where user_id = $uid");
+	$obj = $res->fetch_object();
+
+	return $obj->font_size;
+    }
+
+    /**
+    * Get list of font sizes and names
+    * @params none
+    * @return array of hash values
+    */
+    function getFontSizes()
+    {
+	$ret_arr = array();
+	$mysql = dbConnect('getFontSizes');
+
+	$res = $mysql->query("select size_name, size_px from font_size");
+	while($obj = $res->fetch_object())
+	{
+		$ret_arr[$obj->size_name] = $obj->size_px;
+	}	
+
+	return $ret_arr;
     }
 ?>
