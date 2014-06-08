@@ -783,4 +783,19 @@ The NOT is PAD! team.";
 
 	return $ret_arr;
     }
+
+    /**
+    * Get the users current font colour name
+    * @params user id
+    * @return font colour name
+    */
+    function getCurrentFontColourName($uid)
+    {
+	$mysql = dbConnect('getCurrentFontColourName');
+
+	$res = $mysql->query("select C.name from colours C, users U where U.user_id = $uid and C.hashvalue = U.font_colour");
+	$obj = $res->fetch_object();
+
+	return $obj->name;
+    }
 ?>

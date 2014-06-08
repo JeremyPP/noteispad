@@ -22,7 +22,8 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 elseif(isset($_GET['fc']) && $_GET['fc'])
 {
 	updateFontColour($_SESSION['user_id'], $_GET['fc']);
-	echo "ok";
+	$return['font_colour'] = getCurrentFontColourName($_SESSION['user_id']);
+	echo json_encode($return);
 	exit;
 }
 
@@ -143,7 +144,7 @@ elseif(isset($_GET['fc']) && $_GET['fc'])
 	foreach($colours as &$k)
 	{
 		echo "<div id='fc$k' class='color-selector' style=' background: #$k'></div>";
-		$fcscript .= "$('#fc$k').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { fc: '#$k' } }); $('#modalCorFonte').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
+		$fcscript .= "$('#fc$k').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { fc: '$k' }, dataType: 'json', success: function(data) { $('#fontColour').html(data.font_colour) } }); $('#modalCorFonte').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
 	}
 ?>
 					</div>
@@ -293,10 +294,11 @@ elseif(isset($_GET['fc']) && $_GET['fc'])
 <?php
 	if($pnum > 1)
 	{
+		$fc = getCurrentFontColourName($_SESSION['user_id']);
 		echo <<<EOT
 			<div id="conf-odp" class="confOp" style="margin-bottom: 55px;" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Personalization options</div>
-				<p>Font color: <b>Black</b> <span id="colorChangeFont">CHANGE COLOR</span></p>
+				<p>Font color: <b id="fontColour">$fc</b> <span id="colorChangeFont">CHANGE COLOR</span></p>
 				<p>Background color: <b>White</b> <span id="colorChangeBg">CHANGE COLOR</span></p>
 				<p>Font Size: <b>Normal</b><span id="tamFonteB">CHANGE SIZE</span></p>
 			</div>
