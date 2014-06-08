@@ -766,6 +766,18 @@ The NOT is PAD! team.";
     }
 
     /**
+    * Update background colour
+    * @params user id, background colour
+    * @return nothing
+    */
+    function updateBackgroundColour($uid, $bg)
+    {
+	$mysql = dbConnect('updateBackgroundColour');
+
+	$res = $mysql->query("update users set background_colour = '$bg' where user_id = $uid");
+    }
+
+    /**
     * Get list of colour hash values
     * @params none
     * @return array of hash values
@@ -794,6 +806,21 @@ The NOT is PAD! team.";
 	$mysql = dbConnect('getCurrentFontColourName');
 
 	$res = $mysql->query("select C.name from colours C, users U where U.user_id = $uid and C.hashvalue = U.font_colour");
+	$obj = $res->fetch_object();
+
+	return $obj->name;
+    }
+
+    /**
+    * Get the users current background colour name
+    * @params user id
+    * @return background colour name
+    */
+    function getCurrentBackgroundColourName($uid)
+    {
+	$mysql = dbConnect('getCurrentBackgroundColourName');
+
+	$res = $mysql->query("select C.name from colours C, users U where U.user_id = $uid and C.hashvalue = U.background_colour");
 	$obj = $res->fetch_object();
 
 	return $obj->name;

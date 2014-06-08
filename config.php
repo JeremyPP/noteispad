@@ -26,6 +26,13 @@ elseif(isset($_GET['fc']) && $_GET['fc'])
 	echo json_encode($return);
 	exit;
 }
+elseif(isset($_GET['bg']) && $_GET['bg'])
+{
+	updateBackgroundColour($_SESSION['user_id'], $_GET['bg']);
+	$return['background_colour'] = getCurrentBackgroundColourName($_SESSION['user_id']);
+	echo json_encode($return);
+	exit;
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -155,30 +162,16 @@ elseif(isset($_GET['fc']) && $_GET['fc'])
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConfS">Select the background color</div>
 					<div id="color-main">
-						<div class="color-selector" style=" background: #000; "></div>
-						<div class="color-selector" style=" background: #777; "></div>
-						<div class="color-selector" style=" background: #ccc; "></div>
-						<div class="color-selector" style=" background: #FFF; "></div>
-						<div class="color-selector" style=" background: #771696; "></div>
-						<div class="color-selector" style=" background: #A148BD; "></div>
-						<div class="color-selector" style=" background: #C371DD; "></div>
-						<div class="color-selector" style=" background: #DDA9EE; "></div>
-						<div class="color-selector" style=" background: #227492; "></div>
-						<div class="color-selector" style=" background: #48B1F7; "></div>
-						<div class="color-selector" style=" background: #8DD7FA; "></div>
-						<div class="color-selector" style=" background: #C5F1FF; "></div>
-						<div class="color-selector" style=" background: #17A82F; "></div>
-						<div class="color-selector" style=" background: #2CD347; "></div>
-						<div class="color-selector" style=" background: #63F57B; "></div>
-						<div class="color-selector" style=" background: #99F6A8; "></div>
-						<div class="color-selector" style=" background: #FF8718; "></div>
-						<div class="color-selector" style=" background: #FFAC18; "></div>
-						<div class="color-selector" style=" background: #F7D757; "></div>
-						<div class="color-selector" style=" background: #FFF46F; "></div>
-						<div class="color-selector" style=" background: #DD0F0F; "></div>
-						<div class="color-selector" style=" background: #F14B4B; "></div>
-						<div class="color-selector" style=" background: #FF9494; "></div>
-						<div class="color-selector" style=" background: #FFBBBB; "></div>
+<?php
+	$bcscript = "";
+
+	foreach($colours as &$k)
+	{
+		echo "<div id='bg$k' class='color-selector' style=' background: #$k'></div>";
+		$fcscript .= "$('#bg$k').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { bg: '$k' }, dataType: 'json', success: function(data) { $('#backgroundColour').html(data.background_colour) } }); $('#modalCorBg').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
+	}
+?>
+
 					</div>
 				</div>
 			</div>
@@ -295,11 +288,12 @@ elseif(isset($_GET['fc']) && $_GET['fc'])
 	if($pnum > 1)
 	{
 		$fc = getCurrentFontColourName($_SESSION['user_id']);
+		$bg = getCurrentBackgroundColourName($_SESSION['user_id']);
 		echo <<<EOT
 			<div id="conf-odp" class="confOp" style="margin-bottom: 55px;" data-scrollreveal="enter bottom and move 100px over 1s">
 				<div class="confOp-title">Personalization options</div>
 				<p>Font color: <b id="fontColour">$fc</b> <span id="colorChangeFont">CHANGE COLOR</span></p>
-				<p>Background color: <b>White</b> <span id="colorChangeBg">CHANGE COLOR</span></p>
+				<p>Background color: <b id="backgroundColour">$bg</b> <span id="colorChangeBg">CHANGE COLOR</span></p>
 				<p>Font Size: <b>Normal</b><span id="tamFonteB">CHANGE SIZE</span></p>
 			</div>
 EOT;
