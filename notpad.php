@@ -2,6 +2,21 @@
 require_once("init.php");
 require_once("functions.php");
 session_start();
+
+$fc = '000';
+$bg = 'fff';
+$fs = '22';
+
+if(isset($_SESSION['user_id']))
+{
+	list ($num, $name, $price) = getUserPlan($_SESSION['user_id']);
+	if($name == "Pro")
+	{
+		$fc = getCurrentFontColour($_SESSION['user_id']);
+		$bg = getCurrentBackgroundColour($_SESSION['user_id']);
+		$fs = getCurrentFontSize($_SESSION['user_id']);
+	}
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -15,7 +30,9 @@ session_start();
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
-        <body id="pagNot">
+<?php
+        echo "<body id='pagNot' style='background-color:#$bg'>";
+?>
 		
 		<div class="erro">
 			<div class="recovery-center">
@@ -96,17 +113,7 @@ session_start();
 						<!-- Replace onClick #botao4 -->
 				</div>
 <?php
-	echo "<textarea id='textNote' name='content' spellcheck=false onchange='changed=true;'";
-	$style = "";
-	if(isset($_SESSION['user_id']))
-	{
-		$fc = getCurrentFontColour($_SESSION['user_id']);
-		$bg = getCurrentBackgroundColour($_SESSION['user_id']);
-		$fs = getCurrentFontSize($_SESSION['user_id']);
-		$style .= " style='color:#$fc;background-color:#$bg;font-size:${fs}px'";
-	}
-
-	echo "$style>";
+	echo "<textarea id='textNote' name='content' spellcheck=false onchange='changed=true;' style='color:#$fc;background-color:#$bg;font-size:${fs}px'>";
 ?>
 
 <?php
@@ -239,7 +246,6 @@ session_start();
 				};
 				function day() {
 					$("#top").css('background', '#4CAED3');
-					$("#pagNot").css('background', '#fff');
 <?php
 	if(!isset($_SESSION['user_id']))
 	{
@@ -247,6 +253,7 @@ session_start();
 		$bg = 'fff';
 	}
 
+	echo "$('#pagNot').css('background', '#$bg');\n";
 	echo "$('#textNote').css('background', '#$bg');\n";
 	echo "$('#textNote').css('color', '#$fc');\n";
 ?>

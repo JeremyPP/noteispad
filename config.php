@@ -190,12 +190,14 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 	foreach($font_sizes as $k => $v)
 	{
 		echo "<div id='fs$v' ";
+		$style = '';
 		//if($v == $my_font_size)
 		//{
 			//echo " class='tamSelected' ";
+			//$style = 'color:#4caed3';
 		//}
-		echo "style='font-size:" . $v . "px'>$k</div>";
-		$fcscript .= "$('#fs$v').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { fs: '$v' }, dataType: 'json', success: function(data) { $('#fontSize').html(data.font_size) } }); $('#modalTmFonte').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
+		echo "style='font-size:" . $v . "px;$style'>$k</div>";
+		$fcscript .= "$('#fs$v').click(function(){ $.ajax({ type: 'get', url: 'config.php', data: { fs: '$v' }, dataType: 'json', success: function(data) { $('#fontSize').html(data.font_size); } }); $('#modalTmFonte').attr('class', 'hidden'); $('#openb2').css('opacity', '1'); });\n";
 	}
 ?>
 				</div>
@@ -382,6 +384,7 @@ EOT;
 				});
 				
 				$( "#tamFonteB" ).click(function() {
+				  setSelected();
 				  $("#modalTmFonte").attr('class', 'visible');
 				  $("#openb2").css('opacity', '0');
 				});
@@ -411,6 +414,23 @@ EOT;
 				  $("#modaldelConta").attr('class', 'hidden');
 				  $("#openb2").css('opacity', '1');
 				});
+				function setSelected()
+				{
+					var currFS = $('#fontSize').html();
+					$('#tmFonte').children('div').each(function ()
+					{
+						if($(this).html() == currFS)
+						{
+							$(this).toggleClass('tamSelected');
+							$(this).css('color', '#4caed3');
+						}
+						else if($(this).hasClass('tamSelected'))
+						{
+							$(this).toggleClass('tamSelected');
+							$(this).css('color', '');
+						}
+					});
+				}
 			</script>
 		</body>
 </html>
