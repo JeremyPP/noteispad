@@ -42,7 +42,6 @@ if(!isset($_SESSION['user_id']))
 	$res = $mysql->query("select U.usernote_name, UL.usernote_text from usernote U, usernote_lines UL where U.user_id = $_SESSION[user_id] and UL.usernote_id = U.usernote_id and UL.usernote_seq = (select max(usernote_seq) from usernote_lines where usernote_id = U.usernote_id)");
 	if($res->num_rows)
 	{
-
 		$script = '';
 
 		for($i=0; $i < $res->num_rows; ++$i)
@@ -53,8 +52,9 @@ if(!isset($_SESSION['user_id']))
 			echo "<input type='hidden' name='code' value='$row->usernote_name'>";
 			echo '<div class="notaAllNota">';
 			echo "<div id='id-allNota$i'>";
-			$display_text = substr(trim($row->usernote_text), 0, 300);
+			$display_text = preg_replace('/[\r\n]+/', ' ', substr(trim($row->usernote_text), 0, 300));
 			$display_text .= '....';
+			$display_text = wordwrap($display_text);
 			echo "<input class='allNotaContTxtBtn' type='submit' value='$display_text'>";
 			echo '</form>';
 			echo '</div>';
@@ -69,7 +69,7 @@ if(!isset($_SESSION['user_id']))
 			$script .= '$( "#but-id' . $i . '").hover(' . "\n";
 			$script .= 'function() {' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
-			$script .= 'var div = $("<div class=\'allNotaContTxtBtn replacedNote\' id=\'id-allNota' . $i . '\'>' . $row->usernote_name . '</div>").hide();' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxtBtn replacedNote\' style=\'text-align:center;background:#add8e6;color:#ffffff\' id=\'id-allNota' . $i . '\'>' . $row->usernote_name . '</div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";
