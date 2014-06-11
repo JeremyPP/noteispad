@@ -48,16 +48,14 @@ if(!isset($_SESSION['user_id']))
 		{
 			$res->data_seek($i);
 			$row = $res->fetch_object();				
-			echo "<form method='post' action='notpad.php'>";
-			echo "<input type='hidden' name='code' value='$row->usernote_name'>";
 			echo '<div class="notaAllNota">';
-			echo "<div id='id-allNota$i'>";
+			echo "<a href='notpad.php?note=$row->usernote_name'>";
+			echo "<div class='allNotaContTxt' id='id-allNota$i'>";
 			$display_text = preg_replace('/[\r\n]+/', ' ', substr(trim($row->usernote_text), 0, 300));
 			$display_text .= '....';
-			$display_text = wordwrap($display_text);
-			echo "<input class='allNotaContTxtBtn' type='submit' value='$display_text'>";
-			echo '</form>';
+			echo $display_text;
 			echo '</div>';
+			echo '</a>';
 			echo "<div class='allNotaIcon' id='but-id$i'>";
 			echo '<center>';
 			echo '<img src="eye.png">';
@@ -69,14 +67,13 @@ if(!isset($_SESSION['user_id']))
 			$script .= '$( "#but-id' . $i . '").hover(' . "\n";
 			$script .= 'function() {' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
-			$script .= 'var div = $("<div class=\'allNotaContTxtBtn replacedNote\' style=\'text-align:center;background:#add8e6;color:#ffffff\' id=\'id-allNota' . $i . '\'>' . $row->usernote_name . '</div>").hide();' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxt replacedNote\' id=\'id-allNota' . $i . '\'>' . $row->usernote_name . '</div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";
 			$script .= '}, function() {' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
-			$eol = array("\r\n", "\n", "\r", "\r\l");
-			$script .= 'var div = $("<div id=\'id-allNota' . $i . '\'><input class=\'allNotaContTxtBtn\' value=\''  . str_replace($eol, "\\n", $display_text) . '\' type=\'submit\'></div>").hide();' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxt\' id=\'id-allNota' . $i . '\'>' . $display_text . '</div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";

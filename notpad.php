@@ -122,6 +122,11 @@ if(isset($_SESSION['user_id']))
 		$seq_sql = $_GET[page];
 		$code = $_SESSION[code];
 	}
+	elseif(isset($_GET['note']))
+	{
+		$seq_sql = '';	// Not used for usernotes
+		$code = $_GET['note'];
+	}
 	else
 	{
 		$seq_sql = "(select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)";
