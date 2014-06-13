@@ -55,8 +55,9 @@ if(isset($_GET['email']))
 					<span class="og-close3"></span>
 				</div>
 				<div id="contOverPlan">
-					<h1>Complete the information below</h1>
-					<h2>You chose the <span id="pname">PRO</span> plan for $<span id="pprice">0</span> per month</h2>
+					<h1>Sign up</h1>
+					<h2>You chose the <span id="pname">PRO</span> plan for <span style="color:#4A879E;">$</span><span id="pprice">0</span> per month.</h2>
+					<h3>Please fill in the information below to create your account:</h3>
 					<form name="dadosUser" id="dadosUser" action="me.php" method="post">
 						<input type="hidden" id="planno" name="planno" value="">
 						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" onChange="nameChanged = 1;" autofocus>
@@ -66,7 +67,7 @@ if(isset($_GET['email']))
 						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Invalid email!</div><br>
 						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2" onChange="passChanged=1;">
 						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Invalid password. Minimum of 6 characters.</div>
-						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -107px;margin-left: 345px;">
+						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -123px;margin-left: 345px;">
 						<div class="db-arrow-border"></div>
 						<div class="db-arrow"></div>
 						<div class="password-bubble-title"></div>
@@ -76,7 +77,7 @@ if(isset($_GET['email']))
 						</div>
 						</div>
 						<br>
-						<input type="submit" value="Proceed with billing" class="u-dS">
+						<input type="submit" value="Proceed with billing" class="u-dS" style="margin-top:20px;">
 					</form>
 				</div>
 			</div>
@@ -95,7 +96,7 @@ if(isset($_GET['email']))
 			</div>
 		</div>
 		<a href="../index.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
-			<h1 data-scrollreveal="enter top and move -200px over 1s">Choose your plan</h1>
+			<h1 id="titleplanpage" data-scrollreveal="enter top and move -200px over 1s">Choose your plan</h1>
 			<div id="priceCards">
 <?php
 	echo "\n<script>\n";
@@ -173,14 +174,17 @@ if(isset($_GET['email']))
 				$("#planno").val(ind);
 			}
 
-			$(".u-dI2").after("<div class='passwordInfo'><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div><div class='passwordDot'></div></div>");
+			$(".u-dI2").after("<div class='passwordInfo'><div class='passwordDot'>?</div></div>");
+			
 			$(".plan-button").click(function () {
 				$("#showmeOver").fadeIn();
 				$("#openb2").css({ opacity: 0 });
+				$("#titleplanpage").css({ opacity: 0 });
 			});
 			$("#closeOverPlan").click(function () {
 				$("#showmeOver").fadeOut();
 				$("#openb2").css({ opacity: 1 });
+				$("#titleplanpage").css({ opacity: 1 });
 			});
 			
 			$(".plan-button2").click(function () {

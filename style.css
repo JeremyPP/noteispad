@@ -614,8 +614,8 @@ input[type="checkbox"] {
 	background: rgba(1,1,1,.5);
 }
 #showme{
-	width: 95%;
-	height: 95%;
+	width: 800px;
+	height: 670px;
 	margin: auto;
 	top: 0;
 	bottom: 0;
@@ -699,12 +699,14 @@ input[type="checkbox"] {
 }
 #contOverPlan h2{
 		font-family: 'Open Sans', sans-serif;
-		color: #4A879E;
+		color: #70B3CC;
 		text-align: center;
-		font-size: 20px;
+		font-size: 25px;
 		font-weight: 800;
 		margin-top: -50px;
-		margin-bottom: 50px;
+}
+#pname, #pprice{
+	color: #4A879E;
 }
 #dadosUser{
 	width: 320px;
@@ -749,10 +751,20 @@ input[type="checkbox"] {
 	margin-top: -57px;
 }
 .passwordInfo .passwordDot{
-	height: 3px;
-	width: 4px;
+	height: 18px;
+	width: 18px;
 	margin: 2px;
-	background-color: #98C6E7;
+	border-radius: 50%;
+	background-color: #C5C5C5;
+	position: relative;
+	right: 14px;
+	text-align: center;
+	font-weight: 900;
+	font-family: sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	color: #fff;
+	cursor: default;
 }
 .db-password-bubble {
 	position: absolute;
@@ -2090,6 +2102,15 @@ input[type="checkbox"] {
 	#contOverPlan h2{
 		margin-top: -30px;
 		margin-bottom: 30px;
+	}
+	#contOverPlan h3{
+		font-family: 'Open Sans', sans-serif;
+		color: #969696;
+		text-align: center;
+		font-size: 20px;
+		font-weight: 800;
+		margin-top: 20px;
+		margin-bottom: 40px;
 	}
 	#novoPlano{
 		overflow: scroll;
