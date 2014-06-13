@@ -32,8 +32,7 @@ if(isset($_POST['email']))
 			<div class="recovery-center">
 				<h1>Thank you! :)</h1>
 				<h2>
-					A new password has been sent to your email. <br>
-					Don't forget to change it once logged by going to Settings > Change Password.
+					A link to reset your password has been sent to your email.
 				</h2>
 				<a href="/index.php" style="text-decoration: none;"><div id="voltar-pass-b">Ok</div></a>
 			</div>
@@ -47,11 +46,11 @@ if(isset($_POST['email']))
 				<a href="" style="text-decoration: none;"><div id="voltar-pass-er-b">Voltar</div></a>
 			</div>
 		</div>
-		<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
+		<a href="." style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
 		<h1 data-scrollreveal="enter top and move -200px over 1s">Recover password</h1>
-		<p style="margin-top: 40px; max-width: 750px;">If you are a registered user then new password will be sent to your email address. It is highly recommended that you change it once logged by going to "Settings".</p>
+		<p style="margin-top: 40px; max-width: 750px;">If you are a registered user, a link to reset your password will be sent to your email address.</p>
 		<form id="dadosUser" method="POST">
-			<input type="email" name="email" placeholder="Your email" class="u-dI" autofocus><br>
+			<input type="email" name="email" placeholder="Your email" class="u-dI" autofocus required><br>
 			<input type="submit" value="Send" class="recupPass">
 		</form>
         <script src="scrollReveal.js"></script>
