@@ -705,6 +705,15 @@ input[type="checkbox"] {
 		font-weight: 800;
 		margin-top: -50px;
 }
+#contOverPlan h3{
+		font-family: 'Open Sans', sans-serif;
+		color: #969696;
+		text-align: center;
+		font-size: 20px;
+		font-weight: 800;
+		margin-top: 20px;
+		margin-bottom: 40px;
+}
 #pname, #pprice{
 	color: #4A879E;
 }
@@ -2102,15 +2111,6 @@ input[type="checkbox"] {
 	#contOverPlan h2{
 		margin-top: -30px;
 		margin-bottom: 30px;
-	}
-	#contOverPlan h3{
-		font-family: 'Open Sans', sans-serif;
-		color: #969696;
-		text-align: center;
-		font-size: 20px;
-		font-weight: 800;
-		margin-top: 20px;
-		margin-bottom: 40px;
 	}
 	#novoPlano{
 		overflow: scroll;
