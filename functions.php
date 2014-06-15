@@ -254,18 +254,20 @@
     /**
     * Add new user
     * @param $name first name
-    * @param $password password (stored encrypted
+    * @param $password password (stored encrypted)
     * @param $email email address
+    * @param $plan plan id
+    * @param $trans_id PayPal transaction id
+    * @param $start_date
     * @return new user_id 
     */
-    function addUser($name, $password, $email, $plan)
+    function addUser($name, $password, $email, $plan, $tran_id, $start_date)
     {
 	$mysql = dbConnect('addUser');
 
 	$encpw = password_hash($password, PASSWORD_BCRYPT);
 
-// FOR NOW WE SET THE PAID DATE TO NOW
-	$res = $mysql->query("insert into users(user_name, email, password, plan_id, paid_date) values('$_POST[name]', '$_POST[email]', '$encpw', $plan, now())");
+	$res = $mysql->query("insert into users(user_name, email, password, plan_id, paid_date, payment_profile) values('$name', '$email', '$encpw', $plan, '$start_date', '$tran_id')");
 
 	return $mysql->insert_id;
     }
@@ -915,5 +917,19 @@ The NOT is PAD! team.";
 	}	
 
 	return $ret_arr;
+    }
+
+    /**
+    * Return paypal details as array
+    * @param none
+    * @return user, password and signature
+    */
+    function getPayPalMerchantDetails()
+    {
+	$mysql = dbConnect('getPayPalMerchantDetails');
+	$res = $mysql->query("select user, pwd, signature, sandbox from paypal");
+	$obj = $res->fetch_object();
+
+	return array ($obj->user, $obj->pwd, $obj->signature, $obj->sandbox);
     }
 ?>
