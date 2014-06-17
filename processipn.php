@@ -81,9 +81,9 @@ if(strcmp($res, "VERIFIED") == 0)
 	{
 		//$payment_amount = $_POST['mc_gross'];
 		// Check that the amount agrees with the plan amount and the currency is USD
-		$payment_amount = $_POST['mc_gross'];
-		$curr_code = $_POST['mc_currency'];
-		$profile_id = $_POST['recurring_profile_id'];
+		$payment_amount = $_POST['amount'];
+		$curr_code = $_POST['currency_code'];
+		$profile_id = $_POST['recurring_payment_id'];
 		if(($curr_code == 'USD') && (isCorrectPlan($profile_id, $payment_amount)))
 		{
 			updateDate($profile_id);
