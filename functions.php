@@ -932,4 +932,29 @@ The NOT is PAD! team.";
 
 	return array ($obj->user, $obj->pwd, $obj->signature, $obj->sandbox);
     }
+
+    /**
+    * Check that plan amount agrees with the plan subscribed to
+    * @param profile, amount
+    * @return true if it's good, false otherwise
+    */
+    function isCorrectPlan($profile, $amount)
+    {
+	$mysql = dbConnect('isCorrectPlan');
+	$res = $mysql->query("select P.cost from plans P, users U where U.payment_profile = '$profile' and P.plan_id = U.plan_id");
+	$obj = $res->fetch_object();
+
+	return ($obj->cost == $amount);
+    }
+
+    /**
+    * Update the date on a user record
+    * @param payment_profile
+    * @return none
+    */
+    function updateDate($profile)
+    {
+	$mysql = dbConnect('updateDate');
+	$res = $mysql->query("update users set paid_date = now() where payment_profile = '$profile'");
+    }
 ?>

@@ -9,4 +9,6 @@ if($mysql->connect_errno)
 {
 	echo "Failed to connect to db: " . $mysqli->connect_error;
 }
+
+date_default_timezone_set('UTC');
 ?>

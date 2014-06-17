@@ -26,6 +26,22 @@ require_once("functions.php");
     }
 
     /**
+    * Make DoExpressCheckoutPayment call
+    * @param payer id, token, amount
+    * @return Token
+    */
+    function DoExpressCheckoutPayment($payerid, $token, $amt)
+    {
+	$callstr = "&TOKEN=" . urlencode($token);
+	$callstr .= "&PAYERID=" . $payerid;
+	$callstr .= "&PAYMENTREQUEST_0_PAYMENTACTION=Sale";
+	$callstr .= "&PAYMENTREQUEST_0_AMT=" . $amt;
+
+	$res = callPP('DoExpressCheckoutPayment', $callstr);
+	return $res;
+    }
+
+    /**
     * Make CreateRecurringPaymentsProfile call
     * @param token
     * @return Results array
