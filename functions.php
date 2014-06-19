@@ -957,4 +957,91 @@ The NOT is PAD! team.";
 	$mysql = dbConnect('updateDate');
 	$res = $mysql->query("update users set paid_date = now() where payment_profile = '$profile'");
     }
+
+    /**
+    * Return payment profile id for user
+    * @param $id user id
+    * @return payment profile
+    */
+    function getPaymentProfile($id)
+    {
+	$mysql = dbConnect('getPaymentProfile');
+
+	$res = $mysql->query("select payment_profile from users where user_id = $id");
+	$obj = $res->fetch_object();
+
+	return $obj->payment_profile;
+    }
+
+    /**
+    * Check that we've had a payment response from PayPal
+    * @param user id
+    * @return True if it's an active plan, false otherwise
+    */
+    function isActivePlan($id)
+    {
+	$mysql = dbConnect('isActivePlan');
+	$res = $mysql->query("select paid_date from users where user_id = $id");
+	$obj = $res->fetch_object();
+
+	return ($obj->paid_date != '0000-00-00 00:00:00');
+    }
+
+    /**
+    * Get note counts
+    * @param none
+    * @return total usernotes, total fastnotes, live fastnotes
+    */
+    function getNoteStats()
+    {
+	$mysql = dbConnect('getNoteStats');
+	$res = $mysql->query("select count(usernote_id) as count from usernote");
+	$obj = $res->fetch_object();
+	$totu = $obj->count;
+
+	$res = $mysql->query("select count(fnote_id) as count from fastnote");
+	$obj = $res->fetch_object();
+	$lfn = $obj->count;
+
+	$res = $mysql->query("select count(fnote_name) as count from fastnote_archive");
+	$obj = $res->fetch_object();
+	$afn = $obj->count;
+
+	return array ($totu, $afn, $lfn);
+
+    }
+
+    /**
+    * Convert a big disk size number into a more readable one
+    * @param byte size
+    * @return Value with size extension
+    */
+    function displaySize($bytes)
+    {
+	$sv = array('', 'KB', 'MB', 'GB', 'TB', 'PB');
+	$i = 0;
+	while($bytes >= 1024)
+	{
+		$bytes /= 1024;
+		++$i;
+	}
+
+	return (sprintf("%.2f", $bytes) . " " . $sv[$i]);
+    }
+
+    /**
+    * Return a hash of plan names and users with that plan
+    * @param none
+    * @return hash of plan names and user counts
+    */
+    function getUserCounts()
+    {
+	$mysql = dbConnect('getUserCounts');
+	$res = $mysql->query("select P.name, count(U.plan_id) as count from plans P left join users U on (U.plan_id = P.plan_id) group by U.plan_id");
+	while($obj = $res->fetch_object())
+	{
+		$ret[$obj->name] = $obj->count;
+	}
+	return $ret;
+    }
 ?>

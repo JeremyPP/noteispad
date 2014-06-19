@@ -1,1 +1,9 @@
 ErrorDocument 404 /404.php
+
+AuthUserFile /home/www/notispad/.htpasswd
+AuthType Basic
+AuthName "notispad admin"
+
+<Files "admin.php">
+  Require valid-user
+<Files>

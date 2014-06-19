@@ -3,30 +3,45 @@ require_once('functions.php');
 require_once('PPfunctions.php');
 session_start();
 
-if(isset($_REQUEST['token']))
+if(isset($_GET['token']))
 {
-	if(isset($_REQUEST['PayerID']))
+	if(isset($_GET['PayerID']))
 	{	
 		$_SESSION['pp_token'] = $_REQUEST['token'];
 		$_SESSION['pp_payerid'] = $_REQUEST['PayerID'];
 		$res = CreateRecurringPaymentsProfile($_REQUEST['token']);
-//		if(isset($res['ACK']) && ($res['ACK'] == 'SUCCESS'))
-//		{
-			// Do we need to do DoExpressCheckoutPayment?
-//			$res = DoExpressCheckoutPayment($_SESSION['pp_payerid'], $_SESSION['pp_token'], $_SESSION['pp_amt']);
-			if(isset($res['ACK']) && ($res == 'SUCCESS'))
+		if(isset($res['ACK']) && ($res['ACK'] == 'SUCCESS'))
+		{
+			if(!isset($_GET['config']))
 			{
-				$id = addUser($_SESSION['preauth_name'], $_SESSION['preauth_password'], $_SESSION['preauth_email'], $_SESSION['preauth_planno'], $_SESSION['pp_payerid'], $_SESSION['preauth_date']);
+				if($res['PROFILESTATUS'] == "ActiveProfile")
+				{
+					$start_date = $_SESSION['preauth_date'];
+				}
+				else
+				{
+					// Profile is Pending so wait for the IPN to trigger the date
+					$start_date = "0000-00-00 00:00:00";
+				}
+
+				$id = addUser($_SESSION['preauth_name'], $_SESSION['preauth_password'], $_SESSION['preauth_email'], $_SESSION['preauth_planno'], $res['PROFILEID'], $start_date);
 				$_SESSION['user_id'] = $id;
 				if(isset($_SESSION['remember_me']))
 				{
 					addAuth($id);
 				}
 
-				header("Location: me.php");
-				exit();
+				$location = 'me.php';
 			}
-//		}
+			else
+			{
+				$_SESSION['plan_change'] = true;
+				$location = 'config.php';
+			}
+
+			header("Location: $location");
+			exit();
+		}
 	}
 }
 

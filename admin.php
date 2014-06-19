@@ -1,4 +1,9 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+require_once("functions.php");
+session_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 	<head>
@@ -20,9 +25,12 @@
 			</p>
 			<div id="basic-info">
 				<h6>General informations</h6>
-				<div>Total of notes created by users: <span>1542</span></div>
-				<div>Total of Fast Notes created ever: <span>2541</span></div>
-				<div>Total of Fast Notes available: <span>334</span></div>
+<?php
+	list ($tot_usr, $tot_fn, $live_fn) = getNoteStats();
+				echo "<div>Total usernotes created: <span>$tot_usr</span></div>\n";
+				echo "<div>Total of Fast Notes created ever: <span>$tot_fn</span></div>\n";
+				echo "<div>Total of live Fast Notes: <span>$live_fn</span></div>\n";
+?>
 				<br>
 				<div>Users income per month: <span>2907</span></div>
 				<div>Total users income: <span>7844</span></div>
@@ -31,24 +39,54 @@
 				<h6>Server</h6>
 				<div id="bginfoserver">
 					<div>Memory:</div>
-					<h3>17%</h3>
-					<h4>5.1GB of 30GB</h4>
+<?php
+	// Assume that we're interested in the total memory used figure
+	$fh = fopen('/proc/meminfo', 'r');
+	while($line = fgets($fh))
+	{
+		$lp = array();
+		if(preg_match('/^MemTotal:\s+(\d+)\skB$/', $line, $lp))
+		{
+			$totmem = $lp[1];
+		}
+		elseif(preg_match('/^MemFree:\s+(\d+)\skB$/', $line, $lp))
+		{
+			$freemem = $lp[1];
+		}
+	}
+
+	fclose($fh);
+
+	$pcnt = sprintf("%.2f", (($totmem-$freemem)/$totmem)*100);
+					echo "<h3>" . $pcnt . "%</h3>\n";
+
+	$ds = displaySize(disk_total_space("/home/www/noteispad"));
+	$fs = displaySize(disk_free_space("/home/www/noteispad"));
+					echo "<h4>" . $fs . " of " . $ds . "</h4>\n";
+?>
 				</div>
 			</div>
 			<div id="usuarios-info">
 				<h6>Users</h6>
-				<div>Number of users Basic plan:</div>
-				<h3>152</h3>
-				<br>
-				<div>Number of users Pro plan:</div>
-				<h3>247</h3>
-				<br>
-				<div>Number of users Premium plan:</div>
-				<h3>20</h3>
-				<br>
+<?php
+	$plans = array();
+	$plans = getUserCounts();
+	$total = 0;
+	foreach($plans as $k => $v)
+	{
+				echo "<div>Number of users " . $k . " plan:</div>\n";
+				echo "<h3>$v</h3>\n";
+				echo "<br>\n";
+				$total += $v;
+	}
+?>
 				<div id="separausersinfo"></div>
 				<div>Total users:</div>
-				<h3 style="color: #4CAED3;background: #fff;">419</h3>
+				<h3 style="color: #4CAED3;background: #fff;">
+<?php
+	echo $total;
+?>
+				</h3>
 				<br>
 			</div>
 			<div id="lista-usuarios">Download list of all users</div>

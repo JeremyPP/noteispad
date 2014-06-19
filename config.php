@@ -1,6 +1,7 @@
 ﻿<?php
 require_once("init.php");
 require_once("functions.php");
+require_once("PPfunctions.php");
 session_start();
 
 if(!isset($_SESSION['user_id']))
@@ -11,13 +12,29 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 {
 	if($_GET['opt'] == 'd')
 	{
+		cancelPayments($_SESSION['user_id']);
 		deleteUser($_SESSION['user_id']);
+		unset($_SESSION['user_id']);
 		header("Location: index.php");
 	}
 	else
 	{
-		updatePlan($_SESSION['user_id'], $_GET['opt']);
+		if(isActivePlan($_SESSION['user_id']))
+		{
+			cancelPayments($_SESSION['user_id']);
+			updatePayments($_SESSION['user_id'], $_GET['opt']);
+		}
+		else
+		{
+			$alert_scr = 'alert("Error message here: Cannot change plan until PayPal processing is complete");';
+		}
 	}
+}
+elseif(isset($_SESSION['plan_change']))
+{
+	updatePlan($_SESSION['user_id'], $_SESSION['plan_change_plan']);
+	unset($_SESSION['plan_change']);
+	unset($_SESSION['plan_change_plan']);
 }
 elseif(isset($_GET['fc']) && $_GET['fc'])
 {
@@ -318,6 +335,12 @@ EOT;
 	}
 
 	echo "<script>$fcscript</script>\n";
+?>
+<?php
+	if(isset($alert_scr))
+	{
+		echo "<script>$alert_scr</script>\n";
+	}
 ?>
 			
 			<script src="scrollReveal.js"></script>
