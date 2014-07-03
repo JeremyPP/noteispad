@@ -68,6 +68,7 @@ elseif(isset($_GET['password']))
 					<h3>Please fill in the information below to create your account:</h3>
 					<form name="dadosUser" id="dadosUser" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
 						<input type="hidden" id="planno" name="planno" value="">
+<<<<<<< HEAD
 						<input type="hidden" name="cmd" value="_xclick-subscriptions">
 						<input type="hidden" name="business" value="notispad@gmail.com">
 						<input type="hidden" id="item_name" name="item_name" value="">
@@ -77,12 +78,12 @@ elseif(isset($_GET['password']))
 						<input type="hidden" name="src" value="1">
 						<input type="hidden" name="no_shipping" value="1">
 						<input type="hidden" id="custom" name="custom" value="">
-						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" onChange="nameChanged = 1;" autofocus>
+						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" onChange="nameChanged = 1;" autofocus required>
 						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Please supply one name</div><br>
-						<input type="text" name="email" id="email-cc" placeholder="Your email" class="u-dI" onChange="emailChanged=1;">
+						<input type="text" name="email" id="email-cc" placeholder="Your email" class="u-dI" onChange="emailChanged=1;" required>
 						<div class="form-error-conf" id="email-error" style="margin-top:-10px;margin-bottom:0px;">This email address is already registered!</div>
 						<div class="form-error-conf" id="email-error2" style="margin-top:-10px;margin-bottom:0px;">Invalid email!</div><br>
-						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2" onChange="passChanged=1;">
+						<input type="password" name="password" id="pass-cc" placeholder="Your password" class="u-dI u-dI2" onChange="passChanged=1;" required>
 						<div class="form-error-conf" id="pass-error" style="margin-top:-10px;margin-bottom:0px;">Invalid password. Minimum of 6 characters.</div>
 						<div class="db-password-bubble db-left-arrow" style="width: 160px;position: absolute;display: none;margin-top: -123px;margin-left: 345px;">
 						<div class="db-arrow-border"></div>
