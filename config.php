@@ -7,6 +7,7 @@ session_start();
 if(!isset($_SESSION['user_id']))
 {
 	header("Location: .");
+	exit();
 }
 elseif(isset($_GET['opt']) && $_GET['opt'])
 {
@@ -21,7 +22,6 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 	{
 		if(isActivePlan($_SESSION['user_id']))
 		{
-			cancelPayments($_SESSION['user_id']);
 			updatePayments($_SESSION['user_id'], $_GET['opt']);
 		}
 		else

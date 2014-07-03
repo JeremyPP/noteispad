@@ -9,7 +9,7 @@ if(isset($_POST['email']))
 	{
 		$key = generateKey();
 		$subject = "Password reset";
-		$text = "Hello from notispad\r\nA request has been made to reset your password\r\nIf you did not make this request then please ignore this email, otherwise go to this url and reset your password:\r\nhttp://pbembid.com:8888/reset.php?$key\r\nPlease note that this url is only valid for 24 hours and if you have any questions about this email then please contact us at info@notispad.com\r\n";
+		$text = "Hello from notispad\r\nA request has been made to reset your password\r\nIf you did not make this request then please ignore this email, otherwise go to this url and reset your password:\r\nhttp://notispad.selfip.com/reset.php?$key\r\nPlease note that this url is only valid for 24 hours and if you have any questions about this email then please contact us at info@notispad.com\r\n";
 		mail($_POST['email'], $subject, $text, null, '-fdo-not-reply@notispad.com');
 		updateReset($uid, $key);
 	}

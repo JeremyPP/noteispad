@@ -55,22 +55,22 @@ end"))
 	die("Failed to create procedure: " . $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS plans(plan_id INT not null auto_increment, name VARCHAR(256) not null, cost decimal(5,2) not null, notes_per_month smallint not null, primary key(plan_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS plans(plan_id INT not null, name VARCHAR(256) not null, cost decimal(5,2) not null, notes_per_month smallint not null, paypal_code varchar(255) not null, primary key(plan_id))"))
 {
 	die("Failed to create plans: " . $mysql->error);
 }
 
-$res = $mysql->query("select * from plans");
-
-if(!$res->num_rows)
+if(!$mysql->query("delete from plans"))
 {
-	if(!$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Basic', 2, 20)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Pro', 5, 100)") || !$mysql->query("INSERT into plans(name, cost, notes_per_month) values('Premium', 10, 500)"))
-	{
-		die("Failed to populate plans: " . $mysql->error);
-	}
+	die("Failed to clear plans: " . $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '000', background_colour char(7) not null default 'fff', font_size smallint not null default 22, paid_date timestamp not null default '0000-00-00 00:00:00', payment_profile varchar(255) default null, auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
+if(!$mysql->query("INSERT into plans(plan_id, name, cost, notes_per_month) values(1, 'Basic', 2, 20)") || !$mysql->query("INSERT into plans(plan_id, name, cost, notes_per_month) values(2,'Pro', 5, 100)") || !$mysql->query("INSERT into plans(plan_id, name, cost, notes_per_month) values(3, 'Premium', 10, 500)"))
+{
+	die("Failed to populate plans: " . $mysql->error);
+}
+
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '000', background_colour char(7) not null default 'fff', font_size smallint not null default 22, payment_date timestamp not null default '0000-00-00 00:00:00', subscr_id varchar(255) default null, payer_id varchar(255) default null, auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
 {
 	die("Failed to create users: " . $mysql->error);
 }
@@ -149,5 +149,15 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS paypal(user varchar(255) NOT NULL,
 }
 
 $mysql->query("delete from paypal");
-$mysql->query("insert into paypal values('notispad_api1.gmail.com', '1402489348', 'AFcWxV21C7fd0v3bYYYRCpSSRl31Ab9.jE5LVWPHdMnGj7Nw.cv6nqr6')");
+$mysql->query("insert into paypal values('notispad_api1.gmail.com', '1402489348', 'AFcWxV21C7fd0v3bYYYRCpSSRl31Ab9.jE5LVWPHdMnGj7Nw.cv6nqr6', true)");
+
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS ticket(token varchar(100) NOT NULL, name varchar(255) default null, pwd varchar(255) default null, email varchar(255) default null, planno int default null, subscr_id varchar(255) default null, processed boolean not null default false, primary key(token))"))
+{
+	die("Failed to create ticket: " . $mysql->error);
+}
+
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS paypal_transactions(txn_id varchar(100) NOT NULL, date_done timestamp default now(), primary key(txn_id))"))
+{
+	die("Failed to create ticket: " . $mysql->error);
+}
 ?>

@@ -5,42 +5,6 @@ require_once("PPfunctions.php");
 
 session_start();
 
-if(isset($_POST['planno']))
-{
-	// We're adding a new user
-	if(checkUser($_POST['email']))
-	{
-		// User already exists
-		$_SESSION['error'] = "erro14();";
-	}
-	else
-	{
-		$_SESSION['preauth_name'] = $_POST['name'];
-		$_SESSION['preauth_password'] = $_POST['password'];
-		$_SESSION['preauth_email'] = $_POST['email'];
-		$_SESSION['preauth_planno'] = $_POST['planno'];
-		if(isset($_POST['remember_me']))
-		{
-			$_SESSION['remember_me'] = 1;
-		}
-
-		// Paypal processing....
-		// Set up payment authorisation
-		list ($title, $price, $notes) = getPlan($_POST['planno']);
-		$desc = "NotIsPad $title";
-
-		$cancelUrl = 'http://pbembid.com:8888';
-		$returnUrl = 'http://pbembid.com:8888/processpayment.php';
-
-		$ret = SetExpressCheckout($desc, $cancelUrl, $returnUrl, $_POST['email'], $price);
-		// Check that we're successful and call with token if we are
-		if(isset($ret['ACK']) && ($ret['ACK'] == "SUCCESS"))
-		{
-			redirectToPayPal($ret['TOKEN']);
-		}
-		exit();
-	}
-}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -115,6 +79,7 @@ if(isset($_SESSION['user_id']))
 else
 {
 	header("Location: index.php");
+	exit();
 }
 ?>
 				<a href="minhasnotas.php" class="nemuListProfLink">

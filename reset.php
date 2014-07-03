@@ -196,7 +196,7 @@ else
 				<h2>
 					Sorry, it seems that this link has expired. Please try again.
 				</h2>
-				<a href="http://pbembid.com:8888/forgot.php" style="text-decoration: none;"><div id="voltar-pass-er-b">Ok</div></a>
+				<a href="http://notispad.selfip.com/forgot.php" style="text-decoration: none;"><div id="voltar-pass-er-b">Ok</div></a>
 			</div>
 		</div>
 		<div id="recoverok">

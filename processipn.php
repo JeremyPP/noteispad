@@ -1,8 +1,10 @@
 <?php
 require_once("init.php");
 require_once("functions.php");
+require_once("PPfunctions.php");
 
 // STEP 1: read POST data
+error_log(">>>>>processipn.php");
 foreach ($_POST as $k => $v)
 {
 	error_log(">>>$k=$v");
@@ -59,7 +61,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 // please download 'cacert.pem' from "http://curl.haxx.se/docs/caextract.html" and set 
 // the directory path of the certificate as shown below:
 // curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
-if(!($res = curl_exec($ch))) 
+if(!($ret = curl_exec($ch))) 
 {
 	// error_log("Got " . curl_error($ch) . " when processing IPN data");
 	curl_close($ch);
@@ -68,34 +70,96 @@ if(!($res = curl_exec($ch)))
 
 curl_close($ch);
 
-if(strcmp($res, "VERIFIED") == 0) 
+if(strcmp($ret, "VERIFIED") == 0) 
 {
-	// The IPN is verified, process it:
-	// check whether the payment_status is Completed
-	// check that txn_id has not been previously processed
-	// check that receiver_email is your Primary PayPal email
-	// check that payment_amount/payment_currency are correct
-	// process the notification
+	$res = $_POST;	// Make it simpler to copy code from processpdt to processipn
 
-	if(isset($_POST['payment_status']) && (strtoupper($_POST['payment_status']) == 'COMPLETED'))
+	// First thing to check is that this really is for us
+	if($res['receiver_email'] != 'notispad@gmail.com')
 	{
-		//$payment_amount = $_POST['mc_gross'];
-		// Check that the amount agrees with the plan amount and the currency is USD
-		$payment_amount = $_POST['amount'];
-		$curr_code = $_POST['currency_code'];
-		$profile_id = $_POST['recurring_payment_id'];
-		if(($curr_code == 'USD') && (isCorrectPlan($profile_id, $payment_amount)))
+		error_log(">>>>INVALID RECEIVER_EMAIL: $res[receiver_email]");
+		exit();
+	}
+
+	// The IPN is verified, process it:
+
+	// We could be here for one of the following reasons:
+	// It's a new user (no email registered yet) so setup the whole thing (custom[0] is 'new')
+	// It's an existing user who has paid a subscription (custom[0] is set but already processed)
+	// It's an existing user who has paid a subscription after a plan change (custom[0] is 'update')
+	// It's a cancellation
+	// We don't process subscr_signup (at the moment)
+
+	if(($res['txn_type'] == 'subscr_payment') && isset($res['payment_status']) && ($res['payment_status'] == 'Completed'))
+	{
+		if(isAlreadyDone($res['txn_id']))
 		{
-			updateDate($profile_id);
-		}
-		else
-		{
-			error_log(">>>VALID but wrong: $curr_code $payment_amout, $profile_id");
+			// This has already been done by pdt so exit
+error_log(">>>>>>>>>>This has shown as already done");
 			exit();
 		}
+		
+		$already = isTicketProcessed($res['custom']);
+		if($already == 1)
+		{
+			$amount = $res['mc_gross'];
+			$curr = $res['mc_currency'];
+			
+			// Make sure that the currency is correct and that the plan amount is valid
+			if(($curr == 'USD') && (isCorrectPlan($res['subscr_id'], $amount)))
+			{
+				updateDate($res['subscr_id']);
+				// I know it's alrady closed - I want the txn_id storing
+				closeTicket($res['custom'], $res['txn_id']);
+			}
+			else
+			{
+				error_log(">>>$res[payer_id]: INVALID PLAN PAYMENT OF $curr $amount");
+			}
+		}
+		elseif(($already == 0) && (substr($res['$custom'],0,1) == 'U'))
+		{
+			$amount = $res['mc_gross'];
+			$curr = $res['mc_currency'];
+			$id = getUserByPayerAndSubscription($res['payer_id'], processTicket($res['custom']));
+			// We need to change the plan_id, subscr_id and payment_date
+			// Make sure that the currency is valid
+			if($curr == 'USD')
+			{
+				cancelPayments($id);	// Cancel the existing plan
+				changePlan($id, $res['subscr_id'], $res['payment_date'], $amount);
+				closeTicket($res['custom'], $res['txn_id']);
+				exit();
+			}
+			else
+			{
+				error_log(">>>$res[payer_id]: INVALID CURRENCY $curr");
+			}
+		}
+		elseif(($already == 0) && (substr($res['custom'],0,1) == 'N'))
+		{
+			// New user - don't add if pdt has already done it
+			list ($name, $passwd, $email, $planno) = processTicket($res['custom']);
+			if(!checkUser($email))
+			{
+				addUser($name, $passwd, $email, $planno, $res['subscr_id'], $res['payer_id']);
+				closeTicket($res['custom'], $res['txn_id']);
+			}
+		}
+
+		exit();
 	}
-} 
-elseif($res == "INVALID")
+	elseif($res['txn_type'] == 'subscr_cancel')
+	{
+		//cancelSubscription($res['subscr_id']);
+		exit();
+	}
+	else
+	{
+		// Something went wrong so redirect to index.php
+	}
+}
+elseif($ret == "INVALID")
 {
 	// IPN invalid, log for manual investigation
 	error_log(">>>INVALID: $curr_code $payment_amout, $profile_id");

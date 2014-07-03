@@ -250,7 +250,17 @@
 
 	return $uid;
     }
-	
+
+    /**
+    * encrypt password
+    * @param password in plaintext
+    * @return encrypted password
+    */
+    function encryptPassword($password)
+    {
+	return password_hash($password, PASSWORD_BCRYPT);
+    }
+
     /**
     * Add new user
     * @param $name first name
@@ -258,16 +268,19 @@
     * @param $email email address
     * @param $plan plan id
     * @param $trans_id PayPal transaction id
+    * @param $payer_id PayPal transaction id
     * @param $start_date
+    * @param $has_tz if start date has time zone
     * @return new user_id 
     */
-    function addUser($name, $password, $email, $plan, $tran_id, $start_date)
+    function addUser($name, $password, $email, $plan, $tran_id, $payer_id)
     {
 	$mysql = dbConnect('addUser');
 
-	$encpw = password_hash($password, PASSWORD_BCRYPT);
-
-	$res = $mysql->query("insert into users(user_name, email, password, plan_id, paid_date, payment_profile) values('$name', '$email', '$encpw', $plan, '$start_date', '$tran_id')");
+	// Start date is always today at 1 second past midnight UTC
+	$start_date = gmdate('Y-m-d 00:00:01');
+	
+	$res = $mysql->query("insert into users(user_name, email, password, plan_id, payment_date, subscr_id, payer_id) values('$name', '$email', '$password', $plan, '$start_date', '$tran_id', '$payer_id')");
 
 	return $mysql->insert_id;
     }
@@ -357,7 +370,7 @@
     {
 	$mysql = dbConnect('getNotesUsed');
 
-	$res = $mysql->query("select count(UN.usernote_id) as ncount from usernote UN, users U where UN.user_id = $id and U.user_id = UN.user_id and usernote_time between U.paid_date and date_sub(date_add(U.paid_date, interval 1 month), interval 1 day)");
+	$res = $mysql->query("select count(UN.usernote_id) as ncount from usernote UN, users U where UN.user_id = $id and U.user_id = UN.user_id and usernote_time between U.payment_date and date_sub(date_add(U.payment_date, interval 1 month), interval 1 day)");
 	$obj = $res->fetch_object();
 
 	return $obj->ncount;
@@ -628,7 +641,7 @@ The NOT is PAD! team.";
     function getTimeLeft($id)
     {
 	$mysql = dbConnect('getTimeLeft');
-	$res = $mysql->query("select timediff(date_sub(date_add(paid_date, interval 1 month), interval 1 day), now()) as delta from users where user_id = $id");
+	$res = $mysql->query("select timediff(date_sub(date_add(payment_date, interval 1 month), interval 1 day), now()) as delta from users where user_id = $id");
 	$obj = $res->fetch_object();
 
 	$date_parts = explode(':', $obj->delta);
@@ -668,12 +681,12 @@ The NOT is PAD! team.";
 
     /**
     * Generate a 100 byte random key
-    * @params none
+    * @params optional length (returns 100 if not given)
     * @return key
     */
-    function generateKey()
+    function generateKey($len = 100)
     {
-	return bin2hex(mcrypt_create_iv(100,MCRYPT_DEV_URANDOM));
+	return bin2hex(mcrypt_create_iv($len, MCRYPT_DEV_URANDOM));
     }
 
     /**
@@ -941,7 +954,7 @@ The NOT is PAD! team.";
     function isCorrectPlan($profile, $amount)
     {
 	$mysql = dbConnect('isCorrectPlan');
-	$res = $mysql->query("select P.cost from plans P, users U where U.payment_profile = '$profile' and P.plan_id = U.plan_id");
+	$res = $mysql->query("select P.cost from plans P, users U where U.subscr_id = '$profile' and P.plan_id = U.plan_id");
 	$obj = $res->fetch_object();
 
 	return ($obj->cost == $amount);
@@ -949,13 +962,14 @@ The NOT is PAD! team.";
 
     /**
     * Update the date on a user record
-    * @param payment_profile
+    * @param subscr_id
     * @return none
     */
     function updateDate($profile)
     {
 	$mysql = dbConnect('updateDate');
-	$res = $mysql->query("update users set paid_date = now() where payment_profile = '$profile'");
+	$start_date = gmdate('Y-m-d 00:00:01');
+	$res = $mysql->query("update users set payment_date = '$start_date' where subscr_id = '$profile'");
     }
 
     /**
@@ -967,10 +981,10 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('getPaymentProfile');
 
-	$res = $mysql->query("select payment_profile from users where user_id = $id");
+	$res = $mysql->query("select subscr_id from users where user_id = $id");
 	$obj = $res->fetch_object();
 
-	return $obj->payment_profile;
+	return $obj->subscr_id;
     }
 
     /**
@@ -981,10 +995,10 @@ The NOT is PAD! team.";
     function isActivePlan($id)
     {
 	$mysql = dbConnect('isActivePlan');
-	$res = $mysql->query("select paid_date from users where user_id = $id");
+	$res = $mysql->query("select payment_date from users where user_id = $id");
 	$obj = $res->fetch_object();
 
-	return ($obj->paid_date != '0000-00-00 00:00:00');
+	return ($obj->payment_date != '0000-00-00 00:00:00');
     }
 
     /**
@@ -1043,5 +1057,180 @@ The NOT is PAD! team.";
 		$ret[$obj->name] = $obj->count;
 	}
 	return $ret;
+    }
+
+    /**
+    * Cancel subscription (null the subscr_id and set the payment_date to 0000-00-00 00:00:00)
+    * @param subscr_id
+    * @return none
+    */
+    function cancelSubscription($pp)
+    {
+	$mysql = dbConnect('cancelSubscription');
+	$mysql->query("update users set subscr_id = null, payment_date = '0000-00-00 00:00:00' where subscr_id = '$pp'");
+    }
+
+    /**
+    * Change the plan details for an existing user
+    * @param user id, payment plan, date and amount
+    * @return none
+    */
+    function changePlan($id, $pp, $date, $amount)
+    {
+	$mysql = dbConnect('changePlan');
+	// Get planno using the amount
+	$res = $mysql->query("select plan_id from plans where cost = $amount");
+	if($res->num_rows)
+	{
+		$start_date = gmdate('Y-m-d 00:00:01');
+		$obj = $res->fetch_object();
+		$planno = $obj->plan_id;
+
+		$mysql->query("update users set subscr_id = '$pp', payment_date = '$start_date', plan_id = $planno where user_id = $id");
+	}
+	else
+	{
+		error_log(">>>>changePlan: Invalid plan amount requested: $amount");
+	}
+    }
+
+    /**
+    * Get the current subscriber id for a user_id
+    * @param user_id
+    * @return subscr_id
+    */
+    function getSubscrId($id)
+    {
+	$mysql = dbConnect('getSubscrId');
+	$res = $mysql->query("select subscr_id from users where user_id = $id");
+
+	$obj = $res->fetch_object();
+	return $obj->subscr_id;
+    }
+
+    /**
+    * Get the user_id which has the payer_id and subscription code
+    * @param payer_id, payment_plan
+    * @return user_id or 0 if not in the table
+    */
+    function getUserByPayerAndSubscription($pid, $pp)
+    {
+	$mysql = dbConnect('getSubscriberByPayer');
+
+	$res = $mysql->query("select user_id from users where payer_id = '$pid' and subscr_id = '$pp'");
+	if($res->num_rows)
+	{
+		$obj = $res->fetch_object();
+		$uid = $obj->user_id;
+	}
+	else
+	{
+		$uid = 0;
+	}
+
+	return $uid;
+    }
+
+    /**
+    * Check that the details on the table haven't already been processed
+    * @param paypal transaction id
+    * @return true if already done, false otherwise
+    */
+    function isAlreadyDone($txn_id)
+    {
+	$mysql = dbConnect('isAlreadyDone');
+
+	$res = $mysql->query("select count(txn_id) as tcount from paypal_transactions where txn_id = '$txn_id'");
+
+	$obj = $res->fetch_object();
+	return $obj->tcount;
+    }
+
+    /**
+    * Create a new ticket
+    * @param name, email, plan number, encrypted password
+    * @return ticket
+    */
+    function createNewTicket($name, $email, $plan, $passwd)
+    {
+	$mysql = dbConnect('createNewTicket');
+	$key = 'N' . generateKey(40);
+	$res = $mysql->query("insert into ticket(token, name, pwd, email, planno) values('$key', '$name', '$passwd', '$email', $plan)");
+
+	return $key;
+    }
+
+    /**
+    * Create an update ticket
+    * @param subscriber id
+    * @return ticket
+    */
+    function createUpdateTicket($subscr_id)
+    {
+	$mysql = dbConnect('createUpdateTicket');
+	$key = 'U' . generateKey(40);
+	$res = $mysql->query("insert into ticket(token, subscr_id) values('$key', '$subscr_id')");
+
+	return $key;
+    }
+
+    /**
+    * Return value(s) for a ticket and remove it from the table
+    * @param ticket
+    * @return subscr_id for an update or name, email, password, plan number for a new
+    */
+    function processTicket($ticket)
+    {
+	$mysql = dbConnect('processTicket');
+
+
+	$res = $mysql->query("select name, pwd, email, planno, subscr_id from ticket where token = '$ticket'");
+	$obj = $res->fetch_object();
+
+	if(substr($ticket, 0, 1) == 'U')
+	{
+		return $obj->subscr_id;
+	}
+	elseif(substr($ticket, 0,1) == 'N')
+	{
+		return array($obj->name, $obj->pwd, $obj->email, $obj->planno);
+	}
+	else
+	{
+		error_log(">>>Bad ticket: $ticket");
+		return '';
+	}
+    }
+
+    /**
+    * Is the ticket already processed
+    * @param ticket number
+    * @return value of processed column
+    */
+    function isTicketProcessed($ticket)
+    {
+	$mysql = dbConnect('isTicketProcessed');
+	$res = $mysql->query("select processed from ticket where token = '$ticket'");
+
+	if(!$res->num_rows)
+	{
+		// Invalid ticket
+		return -1;
+	}
+	$obj = $res->fetch_object();
+
+	return $obj->processed;
+    }
+
+    /**
+    * Close a ticket
+    * @param ticket number, transaction id from PayPal
+    * @return none
+    */
+    function closeTicket($ticket, $txn_id)
+    {
+	$mysql = dbConnect('closeTicket');
+	$mysql->query("update ticket set processed = true where token = '$ticket'");
+	$mysql->query("insert into paypal_transactions(txn_id) values('$txn_id')");
     }
 ?>

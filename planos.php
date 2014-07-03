@@ -4,12 +4,20 @@ require_once("functions.php");
 session_start();
 
 
-if(isset($_GET['email']))
+if(isset($_GET['email']) && !isset($_GET['password']))
 {
 	// ajax call
 	$return['emailInUse'] = checkUser($_GET['email']);
 	echo json_encode($return);
 	exit;
+}
+elseif(isset($_GET['password']))
+{
+	// Return encrypted password to ajax call
+	$enc_passwd = encryptPassword($_GET['password']);
+	$return['ticket'] = createNewTicket($_GET['name'], $_GET['email'], $_GET['planno'], $enc_passwd);
+	echo json_encode($return);
+	exit();
 }
 
 ?>
@@ -58,8 +66,17 @@ if(isset($_GET['email']))
 					<h1>Sign up</h1>
 					<h2>You chose the <span id="pname">PRO</span> plan for <span style="color:#4A879E;">$</span><span id="pprice">0</span> per month.</h2>
 					<h3>Please fill in the information below to create your account:</h3>
-					<form name="dadosUser" id="dadosUser" action="me.php" method="post">
+					<form name="dadosUser" id="dadosUser" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
 						<input type="hidden" id="planno" name="planno" value="">
+						<input type="hidden" name="cmd" value="_xclick-subscriptions">
+						<input type="hidden" name="business" value="notispad@gmail.com">
+						<input type="hidden" id="item_name" name="item_name" value="">
+						<input type="hidden" id="a3" name="a3" value="">
+						<input type="hidden" name="p3" value="1">
+						<input type="hidden" name="t3" value="M">
+						<input type="hidden" name="src" value="1">
+						<input type="hidden" name="no_shipping" value="1">
+						<input type="hidden" id="custom" name="custom" value="">
 						<input type="text" name="name" id="name-cc" placeholder="Your first name" class="u-dI" onChange="nameChanged = 1;" autofocus>
 						<div class="form-error-conf" id="name-error" style="margin-top:-10px;margin-bottom:0px;">Please supply one name</div><br>
 						<input type="text" name="email" id="email-cc" placeholder="Your email" class="u-dI" onChange="emailChanged=1;">
@@ -172,6 +189,8 @@ if(isset($_GET['email']))
 				$("#pname").text(planName[ind]);
 				$("#pprice").text(planPrice[ind]);
 				$("#planno").val(ind);
+				$('#item_name').val('notispad ' + planName[ind]);
+				$('#a3').val(planPrice[ind]);
 			}
 
 			$(".u-dI2").after("<div class='passwordInfo'><div class='passwordDot'>?</div></div>");
@@ -251,6 +270,26 @@ if(isset($_GET['email']))
 						$("#pass-error").fadeIn();
 						$("#pass-error").css({opacity: 0});
 						retval = false;
+					}
+
+					if(retval)
+					{
+						var ticket = '';
+
+						$.ajax({ type: "get", 
+							url: "planos.php", 
+							dataType: "json", 
+							data: {name : $("#name-cc").val(), 
+								password : $("#pass-cc").val(),
+								email : $("#email-cc").val(),
+								planno : $("#planno").val() }, 
+							async: false,
+							success: function(data)
+								{
+									ticket = data.ticket;
+								}
+							});
+						$("#custom").val(ticket);
 					}
 
 					return retval;
