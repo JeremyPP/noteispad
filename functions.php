@@ -370,7 +370,7 @@
     {
 	$mysql = dbConnect('getNotesUsed');
 
-	$res = $mysql->query("select count(UN.usernote_id) as ncount from usernote UN, users U where UN.user_id = $id and U.user_id = UN.user_id and usernote_time between U.payment_date and date_sub(date_add(U.payment_date, interval 1 month), interval 1 day)");
+	$res = $mysql->query("select count(UN.usernote_id) as ncount from usernote UN, users U where UN.user_id = $id and U.user_id = UN.user_id and usernote_time between U.payment_date and date_add(U.payment_date, interval 31 day)");
 	$obj = $res->fetch_object();
 
 	return $obj->ncount;
@@ -641,7 +641,7 @@ The NOT is PAD! team.";
     function getTimeLeft($id)
     {
 	$mysql = dbConnect('getTimeLeft');
-	$res = $mysql->query("select timediff(date_sub(date_add(payment_date, interval 1 month), interval 1 day), now()) as delta from users where user_id = $id");
+	$res = $mysql->query("select timediff(date_add(payment_date, interval 31 day), now()) as delta from users where user_id = $id");
 	$obj = $res->fetch_object();
 
 	$date_parts = explode(':', $obj->delta);
