@@ -143,7 +143,7 @@ foreach($font_sizes as $k => $v)
 	$mysql->query("insert into font_size value('$k', $v)");
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS paypal(user varchar(255) NOT NULL, pwd varchar(255) not null, signature varchar(255) not null, sandbox boolean default true)"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS paypal(user varchar(255) NOT NULL, pwd varchar(255) not null, signature varchar(255) not null, sandbox boolean default true, total_income decimal(7,2) default 0.0 not null)"))
 {
 	die("Failed to create paypal: " . $mysql->error);
 }

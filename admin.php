@@ -32,8 +32,12 @@ session_start();
 				echo "<div>Total of live Fast Notes: <span>$live_fn</span></div>\n";
 ?>
 				<br>
-				<div>Users income per month: <span>2907</span></div>
-				<div>Total users income: <span>7844</span></div>
+<?php
+	$amount = getMonthlyIncome();
+				echo "<div>Users income per month: <span>$amount</span></div>\n";
+	$amount = getTotalIncome();
+				echo "<div>Total users income: <span>$amount</span></div>\n";
+?>
 			</div>
 			<div id="servidor-info">
 				<h6>Server</h6>

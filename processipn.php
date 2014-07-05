@@ -95,7 +95,6 @@ if(strcmp($ret, "VERIFIED") == 0)
 		if(isAlreadyDone($res['txn_id']))
 		{
 			// This has already been done by pdt so exit
-error_log(">>>>>>>>>>This has shown as already done");
 			exit();
 		}
 		
@@ -111,6 +110,7 @@ error_log(">>>>>>>>>>This has shown as already done");
 				updateDate($res['subscr_id']);
 				// I know it's alrady closed - I want the txn_id storing
 				closeTicket($res['custom'], $res['txn_id']);
+				updateTotal($amount);
 			}
 			else
 			{
@@ -144,6 +144,7 @@ error_log(">>>>>>>>>>This has shown as already done");
 			{
 				addUser($name, $passwd, $email, $planno, $res['subscr_id'], $res['payer_id']);
 				closeTicket($res['custom'], $res['txn_id']);
+				updateTotal($amount);
 			}
 		}
 

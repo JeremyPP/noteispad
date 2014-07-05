@@ -69,6 +69,7 @@ foreach($res as $k => $v)
 					updateDate($res['subscr_id']);
 					// Just do this to store the txn_id (actually, we should never be here in pdt)
 					closeTicket($res['custom'], $res['txn_id']);
+					updateTotal($amount);
 				}
 				else
 				{
@@ -89,6 +90,7 @@ foreach($res as $k => $v)
 					cancelPayments($id);	// Cancel the existing plan
 					changePlan($id, $res['subscr_id'], $res['payment_date'], $amount);
 					closeTicket($res['custom'], $res['txn_id']);
+					updateTotal($amount);
 					header("Location: config.php");
 					exit();
 				}
@@ -103,6 +105,7 @@ foreach($res as $k => $v)
 				list ($name, $passwd, $email, $planno) = processTicket($res['custom']);
 				$_SESSION['user_id'] = addUser($name, $passwd, $email, $planno, $res['subscr_id'], $res['payer_id']);
 				closeTicket($res['custom'], $res['txn_id']);
+				updateTotal($amount);
 				header("Location: config.php");
 			}
 

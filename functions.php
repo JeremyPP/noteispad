@@ -1233,4 +1233,51 @@ The NOT is PAD! team.";
 	$mysql->query("update ticket set processed = true where token = '$ticket'");
 	$mysql->query("insert into paypal_transactions(txn_id) values('$txn_id')");
     }
+
+    /**
+    * Update cumulative total income
+    * @param Amount
+    * @return none
+    */
+    function updateTotal($amount)
+    {
+	$mysql = dbConnect('updateTotal');
+	$mysql->query("update paypal set total_income = total_income + $amount");
+    }
+
+    /**
+    * Get total income
+    * @param none
+    * @return total income
+    */
+    function getTotalIncome()
+    {
+	$mysql = dbConnect('getTotalIncome');
+	$res = $mysql->query("select total_income from paypal");
+	$obj = $res->fetch_object();
+	return $obj->total_income;
+    }
+
+    /**
+    * Get monthly income
+    * @param none
+    * @return monthly income for live accounts
+    */
+    function getMonthlyIncome()
+    {
+	$mysql = dbConnect('getMonthlyIncome');
+	for($p=1; $p!=4; ++$p)
+	{
+		list ($pn, $pp, $px) = getPlan($p);
+		$plan[$p] = $pp;
+	}
+
+	$amount = 0.00;
+	$res = $mysql->query("select plan_id from users where payment_date between date_sub(payment_date, interval 31 day) and now()");
+	while($obj = $res->fetch_object())
+	{
+		$amount += $plan[$obj->plan_id];
+	}
+	return (sprintf("%.2f", $amount));
+    }
 ?>
