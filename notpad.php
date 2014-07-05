@@ -67,7 +67,7 @@ if(isset($_SESSION['user_id']))
 		$max_notes = getMaxNotes($_SESSION['user_id']);
 		$used_notes = getNotesUsed($_SESSION['user_id']);
 
-		if($used_notes == $max_notes)
+		if($used_notes >= $max_notes)
 		{
 			$dest = 'more.php';
 		}
@@ -119,8 +119,8 @@ if(isset($_SESSION['user_id']))
 <?php
 	if(isset($_GET['page']))
 	{
-		$seq_sql = $_GET[page];
-		$code = $_SESSION[code];
+		$seq_sql = $_GET['page'];
+		$code = $_SESSION['code'];
 	}
 	elseif(isset($_GET['note']))
 	{

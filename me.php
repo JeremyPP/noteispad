@@ -123,7 +123,7 @@ else
 	$max_notes = getMaxNotes($_SESSION['user_id']);
 	$used_notes = getNotesUsed($_SESSION['user_id']);
 
-	if($used_notes == $max_notes)
+	if($used_notes >= $max_notes)
 	{
 		$dest = 'more.php';
 	}
