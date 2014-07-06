@@ -150,9 +150,14 @@ if(strcmp($ret, "VERIFIED") == 0)
 
 		exit();
 	}
+	elseif(($res['txn_type'] == 'subscr_payment') && isset($res['payment_status']) && ($res['payment_status'] == 'Failed'))
+	{
+		setFailed($res['subscr_id'], $res['payer_id']);
+		exit();
+	}
 	elseif($res['txn_type'] == 'subscr_cancel')
 	{
-		//cancelSubscription($res['subscr_id']);
+		cancelSubscription($res['subscr_id'], $res['payer_id']);
 		exit();
 	}
 	else

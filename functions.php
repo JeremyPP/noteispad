@@ -969,7 +969,7 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('updateDate');
 	$start_date = gmdate('Y-m-d 00:00:01');
-	$res = $mysql->query("update users set payment_date = '$start_date' where subscr_id = '$profile'");
+	$res = $mysql->query("update users set payment_date = '$start_date', subscr_failed = false where subscr_id = '$profile'");
     }
 
     /**
@@ -1061,13 +1061,13 @@ The NOT is PAD! team.";
 
     /**
     * Cancel subscription (null the subscr_id and set the payment_date to 0000-00-00 00:00:00)
-    * @param subscr_id
+    * @param subscr_id, payer_id
     * @return none
     */
-    function cancelSubscription($pp)
+    function cancelSubscription($pp, $pid)
     {
 	$mysql = dbConnect('cancelSubscription');
-	$mysql->query("update users set subscr_id = null, payment_date = '0000-00-00 00:00:00' where subscr_id = '$pp'");
+	$mysql->query("update users set subscr_id = null, payment_date = '0000-00-00 00:00:00', payer_id = null, subscr_cancel = true where subscr_id = '$pp' and payer_id = '$pid'");
     }
 
     /**
@@ -1279,5 +1279,16 @@ The NOT is PAD! team.";
 		$amount += $plan[$obj->plan_id];
 	}
 	return (sprintf("%.2f", $amount));
+    }
+
+    /**
+    * Set the failed flag on the user record
+    * @param subscr_id, payer_id
+    * @return none
+    */
+    function setFailed($pp, $pid)
+    {
+	$mysql = dbConnect('setFailed');
+	$mysql->query("update users set subscr_failed = true where subscr_id = '$pp' and payer_id = '$pid'");
     }
 ?>
