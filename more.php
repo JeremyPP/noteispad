@@ -26,7 +26,7 @@ session_start();
 ?>
 		<p id="morenoteText01">Until then, all the notes you create will be treated like Fast Notes, and will only
 			remain on our servers for 7 days. Also, you won't be able to see them in your note manager.</p>
-		<p id="morenoteText02"><b>Do you like to upgrade your plan to get more notes?</b></p>
+		<p id="morenoteText02"><b>Would you like to upgrade your plan to get more notes?</b></p>
 		<center>
 			<a href="config.php"><div class="confMoreN">Yes, take me to my settings page</div></a>
 			<a href="notpad.php"><div class="confMoreN" id="fastNConf">No, continue using Fast Notes</div></a>
