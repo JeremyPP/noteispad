@@ -2,6 +2,13 @@
 require_once("init.php");
 require_once("functions.php");
 session_start();
+$_SESSION['code'] = $_POST['code'];
+$ret = getNoteType($_SESSION['code']);
+if($ret != 'X')
+{
+	header("Location: notpad.php");
+	exit();
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
@@ -22,7 +29,6 @@ session_start();
 	list ($d, $h, $m) = getTimeLeft($_SESSION['user_id']);
 	$mn = getMaxNotes($_SESSION['user_id']);
 	echo "<p>You will get $mn new ones in <b>$d</b> days <b>$h</b> hours and <b>$m</b> minutes...</p>";
-	$_SESSION['code'] = $_POST['code'];
 ?>
 		<p id="morenoteText01">Until then, all the notes you create will be treated like Fast Notes, and will only
 			remain on our servers for 7 days. Also, you won't be able to see them in your note manager.</p>
