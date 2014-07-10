@@ -1,6 +1,5 @@
 ﻿<?php
 require_once("init.php");
-require_once("functions.php");
 
 if(isset($_POST['email']))
 {

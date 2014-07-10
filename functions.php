@@ -1091,7 +1091,7 @@ The NOT is PAD! team.";
 	}
 	else
 	{
-		error_log(">>>>changePlan: Invalid plan amount requested: $amount");
+		error_log("changePlan: Invalid plan amount requested: $amount");
 	}
     }
 
@@ -1198,7 +1198,7 @@ The NOT is PAD! team.";
 	}
 	else
 	{
-		error_log(">>>Bad ticket: $ticket");
+		error_log("Bad ticket: $ticket");
 		return '';
 	}
     }

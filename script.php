@@ -1,11 +1,9 @@
 ﻿<?php 
 require_once("init.php");
-require_once("functions.php");
 $SERVER = "http://localhost:8888";
 
 if(isset($_POST['code']))
 {
-	session_start();
 	$_SESSION['code'] = $_POST['code'];
 }
     

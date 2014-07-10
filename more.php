@@ -1,7 +1,5 @@
 ﻿<?php
 require_once("init.php");
-require_once("functions.php");
-session_start();
 $_SESSION['code'] = $_POST['code'];
 $ret = getNoteType($_SESSION['code']);
 if($ret != 'X')

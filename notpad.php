@@ -1,7 +1,5 @@
 ﻿<?php
 require_once("init.php");
-require_once("functions.php");
-session_start();
 
 $fc = '000';
 $bg = 'fff';

@@ -1,6 +1,5 @@
 <?php
 require_once("init.php");
-require_once("functions.php");
 require_once("PPfunctions.php");
 
 // STEP 1: read POST data

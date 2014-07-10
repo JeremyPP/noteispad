@@ -1,4 +1,14 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("functions.php");
+
+clearAuthId($_SESSION['user_id']);
+
+unset($_SESSION['user_id']);
+
+session_destroy();
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
@@ -86,7 +96,7 @@ notisdpad.com, or some internal error has occurred with PayPal and your payment 
 Please fix the situation and try to log in again.<br><br>
 If you keep seeing this error and you don't know why, contact us at <span>contact@notispad.com</span><br><br>
 		</h2>
-		<a href="#"><div id="voltar-pass-er-b">Go back to the home page</div></a>
+		<a href="index.php"><div id="voltar-pass-er-b">Go back to the home page</div></a>
 	</div>
 </div>
 </body>

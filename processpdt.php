@@ -1,8 +1,6 @@
 <?php
 require_once("init.php");
-require_once("functions.php");
 require_once("PPfunctions.php");
-session_start();
 
 
 $token = 'tBA_zgv-TOeV2BbjWtNc8wjG4FqVNmov_QUYBH4q7IToIjGqgagjGvgFcG0';
