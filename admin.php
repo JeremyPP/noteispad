@@ -62,8 +62,8 @@ require_once("init.php");
 	$pcnt = sprintf("%.2f", (($totmem-$freemem)/$totmem)*100);
 					echo "<h3>" . $pcnt . "%</h3>\n";
 
-	$ds = displaySize(disk_total_space("/home/www/noteispad"));
-	$fs = displaySize(disk_free_space("/home/www/noteispad"));
+	$ds = displaySize(disk_total_space("/home/www/notispad.development"));
+	$fs = displaySize(disk_free_space("/home/www/notispad.development"));
 					echo "<h4>" . $fs . " of " . $ds . "</h4>\n";
 ?>
 				</div>

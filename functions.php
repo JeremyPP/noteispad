@@ -184,8 +184,8 @@
     {
         // Change these
 	$dbhost = '127.0.0.1';
-	$dbname = 'noteispad';
-	$dbuser = 'noteispad';
+	$dbname = 'notispad_dev';
+	$dbuser = 'notispad_dev';
 	$dbpass = 'h0undd0g';
 
 	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);

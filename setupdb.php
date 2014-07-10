@@ -4,8 +4,8 @@
 // expects the user and database to already exist.
 // dbuser should have all Data and Structure grants but not Admin apart from "Super" (for the set global command)
 $dbhost = '127.0.0.1';
-$dbname = 'noteispad';
-$dbuser = 'noteispad';
+$dbname = 'notispad_dev';
+$dbuser = 'notispad_dev';
 $dbpass = 'h0undd0g';
 
 $mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -35,12 +35,12 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_archive(fnote_name VARCHA
 	die("Failed to create fastnote_archive: " . $mysql->error);
 }
 
-if(!$mysql->query("drop procedure if exists noteispad.delete_fastnote_sp"))
+if(!$mysql->query("drop procedure if exists $dbname.delete_fastnote_sp"))
 {
 	die("Failed to drop procedure: " . $mysql->error);
 }
 
-if(!$mysql->query(" CREATE PROCEDURE noteispad.delete_fastnote_sp (fncode varchar(1024)) 
+if(!$mysql->query(" CREATE PROCEDURE $dbname.delete_fastnote_sp (fncode varchar(1024)) 
 begin
 insert into fastnote_archive(fnote_name, fnote_text)
 select F.fnote_name, FL.fnote_text

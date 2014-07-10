@@ -19,8 +19,8 @@ if(isset($_SESSION['user_id']) && ($_SERVER['REQUEST_URI'] != '/payment_error.ph
 }
 
 $dbhost = '127.0.0.1';
-$dbname = 'noteispad';
-$dbuser = 'noteispad';
+$dbname = 'notispad_dev';
+$dbuser = 'notispad_dev';
 $dbpass = 'h0undd0g';
 
 $mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
