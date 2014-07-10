@@ -5,25 +5,6 @@ require_once("PPfunctions.php");
 
 session_start();
 
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-		"http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-		<link href="style.css" type="text/css" rel="stylesheet">
-		<link href="style7.css" type="text/css" rel="stylesheet">
-		<title>Home - not is pad!</title>
-		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-		<script src="erro.js"></script>
-        <script type="text/javascript">
-        </script>
-    </head>
-        <body>			
-<?php
 if(isset($_POST['email']))
 {
 	// Existing user logging in
@@ -57,6 +38,37 @@ else
 	}
 }
 
+// Keep these seperate for later development (maybe)
+if(cancelledAccount($_SESSION['user_id']))
+{
+	header("Location: payment_error.php");
+	exit();
+}
+elseif(failedPayment($_SESSION['user_id']))
+{
+	header("Location: payment_error.php");
+	exit();
+}
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+		"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+		<link href="style.css" type="text/css" rel="stylesheet">
+		<link href="style7.css" type="text/css" rel="stylesheet">
+		<title>Home - not is pad!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script src="erro.js"></script>
+        <script type="text/javascript">
+        </script>
+    </head>
+        <body>			
+<?php
 if(isset($_SESSION['user_id']))
 {
 	$fname = getFirstName($_SESSION['user_id']);

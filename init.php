@@ -11,4 +11,6 @@ if($mysql->connect_errno)
 }
 
 date_default_timezone_set('UTC');
+
+error_log(">>>>$_SERVER[REQUEST_URI]");
 ?>

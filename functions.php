@@ -969,7 +969,7 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('updateDate');
 	$start_date = gmdate('Y-m-d 00:00:01');
-	$res = $mysql->query("update users set payment_date = '$start_date', subscr_failed = false where subscr_id = '$profile'");
+	$res = $mysql->query("update users set payment_date = '$start_date', subscr_failed = false, subscr_cancel = false where subscr_id = '$profile'");
     }
 
     /**
@@ -1067,7 +1067,8 @@ The NOT is PAD! team.";
     function cancelSubscription($pp, $pid)
     {
 	$mysql = dbConnect('cancelSubscription');
-	$mysql->query("update users set subscr_id = null, payment_date = '0000-00-00 00:00:00', payer_id = null, subscr_cancel = true where subscr_id = '$pp' and payer_id = '$pid'");
+	// $mysql->query("update users set subscr_id = null, payment_date = '0000-00-00 00:00:00', payer_id = null, subscr_cancel = true where subscr_id = '$pp' and payer_id = '$pid'");
+	$mysql->query("update users set subscr_cancel = true where subscr_id = '$pp' and payer_id = '$pid'");
     }
 
     /**
@@ -1290,5 +1291,31 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('setFailed');
 	$mysql->query("update users set subscr_failed = true where subscr_id = '$pp' and payer_id = '$pid'");
+    }
+
+    /**
+    * Has this user cancelled their account at paypal?
+    * @param user_id
+    * @return true if cancelled, false otherwise
+    */
+    function cancelledAccount($uid)
+    {
+	$mysql = dbConnect('cancelledAccount');
+	$res = $mysql->query("select subscr_cancel from users where user_id = $uid");
+	$obj = $res->fetch_object();
+	return $obj->subscr_cancel;
+    }
+
+    /**
+    * Has the last payment failed?
+    * @param user_id
+    * @return true if failed payment, false otherwise
+    */
+    function failedPayment($uid)
+    {
+	$mysql = dbConnect('failedPayment');
+	$res = $mysql->query("select subscr_failed from users where user_id = $uid");
+	$obj = $res->fetch_object();
+	return $obj->subscr_failed;
     }
 ?>
