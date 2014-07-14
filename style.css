@@ -443,6 +443,10 @@ ol, ul {
 	font-weight: 900;
 	cursor: pointer;
 }
+#duvidaPrice a{
+	color: #fff;
+	text-decoration: none;
+}
 #openb2 {
 	top: 0;
 	width: 90px;

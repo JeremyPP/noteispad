@@ -174,7 +174,7 @@ elseif(isset($_GET['password']))
 				
 			</div>
 				<div id="duvidaPrice" data-scrollreveal="after 1.2s, ease-in 32px and reset over .66s">
-					<p>Any doubt about which plan to choose? <span>Talk to us</span>!</p>
+					<p>Any doubt about which plan to choose? <span><a href="mailto:contact@notispad.com">Talk to us</a></span>!</p>
 				</div>
         <script src="scrollReveal.js"></script>
 		<script>
