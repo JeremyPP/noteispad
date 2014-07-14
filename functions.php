@@ -561,7 +561,7 @@ The NOT is PAD! team.";
 			$mysql->query("insert into fastnote_lines(fnote_id, fnote_text) values($fnote_id, '$postarray[content]')");
 
 			// Also create the event to call the sp for deletion after 7 days
-			$result = $mysql->query("create event $postarray[code]_delete on schedule at now() + interval 7 day do call delete_fastnote_sp('$postarray[code]');");
+			$result = $mysql->query("create event delete_" . $fnote_id . " on schedule at now() + interval 7 day do call delete_fastnote_sp('$postarray[code]');");
 			if(!$result)
 			{
 				error_log("Create event failed: " . $mysql->error);
@@ -630,6 +630,43 @@ The NOT is PAD! team.";
     function deleteUser($id)
     {
 	$mysql = dbConnect('deleteUser');
+	// Convert usernotes to fastnotes
+	$res = $mysql->query("select usernote_id, usernote_name from usernote where user_id = $id");
+	while($obj = $res->fetch_object())
+	{
+		// Is there a fastnote called this?
+		$res2 = $mysql->query("select count(fnote_name) as count from fastnote where fnote_name = '$obj->usernote_name'");
+		$obj2 = $res2->fetch_object();
+		if($obj2->count)
+		{
+			// Yes, so we need to adjust the seq numbers
+			$res2 = $mysql->query("select F.fnote_id, max(FL.fnote_seq) as seq from fastnote F, fastote_lines FL where F.fnote_name = '$obj->usernote_name' and FL.fnote_id = F.fnote_id");
+			$obj2 = $res->fetch_object();
+			$seq = $obj2->seq;
+			++$seq;
+			$fn_id = $obj2->fnote_id;
+		}
+		else
+		{
+			$res2 = $mysql->query("select max(fnote_id) as fn_id from fastnote");
+			$obj2 = $res2->fetch_object();
+			$fn_id = $obj2->fn_id;
+			++$fn_id;
+			$seq = 1;
+		}
+		$mysql->query("insert into fastnote(fnote_id, fnote_name) values($fn_id, '$obj->usernote_name')");	
+		// Also create the event to call the sp for deletion after 7 days
+		$result = $mysql->query("create event delete_" . $fn_id . " on schedule at now() + interval 7 day do call delete_fastnote_sp('$obj->usernote_name');");
+
+		$res2 = $mysql->query("select usernote_text from usernote_lines where usernote_id = $obj->usernote_id order by usernote_seq");
+		while($obj2 = $res2->fetch_object())
+		{
+			// This should be in a transaction!
+			$mysql->query("insert into fastnote_lines(fnote_id, fnote_seq, fnote_text) values($fn_id, $seq, '$obj2->usernote_text')");	
+			++$seq;
+		}
+	}
+
 	$mysql->query("delete from users where user_id = $id");
     }
 
@@ -969,7 +1006,7 @@ The NOT is PAD! team.";
     {
 	$mysql = dbConnect('updateDate');
 	$start_date = gmdate('Y-m-d 00:00:01');
-	$res = $mysql->query("update users set payment_date = '$start_date', subscr_failed = false, subscr_cancel = false where subscr_id = '$profile'");
+	$res = $mysql->query("update users set payment_date = '$start_date', subscr_failed = false where subscr_id = '$profile'");
     }
 
     /**
@@ -1057,18 +1094,6 @@ The NOT is PAD! team.";
 		$ret[$obj->name] = $obj->count;
 	}
 	return $ret;
-    }
-
-    /**
-    * Cancel subscription (null the subscr_id and set the payment_date to 0000-00-00 00:00:00)
-    * @param subscr_id, payer_id
-    * @return none
-    */
-    function cancelSubscription($pp, $pid)
-    {
-	$mysql = dbConnect('cancelSubscription');
-	// $mysql->query("update users set subscr_id = null, payment_date = '0000-00-00 00:00:00', payer_id = null, subscr_cancel = true where subscr_id = '$pp' and payer_id = '$pid'");
-	$mysql->query("update users set subscr_cancel = true where subscr_id = '$pp' and payer_id = '$pid'");
     }
 
     /**
@@ -1294,16 +1319,14 @@ The NOT is PAD! team.";
     }
 
     /**
-    * Has this user cancelled their account at paypal?
+    * Set the cancel flag to show that we're doing it and not IPN
     * @param user_id
-    * @return true if cancelled, false otherwise
+    * @return none
     */
-    function cancelledAccount($uid)
+    function setCancelFlag($uid)
     {
-	$mysql = dbConnect('cancelledAccount');
-	$res = $mysql->query("select subscr_cancel from users where user_id = $uid");
-	$obj = $res->fetch_object();
-	return $obj->subscr_cancel;
+	$mysql = dbConnect('setCancelFlag');
+	$res = $mysql->query("update users set cancel_in_progress = true where user_id = $uid");
     }
 
     /**
@@ -1317,5 +1340,44 @@ The NOT is PAD! team.";
 	$res = $mysql->query("select subscr_failed from users where user_id = $uid");
 	$obj = $res->fetch_object();
 	return $obj->subscr_failed;
+    }
+
+    /**
+    * Are we doing a plan change?
+    * @param user_id
+    * @return Value of plan_change flag
+    */
+    function isPlanChange($uid)
+    {
+	$mysql = dbConnect('isPlanChange');
+	$res = $mysql->query("select plan_change from users where user_id = $uid");
+	$obj = $res->fetch_object();
+	return $obj->plan_change;
+    }
+
+    /**
+    * Are we already cancelling the plan?
+    * @param user_id
+    * @return Value of cancel_in_progress flag
+    */
+    function isCancelInProgress($uid)
+    {
+	$mysql = dbConnect('isCancelInProgress');
+	$res = $mysql->query("select cancel_in_progress from users where user_id = $uid");
+	$obj = $res->fetch_object();
+	return $obj->cancel_in_progress;
+    }
+
+    /**
+    * Is it a valid user?
+    * @param user_id
+    * @return user_id if it is, 0 otherwise
+    */
+    function isValidUser($uid)
+    {
+	$mysql = dbConnect('isValidUser');
+	$res = $mysql->query("select count(user_id) as uid from users where user_id = $uid");
+	$obj = $res->fetch_object();
+	return $obj->uid;
     }
 ?>

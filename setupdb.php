@@ -70,7 +70,7 @@ if(!$mysql->query("INSERT into plans(plan_id, name, cost, notes_per_month) value
 	die("Failed to populate plans: " . $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '000', background_colour char(7) not null default 'fff', font_size smallint not null default 22, payment_date timestamp not null default '0000-00-00 00:00:00', subscr_id varchar(255) default null, payer_id varchar(255) default null, subscr_cancel boolean default false not null, subscr_failed boolean default false not null, auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS users(user_id int not null auto_increment, user_name varchar(256) not null, email varchar(256) not null, password char(60) not null, plan_id INT not null, font_colour char(7) not null default '000', background_colour char(7) not null default 'fff', font_size smallint not null default 22, payment_date timestamp not null default '0000-00-00 00:00:00', subscr_id varchar(255) default null, payer_id varchar(255) default null, cancel_in_progress boolean default false not null, plan_change boolean default false not null, subscr_failed boolean default false not null, auth_key varchar(255) default null, reset_id varchar(255) default null, reset_sent timestamp not null default '0000-00-00 00:00:00', primary key(user_id))"))
 {
 	die("Failed to create users: " . $mysql->error);
 }

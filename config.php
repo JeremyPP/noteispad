@@ -11,6 +11,9 @@ elseif(isset($_GET['opt']) && $_GET['opt'])
 {
 	if($_GET['opt'] == 'd')
 	{
+		// Let the IPN script know that we're doing this cancellation
+		// so it doesn't need to process it
+		setCancelFlag($_SESSION['user_id']);
 		cancelPayments($_SESSION['user_id']);
 		deleteUser($_SESSION['user_id']);
 		unset($_SESSION['user_id']);

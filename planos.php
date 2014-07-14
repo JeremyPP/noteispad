@@ -66,7 +66,6 @@ elseif(isset($_GET['password']))
 					<h3>Please fill in the information below to create your account:</h3>
 					<form name="dadosUser" id="dadosUser" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
 						<input type="hidden" id="planno" name="planno" value="">
-<<<<<<< HEAD
 						<input type="hidden" name="cmd" value="_xclick-subscriptions">
 						<input type="hidden" name="business" value="notispad@gmail.com">
 						<input type="hidden" id="item_name" name="item_name" value="">

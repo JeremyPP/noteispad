@@ -35,13 +35,7 @@ else
 	}
 }
 
-// Keep these seperate for later development (maybe)
-if(cancelledAccount($_SESSION['user_id']))
-{
-	header("Location: payment_error.php");
-	exit();
-}
-elseif(failedPayment($_SESSION['user_id']))
+if(failedPayment($_SESSION['user_id']))
 {
 	header("Location: payment_error.php");
 	exit();

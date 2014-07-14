@@ -156,12 +156,30 @@ if(strcmp($ret, "VERIFIED") == 0)
 	}
 	elseif($res['txn_type'] == 'subscr_cancel')
 	{
-		cancelSubscription($res['subscr_id'], $res['payer_id']);
-		exit();
-	}
-	else
-	{
-		// Something went wrong so redirect to index.php
+		// There are three possible reasons for a cancel:
+		// Change of plan - plan_change flag will be set for the user row
+		// User deletion - cancel_in_progress flag will be set (or user record will no longer exist)
+		// User cancel at paypal - neither of the above will be true
+
+		$id = getUserByPayerAndSubscription($res['payer_id'], $res['subscr_id']);
+		// If we don't have an id then the account has already gone
+
+		if($id)
+		{
+			if(isPlanChange($id))
+			{
+				setPlanChange($id, false);
+			}
+			elseif(isCancelInProgress($id))
+			{
+				// Do nothing - for now
+			}
+			else
+			{
+				// Cancelled at PayPal
+				deleteUser($id);
+			}
+		}
 	}
 }
 elseif($ret == "INVALID")

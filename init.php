@@ -5,13 +5,7 @@ session_start();
 
 if(isset($_SESSION['user_id']) && ($_SERVER['REQUEST_URI'] != '/payment_error.php'))
 {
-	// Keep these seperate for later development (maybe)
-	if(cancelledAccount($_SESSION['user_id']))
-	{
-		header("Location: payment_error.php");
-		exit();
-	}
-	elseif(failedPayment($_SESSION['user_id']))
+	if(!isValidUser($_SESSION['user_id']) || failedPayment($_SESSION['user_id']))
 	{
 		header("Location: payment_error.php");
 		exit();

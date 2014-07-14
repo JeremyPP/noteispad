@@ -103,16 +103,17 @@ foreach($res as $k => $v)
 				list ($name, $passwd, $email, $planno) = processTicket($res['custom']);
 				$_SESSION['user_id'] = addUser($name, $passwd, $email, $planno, $res['subscr_id'], $res['payer_id']);
 				closeTicket($res['custom'], $res['txn_id']);
-				updateTotal($amount);
-				header("Location: config.php");
+				updateTotal($res['mc_gross']);
+				//header("Location: config.php");
+				header("Location: me.php");
+				exit();
 			}
 
-			header("Location: me.php");
+			//header("Location: me.php");
 			exit();
 		}
 		elseif($res['txn_type'] == 'subscr_cancel')
 		{
-			// cancelSubscription($res['subscr_id']);
 			header("Location: me.php");
 			exit();
 		}
