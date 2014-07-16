@@ -122,12 +122,10 @@ if(isset($_SESSION['user_id']))
 	}
 	elseif(isset($_GET['note']))
 	{
-		$seq_sql = '';	// Not used for usernotes
 		$code = $_GET['note'];
 	}
 	else
 	{
-		$seq_sql = "(select max(fnote_seq) from fastnote_lines where fnote_id = F.fnote_id)";
 		if(isset($_POST['code']))
 		{
 			$code = $_POST['code'];
@@ -138,7 +136,7 @@ if(isset($_SESSION['user_id']))
 		}
 	}
 
-	echo getNoteText($code, $seq_sql);
+	echo getNoteText($code);
 ?>
 				</textarea>
 				<div id="bottom"></div>

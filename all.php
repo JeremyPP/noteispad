@@ -17,21 +17,7 @@ require_once("init.php");
 	
 	
         <?php
-                //$codigo=$_SESSION['codtempacess'];
-                $server = "http://localhost:8888";
-                //$pages = json_decode(sendGet($server."?function=getInfo&code=".$codigo), true)['pages'];
-                //if ($pages == 0) {
-                    //$pages = json_decode(sendGet($server."?function=getInfo&code=default"), true)['pages'];
-                //}
-                
-		if(isset($_SESSION['user_id']))
-		{
-			$result = $mysql->query("select UL.usernote_text as fntext from usernote U, usernote_lines UL where U.usernote_name = '$_SESSION[code]' and UL.usernote_id = U.usernote_id");
-		}
-		else
-		{
-			$result = $mysql->query("select FL.fnote_text as fntext from fastnote F, fastnote_lines FL where F.fnote_name = '$_SESSION[code]' and FL.fnote_id = F.fnote_id");
-		}
+		$result = $mysql->query("select NL.note_text as ntext from notes N, note_lines NL where N.note_name = '$_SESSION[code]' and NL.note_id = N.note_id");
 
 		if($result->num_rows)
 		{

@@ -1,8 +1,7 @@
 ﻿<?php
 require_once("init.php");
 $_SESSION['code'] = $_POST['code'];
-$ret = getNoteType($_SESSION['code']);
-if($ret != 'X')
+if(isNotNewNote($_SESSION['code'])
 {
 	header("Location: notpad.php");
 	exit();

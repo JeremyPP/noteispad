@@ -37,7 +37,7 @@ if(!isset($_SESSION['user_id']))
 			
 			<div id="contAllNotas" data-scrollreveal="enter bottom and move 100px over 1s">
 <?php
-	$res = $mysql->query("select U.usernote_name, UL.usernote_text from usernote U, usernote_lines UL where U.user_id = $_SESSION[user_id] and UL.usernote_id = U.usernote_id and UL.usernote_seq = (select max(usernote_seq) from usernote_lines where usernote_id = U.usernote_id)");
+	$res = $mysql->query("select N.note_name, NL.note_text from notes N, note_lines NL where N.user_id = $_SESSION[user_id] and NL.note_id = N.note_id and NL.note_seq = (select max(note_seq) from note_lines where note_id = N.note_id)");
 	if($res->num_rows)
 	{
 		$script = '';
@@ -47,9 +47,9 @@ if(!isset($_SESSION['user_id']))
 			$res->data_seek($i);
 			$row = $res->fetch_object();				
 			echo '<div class="notaAllNota">';
-			echo "<a href='notpad.php?note=$row->usernote_name'>";
+			echo "<a href='notpad.php?note=$row->note_name'>";
 			echo "<div class='allNotaContTxt' id='id-allNota$i'>";
-			$display_text = preg_replace('/[\r\n]+/', ' ', substr(trim($row->usernote_text), 0, 300));
+			$display_text = preg_replace('/[\r\n]+/', ' ', substr(trim($row->note_text), 0, 300));
 			$display_text .= '....';
 			echo $display_text;
 			echo '</div>';
@@ -65,7 +65,7 @@ if(!isset($_SESSION['user_id']))
 			$script .= '$( "#but-id' . $i . '").hover(' . "\n";
 			$script .= 'function() {' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
-			$script .= 'var div = $("<div class=\'allNotaContTxt replacedNote\' id=\'id-allNota' . $i . '\'>' . $row->usernote_name . '</div>").hide();' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxt replacedNote\' id=\'id-allNota' . $i . '\'>' . $row->note_name . '</div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
 			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";
