@@ -139,7 +139,7 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS paypal(user varchar(255) NOT NULL,
 }
 
 $mysql->query("delete from paypal");
-$mysql->query("insert into paypal values('notispad_api1.gmail.com', '1402489348', 'AFcWxV21C7fd0v3bYYYRCpSSRl31Ab9.jE5LVWPHdMnGj7Nw.cv6nqr6', true)");
+$mysql->query("insert into paypal(user, pwd, signature, sandbox) values('notispad_api1.gmail.com', '1402489348', 'AFcWxV21C7fd0v3bYYYRCpSSRl31Ab9.jE5LVWPHdMnGj7Nw.cv6nqr6', true)");
 
 if(!$mysql->query("CREATE TABLE IF NOT EXISTS ticket(token varchar(100) NOT NULL, name varchar(255) default null, pwd varchar(255) default null, email varchar(255) default null, planno int default null, subscr_id varchar(255) default null, processed boolean not null default false, primary key(token))"))
 {
