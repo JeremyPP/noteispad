@@ -264,7 +264,7 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 
 		if($pnum == $i)
 		{
-			echo "<center><a href='config.php?opt=0' class='plan-button select'>Current plan</a></center>\n";
+			echo "<center><span class='plan-button select'>Current plan</span></center>\n";
 		}
 		else
 		{
