@@ -14,10 +14,10 @@
 				}
 				
 				function erro02(){
-				  $("#emailLog").css('background', 'rgb(245, 212, 212)');
-				  $("#emailLog").css('border', '1px solid #e74c3c');
+				  //$("#emailLog").css('background', 'rgb(245, 212, 212)');
+				  //$("#emailLog").css('border', '1px solid #e74c3c');
 				  $("#email-error1").css('display', 'block');
-				  $("#email-error2").css('display', 'block');
+				  //$("#email-error2").css('display', 'block');
 				}
 				function erro03(){
 				  $("#senhaLog").css('background', 'rgb(245, 212, 212)');
