@@ -58,6 +58,24 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 	echo json_encode($return);
 	exit;
 }
+elseif(isset($_POST['pwCheck']))
+{
+	if($_POST['pwCheck'] == '')
+	{
+		$return['checkRes'] = false;
+	}
+	else
+	{
+		$return['checkRes'] = validPassword($_SESSION['user_id'], $_POST['pwCheck']);
+	}
+
+	echo json_encode($return);
+	exit;
+}
+elseif(isset($_POST['codigo04']))
+{
+	updatePassword($_SESSION['user_id'], $_POST['codigo04']);
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -133,29 +151,11 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 				<div id="boxSenha">
 					<span class="og-closeE"></span>
 					<center>
-                        <form action="" method="post" style="margin-top: 20px;">
+                        <form action="" method="post" id="changePass" style="margin-top: 20px;">
                             <input id="novaSenha-ant" placeholder="Current password" type="password" name="codigo03">
-<?php
-	if(isset($_POST['codigo03']))
-	{
-		if(!validPassword($_SESSION['user_id'], $_POST['codigo03']))	
-		{
-			echo "<div class='form-error-conf' id='pass-error' style='margin-bottom: 0px;'>Incorrect password!</div>";
-			echo "<script>alert('Invalid password');</script>";
-		}
-	}
-?>
-							<input id="novaSenha" placeholder="New password" type="password" name="codigo04">
-<?php
-	if((isset($_POST['codigo03']) && !isset($_POST['codigo04'])) || (isset($_POST['codigo04']) && strlen($_POST['codigo04']) < 6))
-	{
-			echo "<div class='form-error-conf' id='pass-error02'>Invalid password! Need to be at least 6 characters.</div>";
-	}
-	elseif((isset($_POST['codigo03']) && validPassword($_SESSION['user_id'], $_POST['codigo03']))  && isset($_POST['codigo04']))
-	{
-		updatePassword($_SESSION['user_id'], $_POST['codigo04']);
-	}
-?>
+			    <div class='form-error-conf' id='pass-error' style='margin-bottom: 0px;'>Incorrect password!</div>
+			    <input id="novaSenha" placeholder="New password" type="password" name="codigo04" onChange="passChanged=1">
+			    <div class='form-error-conf' id='pass-error02'>Invalid password! Needs to be at least 6 characters.</div>
 			
 							<br>
 							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
@@ -318,7 +318,7 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 			<h1 data-scrollreveal="enter top and move -200px over 1s">Settings</h1>
 			
 			<div id="conf-mip" class="confOp" data-scrollreveal="enter bottom and move 100px over 1s">
-				<div class="confOp-title">Change Personal Informations</div>
+				<div class="confOp-title">Change Personal Information</div>
 <?php
 				echo "<p>$firstname <span id='openNomePopup'>EDIT NAME</span></p>";
 				echo "<p>$email <span id='openEmailPopup'>EDIT EMAIL</span></p>";
@@ -362,10 +362,41 @@ EOT;
 			
 			<script src="scrollReveal.js"></script>
 			<script>
+				var passChanged = 0;
+
 				function setVal(ind)
 				{
 					$('#planno').val(ind);
 				}
+				$(document).ready(function()
+				{
+					$("#changePass").submit(function(e)
+					{
+						var retval = true;
+						$.ajax({ type : 'post',
+							url: 'config.php',
+							dataType: 'json',
+							data: {pwCheck: $('#novaSenha-ant').val() },
+							async: false,
+							success: function(d)
+							{
+								if(!d.checkRes)
+								{
+									erro09();
+									retval = false;
+								}
+							}
+						});
+
+						if(!passChanged || ($('#novaSenha').val().length < 6))
+						{
+							erro10();
+							retval = false;
+						}
+
+						return retval;
+					});
+				});
 				$(".prem-plan").click(function()
 				{
 					$("#work-in-prog-overlay").fadeIn();

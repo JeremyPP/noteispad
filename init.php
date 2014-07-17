@@ -3,14 +3,14 @@ require_once("functions.php");
 
 session_start();
 
-if(isset($_SESSION['user_id']) && ($_SERVER['REQUEST_URI'] != '/payment_error.php'))
-{
-	if(!isValidUser($_SESSION['user_id']) || failedPayment($_SESSION['user_id']))
-	{
-		header("Location: payment_error.php");
-		exit();
-	}
-}
+//if(isset($_SESSION['user_id']) && ($_SERVER['REQUEST_URI'] != '/payment_error.php'))
+//{
+//	if(!isValidUser($_SESSION['user_id']) || failedPayment($_SESSION['user_id']))
+//	{
+//		header("Location: payment_error.php");
+//		exit();
+//	}
+//}
 
 $dbhost = '127.0.0.1';
 $dbname = 'notispad_dev';

@@ -1,4 +1,5 @@
 ﻿<?php
+
 require_once("init.php");
 require_once("PPfunctions.php");
 
@@ -9,6 +10,7 @@ if(isset($_POST['email']))
 	if(!$uid || !validPassword($uid, $_POST['password']))
 	{
 		$_SESSION['error'] =  "erro02();";
+		header("Location: .");
 	}
 	else
 	{
