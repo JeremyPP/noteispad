@@ -92,5 +92,12 @@ require_once("init.php");
 				<br>
 			</div>
 			<div id="lista-usuarios">Download list of all users</div>
+<script>
+	$('#lista-usuarios').click(function(e)
+	{
+		e.preventDefault();
+		window.location.href='sendFile.php';
+	});
+</script>
 		</body>
 </html>

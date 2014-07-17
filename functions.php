@@ -1284,4 +1284,47 @@ The NOT is PAD! team.";
 	$obj = $res->fetch_object();
 	return $obj->uid;
     }
+
+    /**
+    * Generate list of users
+    * @param none
+    * @return full path of generated filename
+    */
+    function generateUserList()
+    {
+	$output_dir = "/home/www/notispad.development/admin_output";
+
+	// Sweep away any existing files first
+	array_map('unlink', glob($output_dir . "/*.json"));
+
+	$arr = array();
+	$mysql = dbConnect('generateUserList');
+	$res = $mysql->query("select U.user_id, U.user_name, U.email, P.name, U.cancel_in_progress, U.subscr_failed from users U, plans P where P.plan_id = U.plan_id");
+	while($obj = $res->fetch_object())
+	{
+
+		$res2 = $mysql->query("select count(*) as ncount from notes where user_id = $obj->user_id");
+		$obj2 = $res2->fetch_object();
+		if($obj->cancel_in_progress)
+		{
+			$str = "Cancelling";
+		}
+		elseif($obj->subscr_failed)
+		{
+			$str = "Failed payment";
+		}
+		else
+		{
+			$str = "Active";
+		}
+
+		$arr[] = array_map('htmlentities', array('name' => $obj->user_name, 'email' => $obj->email, 'notecount' => $obj2->ncount, 'status' => $str));
+	}
+
+	$filename = $output_dir . "/admin-" . date("YmdHis") . ".json";
+	file_put_contents($filename, html_entity_decode(json_encode($arr)));
+
+	return $filename;
+    }
+
 ?>

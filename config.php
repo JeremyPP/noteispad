@@ -150,7 +150,6 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 	if((isset($_POST['codigo03']) && !isset($_POST['codigo04'])) || (isset($_POST['codigo04']) && strlen($_POST['codigo04']) < 6))
 	{
 			echo "<div class='form-error-conf' id='pass-error02'>Invalid password! Need to be at least 6 characters.</div>";
-			//echo "<script>alert('Invalid password! Need to be at least 6 characters.');</script>";
 	}
 	elseif((isset($_POST['codigo03']) && validPassword($_SESSION['user_id'], $_POST['codigo03']))  && isset($_POST['codigo04']))
 	{
@@ -266,6 +265,10 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 		{
 			echo "<center><span class='plan-button select'>Current plan</span></center>\n";
 		}
+		elseif($i == 3)
+		{
+			echo "<center><span class='plan-button prem-plan'>Choose</span></center>\n";
+		}
 		else
 		{
 			echo "<center><a href='config.php?opt=$i' onClick='setVal($i)' class='plan-button'>Choose</a></center>\n";
@@ -284,6 +287,19 @@ elseif(isset($_GET['fs']) && $_GET['fs'])
 ?>
 			</div>
 			</div>
+			</div>
+		       <div id="work-in-prog-overlay">
+				<div id="inprogPremium">
+					<div id="closeOverPlan">
+							<span class="og-close3"></span>
+					</div>
+
+					<h2>Ooops!</h2>
+					<h3>It seems that we are still working on that. Please come back soon. :)</h3>
+					<center>
+						<img src="Preloader_3.gif"></img>
+					</center>
+				</div>
 			</div>
 			<div id="modaldelConta" class="hidden">
 				<div id="dellConta">
@@ -350,6 +366,16 @@ EOT;
 				{
 					$('#planno').val(ind);
 				}
+				$(".prem-plan").click(function()
+				{
+					$("#work-in-prog-overlay").fadeIn();
+					$("#modalMudarPlano").css({ opacity: 0 });
+				});
+				$("#closeOverPlan").click(function()
+				{
+					$("#work-in-prog-overlay").fadeOut();
+					$("#modalMudarPlano").css({ opacity: 1 });
+				});
 				$( "#openNomePopup" ).click(function() {
 				  $("#modalNome").attr('class', 'visible');
 				  $("#openb2").css('opacity', '0');
