@@ -38,6 +38,7 @@ body{
 	margin-right: -5px;
 }
 #senha{
+	width: 480px;
 	width: calc(100% - 20px);
 	height: 70px;
 	border: none;
@@ -57,13 +58,13 @@ body{
 	border-left: 5px solid lightsteelblue;
 }
 ::-webkit-input-placeholder {
-   font-size: 18px;
+   font-size: 18px !important;
 }
 :-moz-placeholder { /* Firefox 18- */
-   font-size: 18px;
+   font-size: 18px !important;
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-   font-size: 18px;
+   font-size: 18px !important;
 }
 :-ms-input-placeholder {  
    font-size: 18px !important;
