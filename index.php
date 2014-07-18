@@ -112,6 +112,10 @@ if(isset($_SESSION['user_id']))
 					you to organize and manage all your notes in addition to ensure you access
 					to advanced options. If you are interested, click <a href="planos.php">here</a> and check out the best plan
 					for you!</p>
+					<br>
+					<p>If you have any additional question or want to have more information on what
+					we do, just send us an email at <a href="mailto:contact@notispad.com">contact@notispad.com</a>
+					and we will be happy to talk with you.</p>
 					<p>We hope to see you soon!</p>
 					<p>Best,</p>
 					<br>
