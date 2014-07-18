@@ -41,13 +41,31 @@ if(isset($_SESSION['user_id']))
 			</div>
 		</div>
 		<script>
-		var ua = window.navigator.userAgent;
-        var msie = ua.indexOf("MSIE ");
+			navigator.sayswho= (function(){
+				var ua= navigator.userAgent, tem, 
+				M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+				if(/trident/i.test(M[1])){
+					tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+					return 'IE '+(tem[1] || '');
+				}
+				if(M[1]=== 'Chrome'){
+					tem= ua.match(/\bOPR\/(\d+)/)
+					if(tem!= null) return 'Opera '+tem[1];
+				}
+				M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+				if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+				return M.join(' ');
+			})();
 
-        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
-            document.getElementById('erroNav').style.display="block";
-        else
-            document.getElementById('erroNav').style.display="none";
+			var func = navigator.sayswho;
+			var bF = func.split(' ');
+			var bN = bF.shift();
+
+			if(bN == "Safari" || bN == "Opera" || bN == "IE"){
+				document.getElementById('erroNav').style.display="block";
+			}else{
+				document.getElementById('erroNav').style.display="none";
+			}
 		</script>
 		
 		<div class="erro">
