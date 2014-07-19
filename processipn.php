@@ -46,7 +46,16 @@ foreach($myPost as $key => $value)
 }
 
 // Step 2: POST IPN data back to PayPal to validate
-$ch = curl_init('https://www.sandbox.paypal.com/cgi-bin/webscr');
+if(isSandbox())
+{
+	$url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+}
+else
+{
+	$url = "https://www.paypal.com/cgi-bin/webscr";
+}
+
+$ch = curl_init($url);
 curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);

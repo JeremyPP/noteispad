@@ -9,9 +9,19 @@ if(isset($_GET['tx']))
 	// First call - we've got the tx but care about the other values as it might be a spoof call
 	$tx=$_GET['tx'];
 	$ch = curl_init();
+	if(isSandbox())
+	{
+		$url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+	}
+	else
+	{
+		$url = "https://www.paypal.com/cgi-bin/webscr";
+	}
+
 	curl_setopt_array($ch, array
 	(
-		CURLOPT_URL => 'https://www.sandbox.paypal.com/cgi-bin/webscr',
+		
+		CURLOPT_URL => $url,
 		CURLOPT_POST => true,
 		CURLOPT_POSTFIELDS => http_build_query(array
 		(

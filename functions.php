@@ -1327,4 +1327,16 @@ The NOT is PAD! team.";
 	return $filename;
     }
 
+    /**
+    * Is this a dev/sandbox system?
+    * @param none
+    * @return sandbox from paypal table
+    */
+    function isSandbox()
+    {
+	$mysql = dbConnect('isSandbox');
+	$res = $mysql->query("select sandbox from paypal");
+	$obj = $res->fetch_object();
+	return $obj->sandbox;
+    }
 ?>

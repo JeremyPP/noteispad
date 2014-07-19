@@ -64,7 +64,19 @@ elseif(isset($_GET['password']))
 					<h1>Sign up</h1>
 					<h2>You chose the <span id="pname">PRO</span> plan for <span style="color:#4A879E;">$</span><span id="pprice">0</span> per month.</h2>
 					<h3>Please fill in the information below to create your account:</h3>
-					<form name="dadosUser" id="dadosUser" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+<?php
+	if(isSandbox())
+	{
+		$url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+	}
+	else
+	{
+		$url = ""https://www.paypal.com/cgi-bin/webscr";
+	}
+
+	echo "<form name='dadosUser' id='dadosUser' method='post' action='$url'>";
+?>
+
 						<input type="hidden" id="planno" name="planno" value="">
 						<input type="hidden" name="cmd" value="_xclick-subscriptions">
 						<input type="hidden" name="business" value="notispad@gmail.com">
