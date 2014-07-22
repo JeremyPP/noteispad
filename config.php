@@ -72,6 +72,12 @@ elseif(isset($_POST['pwCheck']))
 	echo json_encode($return);
 	exit;
 }
+elseif(isset($_POST['emailCheck']))
+{
+	$return['checkRes'] = checkUser($_POST['emailCheck']);
+	echo json_encode($return);
+	exit;
+}
 elseif(isset($_POST['codigo04']))
 {
 	updatePassword($_SESSION['user_id'], $_POST['codigo04']);
@@ -108,7 +114,7 @@ elseif(isset($_POST['codigo04']))
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConf">Type a new name</div>
 					<center>
-                        <form action="" method="post">
+                        <form id="nmForm" action="" method="post">
 <?php
 	if(isset($_POST['codigo01']))
 	{
@@ -120,7 +126,7 @@ elseif(isset($_POST['codigo04']))
 ?>
 							<div class="form-error-conf" id="name-error">Enter only one (01) name.</div>
 							<br>
-							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
+							<input id="valid" type="submit" value="Save" name="salvar">
                         </form>
                     </center>
 				</div>
@@ -130,7 +136,7 @@ elseif(isset($_POST['codigo04']))
 					<span class="og-closeE"></span>
 					<div class="popUpTxtConf">Type a new email</div>
 					<center>
-                        <form action="" method="post">
+                        <form id="emailForm" action="" method="post">
 <?php
 	if(isset($_POST['codigo02']))
 	{
@@ -138,9 +144,9 @@ elseif(isset($_POST['codigo04']))
 	}
 
 	$email = getEmail($_SESSION['user_id']);
-                            echo "<input id='novoEmail02' placeholder='' type='email' name='codigo02' value='$email'>";
+                            echo "<input id='novoEmail02' onChange='emailChanged=1' placeholder='' type='email' name='codigo02' value='$email'>";
 ?>
-							<div class="form-error-conf" id="email-error">Invalid email or incorrect password!</div>
+							<div class="form-error-conf" id="email-error">Email already registered!</div>
 							<br>
 							<input id="valid" type="submit" onclick="" value="Save" name="salvar">
                         </form>
@@ -363,6 +369,7 @@ EOT;
 			<script src="scrollReveal.js"></script>
 			<script>
 				var passChanged = 0;
+				var emailChanged = 0;
 
 				function setVal(ind)
 				{
@@ -370,6 +377,41 @@ EOT;
 				}
 				$(document).ready(function()
 				{
+					$('#emailForm').submit(function(e)
+					{
+						var retval = true;
+						if(emailChanged)
+						{
+							$.ajax({ type : 'post',
+								url: 'config.php',
+								dataType: 'json',
+								data: {emailCheck: $('#novoEmail02').val() },
+								async: false,
+								success: function(d)
+								{
+									if(d.checkRes)
+									{
+										erro08();
+										retval = false;
+									}
+								}
+							});
+						}
+
+						return retval;
+					});
+
+					$('#nmForm').submit(function(e)
+					{
+						var retval = true;
+						if(/\s/.test($("#novoEmail").val()) || ($("#novoEmail").val() === ""))
+						{
+							erro07();
+							retval = false;
+						}
+						return retval;
+					});
+
 					$("#changePass").submit(function(e)
 					{
 						var retval = true;
