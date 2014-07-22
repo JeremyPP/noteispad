@@ -17,7 +17,9 @@ body{background:#D34C4C;-webkit-touch-callout:none;-webkit-user-select:none;-kht
 <h1>404.</h1>
 <h3>Page not found!</h3>
 <h2>There's that guy that said that thing about never being truly lost...</h2>
-<a href="http://notispad.com"><div id="b">Go back home</div></a>
+<?php
+echo "<a href='http://$_SERVER[SERVER_NAME]'><div id='b'>Go back home</div></a>\n";
+?>
 </div>
 </center>
 </body>

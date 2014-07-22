@@ -1,8 +1,12 @@
 ﻿<?php
 require_once("init.php");
 
-
-if(isset($_GET['email']) && !isset($_GET['password']))
+if(isset($_SESSION['user_id']))
+{
+	header("Location: 404.php");
+	exit();
+}
+elseif(isset($_GET['email']) && !isset($_GET['password']))
 {
 	// ajax call
 	$return['emailInUse'] = checkUser($_GET['email']);
@@ -71,7 +75,7 @@ elseif(isset($_GET['password']))
 	}
 	else
 	{
-		$url = ""https://www.paypal.com/cgi-bin/webscr";
+		$url = "https://www.paypal.com/cgi-bin/webscr";
 	}
 
 	echo "<form name='dadosUser' id='dadosUser' method='post' action='$url'>";

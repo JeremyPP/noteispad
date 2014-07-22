@@ -1,7 +1,12 @@
 ﻿<?php
 require_once("init.php");
 
-if(isset($_POST['email']))
+if(isset($_SESSION['user_id']))
+{
+	header("Location: 404.php");
+	exit();
+}
+elseif(isset($_POST['email']))
 {
 	$uid = checkUser($_POST['email']);
 	if($uid)
