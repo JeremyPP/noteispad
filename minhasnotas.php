@@ -49,8 +49,12 @@ if(!isset($_SESSION['user_id']))
 			echo '<div class="notaAllNota">';
 			echo "<a href='notpad.php?note=$row->note_name'>";
 			echo "<div class='allNotaContTxt' id='id-allNota$i'>";
-			$display_text = preg_replace('/[\r\n]+/', ' ', substr(trim($row->note_text), 0, 300));
-			$display_text .= '....';
+			$display_text = preg_replace('/[\r\n]+/', ' ', trim($row->note_text));
+			if(strlen($display_text) > 300)
+			{
+				$display_text = substr($display_text,0,300);
+				$display_text .= '....';
+			}
 			echo $display_text;
 			echo '</div>';
 			echo '</a>';

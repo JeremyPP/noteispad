@@ -461,9 +461,12 @@ The NOT is PAD! team.";
 
 	$mysql = dbConnect('saveNote');
 
-	if(isNotNewNote($postarray['code']))
+	$content = $mysql->real_escape_string($postarray['content']);
+	$code = $mysql->real_escape_string($postarray['code']);
+
+	if(isNotNewNote($code))
 	{
-		$result = $mysql->query("select note_id, user_id from notes where note_name = '$postarray[code]'");
+		$result = $mysql->query("select note_id, user_id from notes where note_name = '$code'");
 		$obj = $result->fetch_object();
 		$note_id = $obj->note_id;
 		$user_id = $obj->user_id;
@@ -477,32 +480,32 @@ The NOT is PAD! team.";
 			$obj = $res->fetch_object();
 			if($obj->ncount > 1)
 			{
-				$sql = "insert into note_lines(note_id, note_text) values($note_id, '$postarray[content]')";
+				$sql = "insert into note_lines(note_id, note_text) values($note_id, '$content')";
 			}
 			else
 			{
-				$sql = "update note_lines set note_text = '$postarray[content]' where note_id = $note_id";
+				$sql = "update note_lines set note_text = '$content' where note_id = $note_id";
 			}
 		}
 		else
 		{
 			// It's a fastnote (or a usernote treated like one)
-			$sql = "insert into note_lines(note_id, note_text) values($note_id, '$postarray[content]')";
+			$sql = "insert into note_lines(note_id, note_text) values($note_id, '$content')";
 		}
 	}
 	else
 	{
 		// It's a completely new note
 		$uid = (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null');
-		$mysql->query("insert into notes(user_id, note_name) values($uid, '$postarray[code]')");
+		$mysql->query("insert into notes(user_id, note_name) values($uid, '$code')");
 		$nid = $mysql->insert_id;
 
 		if($uid == 'null')
 		{
-			$mysql->query("create event note_delete_" . $nid . " on schedule at now() + interval 7 day do call delete_note_sp('$postarray[code]');");
+			$mysql->query("create event note_delete_" . $nid . " on schedule at now() + interval 7 day do call delete_note_sp('$code');");
 		}
 
-		$sql = "insert into note_lines(note_id, note_text) values($nid, '$postarray[content]')";
+		$sql = "insert into note_lines(note_id, note_text) values($nid, '$content')";
 	}
 
 	$mysql->query($sql);
