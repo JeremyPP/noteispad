@@ -280,7 +280,7 @@
 	// Start date is always today at 1 second past midnight UTC
 	$start_date = gmdate('Y-m-d 00:00:01');
 	
-	$res = $mysql->query("insert into users(user_name, email, password, plan_id, payment_date, subscr_id, payer_id) values('$name', '$email', '$password', $plan, '$start_date', '$tran_id', '$payer_id')");
+	$res = $mysql->query("insert into users(user_name, email, password, plan_id, payment_date, subscr_id, payer_id) values('" . $mysql->real_escape_string($name) . "', '$email', '$password', $plan, '$start_date', '$tran_id', '$payer_id')");
 
 	return $mysql->insert_id;
     }
@@ -519,7 +519,7 @@ The NOT is PAD! team.";
     function updateFirstName($id, $newval)
     {
 	$mysql = dbConnect('updateFirstName');
-	$mysql->query("update users set user_name = '$newval' where user_id = $id");
+	$mysql->query("update users set user_name = '" . $mysql->real_escape_string($newval) . "' where user_id = $id");
     }
 
     /**
@@ -530,7 +530,7 @@ The NOT is PAD! team.";
     function updateEmail($id, $newval)
     {
 	$mysql = dbConnect('updateEmail');
-	$mysql->query("update users set email = '$newval' where user_id = $id");
+	$mysql->query("update users set email = '" . $mysql->real_escape_string($newval) . "' where user_id = $id");
     }
 
     /**
