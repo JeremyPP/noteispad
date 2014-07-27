@@ -1,4 +1,13 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+	// Change this to the path on your server
+	$file = '/home/www/notispad.development/admin_output/emails.txt';
+
+	if(isset($_POST['ine']))
+	{
+		file_put_contents($file, $_POST['ine'] . "\n", FILE_APPEND | LOCK_EX);
+	}
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html><head><title>not is pad!</title>
 <meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -9,7 +18,7 @@ body{background: url("bg.jpg");padding: 0;margin: 0;}#l{position: absolute;width
 </style>
 </head><body><div id="ovrl"></div><div id="l">
 <center><div id="c"></div></center><center><div class="u"></div></center>
-<div id="mc"><h1>A new way to manage and share your notes in the clouds is coming. Stay tuned!</h1>
-<center><form><input id="ine" type="email" placeholder="My email" required></input>
+<div id="mc"><h1>A new way to manage and share your notes in the cloud is coming. Stay tuned!</h1>
+<center><form method='post'><input name="ine" id="ine" type="email" placeholder="My email" required></input>
 <input id="ins" type="submit" value="Let me know when is out!"></input>
 </form></center></div></div></body></html>
