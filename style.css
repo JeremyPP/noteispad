@@ -2137,6 +2137,9 @@ input[type="checkbox"] {
 	#conf h1{
 		font-size: 50px;
 	}
+	#showme{
+		width: 100%;
+	}
 }
 @media only screen and (max-width: 500px) {
 	#center{
@@ -2189,10 +2192,6 @@ input[type="checkbox"] {
 	#pagePrice h1{
 		margin-bottom: 45px;
 		font-size: 33px;
-	}
-	#dadosUser {
-		width: auto;
-		margin: 6px;
 	}
 	.passwordInfo{
 		display: none;
