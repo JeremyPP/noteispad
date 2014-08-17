@@ -92,7 +92,7 @@ else
 	exit();
 }
 ?>
-				<a href="minhasnotas.php" class="nemuListProfLink">
+				<a href="mynotes.php" class="nemuListProfLink">
 					<div id="notasMmenu" class="nemuListProf">
 						All my notes
 					</div>
