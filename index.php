@@ -110,7 +110,7 @@ if(isset($_SESSION['user_id']))
 					services. Besides having access to an exclusive area on our servers to store
 					all your notes, you will have access to the Note Manager. This last allows
 					you to organize and manage all your notes in addition to ensure you access
-					to advanced options. If you are interested, click <a href="planos.php">here</a> and check out the best plan
+					to advanced options. If you are interested, click <a href="signup.php">here</a> and check out the best plan
 					for you!</p>
 					<br>
 					<p>If you have any additional question or want to have more information on what
@@ -157,7 +157,7 @@ if(isset($_SESSION['user_id']))
 							</center>
 						</div>
 						<center id="separaLogin">or</center>
-						<center id="createSubmit"><a href="planos.php" style="padding: 15px;color: #fafafa; text-decoration: none;text-transform: uppercase;font-weight: 700;">Create an account</a></center>
+						<center id="createSubmit"><a href="signup.php" style="padding: 15px;color: #fafafa; text-decoration: none;text-transform: uppercase;font-weight: 700;">Create an account</a></center>
 					</form>
 				</div>
 			</div>

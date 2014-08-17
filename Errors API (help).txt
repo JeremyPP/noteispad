@@ -127,7 +127,7 @@ use: If any error occurs while trying to save the changes.
  _________________________________
 |                                 |
 |          ERRORS part 5          |
-| (create account -> planos.php)  |
+| (create account -> signup.php)  |
 |_________________________________|
 
 

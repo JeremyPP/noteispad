@@ -260,7 +260,7 @@ elseif(isset($_GET['password']))
 					else
 					{
 						$.ajax({ type: "get", 
-							url: "planos.php", 
+							url: "signup.php", 
 							dataType: "json", 
 							data: {email: $("#email-cc").val() }, 
 							async: false,
@@ -291,7 +291,7 @@ elseif(isset($_GET['password']))
 						var ticket = '';
 
 						$.ajax({ type: "get", 
-							url: "planos.php", 
+							url: "signup.php", 
 							dataType: "json", 
 							data: {name : $("#name-cc").val(), 
 								password : $("#pass-cc").val(),
