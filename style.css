@@ -13,7 +13,7 @@ body{
 	background: #cecece; /* Firefox */
 }
 
-/* =======Pagina inicial======= */
+/* ======= Main Page ======= */
 #center{
 	color: #ccc;
 	width: 500px;
@@ -121,7 +121,7 @@ input:focus::-webkit-input-placeholder {
 	-moz-border-radius: 200px;
 }
 
-/* =======Pagina de notas======= */
+/* ======= Notes ======= */
 #pagNot{
 	background: #fff;
 }
@@ -269,7 +269,7 @@ input:focus::-webkit-input-placeholder {
 	margin-bottom: 30px;
 }
 
-/* =======Salvar======= */
+/* ======= Save ======= */
 #salvo{
 	background: #4CAED3;
 	position: fixed;
@@ -312,7 +312,7 @@ input:focus::-webkit-input-placeholder {
 	margin: auto;
 }
 
-/* =======Todas as Notas======= */
+/* ======= All Notes ======= */
 .all{
 	background: #fafafa;
 	margin: 15px;
@@ -340,7 +340,7 @@ input:focus::-webkit-input-placeholder {
 	padding-right: 15px;
 }
 
-/* =======Planos & preços======= */
+/* ======= Plans & Pricing ======= */
 #pagePrice h1{
 	font-family: 'Open Sans', sans-serif;
 	color: #FFFFFF;
@@ -1583,7 +1583,7 @@ input[type="checkbox"] {
 	color: #fff;
 }
 
-/*======= Erros =======*/
+/*======= Errors =======*/
 .erro{
 	visibility: hidden;
 	opacity: 0;
@@ -1699,7 +1699,7 @@ input[type="checkbox"] {
 	top: -80px;
 }
 
-/*Recuperar senha (erro ou não))*/
+/*Reset password (error or not)*/
 #recoverok{
 	background: #4CAED3;
 	height: 100%;
@@ -1958,7 +1958,7 @@ input[type="checkbox"] {
 	margin-top: 10px;
 }
 
-/*======= Popup de confirmação =======*/
+/*======= Comfirmation Popup =======*/
 #pagNot .popup-modal{
 	background: rgba(0, 0, 0, .2);
 	position: absolute;
@@ -2021,7 +2021,7 @@ input[type="checkbox"] {
 	background: rgb(201, 201, 201);
 }
 
-/*======= Erro se o navegador for IE =======*/
+/*======= Error if browser is IE =======*/
 .erro-navegador{
 	width: 100%;
 	min-height: 70px;
@@ -2085,7 +2085,7 @@ input[type="checkbox"] {
     margin: -1px auto;
 }
 
-/*======= Media querys =======*/
+/*======= Media queries =======*/
 @media only screen and (max-width: 603px) {
 	#contentOver h1{
 		font-size: 60px !important;

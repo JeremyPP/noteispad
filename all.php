@@ -9,13 +9,12 @@ require_once("init.php");
         <link href="style.css" type="text/css" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <title>All pages - not is pad!</title>
-
+		<title>All pages - not is pad!</title>
+		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
+		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
     </head>
     <body>
-	
-	
-	
+
         <?php
 		$result = $mysql->query("select NL.note_text as ntext from notes N, note_lines NL where N.note_name = '$_SESSION[code]' and NL.note_id = N.note_id");
 

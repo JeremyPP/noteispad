@@ -29,6 +29,8 @@ else
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<title>Forgot password - not is pad!</title>
+		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
+		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 		<style>

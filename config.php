@@ -94,6 +94,8 @@ elseif(isset($_POST['codigo04']))
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<title>Settings - not is pad!</title>
+		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
+		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 		<script src="erro.js"></script>
     </head>

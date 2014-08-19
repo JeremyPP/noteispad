@@ -14,6 +14,8 @@ session_destroy();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Payment error!</title>
+<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
+<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 <meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <style>

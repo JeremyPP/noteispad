@@ -58,6 +58,8 @@ elseif(failedPayment($_SESSION['user_id']))
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link href="style7.css" type="text/css" rel="stylesheet">
 		<title>Home - not is pad!</title>
+		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
+		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
