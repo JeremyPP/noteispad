@@ -2086,6 +2086,17 @@ input[type="checkbox"] {
 }
 
 /*======= Media queries =======*/
+@media only screen and (max-width: 1000px) {
+	#contAllNotas {
+		max-width: 100%;
+	}
+	.notaAllNota{
+		width: 100%;
+	}
+	.allNotaContTxt{
+		width: calc(100% - 140px);
+	}
+}
 @media only screen and (max-width: 603px) {
 	#contentOver h1{
 		font-size: 60px !important;
