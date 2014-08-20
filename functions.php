@@ -415,18 +415,18 @@
     {
 	$ret_text = "Welcome!
 
-You have just created a nonexistent code, so a new note has been created.
+You have just typed a nonexistent code, so a new note has been created.
 Once saved, this note will be associated to this code.
-Save this code to access your notes again, or to share it with others people.
-If you share the code, don't worry, the original content of your note will cannot be changed.
-Once the note saved, any changes made will be saved to another 'page'.
-You can access all existing pages by clicking on 'View all'.
-Also, you can create a new note with a brand new code or access another existing note by clicking on 'New Note' in the upper right corner.
+Keep this code to access your note again, or to share it with other people.
+If you share the code, don't worry, the original content of your note will remain unchanged.
+Once the note is saved, any changes made will be saved to another 'page'.
+You can access all existing pages by clicking on 'View All'.
+Also, you can create a new note with a new code or access another existing note by clicking on 'New Note' in the upper right corner.
 We hope you enjoy our services.
 We are here if you have any question.
 Regards,
 
-The NOT is PAD! team.";
+The not is pad! team.";
 
 	$mysql = dbConnect('getNoteText');
 
