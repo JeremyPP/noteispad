@@ -91,28 +91,29 @@ if(isset($_SESSION['user_id']))
 				<div id="contentOver">
 					<h1>Welcome to not is pad!</h1>
 					<h2>Our goal</h2>
-					<p>The idea behind not is pad! is to provide a quick and easy way to share
-					content on the clouds with other people. With the not is pad!, you create a
-					code for your note and share this code with your friends and colleagues. But
-					don't worry, your original note can not be changed. If someone changes the
-					content of the note, another "page" will be created and the initial content
-					will remain unchanged.</p>
+					<p>The idea behind not is pad! is to provide a quick and easy way to save and
+					share content in the clouds with other people. With not is pad!, you create an
+					access code for your note that, if you wish, you can share with your friends
+					and colleagues. But don't worry, your original note can not be changed. If
+					someone changes the content of the note, another "page" will be created and
+					the initial content will remain unchanged.</p>
 					<h2>Fast Notes</h2>
-					<p>There are two ways to use the not is pad!. The first one is to create
-					"Fast Notes". Fast Notes are a very good way to quickly share or registering
-					an idea, a thought, or anything else. To create a new Fast Note, just choose
-					a new access code and voila, your note is created automatically, just start
-					writing. But keep in mind that Fast Notes can be accessed by anyone with the
-					access code associated to this note. For this reason, if you don't want to
-					share its content, keep the access code safe. It's also important to know
-					that Fast Notes are available on our servers for only 7 (seven) days.</p>
+					<p>There are two ways to use not is pad!. The first one is to create "Fast
+					Notes". Fast Notes are a very good way to quickly share or save an idea, a
+					thought, or anything else. To create a new Fast Note, just choose a new access
+					code and voila, your note is created automatically. But keep in mind that Fast
+					Notes can be accessed by anyone with the access code associated with it. For
+					this reason, if you don't want to share its content, keep the access code safe.
+					It's also important to know that Fast Notes are available on our servers for
+					only 7 (seven) days.</p>
 					<h2>Create an account</h2>
-					<p>Creating an account and choosing between one of our subscription plans,
-					you will benefit from several advantages that will allow you to fully use our
+					<p>Creating an account and choosing between one of our subscription plans you
+					will benefit from several advantages that will allow you to fully use our
 					services. Besides having access to an exclusive area on our servers to store
-					all your notes, you will have access to the Note Manager. This last allows
-					you to organize and manage all your notes in addition to ensure you access
-					to advanced options. If you are interested, click <a href="signup.php">here</a> and check out the best plan
+					all your notes, you will have access to the Note Manager. This last one allows
+					you to organize and manage all your notes in one place. And the most important,
+					your notes will never be deleted and their content will never be lost. If you
+					are interested, click <a href="signup.php">here</a> and check out the best plan
 					for you!</p>
 					<br>
 					<p>If you have any additional question or want to have more information on what
