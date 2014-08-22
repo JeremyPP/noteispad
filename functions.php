@@ -951,7 +951,7 @@ The not is pad! team.";
 	$obj = $res->fetch_object();
 	$totu = $obj->count;
 
-	$res = $mysql->query("select count(note_id) as count from notes where user_id = 0");
+	$res = $mysql->query("select count(note_id) as count from notes where user_id is null");
 	$obj = $res->fetch_object();
 	$lfn = $obj->count;
 
