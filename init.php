@@ -1,4 +1,5 @@
 <?php
+require_once("dbconfig.php");
 require_once("functions.php");
 
 session_start();
@@ -12,12 +13,7 @@ if(isset($_SESSION['user_id']) && ($_SERVER['REQUEST_URI'] != '/payment_error.ph
 	}
 }
 
-$dbhost = '127.0.0.1';
-$dbname = 'notispad_dev';
-$dbuser = 'notispad_dev';
-$dbpass = 'h0undd0g';
-
-$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+$mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 if($mysql->connect_errno)
 {
 	echo "Failed to connect to db: " . $mysqli->connect_error;

@@ -2,9 +2,9 @@
     /* 
     * Central de funções do NOTisPAD
     */
+    require_once("dbconfig.php");
     require_once("init.php");
     require_once("password.php");
-    
     
     /**
     * Costantes para strings.
@@ -182,13 +182,7 @@
     */
     function dbConnect($err_str)
     {
-        // Change these
-	$dbhost = '127.0.0.1';
-	$dbname = 'notispad_dev';
-	$dbuser = 'notispad_dev';
-	$dbpass = 'h0undd0g';
-
-	$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	$mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 	if($mysql->connect_errno)
 	{
 		error_log("Connection error in $err_str" . $mysqli->connect_error);

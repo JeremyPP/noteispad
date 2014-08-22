@@ -3,12 +3,9 @@
 // Setup the database - complete the details below. Please note that this script
 // expects the user and database to already exist.
 // dbuser should have all Data and Structure grants but not Admin apart from "Super" (for the set global command)
-$dbhost = '127.0.0.1';
-$dbname = 'notispad_dev';
-$dbuser = 'notispad_dev';
-$dbpass = 'h0undd0g';
+require_once("dbconfig.php");
 
-$mysql = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+$mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($mysql->connect_errno)
 {
@@ -35,12 +32,12 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS note_lines(note_id INT(11) NOT NUL
 	die("Failed to create note_lines: " . $mysql->error);
 }
 
-if(!$mysql->query("drop procedure if exists $dbname.delete_note_sp"))
+if(!$mysql->query("drop procedure if exists DBNAME.delete_note_sp"))
 {
 	die("Failed to drop procedure: " . $mysql->error);
 }
 
-if(!$mysql->query(" CREATE PROCEDURE $dbname.delete_note_sp (ncode varchar(1024)) 
+if(!$mysql->query(" CREATE PROCEDURE DBNAME.delete_note_sp (ncode varchar(1024)) 
 begin
 insert into fastnote_archive(fnote_name, fnote_text)
 select N.note_name, NL.note_text
