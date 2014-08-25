@@ -39,7 +39,7 @@ if(!isset($_SESSION['user_id']))
 			
 			<div id="contAllNotas" data-scrollreveal="enter bottom and move 100px over 1s">
 <?php
-	$res = $mysql->query("select N.note_name, NL.note_text from notes N, note_lines NL where N.user_id = $_SESSION[user_id] and NL.note_id = N.note_id and NL.note_seq = (select max(note_seq) from note_lines where note_id = N.note_id)");
+	$res = $mysql->query("select N.note_name, NL.note_text, NL.note_seq from notes N, note_lines NL where N.user_id = $_SESSION[user_id] and NL.note_id = N.note_id and NL.note_seq = (select max(note_seq) from note_lines where note_id = N.note_id)");
 	if($res->num_rows)
 	{
 		$script = '';
@@ -50,7 +50,7 @@ if(!isset($_SESSION['user_id']))
 			$row = $res->fetch_object();				
 			echo '<div class="notaAllNota">';
 			echo "<a href='notpad.php?note=$row->note_name'>";
-			echo "<div class='allNotaContTxt' id='id-allNota$i'>";
+			echo "<div class='allNotaContTxt' id='id-allNota$row->note_seq'>";
 			$display_text = preg_replace('/[\r\n]+/', ' ', trim($row->note_text));
 			if(strlen($display_text) > 300)
 			{
@@ -60,7 +60,7 @@ if(!isset($_SESSION['user_id']))
 			echo $display_text;
 			echo '</div>';
 			echo '</a>';
-			echo "<div class='allNotaIcon' id='but-id$i'>";
+			echo "<div class='allNotaIcon' id='but-id$row->note_seq'>";
 			echo '<center>';
 			echo '<img src="eye.png">';
 			echo '</center>';
@@ -68,18 +68,18 @@ if(!isset($_SESSION['user_id']))
 			echo '</div>';
 			echo '</div>';
 
-			$script .= '$( "#but-id' . $i . '").hover(' . "\n";
+			$script .= '$( "#but-id' . $row->note_seq . '").hover(' . "\n";
 			$script .= 'function() {' . "\n";
-			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
-			$script .= 'var div = $("<div class=\'allNotaContTxt replacedNote\' id=\'id-allNota' . $i . '\'>' . $row->note_name . '</div>").hide();' . "\n";
+			$script .= '$(\'#id-allNota' . $row->note_seq . '\').fadeOut( 50 , function(){' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxt replacedNote\' id=\'id-allNota' . $row->note_seq . '\'>' . $row->note_name . '</div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
-			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
+			$script .= '$(\'#id-allNota' . $row->note_seq . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";
 			$script .= '}, function() {' . "\n";
-			$script .= '$(\'#id-allNota' . $i . '\').fadeOut( 50 , function(){' . "\n";
-			$script .= 'var div = $("<div class=\'allNotaContTxt\' id=\'id-allNota' . $i . '\'>' . $display_text . '</div>").hide();' . "\n";
+			$script .= '$(\'#id-allNota' . $row->note_seq . '\').fadeOut( 50 , function(){' . "\n";
+			$script .= 'var div = $("<div class=\'allNotaContTxt\' id=\'id-allNota' . $row->note_seq . '\'>' . $display_text . '</div>").hide();' . "\n";
 			$script .= '$(this).replaceWith(div);' . "\n";
-			$script .= '$(\'#id-allNota' . $i . '\').fadeIn( 50 );' . "\n";
+			$script .= '$(\'#id-allNota' . $row->note_seq . '\').fadeIn( 50 );' . "\n";
 			$script .= '});' . "\n";
 			$script .= '}' . "\n";
 			$script .= ');' . "\n";

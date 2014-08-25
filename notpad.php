@@ -87,6 +87,10 @@ if(isset($_SESSION['user_id']))
 			{
 				$code = $_POST['code'];
 			}
+			elseif(isset($_GET['note']))
+			{
+				$code = $_GET['note'];
+			}
 			else
 			{
 				$code = $_SESSION['code'];
