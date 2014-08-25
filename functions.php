@@ -405,7 +405,7 @@
     * @param note code
     * @return text of note
     */
-    function getNoteText($code)
+    function getNoteText($code, $page=0)
     {
 	$ret_text = "Welcome!
 
@@ -426,7 +426,16 @@ The not is pad! team.";
 
 	if(isNotNewNote($code))
 	{
-		$result = $mysql->query("select NL.note_text as ntext from note_lines NL, notes N where N.note_name = '$code' and NL.note_id = N.note_id and NL.note_seq = (select max(note_seq) from note_lines where note_id = N.note_id)");
+		if($page == 0)
+		{
+			$seq_sql = '(select max(note_seq) from note_lines where note_id = N.note_id)';
+		}
+		else
+		{
+			$seq_sql = $page;
+		}
+
+		$result = $mysql->query("select NL.note_text as ntext from note_lines NL, notes N where N.note_name = '$code' and NL.note_id = N.note_id and NL.note_seq = $seq_sql");
 
 		if($result->num_rows)
 		{

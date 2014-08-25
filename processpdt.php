@@ -51,7 +51,7 @@ foreach($res as $k => $v)
 }
 
 		// First thing to check is that this really is for us
-		if($res['receiver_email'] != 'notispad@gmail.com')
+		if($res['receiver_email'] != PPEMAIL)
 		{
 			error_log(">>>>INVALID RECEIVER_EMAIL: $res[receiver_email]");
 			exit();

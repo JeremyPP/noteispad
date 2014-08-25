@@ -16,7 +16,7 @@ require_once("init.php");
     <body>
 
         <?php
-		$result = $mysql->query("select NL.note_text as ntext from notes N, note_lines NL where N.note_name = '$_SESSION[code]' and NL.note_id = N.note_id");
+		$result = $mysql->query("select NL.note_text as ntext, NL.note_seq as nid from notes N, note_lines NL where N.note_name = '$_SESSION[code]' and NL.note_id = N.note_id");
 
 		if($result->num_rows)
 		{
@@ -24,7 +24,7 @@ require_once("init.php");
 			{
 				$result->data_seek($i);
 				$row = $result->fetch_row();
-				echo "<a href='notpad.php?page=$p' style='text-decoration: none; color: #000; '><div class='all'>
+				echo "<a href='notpad.php?page=$row[1]' style='text-decoration: none; color: #000; '><div class='all'>
 				<div class='allnum'>
 					Page $p
 				</div>

@@ -117,9 +117,11 @@ if(isset($_SESSION['user_id']))
 ?>
 
 <?php
+	$page = 0;
+
 	if(isset($_GET['page']))
 	{
-		$seq_sql = $_GET['page'];
+		$page = $_GET['page'];
 		$code = $_SESSION['code'];
 	}
 	elseif(isset($_GET['note']))
@@ -138,7 +140,7 @@ if(isset($_SESSION['user_id']))
 		}
 	}
 
-	echo getNoteText($code);
+	echo getNoteText($code, $page);
 ?>
 				</textarea>
 				<div id="bottom"></div>
