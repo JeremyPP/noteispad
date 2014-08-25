@@ -240,7 +240,20 @@ if(isset($_SESSION['user_id']))
 		unset($_SESSION['error']);
 		echo "</script>";
 	}
-?>	
+?>
+		<script>
+			function opinfo(){
+				$("#over").attr('class', 'open');
+				$("#center").attr('class', 'open');
+				$("#b01").attr('class', 'open');
+				$("body").css('overflow-y', 'visible');
+			}
+			<?php
+			if (!empty($_GET['info']) && $_GET['info'] == "true" ){
+			echo 'opinfo();';
+			}
+			?>
+		</script>
 		<script src="scrollReveal.js"></script>
         </body>
 </html>
