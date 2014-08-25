@@ -83,7 +83,7 @@ if(strcmp($ret, "VERIFIED") == 0)
 	$res = $_POST;	// Make it simpler to copy code from processpdt to processipn
 
 	// First thing to check is that this really is for us
-	if($res['receiver_email'] != 'notispad@gmail.com')
+	if($res['receiver_email'] != PPEMAIL)
 	{
 		error_log(">>>>INVALID RECEIVER_EMAIL: $res[receiver_email]");
 		exit();

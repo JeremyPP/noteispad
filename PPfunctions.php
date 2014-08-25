@@ -15,7 +15,7 @@ require_once("functions.php");
 	$callstr .= "&PAYMENTREQUEST_0_PAYMENTACTION=Sale";
 	$callstr .= "&L_BILLINGTYPE0=RecurringPayments";
 	$callstr .= "&NOSHIPPING=1";
-	$callstr .= "&EMAIL=" . urlencode('admin@notispad.com');
+	$callstr .= "&EMAIL=" . urlencode(PPEMAIL);
 	$callstr .= "&L_BILLINGAGREEMENTDESCRIPTION0=" . urlencode($desc);
 	$_SESSION['pp_desc'] = urlencode($desc);	// Save for later processing
 	$callstr .= "&returnUrl=" . urlencode($returl);
@@ -212,7 +212,7 @@ echo '    <span class="l-b"></span>' . "\n";
 	echo "<form id='redir' action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post'>";
 
 	echo "<input type='hidden' name='cmd' value='_xclick-subscriptions'>";
-	echo "<input type='hidden' name='business' value='notispad@gmail.com'>";
+	echo "<input type='hidden' name='business' value='" . PPEMAIL . "'>";
 	echo "<input type='hidden' id='item_name' name='item_name' value='$desc'>";
 	echo "<input type='hidden' id='a3' name='a3' value='$price'>";
 	echo "<input type='hidden' name='p3' value='1'>";
