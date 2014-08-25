@@ -1,0 +1,17 @@
+/* humanstxt.org */
+
+/* TEAM */
+	Front-end developer and designer: Jeremy Pougnet
+	Twitter: @SNJ955
+
+	Back-end developer: Keith Jones
+	Google+: +KeithJonesPA13
+
+/* THANKS */
+	To everyone who has contributed to make this project come true!
+
+/* SITE */
+	Name: not is pad!
+	Launched: 23-08-2014
+	Languages: English
+	IDE: Notepad++, Gimp
