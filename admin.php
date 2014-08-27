@@ -16,7 +16,7 @@ require_once("init.php");
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     </head>
         <body id="admin" style="background: #333;">
-			<a href="../notepad" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
+			<a href="../index.php" style=" text-decoration: none; "><div id="openb2"><img src="back.png">Back</div></a>
 			<h1>ADMIN.</h1>
 			<p>
 				This is a restricted area reserved for administrators. If you don't know how you
