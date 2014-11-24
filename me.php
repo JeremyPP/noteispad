@@ -57,7 +57,7 @@ elseif(failedPayment($_SESSION['user_id']))
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link href="style7.css" type="text/css" rel="stylesheet">
-		<title>Home - not is pad!</title>
+		<title>Home - notispad</title>
 		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
 		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -134,7 +134,7 @@ else
 				<div id="logo">
 					<center><div id = "cloud"></div></center>
 					<center><div class="logo-p2"></div></center>
-					<div id="name">not is pad!</div>
+					<div id="name">notispad</div>
 				</div>
 				<div>
 <?php
@@ -152,15 +152,15 @@ else
 		
 	echo "<form action='$dest' method='post'>";
 ?>
-						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
+						<input id="senha" placeholder=" Access Code" type="password" name="code">
 					</form>
 				</div>
-				<div id="desc">
-				"Enjoy the best of the cloud, make your notes anywhere at anytime."
+				<div id="desct">
+				Create a new note by typing a new Access Code, or open a note that already exist typing the correct Access Code above.
 				</div>
 			</div>
 			<script>
-				var $div = $("#senha");
+				/*var $div = $("#senha");
 				//var $text = $("#desc");
 				
 				$($div).focus(function() {
@@ -177,7 +177,7 @@ else
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 					});
-				});
+				});*/
 			</script>
 		<script src="scrollReveal.js"></script>
         </body>

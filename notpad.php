@@ -23,7 +23,7 @@ if(isset($_SESSION['user_id']))
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
-		<title>Note - not is pad!</title>
+		<title>Note - notispad</title>
 		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
 		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -56,7 +56,7 @@ if(isset($_SESSION['user_id']))
 			<div id="modal" class="hidden">
 				<div id="box">
 					<span class="og-close"></span>
-					<p>Create your Access Code for a new note, or go to one that already exist.</p>
+					<p>Open another note or create a new one by typing the Access Code below.</p>
 					<center>
 <?php
 
@@ -75,7 +75,7 @@ if(isset($_SESSION['user_id']))
 
         echo "<form action='$dest' method='post'>";
 ?>
-                            <input id="senhaNota" placeholder="Type your Access Code" type="password" name="code">
+                            <input id="senhaNota" placeholder=" Access Code" type="password" name="code">
                         </form>
                     </center>
 				</div>
@@ -254,7 +254,7 @@ if(isset($_SESSION['user_id']))
 					$("#dn-swit-d").show();
 				};
 				function day() {
-					$("#top").css('background', '#4CAED3');
+					$("#top").css('background', '#6185B3');
 <?php
 	if(!isset($_SESSION['user_id']))
 	{
@@ -266,16 +266,16 @@ if(isset($_SESSION['user_id']))
 	echo "$('#textNote').css('background', '#$bg');\n";
 	echo "$('#textNote').css('color', '#$fc');\n";
 ?>
-					$("#botao2").css('background', 'lightblue');
-					$("#botao1").css('color', '#4CAED3');
-					$("#botao3").css('color', '#4CAED3');
-					$("#botao4").css('color', '#4CAED3');
-					$("#botao0").css('color', '#4CAED3');
-					$("#botao1").css('background', '#F1F1F1');
-					$("#botao3").css('background', '#F1F1F1');
-					$("#botao4").css('background', '#F1F1F1');
-					$("#botao0").css('background', '#F1F1F1');
-					$("#bottomBar").css('background', '#4CAED3');
+					$("#botao2").css('background', '#93AAE4');
+					$("#botao1").css('color', '#6185B3');
+					$("#botao3").css('color', '#6185B3');
+					$("#botao4").css('color', '#6185B3');
+					$("#botao0").css('color', '#6185B3');
+					$("#botao1").css('background', '#E7E7E7');
+					$("#botao3").css('background', '#E7E7E7');
+					$("#botao4").css('background', '#E7E7E7');
+					$("#botao0").css('background', '#E7E7E7');
+					$("#bottomBar").css('background', '#6185B3');
 					$("#dn-swit-d").hide();
 					$("#dn-swit-n").show();
 				};

@@ -31,7 +31,7 @@ elseif(isset($_GET['password']))
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<title>Plans - not is pad!</title>
+		<title>Plans - notispad</title>
 		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
 		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -76,7 +76,7 @@ elseif(isset($_GET['password']))
 				</div>
 				<div id="contOverPlan">
 					<h1>Sign up</h1>
-					<h2>You chose the <span id="pname">PRO</span> plan for <span style="color:#4A879E;">$</span><span id="pprice">0</span> per month.</h2>
+					<h2>You chose the <span id="pname">PRO</span> plan for <span>$</span><span id="pprice">0</span> per month.</h2>
 					<h3>Please fill in the information below to create your account:</h3>
 <?php
 	if(isSandbox())
@@ -118,7 +118,7 @@ elseif(isset($_GET['password']))
 						</div>
 						</div>
 						<br>
-						<input type="submit" value="Proceed with billing" class="u-dS" style="margin-top:20px;">
+						<input type="submit" value="Proceed with billing" class="u-dS" style="margin-top:20px;border-radius:25px;height:50px;">
 					</form>
 				</div>
 			</div>
@@ -200,7 +200,7 @@ elseif(isset($_GET['password']))
 				
 			</div>
 				<div id="duvidaPrice" data-scrollreveal="after 1.2s, ease-in 32px and reset over .66s">
-					<p>Any doubt about which plan to choose? <span><a href="mailto:contact@notispad.com">Talk to us</a></span>!</p>
+					<p>Any doubt about which plan to choose? <span><a href="mailto:contact@notispad.com">We can help you!</a></span></p>
 				</div>
         <script src="scrollReveal.js"></script>
 		<script>

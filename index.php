@@ -24,8 +24,8 @@ if(isset($_SESSION['user_id']))
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link href="style.css" type="text/css" rel="stylesheet">
 		<link href="style7.css" type="text/css" rel="stylesheet">
-		<title>not is pad!</title>
-		<meta name="description" content="not is pad! is the simplest and fastest way to save and share your notes anywhere at anytime." >
+		<title>notispad</title>
+		<meta name="description" content="notispad is the simplest and fastest way to save and share your notes anywhere at anytime." >
 		<meta name="keywords" content="notes, file sharing, cloud storage, online notes, sharing, cloud, backup, collaboration, remote access, notepad" >
 		<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -95,16 +95,16 @@ if(isset($_SESSION['user_id']))
 			<div id="over" class="closed">
 				<div id="closeb"><span class="og-close"></span></div>
 				<div id="contentOver">
-					<h1>Welcome to not is pad!</h1>
+					<h1>Welcome to notispad!</h1>
 					<h2>Our goal</h2>
-					<p>The idea behind not is pad! is to provide a quick and easy way to save and
-					share content in the clouds with other people. With not is pad!, you create an
+					<p>The idea behind notispad is to provide a quick and easy way to save and
+					share content in the clouds with other people. With notispad, you create an
 					access code for your note that, if you wish, you can share with your friends
 					and colleagues. But don't worry, your original note can not be changed. If
 					someone changes the content of the note, another "page" will be created and
 					the initial content will remain unchanged.</p>
 					<h2>Fast Notes</h2>
-					<p>There are two ways to use not is pad!. The first one is to create "Fast
+					<p>There are two ways to use notispad. The first one is to create "Fast
 					Notes". Fast Notes are a very good way to quickly share or save an idea, a
 					thought, or anything else. To create a new Fast Note, just choose a new access
 					code and voila, your note is created automatically. But keep in mind that Fast
@@ -126,9 +126,6 @@ if(isset($_SESSION['user_id']))
 					we do, just send us an email at <a href="mailto:contact@notispad.com">contact@notispad.com</a>
 					and we will be happy to talk with you.</p>
 					<p>We hope to see you soon!</p>
-					<p>Best,</p>
-					<br>
-					<p>The not is pad! team.</p>
 					<br>
 					<br>
 				</div>
@@ -175,20 +172,20 @@ if(isset($_SESSION['user_id']))
 				<div id="logo">
 					<center><div id = "cloud"></div></center>
 					<center><div class="logo-p2"></div></center>
-					<div id="name">not is pad!</div>
+					<div id="name">notispad</div>
 				</div>
 				<div>
 					<form action="notpad.php" method="post">
-						<input id="senha" placeholder="Type your Access Code" type="password" name="code">
+						<input id="senha" placeholder=" Access Code" type="password" name="code">
 					</form>
 				</div>
-				<div id="desc">
-				"Enjoy the best of the cloud, make your notes anywhere at anytime."
+				<div id="desct">
+				Create a new note by typing a new Access Code, or open a note that already exist typing the correct Access Code above.
 				</div>
 			</div>
 			
 			<script>
-				var $div = $("#senha");
+				/*var $div = $("#senha");
 				//var $text = $("#desc");
 				
 				$($div).focus(function() {
@@ -205,7 +202,7 @@ if(isset($_SESSION['user_id']))
 					   $(this).replaceWith(div);
 					   $('#desc').fadeIn( 500 );
 					});
-				});
+				});*/
 				
 				$( "#openb" ).click(function() {
 				  $("#over").attr('class', 'open');
