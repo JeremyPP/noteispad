@@ -39,7 +39,7 @@ if(!$mysql->query("drop procedure if exists " . DBNAME . ".delete_note_sp"))
 
 if(!$mysql->query(" CREATE PROCEDURE " . DBNAME . ".delete_note_sp (nid INT(11)) 
 begin
-insert into fastnote_archive(note_id, note_name, note_text)
+replace into fastnote_archive(note_id, note_name, note_text)
 select N.note_id, N.note_name, NL.note_text
        from notes N, note_lines NL
         where NL.note_id = nid
