@@ -37,12 +37,13 @@ if(!$mysql->query("drop procedure if exists " . DBNAME . ".delete_note_sp"))
 	die("Failed to drop procedure: " . $mysql->error);
 }
 
-if(!$mysql->query(" CREATE PROCEDURE " . DBNAME . ".delete_note_sp (nid INT(11)) 
+if(!$mysql->query(" CREATE PROCEDURE " . DBNAME . ".delete_note_sp (IN nid INT(11)) 
+MODIFIES SQL DATA
 begin
-replace into fastnote_archive(note_id, note_name, note_text)
+insert into fastnote_archive(note_id, note_name, note_text)
 select N.note_id, N.note_name, NL.note_text
        from notes N, note_lines NL
-        where NL.note_id = nid
+        where N.note_id = nid
         and NL.note_seq = (select max(note_seq) from note_lines where note_id = nid);
 
 delete from notes where note_id = nid;
