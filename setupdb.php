@@ -17,7 +17,7 @@ if(!$mysql->query("set global event_scheduler=on"))
 	die("Failed to set event_scheduler on: " .  $mysql->error);
 }
 
-if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_archive(fnote_name VARCHAR(1024), fnote_text VARCHAR(3072))"))
+if(!$mysql->query("CREATE TABLE IF NOT EXISTS fastnote_archive(note_id INT(11), note_name VARCHAR(1024), note_text VARCHAR(3072), PRIMARY KEY(note_id))"))
 {
 	die("Failed to create fastnote_archive: " . $mysql->error);
 }
@@ -39,8 +39,8 @@ if(!$mysql->query("drop procedure if exists " . DBNAME . ".delete_note_sp"))
 
 if(!$mysql->query(" CREATE PROCEDURE " . DBNAME . ".delete_note_sp (nid INT(11)) 
 begin
-insert into fastnote_archive(fnote_name, fnote_text)
-select N.note_name, NL.note_text
+insert into fastnote_archive(note_id, note_name, note_text)
+select N.note_id, N.note_name, NL.note_text
        from notes N, note_lines NL
         where NL.note_id = nid
         and NL.note_seq = (select max(note_seq) from note_lines where note_id = nid);
