@@ -505,7 +505,7 @@ The not is pad! team.";
 
 		if($uid == 'null')
 		{
-			$mysql->query("create event note_delete_" . $nid . " on schedule at now() + interval 7 day do call delete_note_sp('$code');");
+			$mysql->query("create event note_delete_" . $nid . " on schedule at now() + interval 7 day do call delete_note_sp($nid);");
 		}
 
 		$sql = "insert into note_lines(note_id, note_text) values($nid, '$content')";
@@ -574,7 +574,7 @@ The not is pad! team.";
 	{
 		$mysql->query("update notes set user_id = null where note_id = $obj->note_id");
 		// Also create the event to call the sp for deletion after 7 days
-		$result = $mysql->query("create event delete_" . $obj->note_id . " on schedule at now() + interval 7 day do call delete_note_sp('$obj->note_name');");
+		$result = $mysql->query("create event delete_" . $obj->note_id . " on schedule at now() + interval 7 day do call delete_note_sp($obj->note_id);");
 	}
 
 	$mysql->query("delete from users where user_id = $id");

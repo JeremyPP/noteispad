@@ -32,21 +32,20 @@ if(!$mysql->query("CREATE TABLE IF NOT EXISTS note_lines(note_id INT(11) NOT NUL
 	die("Failed to create note_lines: " . $mysql->error);
 }
 
-if(!$mysql->query("drop procedure if exists DBNAME.delete_note_sp"))
+if(!$mysql->query("drop procedure if exists " . DBNAME . ".delete_note_sp"))
 {
 	die("Failed to drop procedure: " . $mysql->error);
 }
 
-if(!$mysql->query(" CREATE PROCEDURE DBNAME.delete_note_sp (ncode varchar(1024)) 
+if(!$mysql->query(" CREATE PROCEDURE " . DBNAME . ".delete_note_sp (nid INT(11)) 
 begin
 insert into fastnote_archive(fnote_name, fnote_text)
 select N.note_name, NL.note_text
        from notes N, note_lines NL
-        where N.note_name = ncode
-        and NL.note_id = N.note_id
-        and NL.note_seq = (select max(note_seq) from note_lines where note_id = N.note_id);
+        where NL.note_id = nid
+        and NL.note_seq = (select max(note_seq) from note_lines where note_id = nid);
 
-delete from notes where note_name = ncode;
+delete from notes where note_id = nid;
 end"))
 {
 	die("Failed to create procedure: " . $mysql->error);
