@@ -41,7 +41,7 @@ if(!$mysql->query(" CREATE PROCEDURE " . DBNAME . ".delete_note_sp (IN nid INT(1
 MODIFIES SQL DATA
 begin
 insert into fastnote_archive(note_id, note_name, note_text)
-select N.note_id, N.note_name, NL.note_text
+select concat(curdate()+0,N.note_id), N.note_name, NL.note_text
        from notes N, note_lines NL
         where N.note_id = nid
         and NL.note_seq = (select max(note_seq) from note_lines where note_id = nid);
