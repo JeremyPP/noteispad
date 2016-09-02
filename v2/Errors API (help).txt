@@ -1,0 +1,167 @@
+#########################
+#                       #
+#  Errors Note is Pad!  #
+#         v1.2          #
+#                       #
+#########################
+
+
+To see an error, on the console call the corresponding function..
+
+Ex: To open Error 01: 
+inspect element > console > type "erro01()" without the quotes.
+
+OBS: to see errors 01 and 02, the login "menu" needs to be open.
+
+
+===============================
+
+ _________________
+|                 |
+|  ERRORS part 1  |
+|   (index.php)   |
+|_________________|
+
+Error 01 - big (all the page):
+
+-> function: erro01();
+use: Connection error with the Database, other errors...
+
+-------------------------------
+
+Error 02 - login01 (email):
+
+-> function: erro02();
+use: The email is incorrect or nonexistent.
+-------------------------------
+
+Error 03 - login02 (password):
+
+-> function: erro03();
+use: The password is incorrect.
+
+-------------------------------
+
+Error 04 - Access Code invalid (creating a new note):
+
+-> function: erro04();
+use: The access code contain an unauthorized character.
+
+-------------------------------
+
+
+ _______________________________________
+|                                       |
+|              ERRORS part 2            |
+| (Recover password page -> forgot.php) |
+|_______________________________________|
+
+
+Error 05 - failure (same as error 01):
+
+-> function: errorRP();
+use: If an error occurred while attempting to send a new password. EX: The 
+entered email is not linked to any existing account.
+
+-------------------------------
+
+
+ ________________________
+|                        |
+|     ERRORS part 3      |
+| (notes -> notpad.php)  |
+|________________________|
+
+
+Error 06 - failure (same as error 01 and 05):
+
+-> function: erroSaveN();
+use: If any error occurred while trying to save the note.
+
+-------------------------------
+
+
+ ________________________________
+|                                |
+|          ERRORS part 4         |
+| (Configuration -> config.php)  |
+|________________________________|
+
+
+Error 07 - change info (name):
+
+-> function: erro07();
+use: If the user enters more than one word for the name.
+
+-------------------------------
+
+Error 08 - change info (email):
+
+-> function: erro08();
+use: If the email is invalid.
+
+-------------------------------
+
+Error 09 - change info (current password):
+
+-> function: erro09();
+use: if the password is incorrect.
+
+-------------------------------
+
+Error 10 - change info (new password):
+
+-> function: erro10();
+use: If the new password is invalid. EX: Less than 6 characters.
+
+-------------------------------
+
+Error 11 - failure (error to save):
+
+-> function: erro11();
+use: If any error occurs while trying to save the changes.
+
+-------------------------------
+
+
+ _________________________________
+|                                 |
+|          ERRORS part 5          |
+| (create account -> signup.php)  |
+|_________________________________|
+
+
+Error 12 - failure (error saving):
+
+-> function: erro12();
+use: If an unexpected error occurs when creating the User's Account.
+
+-------------------------------
+
+Error 13 - info account (name):
+
+-> function: erro13();
+use: If the user enters more than one word for the name.
+
+-------------------------------
+
+Error 14 - info account (email already exist):
+
+-> function: erro14();
+use: If the email that was entered already exists in the DB.
+
+-------------------------------
+
+Error 15 - info account (invalid email):
+
+-> function: erro15();
+use: If the email is invalid.
+
+-------------------------------
+
+Error 16 - info account (password):
+
+-> function: erro15();
+use: If the password is invalid. EX: Have less than 6 characters.
+
+-------------------------------
