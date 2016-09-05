@@ -1,4 +1,22 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+﻿<?php
+require_once("init.php");
+
+if(isset($_COOKIE['authid']))
+{
+	$uid = validAuthId($_COOKIE['authid']);
+	if($uid)
+	{
+		session_regenerate_id(true);
+		$_SESSION['user_id'] = $uid;
+	}
+}
+
+if(isset($_SESSION['user_id']))
+{
+	header("Location: me.php");
+}
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 	<head>
@@ -13,7 +31,14 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 		<script src="erro.js"></script>
-
+        <script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  ga('create', 'UA-54091012-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
     </head>
     <body>
 		<!--- Check client browser --->
@@ -23,7 +48,33 @@
 				Chrome for a better experience.
 			</div>
 		</div>
-	
+		<script>
+			navigator.sayswho= (function(){
+				var ua= navigator.userAgent, tem, 
+				M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+				if(/trident/i.test(M[1])){
+					tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+					return 'IE '+(tem[1] || '');
+				}
+				if(M[1]=== 'Chrome'){
+					tem= ua.match(/\bOPR\/(\d+)/)
+					if(tem!= null) return 'Opera '+tem[1];
+				}
+				M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+				if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+				return M.join(' ');
+			})();
+
+			var func = navigator.sayswho;
+			var bF = func.split(' ');
+			var bN = bF.shift();
+
+			if(bN == "Safari" || bN == "Opera" || bN == "IE"){
+				document.getElementById('erroNav').style.display="block";
+			}else{
+				document.getElementById('erroNav').style.display="none";
+			}
+		</script>
 		
 		<div class="erro">
 			<div class="recovery-center">
@@ -178,6 +229,27 @@
 				});
 				
 			</script>
+<?php
+	if(isset($_SESSION['error']))
+	{
+		echo '<script>$("#loginOver").attr("class", "open");$("#center").attr("class", "openSing");$("#openb").attr("class", "open");';
+		echo $_SESSION['error'];
+		unset($_SESSION['error']);
+		echo "</script>";
+	}
+?>
+		<script>
+			function opinfo(){
+				$("#over").attr('class', 'open');
+				$("#center").attr('class', 'open');
+				$("#b01").attr('class', 'open');
+				$("body").css('overflow-y', 'visible');
+			}
+			<?php
+			if (!empty($_GET['info']) && $_GET['info'] == "true" ){
+			echo 'opinfo();';
+			}
+			?>
 		</script>
 		<script src="scrollReveal.js"></script>
         </body>
